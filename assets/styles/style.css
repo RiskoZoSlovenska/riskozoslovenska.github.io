@@ -39,6 +39,43 @@ b {
 }
 
 
+/* Links */
+a {
+  text-decoration: none;
+  color: var(--blue-accent-color);
+  transition: 200ms ease-out;
+}
+
+/* a:visited {
+  color: #0071aa;
+} */
+
+a:hover {
+  color: var(--main-text-color);
+  transition: 200ms ease-out;
+}
+
+a:active {
+  color: var(--main-text-color);
+  transition: 0ms;
+}
+
+
+/* Classes */
+.darkener {
+	background-color: #000000;
+	opacity: 0;
+
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+
+	z-index: 125;
+
+	pointer-events: none; /* Don't sink mouse events */
+}
+
+
 /* == Sidebar == */
 /* Transitions for sidebar-bar and sidebar-darkener */
 #sidebar-bar, #sidebar-darkener {
@@ -67,6 +104,7 @@ b {
 	opacity: 0.5;
 }
 
+/* Sidebar components styling */
 #sidebar-bar > h1 {
 	margin: 0;
 	margin-bottom: 1em;
@@ -87,21 +125,7 @@ b {
 }
 
 
-.darkener {
-	background-color: #000000;
-	opacity: 0;
-
-	position: fixed;
-	width: 100vw;
-	height: 100vh;
-
-	z-index: 125;
-
-	pointer-events: none; /* Don't sink mouse events */
-}
-
-
-
+/* Footer */
 footer {
 	margin: auto 0 0 0;
 
@@ -109,26 +133,4 @@ footer {
 	box-sizing: border-box; /* Makes it not exceed page size */
 
 	background-color: #252526;
-}
-
-
-/* Links */
-a {
-  text-decoration: none;
-  color: var(--blue-accent-color);
-  transition: 200ms ease-out;
-}
-
-/* a:visited {
-  color: #0071aa;
-} */
-
-a:hover {
-  color: var(--main-text-color);
-  transition: 200ms ease-out;
-}
-
-a:active {
-  color: var(--main-text-color);
-  transition: 0ms;
 }
