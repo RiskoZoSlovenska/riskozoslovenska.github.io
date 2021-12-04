@@ -111,6 +111,17 @@ a:active {
 }
 
 /* Sidebar components styling */
+.sidebar-ribbon-image {
+	position: fixed;
+	top: 0;
+	right: 0;
+	transform: translateX(var(--sidebar-ribbon-size));
+
+	box-sizing: border-box;
+	width: var(--sidebar-ribbon-size);
+	padding: calc(var(--sidebar-ribbon-size) * 0.4); /* This is padding, so actual image size is 20% of ribbon */
+}
+
 #sidebar > h1 {
 	margin: 0;
 	margin-bottom: 0.5em;
