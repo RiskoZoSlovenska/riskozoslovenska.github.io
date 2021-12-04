@@ -79,16 +79,16 @@ a:active {
 
 
 /* == Sidebar == */
-/* Transitions for sidebar-bar and sidebar-darkener */
-#sidebar-bar, #sidebar-darkener {
+/* Transitions for sidebar and sidebar-darkener */
+#sidebar, #sidebar-darkener {
 	transition: 500ms ease;
 }
-#sidebar-bar:hover, #sidebar-bar:hover + #sidebar-darkener {
+#sidebar:hover, #sidebar:hover + #sidebar-darkener {
 	transition: 300ms ease;
 }
 
-/* Sidebar bar */
-#sidebar-bar {
+/* Sidebar */
+#sidebar {
 	background-color: var(--main-background-color);
 	border-right: var(--sidebar-ribbon-size) solid var(--red-accent-color);
 
@@ -99,31 +99,31 @@ a:active {
 
 	padding: 1em 2em 1em 1em;
 }
-#sidebar-bar:hover {
+#sidebar:hover {
 	transform: translateX(0);
 }
-#sidebar-bar:hover + #sidebar-darkener {
+#sidebar:hover + #sidebar-darkener {
 	opacity: 0.5;
 }
 
 /* Sidebar components styling */
-#sidebar-bar > h1 {
+#sidebar > h1 {
 	margin: 0;
 	margin-bottom: 0.5em;
 	text-align: center;
 	/* font-size: 100%; */ /* font size doesn't wanna work */ 
 }
 
-#sidebar-bar ul {
+#sidebar ul {
 	list-style-type: none;
 	padding: 0 0 0 1em;
 }
 
-#sidebar-bar li {
+#sidebar li {
 	font-size: 1.3rem;
 	margin-bottom: 0.7rem;
 }
-#sidebar-bar li a:hover {
+#sidebar li a:hover {
 	text-decoration: underline solid;
 }
 
