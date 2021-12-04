@@ -105,7 +105,7 @@ a:active {
 #sidebar:hover, #sidebar:focus {
 	transform: translateX(0);
 }
-#sidebar:hover + #sidebar-darkener
+#sidebar:hover + #sidebar-darkener,
 #sidebar:focus + #sidebar-darkener {
 	opacity: 0.5;
 }
