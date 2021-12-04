@@ -108,7 +108,8 @@ a:active {
 /* Sidebar components styling */
 #sidebar-bar > h1 {
 	margin: 0;
-	margin-bottom: 1em;
+	margin-bottom: 0.5em;
+	text-align: center;
 	/* font-size: 100%; */ /* font size doesn't wanna work */ 
 }
 
