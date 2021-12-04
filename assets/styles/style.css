@@ -34,6 +34,11 @@ body {
 }
 
 
+b {
+	color: var(--red-accent-color);
+}
+
+
 /* == Sidebar == */
 /* Transitions for sidebar-bar and sidebar-darkener */
 #sidebar-bar, #sidebar-darkener {
