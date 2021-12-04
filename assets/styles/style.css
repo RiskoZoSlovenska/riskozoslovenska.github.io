@@ -52,7 +52,7 @@ a {
   color: #0071aa;
 } */
 
-a:hover {
+a:hover, a:focus {
   color: var(--main-text-color);
   transition: 200ms ease-out;
 }
@@ -83,7 +83,10 @@ a:active {
 #sidebar, #sidebar-darkener {
 	transition: 500ms ease;
 }
-#sidebar:hover, #sidebar:hover + #sidebar-darkener {
+#sidebar:hover,
+#sidebar:focus,
+#sidebar:hover + #sidebar-darkener
+#sidebar:focus + #sidebar-darkener {
 	transition: 300ms ease;
 }
 
@@ -99,10 +102,11 @@ a:active {
 
 	padding: 1em 2em 1em 1em;
 }
-#sidebar:hover {
+#sidebar:hover, #sidebar:focus {
 	transform: translateX(0);
 }
-#sidebar:hover + #sidebar-darkener {
+#sidebar:hover + #sidebar-darkener
+#sidebar:focus + #sidebar-darkener {
 	opacity: 0.5;
 }
 
