@@ -1,5 +1,6 @@
 :root {
 	--main-text-color: #d4d4d4;
+	--dull-text-color: #8e908c;
 	--main-background-color: #1e1e1e;
 	--red-accent-color: #ff3232;
 	--blue-accent-color: #00aaff;
@@ -129,8 +130,9 @@ a:active {
 footer {
 	margin: auto 0 0 0;
 
-	padding: 1em 3em;
+	padding: 0.5em 3em;
 	box-sizing: border-box; /* Makes it not exceed page size */
 
+	color: var(--dull-text-color);
 	background-color: #252526;
 }
