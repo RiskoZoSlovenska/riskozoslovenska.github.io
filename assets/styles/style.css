@@ -1,0 +1,129 @@
+:root {
+	--main-text-color: #d4d4d4;
+	--main-background-color: #1e1e1e;
+	--red-accent-color: #ff3232;
+	--blue-accent-color: #00aaff;
+
+	--sidebar-ribbon-size: 1rem;
+}
+
+
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: "Consolas", sans-serif;
+
+	background-color: var(--main-background-color);
+	color: var(--main-text-color);
+
+	/* These three keep the footer in place */
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+#page-main {
+	padding: 3em;
+}
+
+#sidebar-insert + #page-main {
+	margin-left: var(--sidebar-ribbon-size);
+}
+
+
+/* == Sidebar == */
+/* Transitions for sidebar-bar and sidebar-darkener */
+#sidebar-bar, #sidebar-darkener {
+	transition: 500ms ease;
+}
+#sidebar-bar:hover, #sidebar-bar:hover + #sidebar-darkener {
+	transition: 300ms ease;
+}
+
+/* Sidebar bar */
+#sidebar-bar {
+	background-color: var(--main-background-color);
+	border-right: var(--sidebar-ribbon-size) solid var(--red-accent-color);
+
+	position: fixed;
+	transform: translateX(-100%) translate(var(--sidebar-ribbon-size));
+	height: 100vh;
+	z-index: 150;
+
+	padding: 1em 2em 1em 1em;
+}
+#sidebar-bar:hover {
+	transform: translateX(0);
+}
+#sidebar-bar:hover + #sidebar-darkener {
+	opacity: 0.5;
+}
+
+#sidebar-bar > h1 {
+	margin: 0;
+	margin-bottom: 1em;
+	/* font-size: 100%; */ /* font size doesn't wanna work */ 
+}
+
+#sidebar-bar ul {
+	list-style-type: none;
+	padding: 0 0 0 1em;
+}
+
+#sidebar-bar li {
+	font-size: 1.3rem;
+	margin-bottom: 0.7rem;
+}
+#sidebar-bar li a:hover {
+	text-decoration: underline solid;
+}
+
+
+.darkener {
+	background-color: #000000;
+	opacity: 0;
+
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+
+	z-index: 125;
+
+	pointer-events: none; /* Don't sink mouse events */
+}
+
+
+
+footer {
+	margin: auto 0 0 0;
+
+	padding: 1em 3em;
+	box-sizing: border-box; /* Makes it not exceed page size */
+
+	background-color: #252526;
+}
+
+
+/* Links */
+a {
+  text-decoration: none;
+  color: var(--blue-accent-color);
+  transition: 200ms ease-out;
+}
+
+/* a:visited {
+  color: #0071aa;
+} */
+
+a:hover {
+  color: var(--main-text-color);
+  transition: 200ms ease-out;
+}
+
+a:active {
+  color: var(--main-text-color);
+  transition: 0ms;
+}
