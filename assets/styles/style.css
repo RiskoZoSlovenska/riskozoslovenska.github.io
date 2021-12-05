@@ -29,6 +29,7 @@ body {
 
 main {
 	padding: 2em 3em;
+	width: 75%;
 }
 
 #sidebar-insert ~ * {
@@ -94,7 +95,7 @@ a:active {
 
 	position: fixed;
 	transform: translateX(-100%) translate(var(--sidebar-ribbon-size));
-	height: 100vh;
+	height: 100%;
 	z-index: 150;
 
 	padding: 1em 2em 1em 1em;
