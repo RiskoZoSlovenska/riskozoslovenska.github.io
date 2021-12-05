@@ -83,10 +83,7 @@ a:active {
 #sidebar, #sidebar-darkener {
 	transition: 500ms ease;
 }
-#sidebar:hover,
-#sidebar:focus,
-#sidebar:hover + #sidebar-darkener
-#sidebar:focus + #sidebar-darkener {
+#sidebar:hover, #sidebar:hover + #sidebar-darkener {
 	transition: 300ms ease;
 }
 
@@ -102,11 +99,10 @@ a:active {
 
 	padding: 1em 2em 1em 1em;
 }
-#sidebar:hover, #sidebar:focus {
+#sidebar:hover {
 	transform: translateX(0);
 }
-#sidebar:hover + #sidebar-darkener,
-#sidebar:focus + #sidebar-darkener {
+#sidebar:hover + #sidebar-darkener {
 	opacity: 0.5;
 }
 
