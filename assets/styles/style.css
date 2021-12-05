@@ -64,6 +64,27 @@ a:active {
 }
 
 
+
+/* Lists */
+.larger-list > li {
+	margin: 1em 0;
+}
+
+
+
+/* Header asides */
+.asided-header {
+	margin-bottom: 0;
+}
+
+.asided-header + aside {
+	color: var(--dull-text-color);
+	font-size: 0.8em;
+	margin-bottom: 2em;
+}
+
+
+
 /* Classes */
 .darkener {
 	background-color: #000000;
