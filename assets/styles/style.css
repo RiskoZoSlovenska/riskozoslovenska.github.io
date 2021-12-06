@@ -31,7 +31,7 @@ html {
 
 
 
-/* Main content */
+/* Body and main */
 body {
 	font-family: "Consolas", sans-serif;
 	font-size: 1.15em;
@@ -52,8 +52,8 @@ main {
 	width: 75%;
 }
 
-#sidebar-insert ~ * {
-	margin-left: var(--sidebar-ribbon-size);
+main.full-width-main {
+	width: initial;
 }
 
 
@@ -141,6 +141,11 @@ footer {
 
 
 /* == Sidebar == */
+#sidebar-insert ~ * {
+	margin-left: var(--sidebar-ribbon-size);
+}
+
+
 /* Transitions for sidebar and sidebar-darkener */
 #sidebar, #sidebar-darkener {
 	transition: 500ms ease;
@@ -201,4 +206,30 @@ footer {
 }
 #sidebar li a:hover {
 	text-decoration: underline solid;
+}
+
+
+/* == Error Page == */
+main.error-page-main {
+	text-align: center;
+	padding-top: 6em;
+}
+
+main.error-page-main h1,
+main.error-page-main h2,
+main.error-page-main h3,
+main.error-page-main h4,
+main.error-page-main h5,
+main.error-page-main h6 {
+	margin: 0.5em;
+}
+
+main.error-page-main .aside {
+	color: var(--dull-text-color);
+}
+
+@media only screen and (max-width: 650px) {
+	.aside {
+		font-size: 0.7em;
+	}
 }

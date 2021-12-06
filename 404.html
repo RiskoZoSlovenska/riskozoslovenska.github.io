@@ -7,26 +7,6 @@
 
 	<link rel="stylesheet" href="/assets/styles/normalize.css">
 	<link rel="stylesheet" href="/assets/styles/style.css">
-	<style>
-		/* Shamelessly using CSS inside an HTML file cuz this is the only place where this will be used */
-		main {
-			text-align: center;
-			padding-top: 6em;
-		}
-
-		.less-margin {
-			margin: 0.5em;
-		}
-		.aside {
-			color: var(--dull-text-color);
-		}
-
-		@media only screen and (max-width: 650px) {
-			.aside {
-				font-size: 0.7em;
-			}
-		}
-	</style>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -37,10 +17,10 @@
 <body>
 	<div id="sidebar-insert"></div>
 
-	<main>
-		<h1 class="less-margin"><b>404 ;-;</b></h1>
-		<h2 class="less-margin aside">(a.k.a. Not Found)</h2>
-		<h3 class="less-margin aside">(a.k.a. something got screwed up)</h3>
+	<main class="error-page-main full-width-main">
+		<h1><b>404 ;-;</b></h1>
+		<h2 class="aside">(a.k.a. Not Found)</h2>
+		<h3 class="aside">(a.k.a. something got screwed up)</h3>
 
 		<br><br><br>
 
