@@ -8,6 +8,19 @@
 	--sidebar-ribbon-size: 1.5rem;
 }
 
+/* 
+	z-indexes:
+
+	0   - 99 : Main content
+	100 - 199: Front stuff like footer, sidebar, darkeners, overlays, etc
+
+
+	Currently used indexes:
+	110 - Footer
+	125 - Sidebar darkener
+	150 - Sidebar
+*/
+
 
 
 /* Page */
@@ -185,4 +198,6 @@ footer {
 
 	color: var(--dull-text-color);
 	background-color: #252526;
+
+	z-index: 110;
 }
