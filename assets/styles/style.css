@@ -44,23 +44,22 @@ main {
 
 /* Links */
 a {
-  text-decoration: none;
-  color: var(--blue-accent-color);
-  transition: 200ms ease-out;
+	text-decoration: none;
+	color: var(--blue-accent-color);
+	transition: color 400ms ease-out;
 }
 
 /* a:visited {
   color: #0071aa;
 } */
 
-a:hover, a:focus {
-  color: var(--main-text-color);
-  transition: 200ms ease-out;
+a:hover, a:focus, a:active {
+	color: var(--main-text-color);
+	transition: 200ms ease-out;
 }
 
 a:active {
-  color: var(--main-text-color);
-  transition: 0ms;
+	transition-duration: 0ms;
 }
 
 
@@ -101,8 +100,9 @@ b {
 	width: 100vw;
 	height: 100vh;
 
-	z-index: 125;
+	transition-property: opacity;
 
+	z-index: 125;
 	pointer-events: none; /* Don't sink mouse events */
 }
 
@@ -127,6 +127,8 @@ b {
 	transform: translateX(-100%) translate(var(--sidebar-ribbon-size));
 	height: 100%;
 	z-index: 150;
+
+	transition-property: transform;
 
 	padding: 1em 2em 1em 1em;
 }
