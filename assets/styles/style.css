@@ -87,7 +87,35 @@ a:active {
 
 
 
-/* Others */
+/* Buttons */
+button {
+	color: var(--main-text-color);
+	background-color: var(--lighter-background-color);
+
+	font-size: 2em;
+	padding: 0.25em;
+	margin: 5px;
+
+	border-radius: 0.25em;
+	border: 0;
+
+	transition: color 400ms ease-out;
+}
+
+button:hover, button:active, button:active {
+	filter: brightness(150%);
+
+	transition: 200ms ease-out;
+}
+
+button:active {
+	filter: brightness(200%);
+	transition-duration: 0ms;
+}
+
+
+
+/* Emphasized content */
 b {
 	color: var(--accent-color-1);
 }
@@ -110,20 +138,37 @@ footer {
 
 
 
-/* Header asides */
+/* Asides */
+aside {
+	color: var(--dull-text-color);
+	font-size: 0.8em;
+}
+
+
+aside.disclaimer-aside {
+	filter: brightness(50%);
+	margin-top: 20%;
+}
+
+
 .asided-header {
 	margin-bottom: 0;
 }
 
 .asided-header + aside {
-	color: var(--dull-text-color);
-	font-size: 0.8em;
 	margin-bottom: 2em;
 }
 
 
 
-/* Classes */
+/* Loading elements */
+.loading {
+	font-style: italic;
+}
+
+
+
+/* Darkener */
 .darkener {
 	background-color: #000000;
 	opacity: 0;
@@ -231,5 +276,79 @@ main.error-page-main .aside {
 @media only screen and (max-width: 650px) {
 	.aside {
 		font-size: 0.7em;
+	}
+}
+
+
+
+/* == Hangman (and possibly other games?) == */
+/* God, tuning this took so long (.-. ) */
+#game-flex {
+	display: flex;
+	flex-direction: row;
+	text-align: center;
+
+	max-height: 40vh;
+	max-width: 70vw;
+	margin-left: 10vw;
+}
+
+#hangman-word {
+	font-size: min(3em, 8vw); /* Limits size on slim devices*/
+
+	text-align: center;
+	margin-bottom: 0.5em;
+}
+
+#hangman-svg {
+	max-height: inherit;
+	max-width: 35vw;
+
+	float: right;
+	margin-right: 3em;
+	margin-bottom: 1em;
+}
+
+#game-flex > div {
+	flex: 1;
+
+	max-height: inherit;
+	max-width: inherit;
+}
+
+#game-flex button {
+	/* font-size: 4.5vmin; */
+	font-size: calc(2.25vh + 2vw);
+}
+
+#game-flex button.clicked-correct {
+	background-color: #48ca48;
+}
+
+#game-flex button.clicked-incorrect {
+	background-color: #ca4848;
+}
+
+/*
+	On smaller screens:
+	* Flex in a column (so remove height/width limitations)
+	* Float hangman in center (so remove right marging)
+	* Set explicit hangman max-height (so remove width limit) (since game-flex's limitation was removed)
+*/
+@media only screen and (max-aspect-ratio: 3/4) {
+	#game-flex {
+		flex-direction: column;
+		margin-left: initial;
+		
+		max-height: initial;
+		max-width: initial;
+	}
+
+	#hangman-svg {
+		float: none;
+		margin-right: 0;
+
+		max-height: 25vh;
+		max-width: initial;
 	}
 }

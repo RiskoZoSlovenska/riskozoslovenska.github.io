@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+	<title>Hangman</title>
+	<link rel="icon" type="image/svg" href="/assets/images/icon.svg">
+	<meta name="description" content="A friendly game of hangman.">
+	<meta charset="utf-8">
+
+	<link rel="stylesheet" href="/assets/styles/normalize.css">
+	<link rel="stylesheet" href="/assets/styles/style.css">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="/assets/inserts/insert.js"></script>
+	<script src="main.js" defer></script>
+</head>
+
+
+<body>
+	<div id="sidebar-insert"></div>
+
+	<main class="full-width-main">
+		<h1 class="asided-header">Hangman</h1>
+		<aside>A friendly game of Hangman</aside>
+
+		<br>
+
+		<div id="hangman-word" class="loading">Loading...</div>
+		<div id="game-flex">
+			<svg id="hangman-svg" viewBox="0 0 100 110">
+				<!-- Gallow -->
+				<path d="M 15 0  H 80  V 17.5  H 70  V 10  H 25  V 100  H 40  V 110 H 0 V 100 H 15 Z" />
+			
+				<!-- Head -->
+				<circle cx="75" cy="30" r="12.5" />
+			
+				<!-- Body -->
+				<rect x="72.6" y="42.24745" width="5" height="40.075" />
+			
+				<!-- Left Arm -->
+				<path d="M 73.96447 47.24745  L 77.5 50.78298  L 59.82233 68.46065  L 56.2868 64.92512  Z" />
+			
+				<!-- Left Leg -->
+				<path d="M 72.5 78.7868  L 76.03553 82.32233  L 58.35786 100  L 54.82233 96.46447  Z" />
+			
+				<!-- Right Arm -->
+				<path d="M 76.03553 47.24745  L 93.7132 64.92512  L 90.17767 68.46065  L 72.5 50.78298  Z" />
+			
+				<!-- Right Leg -->
+				<path d="M 77.5 78.78680  L 95.17767 96.46447  L 91.64214 100  L 73.96447 82.32233  Z" />
+			</svg>
+			
+			<div id="button-container"></div>
+		</div>
+
+		<aside class="disclaimer-aside">This game is (unofficially) powered by
+			<a href="https://random-word-api.herokuapp.com/">https://random-word-api.herokuapp.com/</a> and
+			as such I cannot guarantee that:
+			<ol>
+				<li>the difficulty is reasonable,</li>
+				<li>the game works all the time,</li>
+				<li>or that provided words will be family-friendly (even though they should be).</li>
+			</ol>
+		</aside>
+	</main>
+
+	<footer id="footer-insert"></footer>
+</body>
+</html>
