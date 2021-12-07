@@ -56,6 +56,12 @@ main.full-width-main {
 	width: initial;
 }
 
+@media only screen and (max-width: 650px) {
+	main {
+		width: initial;
+	}
+}
+
 
 
 /* Links */
