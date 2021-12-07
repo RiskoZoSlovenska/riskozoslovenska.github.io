@@ -46,10 +46,10 @@ body {
 }
 
 main {
-	padding: 2em 3em;
-
 	box-sizing: border-box;
 	width: 75%;
+	
+	padding: 2em 3em;
 }
 
 main.full-width-main {
@@ -274,7 +274,7 @@ main.error-page-main .aside {
 }
 
 @media only screen and (max-width: 650px) {
-	.aside {
+	main.error-page-main .aside {
 		font-size: 0.7em;
 	}
 }

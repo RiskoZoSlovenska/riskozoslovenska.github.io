@@ -1,6 +1,6 @@
 <!--
 	This image is not used on the website, but the script used on the /hangman/ page contains a copy
-	of it that is uses to dynamically generate the image. This file exists for easy modification,
+	of it that is used to dynamically generate the image. This file exists for easy modification,
 	but any changes will have to be copied back to that script.
 -->
 <svg viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
