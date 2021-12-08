@@ -6,6 +6,9 @@
 	--accent-color-1: #ff3232; /* Red for titles, highlights, sidebar, etc. */
 	--accent-color-2: #00aaff; /* Blue for links, etc */
 
+	--main-font: "Consolas", sans-serif;
+	--monospace-font: "Consolas", monospace;
+
 	--sidebar-ribbon-size: 1.5rem;
 }
 
@@ -33,7 +36,7 @@ html {
 
 /* Body and main */
 body {
-	font-family: "Consolas", sans-serif;
+	font-family: var(--main-font);
 	font-size: 1.15em;
 
 	background-color: var(--main-background-color);
@@ -290,11 +293,8 @@ main.error-page-main .aside {
 /* == Hangman (and possibly other games?) == */
 /* God, tuning this took so long (.-. ) */
 #game-flex {
-	font-family: "Consolas", monospace;
-	
 	display: flex;
 	flex-direction: row;
-	text-align: center;
 
 	max-height: 40vh;
 	max-width: 70vw;
@@ -305,8 +305,12 @@ main.error-page-main .aside {
 	font-size: min(3em, 8vw); /* Limits size on slim devices*/
 	letter-spacing: 0.075em;
 
-	text-align: center;
 	margin-bottom: 0.5em;
+}
+
+#game-flex, #hangman-word {
+	font-family: var(--monospace-font);
+	text-align: center;
 }
 
 #hangman-svg {
