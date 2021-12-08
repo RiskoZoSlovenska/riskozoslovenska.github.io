@@ -290,6 +290,8 @@ main.error-page-main .aside {
 /* == Hangman (and possibly other games?) == */
 /* God, tuning this took so long (.-. ) */
 #game-flex {
+	font-family: "Consolas", monospace;
+	
 	display: flex;
 	flex-direction: row;
 	text-align: center;
