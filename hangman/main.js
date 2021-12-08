@@ -58,7 +58,7 @@ function removeAllChildren(element) {
 }
 
 function wasClicked(button) {
-	return button.classList.contains("clicked-correct") ?? button.classList.contains("clicked-incorrect")
+	return button.classList.contains("clicked-correct") || button.classList.contains("clicked-incorrect")
 }
 
 
