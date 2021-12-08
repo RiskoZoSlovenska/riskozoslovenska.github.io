@@ -40,7 +40,12 @@ const BUTTON_CONTAINER = document.getElementById("button-container")
 const WORD = document.getElementById("hangman-word")
 const IMAGE = document.getElementById("hangman-svg")
 
-const QUEUE_LOW_THRESHOLD = 5
+const IMAGE_COLOR = window.getComputedStyle(document.documentElement).getPropertyValue("--main-text-color")
+const LOADING_CLASS = "loading"
+const CLICKED_CORRECT_CLASS = "clicked-correct"
+const CLICKED_INCORRECT_CLASS = "clicked-incorrect"
+
+const QUEUE_LOW_THRESHOLD = 5 // Remember to change the fetch number in the below url as well
 const WORDS_FETCH_URL = "https://random-word-api.herokuapp.com/word?number=10&swear=0"
 
 
@@ -58,7 +63,7 @@ function removeAllChildren(element) {
 }
 
 function wasClicked(button) {
-	return button.classList.contains("clicked-correct") || button.classList.contains("clicked-incorrect")
+	return button.classList.contains(CLICKED_CORRECT_CLASS) || button.classList.contains(CLICKED_INCORRECT_CLASS)
 }
 
 
@@ -93,8 +98,8 @@ function resetButtons() {
 	for (let i = 0; i < buttons.length; i++) {
 		const button = buttons[i]
 
-		button.classList.remove("clicked-correct")
-		button.classList.remove("clicked-incorrect")
+		button.classList.remove(CLICKED_CORRECT_CLASS)
+		button.classList.remove(CLICKED_INCORRECT_CLASS)
 	}
 }
 
@@ -114,7 +119,7 @@ function advanceImage() {
 	for (const attrib in attribs) {
 		object.setAttributeNS(null, attrib, attribs[attrib])
 	}
-	object.setAttributeNS(null, "fill", "#d4d4d4")
+	object.setAttributeNS(null, "fill", IMAGE_COLOR)
 
 	IMAGE.appendChild(object)
 }
@@ -122,7 +127,7 @@ function advanceImage() {
 
 
 function updateWord() {
-	WORD.classList.remove("loading") // Remove loading class if it's still present
+	WORD.classList.remove(LOADING_CLASS) // Remove loading class if it's still present
 
 	let asVisible = ""
 	let isFullyVisible = true
@@ -146,7 +151,7 @@ function updateWord() {
 
 
 function clickedCorrect(button) {
-	button.classList.add("clicked-correct")
+	button.classList.add(CLICKED_CORRECT_CLASS)
 
 	const letter = button.textContent
 	visibleLetters[letter] = true;
@@ -159,7 +164,7 @@ function clickedCorrect(button) {
 }
 
 function clickedIncorrect(button) {
-	button.classList.add("clicked-incorrect")
+	button.classList.add(CLICKED_INCORRECT_CLASS)
 
 	numWrong += 1
 	advanceImage()
@@ -214,7 +219,7 @@ function nextRound() {
 	resetImage()
 	advanceImage() // Show gallow
 
-	curWord = wordQueue.length == 0 ? getRandomBackupWord() : wordQueue.shift()
+	curWord = (wordQueue.length == 0) ? getRandomBackupWord() : wordQueue.shift()
 	if (wordQueue.length < QUEUE_LOW_THRESHOLD) {
 		fetchWords()
 	}
