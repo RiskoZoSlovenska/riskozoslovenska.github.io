@@ -303,6 +303,7 @@ main.error-page-main .aside {
 
 #hangman-word {
 	font-size: min(3em, 8vw); /* Limits size on slim devices*/
+	letter-spacing: 0.075em;
 
 	text-align: center;
 	margin-bottom: 0.5em;
