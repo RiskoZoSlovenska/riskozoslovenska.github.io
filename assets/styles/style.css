@@ -105,13 +105,13 @@ button {
 	border-radius: 0.25em;
 	border: 0;
 
-	transition: color 400ms ease-out;
+	transition: color, filter 400ms ease-out;
 }
 
 button:hover, button:active, button:active {
 	filter: brightness(150%);
 
-	transition: 200ms ease-out;
+	transition-duration: 200ms;
 }
 
 button:active {
