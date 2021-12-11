@@ -80,7 +80,7 @@ a {
 
 a:hover, a:focus, a:active {
 	color: var(--main-text-color);
-	transition: 200ms ease-out;
+	transition-duration: 200ms;
 }
 
 a:active {
@@ -108,7 +108,8 @@ button {
 	border-radius: 0.25em;
 	border: 0;
 
-	transition: color, filter 400ms ease-out;
+	transition: 400ms ease-out;
+	transition-property: color, filter; /* Specify this separately so the other properties apply properly */
 }
 
 button:hover, button:active, button:active {
@@ -119,6 +120,7 @@ button:hover, button:active, button:active {
 
 button:active {
 	filter: brightness(200%);
+
 	transition-duration: 0ms;
 }
 
@@ -202,10 +204,12 @@ aside.disclaimer-aside {
 
 /* Transitions for sidebar and sidebar-darkener */
 #sidebar, #sidebar-darkener {
-	transition: 500ms ease;
+	/* Specify these two separately as to not overwrite individually-defined transition-property's */
+	transition-duration: 500ms;
+	transition-timing-function: ease;
 }
 #sidebar:hover, #sidebar:hover + #sidebar-darkener {
-	transition: 300ms ease;
+	transition-duration: 300ms;
 }
 
 
