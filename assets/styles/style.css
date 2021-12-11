@@ -234,13 +234,17 @@ aside.disclaimer-aside {
 /* Sidebar components */
 .sidebar-ribbon-image {
 	position: fixed;
+	transform: translateX(var(--sidebar-ribbon-size)); /* Move the image into the ribbon */
+
 	top: 0;
 	right: 0;
-	transform: translateX(var(--sidebar-ribbon-size));
-
 	box-sizing: border-box;
 	width: var(--sidebar-ribbon-size);
 	padding: calc(var(--sidebar-ribbon-size) * 0.4); /* This is padding, so actual image size is 20% of ribbon */
+	overflow: visible; /* Makes the inline SVG be not cut-off slightly (https://stackoverflow.com/a/46344280) */
+}
+#sidebar svg .main-text-colored {
+	fill: var(--main-text-color);
 }
 
 #sidebar > h1 {
