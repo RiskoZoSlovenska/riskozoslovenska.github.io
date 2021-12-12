@@ -161,6 +161,12 @@ svg .main-text-colored {
 	fill: var(--main-text-color);
 }
 
+.character-like-image {
+	height: 1.2em;
+	vertical-align: sub;
+	margin: 0 0.1em
+}
+
 
 
 /* Footer */
