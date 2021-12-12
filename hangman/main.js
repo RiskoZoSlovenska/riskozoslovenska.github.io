@@ -7,12 +7,29 @@
 		https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 */
 
+const EndState = { // Values should correspond to the data-game-state attribute values
+	Won: "won",
+	Lost: "lost",
+}
+
 const ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 const BACKUP_WORDS = [
 	"TEST", "WEBSITE", "TEA", "CRINGE", "BASED", "EASY", "OBLITERATE", "VAPORIZE", "RANDOM", "BLOB", "BREAD",
 	"POTATO", "MELANCHOLY", "JEFF", "TERRIBLY", "HYPERTEXT", "CAPITAL", "SPIRIT", "TREE", "SNAKE", "CHEESE",
 	"MATCHA",
 ]
+const END_BAR_TEXTS = {
+	[EndState.Won]: {
+		titles: ["Yay you won!", "Victory is yours!", "Nice!", "Noice!"],
+		remarks: ["ez?", "ez.", "nice.", "gg", "gg no re"],
+		buttons: ["Next", "Rematch.", "Gimme another one", "MORE"],
+	},
+	[EndState.Lost]: {
+		titles: ["You failed!", "You died!", "Nope!", "F"],
+		remarks: [";-;", "F", "cri", "gonna cry?", "git gud"],
+		buttons: ["Next", "Rematch.", "+1 life", "I don't give up", "Try again?"],
+	}
+}
 
 const BUTTON_CONTAINER = document.getElementById("button-container")
 const WORD = document.getElementById("hangman-word")
@@ -28,24 +45,6 @@ const VISIBLE_IMAGE_PART_CLASS = "visible-hangman-part"
 const CLICKED_CORRECT_CLASS = "clicked-correct"
 const CLICKED_INCORRECT_CLASS = "clicked-incorrect"
 const NOT_GUESSED_LETTER_CLASS = "not-guessed-letter"
-
-const EndState = { // Values should correspond to the data-game-state attribute values
-	Won: "won",
-	Lost: "lost",
-}
-
-const END_BAR_TEXTS = {
-	[EndState.Won]: {
-		titles: ["Yay you won!", "Victory is yours!", "Nice!", "Noice!"],
-		remarks: ["ez?", "ez.", "nice.", "gg", "gg no re"],
-		buttons: ["Next", "Rematch.", "Gimme another one", "MORE"],
-	},
-	[EndState.Lost]: {
-		titles: ["You failed!", "You died!", "Nope!", "F"],
-		remarks: [";-;", "F", "cri", "gonna cry?", "git gud"],
-		buttons: ["Next", "Rematch.", "+1 life", "I don't give up", "Try again?"],
-	}
-}
 
 const QUEUE_LOW_THRESHOLD = 5 // Remember to change the fetch number in the below url as well
 const WORDS_FETCH_URL = "https://random-word-api.herokuapp.com/word?number=10&swear=0"
@@ -64,11 +63,11 @@ function getRandomElement(arr) {
 }
 
 function removeAllChildren(element) {
-	while (element.firstChild) {
+	element.textContent = null // Remove text first (which should remove a fair amount of elements)
+
+	while (element.firstChild) { // ...and then remove everything else that's left
 		element.lastChild.remove()
 	}
-
-	element.textContent = ""
 }
 
 function wasClicked(button) {
@@ -131,7 +130,7 @@ function resetButtons() {
 
 
 function resetImage() {
-	for (let i = 0; i < IMAGE_PARTS.length; i++) {
+	for (let i = 0; i < IMAGE_PARTS.length; i++) { // https://stackoverflow.com/a/22754453
 		IMAGE_PARTS[i].classList.remove(VISIBLE_IMAGE_PART_CLASS)
 	}
 }
