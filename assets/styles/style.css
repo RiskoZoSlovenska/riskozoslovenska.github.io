@@ -10,6 +10,7 @@
 	--monospace-font: "Consolas", monospace;
 
 	--sidebar-ribbon-size: 1.5rem;
+	--game-end-bar-height: 35%;
 }
 
 /* 
@@ -20,6 +21,9 @@
 
 
 	Currently used indexes:
+
+	50  - Game end bar
+
 	110 - Footer
 	125 - Sidebar darkener
 	150 - Sidebar
@@ -300,6 +304,8 @@ main.error-page-main .aside {
 
 /* == Hangman (and possibly other games?) == */
 /* God, tuning this took so long (.-. ) */
+
+/* Main Elements */
 #game-flex {
 	display: flex;
 	flex-direction: row;
@@ -316,6 +322,10 @@ main.error-page-main .aside {
 	margin-bottom: 0.5em;
 }
 
+#hangman-word > .not-guessed-letter {
+	color: #E53D3D;
+}
+
 #game-flex, #hangman-word {
 	font-family: var(--monospace-font);
 	text-align: center;
@@ -330,6 +340,49 @@ main.error-page-main .aside {
 	margin-bottom: 1em;
 }
 
+
+/* Game end bar */
+#game-end-bar {
+	position: fixed;
+	box-sizing: border-box;
+	height: 0;
+	top: 50%;
+	left: 0;
+	width: 100%;
+	padding-left: var(--sidebar-ribbon-size);
+	overflow: hidden;
+
+	transition: 400ms cubic-bezier(0.64, 0, 0.78, 0); /* https://easings.net/#easeInQuint */
+	transition-property: height, top; /* Specify this separately so the other properties apply properly */
+
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+
+	z-index: 50;
+}
+
+#game-end-bar > * {
+	margin: auto;
+}
+
+#game-end-bar[data-is-playing="false"] {
+	top: calc((100% - var(--game-end-bar-height)) / 2); /* Center the bar in the middle */
+	height: var(--game-end-bar-height);
+}
+
+/* I give you permission to kill me for these god-awful colors */
+#game-end-bar[data-end-state="won"] {
+	background-color: #007814; /* Non-transparency fallback */
+	background-color: #007814f1;
+}
+#game-end-bar[data-end-state="lost"] {
+	background-color: #d52121; /* Non-transparency fallback */
+	background-color: #d52121f1;
+}
+
+
+/* Buttons and other stuff */
 #game-flex > div {
 	flex: 1;
 
@@ -338,7 +391,6 @@ main.error-page-main .aside {
 }
 
 #game-flex button {
-	/* font-size: 4.5vmin; */
 	font-size: calc(2.25vh + 2vw);
 }
 
@@ -350,7 +402,10 @@ main.error-page-main .aside {
 	background-color: #ca4848;
 }
 
+
 /*
+	Media adjustments
+
 	On smaller screens:
 	* Flex in a column (so remove height/width limitations)
 	* Float hangman in center (so remove right marging)
