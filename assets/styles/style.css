@@ -344,6 +344,15 @@ main.error-page-main .aside {
 	margin-bottom: 1em;
 }
 
+#hangman-svg-parts > * {
+	opacity: 0;
+
+	transition: opacity 200ms ease-out;
+}
+#hangman-svg-parts > .visible-hangman-part {
+	opacity: 1;
+}
+
 
 /* Game end bar */
 #game-end-bar {

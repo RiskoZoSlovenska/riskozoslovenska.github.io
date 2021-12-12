@@ -13,40 +13,18 @@ const BACKUP_WORDS = [
 	"POTATO", "MELANCHOLY", "JEFF", "TERRIBLY", "HYPERTEXT", "CAPITAL", "SPIRIT", "TREE", "SNAKE", "CHEESE",
 	"MATCHA",
 ]
-const SVG_OBJECTS = [ // {[name, {attribute: value, ...}], ...}
-	// Gallow
-	["path", {d: "M 15 0  H 80  V 17.5  H 70  V 10  H 25  V 100  H 40  V 110  H 0  V 100  H 15  Z"}],
-
-	// Head
-	["circle", {cx: "75", cy: "30", r: "12.5"}],
-
-	// Torso
-	["rect", {x: "72.6", y: "42.24745", width: "5", height: "40.075"}],
-
-	// Left arm
-	["path", {d: "M 73.96447 47.24745  L 77.5 50.78298      L 59.82233 68.46065  L 56.2868 64.92512   Z"}],
-
-	// Left leg
-	["path", {d: "M 72.5 78.7868       L 76.03553 82.32233  L 58.35786 100       L 54.82233 96.46447  Z"}],
-
-	// Right arm
-	["path", {d: "M 76.03553 47.24745  L 93.7132 64.92512   L 90.17767 68.46065  L 72.5 50.78298      Z"}],
-
-	// Right leg
-	["path", {d: "M 77.5 78.78680      L 95.17767 96.46447  L 91.64214 100       L 73.96447 82.32233  Z"}],
-]
 
 const BUTTON_CONTAINER = document.getElementById("button-container")
 const WORD = document.getElementById("hangman-word")
-const IMAGE = document.getElementById("hangman-svg")
 const END_BAR = document.getElementById("game-end-bar")
 const END_BAR_HEADING = document.getElementById("game-end-bar-heading")
 const END_BAR_REMARK = document.getElementById("game-end-bar-remark")
 const NEXT_ROUND_BUTTON = document.getElementById("next-round-button")
 
-const IMAGE_COLOR = window.getComputedStyle(document.documentElement).getPropertyValue("--main-text-color")
+const IMAGE_PARTS = document.getElementById("hangman-svg-parts").children
 
 const LOADING_CLASS = "loading"
+const VISIBLE_IMAGE_PART_CLASS = "visible-hangman-part"
 const CLICKED_CORRECT_CLASS = "clicked-correct"
 const CLICKED_INCORRECT_CLASS = "clicked-incorrect"
 const NOT_GUESSED_LETTER_CLASS = "not-guessed-letter"
@@ -153,22 +131,13 @@ function resetButtons() {
 
 
 function resetImage() {
-	removeAllChildren(IMAGE)
+	for (let i = 0; i < IMAGE_PARTS.length; i++) {
+		IMAGE_PARTS[i].classList.remove(VISIBLE_IMAGE_PART_CLASS)
+	}
 }
 
 function advanceImage() {
-	const objectInfo = SVG_OBJECTS[numWrong] // Assumes that numWrong points to the next element
-
-	const object = document.createElementNS("http://www.w3.org/2000/svg", objectInfo[0])
-
-	// Attributes
-	const attribs = objectInfo[1]
-	for (const attrib in attribs) {
-		object.setAttributeNS(null, attrib, attribs[attrib])
-	}
-	object.setAttributeNS(null, "fill", IMAGE_COLOR)
-
-	IMAGE.appendChild(object)
+	IMAGE_PARTS[numWrong - 1].classList.add(VISIBLE_IMAGE_PART_CLASS) // Assumes numWrong - 1 points to the next part
 }
 
 
@@ -235,7 +204,6 @@ function startRound() {
 
 	numWrong = 0
 	resetImage()
-	advanceImage() // Show gallow
 
 	curWord = (wordQueue.length == 0) ? getRandomElement(BACKUP_WORDS) : wordQueue.shift()
 	if (wordQueue.length < QUEUE_LOW_THRESHOLD) {
@@ -269,7 +237,7 @@ function clickedIncorrect(button) {
 	numWrong += 1
 	advanceImage()
 
-	const lost = (numWrong >= SVG_OBJECTS.length - 1)
+	const lost = (numWrong >= IMAGE_PARTS.length)
 	if (lost) {
 		console.log("Lost!")
 		endRound(EndState.Lost)
