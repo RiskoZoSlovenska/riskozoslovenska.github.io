@@ -1,8 +1,10 @@
 :root {
 	--main-text-color: #d4d4d4;
+	--dullish-text-color: #a5a7a3;
 	--dull-text-color: #8e908c;
 	--main-background-color: #1e1e1e;
 	--lighter-background-color: #252526;
+	--darker-background-color: #161616;
 	--accent-color-1: #ff3232; /* Red for titles, highlights, sidebar, etc. */
 	--accent-color-2: #00aaff; /* Blue for links, etc */
 
@@ -130,9 +132,26 @@ button:active {
 
 
 
-/* Emphasized content */
+/* Styled text */
 b {
 	color: var(--accent-color-1);
+}
+
+.less-visible-text {
+	filter: brightness(50%);
+}
+
+
+
+/* Code */
+code {
+	font-family: var(--monospace-font);
+
+	color: var(--dullish-text-color);
+	background-color: var(--darker-background-color);
+	
+	border-radius: 0.2em;
+	padding: 0.05em 0.2em;
 }
 
 
