@@ -141,6 +141,10 @@ b {
 	filter: brightness(50%);
 }
 
+.no-wrap {
+	white-space: nowrap;
+}
+
 
 
 /* Code */
