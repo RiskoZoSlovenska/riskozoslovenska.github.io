@@ -66,7 +66,7 @@ main.full-width-main {
 	width: initial;
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-aspect-ratio: 1 / 1) {
 	main {
 		width: initial;
 	}
@@ -513,7 +513,7 @@ main.error-page-main .aside {
 	* Float hangman in center (so remove right marging)
 	* Set explicit hangman max-height (so remove width limit) (since game-flex's limitation was removed)
 */
-@media only screen and (max-aspect-ratio: 3/4) {
+@media only screen and (max-aspect-ratio: 3 / 4) {
 	#game-flex {
 		flex-direction: column;
 		margin-left: initial;
