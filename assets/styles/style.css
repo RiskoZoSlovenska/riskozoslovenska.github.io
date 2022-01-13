@@ -29,6 +29,7 @@
 	110 - Footer
 	125 - Sidebar darkener
 	150 - Sidebar
+	175 - Story warning overlay
 */
 
 
@@ -215,6 +216,65 @@ aside.disclaimer-aside {
 /* Loading elements */
 .loading {
 	font-style: italic;
+}
+
+
+
+/* Story warning overlay */
+#warning-insert {
+	position: fixed;
+	box-sizing: border-box; /* Fixes bad sizing */
+	width: 100vw;
+	height: 100vh;
+
+	padding: 10%;
+	text-align: center;
+
+	background-color: var(--main-background-color);
+	opacity: 99.9%;
+
+	z-index: 175;
+}
+
+#warning-insert.warning-accepted {
+	opacity: 0%;
+	transition: opacity 300ms;
+
+	pointer-events: none; /* Don't sink mouse events */
+}
+
+#warning-insert > h1 {
+	color: var(--accent-color-1);
+	text-decoration: underline;
+}
+
+#warning-insert > h2 {
+	color: var(--dullish-text-color);
+}
+
+#warning-insert > ul {
+	color: var(--dull-text-color);
+
+	list-style-position: inside; /* Make bullet points align properly */
+}
+
+#warning-insert > .warning-spacer {
+	display: block;
+	height: 30%;
+}
+@media only screen and (max-aspect-ratio: 1 / 2) { /* Helps with really thin screens */
+	#warning-insert > .warning-spacer {
+		height: 10%;
+	}
+}
+
+#warning-insert > button {
+	background-color: var(--accent-color-1);
+
+	font-size: 1.3em;
+	padding: 0.4em;
+	
+	max-width: 80%;
 }
 
 

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-	<title>Second</title>
+	<title>Baro</title>
 	<link rel="icon" type="image/svg" href="/assets/images/icon.svg">
-	<meta name="description" content="Second.">
+	<meta name="description" content="Test Log 220112-1 BEGIN">
 	<meta name="theme-color" content="#ff3232">
 	<meta charset="utf-8">
 
@@ -12,20 +12,22 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
 	<script src="/assets/inserts/insert.js"></script>
+	<script src="/stories/warning-manager.js" defer></script>
+	<script src="/stories/story-loader.js" defer></script>
 </head>
 
 
 <body>
+	<div id="warning-insert" data-gore></div>
 	<div id="sidebar-insert"></div>
 
 	<main>
-		<h1>Second</h1>
-		<p><a href="\">Back.</a></p>
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-		<p>test</p>
+		<h1 class="asided-header">Baro</h1>
+		<aside id="version-label"></aside>
+		
+		<div id="story-container" data-story="baro.md"></div>
 	</main>
 
 	<footer id="footer-insert"></footer>
