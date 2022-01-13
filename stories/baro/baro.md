@@ -2,7 +2,7 @@
 
 # `Test Log 220112-1 BEGIN`
 ## Rapid Decompression Test
-To determine the effects of rapid atmospheric decompression on a member of species GS-5.
+To determine the effects of rapid atmospheric decompression on a member of species `GS-5`.
 
 Organism `GS-5-1132` will be used for the test, and referred to as the subject. It is a standard H2 male, aged approximately 13 H1-years. Mean height is 97 cm and weight is 43 kg. The subject is in good physical health.
 Subject is brough into a standard class-A decompression chamber by guards without protest. It is laid in the middle of the chamber. The guards exit and the chamber's door is closed remotely.
@@ -31,6 +31,6 @@ At `00:00:50`, chamber begins re-pressurization. No changes to subject.
 
 At `00:01:00`, chamber pressure is measured at 98.5 kPa and temperature at 32.2 °C. The door is opened and the subject is retrieved without incident.
 
-After the conclusion of the test, the subject was placed into a standard type-III REGSYS for 10 hours and made a full recovery. Subject displayed post-traumatic symptomps for about 4 months following the test, predominantly when left alone in a room. More frequent visits to organism GS-5-2356 were allowed.
+After the conclusion of the test, the subject was placed into a standard type-III REGSYS for 10 hours and made a full recovery. Subject displayed post-traumatic symptomps for about 4 months following the test, predominantly when left alone in a room. More frequent visits to organism `GS-5-2356` were allowed.
 
 `Test Log 220112-1 END`
