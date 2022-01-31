@@ -13,7 +13,7 @@ const OVERLAY = document.getElementById(INSERT_ID)
 
 
 
-function setBodyScrollable(scrollable) {
+function setBodyIsScrollable(scrollable) {
 	BODY.style.overflow = scrollable ? null : "hidden"
 }
 
@@ -36,55 +36,42 @@ function addTags(tagList) {
 	}
 
 	console.log("Tags successfully added")
-}
-
-function tryToAddTags() {
-	let tagList = document.getElementById(LIST_ID)
-
-	if (tagList) {
-		addTags(tagList)
-		return true
-	}
-
-	return false
+	return true
 }
 
 
 
 function buttonClicked() {
 	OVERLAY.classList.add(ACCEPTED_CLASS)
-	setBodyScrollable(true)
+	setBodyIsScrollable(true)
 }
 
 function bindButton(button) {
 	button.addEventListener("click", buttonClicked)
 
 	console.log("Button bound successfully")
+	return true
 }
 
-function tryToBindButton() {
-	let button = document.getElementById(BUTTON_ID)
 
-	if (button) {
-		bindButton(button)
-		return true
+
+function tryTillSuccess(func, id) {
+	function tryOnce() {
+		let element = document.getElementById(id)
+
+		return element ? func(element) : false
 	}
 
-	return false
-}
 
+	if (tryOnce()) { return } // Worked already; we can return
 
-
-function tryTillSuccess(func) {
-	if (func()) return // Worked already; we can return
-
-	let obs = new MutationObserver((_, obs) => {
-		if (func()) {
-			obs.disconnect()
+	let observer = new MutationObserver((_, self) => {
+		if (tryOnce()) {
+			self.disconnect()
 		}
 	})
 
-	obs.observe(OVERLAY, {
+	observer.observe(OVERLAY, {
 		childList: true,
 	})
 }
@@ -92,8 +79,8 @@ function tryTillSuccess(func) {
 
 
 if (OVERLAY) {
-	setBodyScrollable(false)
+	setBodyIsScrollable(false)
 
-	tryTillSuccess(tryToAddTags)
-	tryTillSuccess(tryToBindButton)
+	tryTillSuccess(addTags,    LIST_ID)
+	tryTillSuccess(bindButton, BUTTON_ID)
 }
