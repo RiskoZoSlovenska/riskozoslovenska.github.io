@@ -1,8 +1,10 @@
 <nav id="sidebar">
 	<svg class="sidebar-ribbon-image" viewBox="0 0 2 8" xmlns="http://www.w3.org/2000/svg">
-		<circle id="sidebar-dots-main" class="main-text-colored" cx="1" cy="1" r="1" />
-		<use href="#sidebar-dots-main" y="3" />
-		<use href="#sidebar-dots-main" y="6" />
+		<g class="main-text-colored"> <!-- Defining just main circle color does not work on some browsers -->
+			<circle id="sidebar-dots-main" cx="1" cy="1" r="1" />
+			<use href="#sidebar-dots-main" y="3" />
+			<use href="#sidebar-dots-main" y="6" />
+		</g>
 	</svg>
 
 	<h1>Navigation</h1>
