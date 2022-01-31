@@ -258,7 +258,8 @@ aside.disclaimer-aside {
 #warning-insert > ul {
 	color: var(--dull-text-color);
 
-	list-style-position: inside; /* Make bullet points align properly */
+	list-style-position: inside; /* Make bullet points align properly on all browsers */
+	padding-left: 0; /* Make the list items be fully centered */
 }
 
 #warning-insert > .warning-spacer {
