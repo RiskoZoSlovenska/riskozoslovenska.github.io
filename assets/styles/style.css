@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
 :root {
 	--main-text-color: #d4d4d4;
@@ -10,8 +11,8 @@
 	--accent-color-1: #ff3232; /* Red for titles, highlights, sidebar, etc. */
 	--accent-color-2: #00aaff; /* Blue for links, etc */
 
-	--main-font: "Calibri", "Consolas", sans-serif;
-	--monospace-font: "Inconsolata", monospace;
+	--main-font: "Lato", "Calibri", "Roboto", sans-serif;
+	--monospace-font: "Inconsolata", "Consolas", monospace;
 
 	--sidebar-ribbon-size: 1.5rem;
 	--game-end-bar-height: 35%;
