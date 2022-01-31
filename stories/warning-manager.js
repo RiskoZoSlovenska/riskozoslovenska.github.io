@@ -8,7 +8,14 @@ const WARN_STRINGS = {
 	gore: "Graphic descriptions of violence/injury",
 }
 
+const BODY = document.getElementsByTagName("body")[0]
 const OVERLAY = document.getElementById(INSERT_ID)
+
+
+
+function setBodyScrollable(scrollable) {
+	BODY.style.overflow = scrollable ? null : "hidden"
+}
 
 
 
@@ -46,6 +53,7 @@ function tryToAddTags() {
 
 function buttonClicked() {
 	OVERLAY.classList.add(ACCEPTED_CLASS)
+	setBodyScrollable(true)
 }
 
 function bindButton(button) {
@@ -84,6 +92,8 @@ function tryTillSuccess(func) {
 
 
 if (OVERLAY) {
+	setBodyScrollable(false)
+
 	tryTillSuccess(tryToAddTags)
 	tryTillSuccess(tryToBindButton)
 }

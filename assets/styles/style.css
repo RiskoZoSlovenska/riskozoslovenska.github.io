@@ -224,7 +224,7 @@ aside.disclaimer-aside {
 
 /* Story warning overlay */
 #warning-insert {
-	position: fixed;
+	position: absolute;
 	box-sizing: border-box; /* Fixes bad sizing */
 	width: 100vw;
 	height: 100vh;
@@ -234,6 +234,7 @@ aside.disclaimer-aside {
 
 	background-color: var(--main-background-color);
 	opacity: 99.9%;
+	overflow: auto;
 
 	z-index: 175;
 }
@@ -264,7 +265,7 @@ aside.disclaimer-aside {
 	display: block;
 	height: 30%;
 }
-@media only screen and (max-aspect-ratio: 1 / 2) { /* Helps with really thin screens */
+@media only screen and (max-aspect-ratio: 3 / 4) { /* Helps with really thin screens */
 	#warning-insert > .warning-spacer {
 		height: 10%;
 	}
