@@ -224,7 +224,7 @@ aside.disclaimer-aside {
 
 /* Story warning overlay */
 #warning-insert {
-	position: absolute;
+	position: fixed;
 	box-sizing: border-box; /* Fixes bad sizing */
 	width: 100vw;
 	height: 100vh;
