@@ -1,4 +1,4 @@
-<!-- v1.0.1 -->
+<!-- v1.0.2 -->
 
 # `Test Log 220112-1 BEGIN`
 ## Rapid Decompression Test
@@ -31,6 +31,6 @@ At `00:00:50`, chamber begins re-pressurization. No changes to subject.
 
 At `00:01:00`, chamber pressure is measured at 98.5 kPa and temperature at 32.2 °C. The door is opened and the subject is retrieved without incident.
 
-After the conclusion of the test, the subject was placed into a standard type-III REGSYS for 10 hours and made a full recovery. Subject displayed post-traumatic symptomps for about 4 months following the test, predominantly when left alone in a room. More frequent visits to organism `GS-5-2356` were allowed.
+After the conclusion of the test, the subject was placed into a standard type-III REGSYS for 10 hours and made a full recovery. Subject displayed post-traumatic symptoms for about 4 months following the test, predominantly when left alone in a room. More frequent visits to organism `GS-5-2356` were allowed.
 
 `Test Log 220112-1 END`
