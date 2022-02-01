@@ -379,23 +379,19 @@ main.error-page-main {
 	padding-top: 6em;
 }
 
-main.error-page-main h1,
-main.error-page-main h2,
-main.error-page-main h3,
-main.error-page-main h4,
-main.error-page-main h5,
-main.error-page-main h6 {
-	margin: 0.5em;
-}
-
 main.error-page-main .aside {
 	color: var(--dull-text-color);
 }
 
-@media only screen and (max-width: 650px) {
-	main.error-page-main .aside {
-		font-size: 0.7em;
-	}
+/* Hard-coded values go brrrrr */
+main.error-page-main > h1 {
+	font-size: 3em;
+}
+main.error-page-main > h2 {
+	font-size: min(max(4vw, 0.5em), 1.5em);
+}
+main.error-page-main > h3 {
+	font-size: min(max(3vw, 0.3em), 1.17em)
 }
 
 
