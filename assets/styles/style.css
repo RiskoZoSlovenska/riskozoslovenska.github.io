@@ -69,7 +69,7 @@ main.full-width-main {
 	width: initial;
 }
 
-@media only screen and (max-aspect-ratio: 1 / 1) {
+@media only screen and (max-aspect-ratio: 1 / 1), (max-width: 1000px) {
 	main {
 		width: initial;
 		padding: 1em 2em;
