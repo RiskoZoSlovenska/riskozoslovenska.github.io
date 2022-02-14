@@ -331,7 +331,7 @@ aside.disclaimer-aside {
 
 	transition-property: transform;
 
-	padding: 1em 2em 1em 1em;
+	padding: 0;
 }
 #sidebar:hover {
 	transform: translateX(0);
@@ -342,6 +342,14 @@ aside.disclaimer-aside {
 
 
 /* Sidebar components */
+.sidebar-main-content {
+	height: inherit;
+	padding: 1em 2em 1em 1em;
+	box-sizing: border-box; /* Fixes incorrect margins */
+
+	overflow-y: auto;
+}
+
 .sidebar-ribbon-image {
 	position: fixed;
 	transform: translateX(var(--sidebar-ribbon-size)); /* Move the image into the ribbon */
@@ -354,7 +362,7 @@ aside.disclaimer-aside {
 	overflow: visible; /* Makes the inline SVG be not cut-off slightly (https://stackoverflow.com/a/46344280) */
 }
 
-#sidebar > h1 {
+#sidebar h1 {
 	margin: 0;
 	margin-bottom: 0.5em;
 	text-align: center;
