@@ -439,8 +439,7 @@ main.error-page-main > h3 {
 	max-width: 35vw;
 
 	float: right;
-	margin-right: 3em;
-	margin-bottom: 1em;
+	margin: 0 3em 0 0;
 }
 
 #hangman-svg-parts > * {
@@ -534,7 +533,8 @@ main.error-page-main > h3 {
 
 	#hangman-svg {
 		float: none;
-		margin-right: 0;
+
+		margin: 0 0 1em 0;
 
 		max-height: 25vh;
 		max-width: initial;
