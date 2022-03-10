@@ -1,0 +1,27 @@
+name: Update Stories
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "compile-stories.lua"
+      - "assets/story-template.html"
+
+jobs:
+  compile-stories:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+
+      - run: |
+          CLONE_DIR=$(mktemp -d)
+
+          git clone --recursive --single-branch --branch "master" https://${{ secrets.GIT_CREDENTIALS }}@github.com/RiskoZoSlovenska/creative-writing.git "$CLONE_DIR"
+
+          ./luvit ./compile-stories.lua "$CLONE_DIR"
+
+          git status
+
+          

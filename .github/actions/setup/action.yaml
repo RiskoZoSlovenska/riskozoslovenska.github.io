@@ -1,0 +1,23 @@
+name: Setup
+description: Installed required libraries and dependencies
+
+runs:
+  using: composite
+  steps:
+    - uses: leafo/gh-actions-lua@v8.0.0 # Must install lua for luarocks to work
+      with:
+        luaVersion: "5.1"
+
+    - uses: leafo/gh-actions-luarocks@v4
+
+    - run: curl -L https://github.com/luvit/lit/raw/master/get-lit.sh | sh
+      shell: bash
+
+    - run: |
+        luarocks install luafilesystem
+        luarocks install lunamark
+        luarocks install gumbo
+        luarocks install lua-yaml
+
+        ./lit install creationix/coro-fs
+      shell: bash
