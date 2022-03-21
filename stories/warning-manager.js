@@ -27,11 +27,16 @@ function addTag(str, tagList) {
 }
 
 function addTags(tagList) {
-	for (let tag in OVERLAY.dataset) {
+	let tags = OVERLAY.dataset.warnings.match(/[^;]+/g)
+
+	for (let tag of tags) {
 		let str = WARN_STRINGS[tag]
 
 		if (str) {
+			console.log("Adding tag: " + tag)
 			addTag(str, tagList)
+		} else {
+			throw "invalid tag: " + tag
 		}
 	}
 
