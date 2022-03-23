@@ -81,19 +81,11 @@ local function addClass(element, class)
 end
 
 local function insertAfter(new, reference)
-	if reference.nextSibling then
-		reference.parentNode:insertBefore(new, reference.nextSibling)
-	else
-		reference.parentNode:appendChild(new)
-	end
+	reference.parentNode:insertBefore(new, reference.nextSibling)
 end
 
 local function insertFirstChild(new, parent)
-	if parent.firstChild then
-		parent:insertBefore(new, parent.firstChild)
-	else
-		parent:appendChild(new)
-	end
+	parent:insertBefore(new, parent.firstChild)
 end
 
 local function setMetaTag(document, name, fieldName, fieldValue)
@@ -151,7 +143,6 @@ local function compileStory(dir)
 
 	-- Add story content
 	for _, node in ipairs(bodyElements) do
-		pageDocument:adoptNode(node)
 		mainNode:appendChild(node)
 	end
 
