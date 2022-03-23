@@ -2,7 +2,6 @@ const INSERTS_DIR = "/assets/inserts/"
 const INSERTS = [
 	"footer-insert",  "footer.html",
 	"sidebar-insert", "sidebar.html",
-	"warning-insert", "story-warning-overlay.html",
 ]
 
 

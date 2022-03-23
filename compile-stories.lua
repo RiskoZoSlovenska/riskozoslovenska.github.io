@@ -9,13 +9,13 @@ local COMPILED_STORIES_DIR = "./stories/"
 local TEMPLATE_FILE = "./assets/story-template.html"
 
 local STORY_PARENT_ELEMENT = "main"
-local WARN_INSERT_ID = "warning-insert"
+local WARN_OVERLAY_ID = "warning-overlay"
+local WARN_COMPONENT_CLASS = "story-warning-component"
 local VERSION_LABEL_ID = "version-label"
 local ASIDED_HEADER_CLASS = "asided-header"
 local WARNS_ATTRIB_NAME = "data-warnings"
 
 -- TODO: Support for other files and such
--- TODO: "Auto-generated on X" notices (both title and comment)
 
 
 local opts = {}
@@ -132,7 +132,8 @@ local function compileStory(dir)
 
 	local titleNode = pageDocument:getElementsByTagName("title")[1]
 	local mainNode = pageDocument:getElementsByTagName(STORY_PARENT_ELEMENT)[1]
-	local warningNode = pageDocument:getElementById(WARN_INSERT_ID)
+	local warningOverlayNode = pageDocument:getElementById(WARN_OVERLAY_ID)
+	local warningComponents = pageDocument:getElementsByClassName(WARN_COMPONENT_CLASS)
 
 
 	-- Set title
@@ -164,9 +165,11 @@ local function compileStory(dir)
 
 	-- Add warnings
 	if #info.warnings > 0 then
-		warningNode:setAttribute(WARNS_ATTRIB_NAME, table.concat(info.warnings, ";"))
+		warningOverlayNode:setAttribute(WARNS_ATTRIB_NAME, table.concat(info.warnings, ";"))
 	else
-		warningNode:remove()
+		for _, componentNode in ipairs(warningComponents) do
+			componentNode:remove()
+		end
 	end
 
 

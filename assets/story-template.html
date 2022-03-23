@@ -12,12 +12,23 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 	<script src="/assets/inserts/insert.js" defer></script>
-	<script src="/stories/warning-manager.js" defer></script>
+	<script src="/stories/warning-manager.js" defer class="story-warning-component"></script>
 </head>
 
 
 <body>
-	<div id="warning-insert"></div>
+	<div id="warning-overlay" class="story-warning-component">
+		<h1>! Warning !</h1>
+		<h2>This written work may contain the following:</h2>
+		
+		<ul id="story-warnings-list"></ul>
+		
+		<div class="warning-spacer"></div>
+		
+		<button id="warning-accept-button">If you're okay with that, click here to continue</button>
+		<p>Otherwise, you can go <a href="javascript:history.back()">back</a>.</p>
+	</div>
+
 	<div id="sidebar-insert"></div>
 
 	<main></main>
