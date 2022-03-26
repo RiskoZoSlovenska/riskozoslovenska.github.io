@@ -464,8 +464,13 @@ main.error-page-main > h3 {
 	padding-left: var(--sidebar-ribbon-size);
 	overflow: hidden;
 
+	background-color: var(--main-background-color);
+	border-style: solid;
+	border-width: 0 0;
+	opacity: 98%;
+
 	transition: 400ms cubic-bezier(0.64, 0, 0.78, 0); /* https://easings.net/#easeInQuint */
-	transition-property: height, top; /* Specify this separately so the other properties apply properly */
+	transition-property: height, top, border-width; /* Specify this separately so the other properties apply properly */
 
 	display: flex;
 	flex-direction: column;
@@ -481,16 +486,15 @@ main.error-page-main > h3 {
 #game-end-bar[data-is-playing="false"] {
 	top: calc((100% - var(--game-end-bar-height)) / 2); /* Center the bar in the middle */
 	height: var(--game-end-bar-height);
+	border-width: 12px 0;
 }
 
 /* I give you permission to kill me for these god-awful colors */
 #game-end-bar[data-end-state="won"] {
-	background-color: #007814; /* Non-transparency fallback */
-	background-color: #007814f1;
+	border-color: #058c00;
 }
 #game-end-bar[data-end-state="lost"] {
-	background-color: #d52121; /* Non-transparency fallback */
-	background-color: #d52121f1;
+	border-color: #d52121;
 }
 
 
