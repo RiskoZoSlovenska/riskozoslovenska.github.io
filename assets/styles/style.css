@@ -124,7 +124,7 @@ button {
 	transition-property: background-color, filter; /* Specify this separately so the other properties apply properly */
 }
 
-button:hover, button:active, button:active {
+button:hover, button:focus {
 	filter: brightness(150%);
 
 	transition-duration: 200ms;
