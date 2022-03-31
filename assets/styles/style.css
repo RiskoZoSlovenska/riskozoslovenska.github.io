@@ -16,6 +16,7 @@
 
 	--sidebar-ribbon-size: 1.5rem;
 	--game-end-bar-height: 35%;
+	--search-bar-border-size: 2px;
 }
 
 /* 
@@ -32,6 +33,8 @@
 	110 - Footer
 	125 - Sidebar darkener
 	150 - Sidebar
+	155 - Search bar
+	156 - Search results
 	175 - Story warning overlay
 */
 
@@ -225,6 +228,90 @@ aside.disclaimer-aside {
 
 
 
+/* Search bar */
+.search-results-container, .search-bar {
+	width: 180px; /* As much as I hate concrete values this is the only way it works */
+	position: relative;
+}
+
+.search-results-container > *, .search-bar {
+	box-sizing: border-box; /* Fixes weird sizes */
+
+	background-color: var(--main-background-color);
+	color: var(--main-text-color);
+
+	border-color: var(--accent-color-1);
+	border-width: var(--search-bar-border-size);
+	margin: calc(-1 * var(--search-bar-border-size)) 0;
+}
+
+.search-bar {
+	z-index: 156; /* Higher than the results container */
+}
+
+.search-bar::placeholder {
+	font-style: italic;
+}
+
+.search-bar:focus-visible {
+	/* outline: var(--search-bar-border-size) inset var(--accent-color-2); */ /* Alternate outline */
+	outline: none;
+	border-color: var(--accent-color-2);
+}
+
+.search-results-container {
+	height: 0; /* Don't take up space */
+	z-index: 155; /* Lower than the search bar */
+}
+
+.search-results-container div {
+	width: inherit; /* Must explicitly inherit width (using 100% doesn't work) */
+	padding: 0.2em;
+	border-style: solid;
+	cursor: pointer;
+
+	transition: 200ms ease-out;
+	transition-property: filter;
+}
+
+.search-results-container div:hover,
+.search-results-container div:focus {
+	filter: brightness(120%);
+}
+
+.search-results-container div:active {
+	filter: brightness(150%);
+	transition-duration: 0ms;
+}
+
+.search-results-container div:hover h1,
+.search-results-container div:focus h1,
+.search-results-container div:active h1 {
+	text-decoration: underline;
+}
+
+.search-results-container div h1 {
+	font-size: 1em;
+
+	/* Must override the #sidebar h1 rule */
+	text-align: left !important;
+	margin-bottom: 0.2em !important;
+	padding: 0;
+
+	color: var(--accent-color-1);
+}
+
+.search-results-container div p {
+	margin: 0;
+	padding: 0;
+
+	font-size: 0.5em;
+
+	color: var(--dull-text-color);
+}
+
+
+
 /* Story warning overlay */
 #warning-overlay {
 	position: fixed;
@@ -345,7 +432,7 @@ aside.disclaimer-aside {
 /* Sidebar components */
 .sidebar-main-content {
 	height: inherit;
-	padding: 1em 2em 1em 1em;
+	padding: 1em 2em;
 	box-sizing: border-box; /* Fixes incorrect margins */
 
 	overflow-y: auto;
@@ -371,7 +458,11 @@ aside.disclaimer-aside {
 
 #sidebar ul {
 	list-style-type: none;
-	padding: 0 0 0 1em;
+	padding-left: 0;
+}
+
+#sidebar ul ul { /* Any nested uls should have left padding */
+	padding-left: 1em;
 }
 
 #sidebar li {

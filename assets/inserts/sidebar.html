@@ -10,6 +10,18 @@
 		</svg>
 		
 		<h1>Navigation</h1>
+		<input
+			class="search-bar"
+			tabindex="-1"
+
+			type="text"
+			placeholder="Search..."
+
+			onkeyup="updateSearch(event)"
+			onfocus="updateSearch(event)"
+			onblur=" updateSearch(event)"
+		>
+		<div class="search-results-container"></div>
 		<ul>
 			<li><a href="/" tabindex="-1">Home</a></li>
 		

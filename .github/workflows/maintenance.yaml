@@ -1,20 +1,25 @@
-name: Update Stories
+name: Perform Automatic Maintenance
 
 on:
   workflow_dispatch:
   push:
     paths:
-      - "compile-stories.lua"
-      - "assets/story-template.html"
+      - "**.html"
+      - "**.js"
+      - "**.lua"
+      - ".github"
+      - "!stories/**"
 
 jobs:
-  compile-stories:
+  maintenance:
     runs-on: ubuntu-latest
 
     steps:
+      # Setup
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup
 
+      # Update stories
       - run: |
           CLONE_DIR=$(mktemp -d)
 
@@ -24,10 +29,18 @@ jobs:
 
           git status
       
+      # Update search data
+      - run: |
+          ./luvit ./compile-search-data.lua
+
+          git status
+      
+      # Commit changes
+      - run: git status
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Update stories
-          file_pattern: stories/**
+          commit_message: Automatic Maintenance
+          file_pattern: stories/** search_data.json
 
 
           
