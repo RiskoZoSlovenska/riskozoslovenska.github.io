@@ -381,6 +381,8 @@ aside.disclaimer-aside {
 	position: fixed;
 	width: 100vw;
 	height: 100vh;
+	margin: 0;
+	padding: 0;
 
 	transition-property: opacity;
 
@@ -391,7 +393,7 @@ aside.disclaimer-aside {
 
 
 /* == Sidebar == */
-#sidebar-insert ~ * {
+#sidebar ~ * {
 	margin-left: var(--sidebar-ribbon-size);
 }
 

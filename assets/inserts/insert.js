@@ -15,7 +15,7 @@ for (let i = 0; i < INSERTS.length; i += 2) {
 	fetch(path)
 		.then(res => res.text())
 		.then(rawHtml => {
-			element.innerHTML = rawHtml
+			element.outerHTML = rawHtml
 			console.log("Inserted " + path)
 		})
 }
