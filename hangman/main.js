@@ -47,7 +47,7 @@ const CLICKED_INCORRECT_CLASS = "clicked-incorrect"
 const NOT_GUESSED_LETTER_CLASS = "not-guessed-letter"
 
 const QUEUE_LOW_THRESHOLD = 5 // Remember to change the fetch number in the below url as well
-const WORDS_FETCH_URL = "https://random-word-api.herokuapp.com/word?number=10&swear=0"
+const WORDS_FETCH_URL = "https://random-word-api.herokuapp.com/word?number=10"
 
 
 let playing = false
