@@ -1,7 +1,7 @@
 const MAX_RESULTS = 5
 
 let searchData = undefined;
-fetch("search_data.json")
+fetch("/search_data.json")
 	.then(res => res.json())
 	.then(json => {
 		searchData = json
@@ -9,7 +9,7 @@ fetch("search_data.json")
 	})
 
 let resultTemplate = undefined;
-fetch("assets/search-result-template.html")
+fetch("/assets/search-result-template.html")
 	.then(res => res.text())
 	.then(text => {
 		let parser = new DOMParser()
@@ -82,7 +82,7 @@ function clearResults() {
 
 function putResults(results, container) {
 	clearResults()
-	
+
 	for (let resultData of results) {
 		let node = createSearchResultNode(resultData)
 		container.appendChild(node)
@@ -100,6 +100,7 @@ function updateSearch(event) {
 		let rawQuery = searchBox.value
 		let query = cleanQuery(rawQuery)
 		let results = getSearchResults(query)
+		if (!results) { return }
 
 		putResults(results, resultsContainer)
 	} else {
