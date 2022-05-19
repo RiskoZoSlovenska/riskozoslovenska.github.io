@@ -29,6 +29,10 @@ local function getGenerationTimeString()
 end
 
 
+--[[--
+	Returns an iterator which iterates over all the full paths of all non-hidden
+	subdirectories in a directory.
+]]
 local function iterFolderPathsIn(dir)
 	local iter = assert(fs.scandir(dir))
 
@@ -38,9 +42,7 @@ local function iterFolderPathsIn(dir)
 			info = iter()
 		until not info or (info.type == "directory" and info.name:sub(1, 1) ~= ".")
 
-		if not info then return nil end
-
-		return pathlib.join(dir, info.name)
+		return info and pathlib.join(dir, info.name) or nil -- Make full path
 	end
 end
 
@@ -52,6 +54,7 @@ local function cleanTitle(title)
 		:lower()
 end
 
+-- Truncates a string to a max codepoints length, possibly appending an ellipsis
 local function truncate(str, max)
 	if utf8.len(str) > max then
 		local stringEnd = utf8.offset(str, max) - 1 -- Get end of previous char
@@ -63,11 +66,7 @@ end
 assert(truncate("…..…", 2) == "……") -- Quick test
 
 
--- gumbo doesn't add the DOCTYPE tag
-local function addDoctype(html)
-	return "<!DOCTYPE html>\n" .. html
-end
-
+-- Correctly appends to an element's class list string
 local function addClass(element, class)
 	local existing = element.className
 
@@ -88,12 +87,16 @@ local function insertFirstChild(new, parent)
 	parent:insertBefore(new, parent.firstChild)
 end
 
-local function setMetaTag(document, name, fieldName, fieldValue)
+--[[--
+	Looks for a <meta> tag that matches a certain name, and then overwrites one
+	of its attributes.
+]]
+local function setMetaTag(document, name, attribName, attribValue)
 	local nodes = document:getElementsByTagName("meta")
 
 	for _, node in ipairs(nodes) do
 		if node:getAttribute("name") == name then
-			node:setAttribute(fieldName, fieldValue)
+			node:setAttribute(attribName, attribValue)
 			break
 		end
 	end
@@ -163,8 +166,11 @@ local function compileStory(dir)
 		end
 	end
 
-
-	return cleanTitle(title), addDoctype(pageDocument.documentElement.outerHTML)
+	return {
+		title = title,
+		dirName = cleanTitle(title),
+		content = pageDocument:serialize(),
+	}
 end
 
 local function removeCompiled(dir)
@@ -174,31 +180,37 @@ local function removeCompiled(dir)
 	end
 end
 
-local function addCompiled(dir, folderName, content)
-	local dirName = pathlib.join(dir, folderName)
+local function addCompiled(dir, compiledInfo)
+	-- Create folder
+	local dirName = pathlib.join(dir, compiledInfo.dirName)
 	print("Creating story directory:", dirName)
 	fs.mkdir(dirName)
 
+	-- Create index.html
 	local mainName = pathlib.join(dirName, "index.html")
 	print("Writing to file:", mainName)
-	fs.writeFile(mainName, content)
+	fs.writeFile(mainName, compiledInfo.content)
 end
 
 
+
+--- LOGIC STARTS ---
 
 local clonedDir = args[2]
 print("Cloned directory:", clonedDir)
 
+-- Remove existing folders
 for path in iterFolderPathsIn(COMPILED_STORIES_DIR) do
 	removeCompiled(path)
 end
 
+-- Compile stories
 for path in iterFolderPathsIn(clonedDir) do
-	local folderName, content = compileStory(path)
-	if not folderName then goto continue end
+	local compiledInfo = compileStory(path)
+	if not compiledInfo then goto continue end
 
-	print("Compiled story:", folderName)
-	addCompiled(COMPILED_STORIES_DIR, folderName, content)
+	print("Compiled story:", compiledInfo.title, compiledInfo.dirName)
+	addCompiled(COMPILED_STORIES_DIR, compiledInfo) -- Create the folder
 
 	::continue::
 end

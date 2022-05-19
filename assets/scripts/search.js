@@ -59,11 +59,12 @@ function getSearchResults(query) {
 		const counts = searchData.counts[word]
 		if (!counts) { continue }
 
+		// Increment counts for every page
 		for (let i = 0; i < counts.length; i += 2) {
 			let index = counts[i]
 			let count = counts[i + 1]
 
-			top[index] = (top[index] || 0) + count
+			top[index] = (top[index] || 0) + count // Increment
 		}
 	}
 
@@ -114,6 +115,7 @@ function putResults(results, container) {
 }
 
 
+// Export function which will get called by search bar
 function updateSearch(event) {
 	let searchBox = event.target
 	let resultsContainer = searchBox.nextElementSibling
