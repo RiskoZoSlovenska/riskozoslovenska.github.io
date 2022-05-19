@@ -1,3 +1,10 @@
+--[[--
+	Goes through all the html files in the website and compiles then
+	search_data.json object. Only pages whose body has the data-searchable
+	attribute are processed.
+	For the specification of the resulting object, see /assets/scripts/search.js
+]]
+
 local fs = require("coro-fs")
 local pathlib = require("path")
 local json = require("json")
@@ -7,21 +14,10 @@ local gumbo = require("gumbo")
 local SEARCHABLE_ATTRIB = "data-searchable"
 
 local RES_FILE_PATH = "search_data.json"
-local IGNORE_PATHS = {
+local IGNORE_PATHS = { -- Paths to fully ignore
 	"assets",
 }
 
-
-
-local function joinTables(tbl1, tbl2)
-	local len = #tbl1
-
-	for i, value in ipairs(tbl2) do
-		tbl1[len + i] = value
-	end
-
-	return tbl1
-end
 
 
 local function mustIgnorePath(path)
@@ -34,13 +30,13 @@ local function mustIgnorePath(path)
 	return false
 end
 
-local function cleanFilePath(path)
+local function pathToLink(path)
 	-- Remove trailing "index.html"
 	if pathlib.basename(path) == "index.html" then
 		path = pathlib.dirname(path)
 	end
 
-	-- Remove leading comma
+	-- Add leading slash
 	if path:sub(1, 1) ~= "/" then
 		path = "/" .. path
 	end
@@ -58,99 +54,71 @@ local function countWordsInString(str)
 	return words
 end
 
-local function getDataForFile(path)
+local function addDataForFile(data, fileIndex, path)
 	local document = gumbo.parseFile(path)
 
-	if not document.body:hasAttribute(SEARCHABLE_ATTRIB) then
-		print("Not searchable: " .. path)
-
-		return nil, nil
-	else
+	if document.body:hasAttribute(SEARCHABLE_ATTRIB) then
 		print("Searchable: " .. path)
-
-		local text = document.body.textContent
-
-		return {
-			title = document.title,
-			counts = countWordsInString(text),
-			link = cleanFilePath(path),
-		}
+	else
+		print("Not searchable: " .. path)
+		return false
 	end
-end
 
-local function addFileDataToMainData(mainData, fileData, nextFileIndex)
-	local mainCounts = mainData.counts
-
-	-- Add to the counts table
-	for word, count in pairs(fileData.counts) do
-		local countsArr = mainCounts[word]
-		if not countsArr then
-			countsArr = {}
-			mainCounts[word] = countsArr
+	-- Count and insert words
+	for word, count in pairs(countWordsInString(document.body.textContent)) do
+		local arr = data.counts[word]
+		if not arr then
+			-- Create pair if it doesn't exist
+			arr = {}
+			data.counts[word] = arr
 		end
 
-		table.insert(countsArr, nextFileIndex)
-		table.insert(countsArr, count)
+		table.insert(arr, fileIndex)
+		table.insert(arr, count)
 	end
 
-	-- Add others
-	table.insert(mainData.links, fileData.link)
-	table.insert(mainData.titles, fileData.title)
+	-- Insert link and title
+	-- Must account for the fact that Lua arrays start at 1
+	data.titles[fileIndex + 1] = document.title
+	data.links[fileIndex + 1] = pathToLink(path)
+
+	return true
 end
 
-local function addFolderDataToMainData(mainData, folderData)
-	-- Merge counts
-	for word, countsArr in pairs(folderData.counts) do
-		local mainCountsArr = mainData.counts[word]
-
-		if not mainCountsArr then
-			mainData.counts[word] = countsArr
-		else
-			joinTables(mainCountsArr, countsArr)
-		end
-	end
-
-	joinTables(mainData.links, folderData.links)
-	joinTables(mainData.titles, folderData.titles)
-end
-
-
-local function getDataForFolder(path, startFileIndex)
+local function getDataForFolder(startPath)
+	local pathStack = { startPath }
 	local data = {
 		counts = {},
 		links = {},
-		titles = {}
+		titles = {},
 	}
-	local nextFileIndex = startFileIndex or 0
+	local nextFileIndex = 0
 
-	for info in fs.scandir(path) do
-		local newPath = pathlib.join(path, info.name)
+	while pathStack[1] do
+		local path = table.remove(pathStack)
 
-		if mustIgnorePath(newPath) then
-			print("Ignoring: " .. newPath)
-			goto continue
+		for info in fs.scandir(path) do
+			local childPath = pathlib.join(path, info.name)
 
-		elseif info.type == "directory" then
-			local folderData; folderData, nextFileIndex = getDataForFolder(newPath, nextFileIndex)
+			if mustIgnorePath(childPath) then
+				print("Ignoring: " .. childPath) -- Ignore
 
-			addFolderDataToMainData(data, folderData)
+			elseif info.type == "directory" then
+				table.insert(pathStack, childPath) -- Push to stack
 
-		elseif info.name:find(".%.html$") then
-			local fileData = getDataForFile(newPath)
-
-			if fileData then
-				addFileDataToMainData(data, fileData, nextFileIndex)
-
-				nextFileIndex = nextFileIndex + 1
+			elseif info.name:find(".%.html$") then
+				if addDataForFile(data, nextFileIndex, childPath) then -- Process
+					nextFileIndex = nextFileIndex + 1
+				end
 			end
 		end
-
-		::continue::
 	end
 
-	return data, nextFileIndex
+	return data
 end
 
+
+--- LOGIC STARTS ---
 
 local data = getDataForFolder(".")
 local encoded = json.encode(data)

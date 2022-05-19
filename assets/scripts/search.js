@@ -1,3 +1,25 @@
+/*
+	Handles showing search results. It uses the JSON object found in the
+	search_data.json file to match searches. The specification for said object
+	follows.
+
+	Every page has an index number, a link and a title. The search_data object
+	holds three fields:
+		- counts
+		- links
+		- titles
+	
+	Links and titles are arrays where the index corresponds so the index number
+	of a page.
+
+	The counts field is a dictionary, where a words are keys and the values are
+	arrays holding numbers. Every two consecutive numbers in the array
+	correspond to a page index number and how many times the word appears on
+	that page. For example, a key-value pair of `"hello": [2, 3, 0, 1]`
+	signifies that the word "hello" appears 3 times on page 2 and once on page
+	0.
+ */
+
 const MAX_RESULTS = 5
 
 let searchData = undefined;
