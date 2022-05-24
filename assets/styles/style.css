@@ -7,6 +7,7 @@
 	--dull-text-color: #8e908c;
 	--main-background-color: #1e1e1e;
 	--lighter-background-color: #252526;
+	--lighterer-background-color: #2d2d2d;
 	--darker-background-color: #161616;
 	--accent-color-1: #ff3232; /* Red for titles, highlights, sidebar, etc. */
 	--accent-color-2: #00aaff; /* Blue for links, etc */
@@ -178,6 +179,15 @@ svg .main-text-colored {
 	height: 1.2em;
 	vertical-align: sub;
 	margin: 0 0.1em
+}
+
+
+
+/* Other elements */
+hr {
+	height: 3px;
+	background-color: var(--lighterer-background-color);
+	border-style: none; /* Usually defaults to inset border */
 }
 
 
@@ -369,6 +379,19 @@ aside.disclaimer-aside {
 	padding: 0.4em;
 	
 	max-width: 80%;
+}
+
+
+
+/* Story index page */
+#story-list {
+	margin-top: 2em;
+	padding-left: 1.5em;
+	list-style-type: none;
+}
+
+#story-list > li {
+	font-size: 1.2em;
 }
 
 

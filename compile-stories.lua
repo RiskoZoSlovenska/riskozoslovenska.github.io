@@ -6,6 +6,7 @@ local gumbo = require("gumbo")
 local yaml = require("yaml")
 
 local COMPILED_STORIES_DIR = "./stories/"
+local STORY_INDEX_FILE = "./stories/index.html"
 local TEMPLATE_FILE = "./assets/story-template.html"
 
 local STORY_PARENT_ELEMENT = "main"
@@ -14,6 +15,7 @@ local WARN_COMPONENT_CLASS = "story-warning-component"
 local VERSION_LABEL_ID = "version-label"
 local ASIDED_HEADER_CLASS = "asided-header"
 local WARNS_ATTRIB_NAME = "data-warnings"
+local STORY_LIST_ID = "story-list"
 
 -- TODO: Support for other files and such
 
@@ -192,10 +194,57 @@ local function addCompiled(dir, compiledInfo)
 	fs.writeFile(mainName, compiledInfo.content)
 end
 
+local function updateIndex(infos)
+	-- Parse story index file
+	local indexDocument = gumbo.parseFile(STORY_INDEX_FILE)
+	local storyList = indexDocument:getElementById(STORY_LIST_ID)
+
+	-- Remove all children of list
+	while storyList.firstChild do
+		storyList:removeChild(storyList.lastChild)
+	end
+
+	-- Append autogeneration notice
+	storyList:appendChild(
+		indexDocument:createComment(getGenerationTimeString())
+	)
+
+	-- Sort by title
+	table.sort(infos, function(a, b)
+		return a.title < b.title
+	end)
+
+	-- Create link and list item for each story
+	for _, info in ipairs(infos) do
+		local textNode = indexDocument:createTextNode(info.title)
+
+		local linkNode = indexDocument:createElement("a")
+		linkNode:setAttribute("href", "./" .. info.dirName)
+		linkNode:appendChild(textNode)
+
+		local itemNode = indexDocument:createElement("li")
+		itemNode:appendChild(linkNode)
+
+		storyList:appendChild(itemNode)
+	end
+
+	--[[
+		For whatever reason, gumbo adds an extra newline right after the
+		</main> tag and these newlines accumulate. This is a HACK to get rid
+		of them.
+	]]
+	local content = indexDocument:serialize()
+		:gsub("</main>%s*</body>%s*</html>%s*$", "</main>\n</body></html>")
+
+	print("Writing to story index file")
+	fs.writeFile(STORY_INDEX_FILE, content)
+end
+
 
 
 --- LOGIC STARTS ---
 
+local compiledInfos = {}
 local clonedDir = args[2]
 print("Cloned directory:", clonedDir)
 
@@ -211,6 +260,10 @@ for path in iterFolderPathsIn(clonedDir) do
 
 	print("Compiled story:", compiledInfo.title, compiledInfo.dirName)
 	addCompiled(COMPILED_STORIES_DIR, compiledInfo) -- Create the folder
+	table.insert(compiledInfos, compiledInfo)
 
 	::continue::
 end
+
+-- Update story index file
+updateIndex(compiledInfos)
