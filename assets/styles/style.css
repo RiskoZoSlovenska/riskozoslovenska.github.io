@@ -78,7 +78,11 @@ main.full-width-main {
 @media only screen and (max-aspect-ratio: 1 / 1) and (max-width: 1000px) {
 	main {
 		width: initial;
-		padding: 1em 2em;
+		padding: 0.5em 1.2em;
+	}
+
+	body {
+		font-size: 1.05em;
 	}
 }
 
