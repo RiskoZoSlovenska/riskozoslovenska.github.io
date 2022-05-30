@@ -629,6 +629,7 @@ main.error-page-main > h3 {
 
 #game-flex button {
 	font-size: calc(2.25vh + 2vw);
+	font-weight: 900;
 }
 
 #game-flex button.clicked-correct {
