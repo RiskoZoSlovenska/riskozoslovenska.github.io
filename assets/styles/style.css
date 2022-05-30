@@ -160,6 +160,10 @@ b {
 	white-space: nowrap;
 }
 
+.monospace-override {
+	font-family: var(--monospace-font);
+}
+
 
 
 /* Code */
