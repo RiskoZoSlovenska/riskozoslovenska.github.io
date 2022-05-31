@@ -2,19 +2,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
 :root {
+	/* Colors */
 	--main-text-color: #d4d4d4;
-	--dullish-text-color: #a5a7a3;
-	--dull-text-color: #8e908c;
-	--main-background-color: #1e1e1e;
-	--lighter-background-color: #252526;
-	--lighterer-background-color: #2d2d2d;
-	--darker-background-color: #161616;
+	--dull-text-color: #8e8e8e;
+
+	--main-bg-color: #1e1e1e;
+	--alt-bg-color: #252525;
+
+	--code-fg-color: #a5a5a5;
+	--code-bg-color: #161616;
+
+	--hr-color: #2d2d2d;
+
 	--accent-color-1: #ff3232; /* Red for titles, highlights, sidebar, etc. */
 	--accent-color-2: #00aaff; /* Blue for links, etc */
 
+	/* Fonts */
 	--main-font: "Lato", "Calibri", "Roboto", sans-serif;
 	--monospace-font: "Inconsolata", "Consolas", monospace;
 
+	/* Sizes */
 	--sidebar-ribbon-size: 1.5rem;
 	--game-end-bar-height: 35%;
 	--search-bar-border-size: 2px;
@@ -44,7 +51,7 @@
 /* Page */
 html {
 	scroll-behavior: smooth;
-	scrollbar-color: var(--accent-color-1) var(--main-background-color);
+	scrollbar-color: var(--accent-color-1) var(--main-bg-color);
 }
 
 
@@ -54,7 +61,7 @@ body {
 	font-family: var(--main-font);
 	font-size: 1.15em;
 
-	background-color: var(--main-background-color);
+	background-color: var(--main-bg-color);
 	color: var(--main-text-color);
 
 	/* These three keep the footer in place */
@@ -120,7 +127,7 @@ a:active {
 /* Buttons */
 button {
 	color: var(--main-text-color);
-	background-color: var(--lighter-background-color);
+	background-color: var(--alt-bg-color);
 
 	font-size: 2em;
 	padding: 0.25em;
@@ -152,7 +159,7 @@ b {
 	color: var(--accent-color-1);
 }
 
-.less-visible-text {
+.less-visible {
 	filter: brightness(50%);
 }
 
@@ -170,8 +177,8 @@ b {
 code {
 	font-family: var(--monospace-font);
 
-	color: var(--dullish-text-color);
-	background-color: var(--darker-background-color);
+	color: var(--code-fg-color);
+	background-color: var(--code-bg-color);
 	
 	border-radius: 0.2em;
 	padding: 0.05em 0.2em;
@@ -195,7 +202,7 @@ svg .main-text-colored {
 /* Other elements */
 hr {
 	height: 3px;
-	background-color: var(--lighterer-background-color);
+	background-color: var(--hr-color);
 	border-style: none; /* Usually defaults to inset border */
 }
 
@@ -210,7 +217,7 @@ footer {
 	box-sizing: border-box; /* Makes it not exceed page size */
 
 	color: var(--dull-text-color);
-	background-color: var(--lighter-background-color);
+	background-color: var(--alt-bg-color);
 
 	z-index: 110;
 }
@@ -223,12 +230,9 @@ aside {
 	font-size: 0.8em;
 }
 
-
-aside.disclaimer-aside {
-	filter: brightness(50%);
-	margin-top: 20%;
+aside.bottom-disclaimer {
+	margin-top: 25%;
 }
-
 
 .asided-header {
 	margin-bottom: 0;
@@ -256,7 +260,7 @@ aside.disclaimer-aside {
 .search-results-container > *, .search-bar {
 	box-sizing: border-box; /* Fixes weird sizes */
 
-	background-color: var(--main-background-color);
+	background-color: var(--main-bg-color);
 	color: var(--main-text-color);
 
 	border-color: var(--accent-color-1);
@@ -341,7 +345,7 @@ aside.disclaimer-aside {
 	padding: 10%;
 	text-align: center;
 
-	background-color: var(--main-background-color);
+	background-color: var(--main-bg-color);
 	opacity: 99.9%;
 	overflow: auto;
 
@@ -361,7 +365,7 @@ aside.disclaimer-aside {
 }
 
 #warning-overlay > h2 {
-	color: var(--dullish-text-color);
+	color: var(--dull-text-color);
 }
 
 #warning-overlay > ul {
@@ -443,7 +447,7 @@ aside.disclaimer-aside {
 
 /* Sidebar */
 #sidebar {
-	background-color: var(--main-background-color);
+	background-color: var(--main-bg-color);
 	border-right: var(--sidebar-ribbon-size) solid var(--accent-color-1);
 
 	position: fixed;
@@ -589,7 +593,7 @@ main.error-page-main > h3 {
 	padding-left: var(--sidebar-ribbon-size);
 	overflow: hidden;
 
-	background-color: var(--main-background-color);
+	background-color: var(--main-bg-color);
 	border-style: solid;
 	border-width: 0 0;
 	opacity: 98%;
