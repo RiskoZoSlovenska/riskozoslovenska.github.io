@@ -7,14 +7,16 @@ local yaml = require("yaml")
 
 local COMPILED_STORIES_DIR = "./stories/"
 local STORY_INDEX_FILE = "./stories/index.html"
-local TEMPLATE_FILE = "./assets/story-template.html"
+local PAGE_TEMPLATE_FILE = "./assets/story-template.html"
 
-local STORY_PARENT_ELEMENT = "main"
-local WARN_COMPONENT_CLASS = "story-warning-component"
+local TITLE_HEADER_ID = "title-header"
 local VERSION_LABEL_ID = "version-label"
-local ASIDED_HEADER_CLASS = "asided-header"
-local WARN_LIST_ID = "story-warnings-list"
+local BODY_CONTAINER_ID = "body-container"
+local BODY_CONTAINER_TAG = "div"
+local WARNS_LIST_ID = "story-warnings-list"
+local WARN_COMPONENT_CLASS = "story-warning-component"
 local WARN_PENDING_ATTRIB = "data-warning-accept-pending"
+
 local STORY_LIST_ID = "story-list"
 
 local WARN_DESCS = {
@@ -26,6 +28,16 @@ local WARN_DESCS = {
 
 local opts = {}
 local writer = lunamark.writer.html.new(opts)
+do
+	-- Make sure the headers found in the body are one level higher than the
+	-- ones on the story page itself
+	local oldHeader = writer.header
+
+	function writer.header(s, level)
+		return oldHeader(s, level + 1)
+	end
+end
+
 local parseMarkdown = lunamark.reader.markdown.new(writer, opts)
 
 
@@ -34,6 +46,16 @@ local function getGenerationTimeString()
 	return os.date("Automatically generated on %F %T")
 end
 
+
+--[[--
+	Reads the contents of file in a directory. Returns nil if the file doesn't
+	exist.
+]]
+local function read(dir, name)
+	local path = pathlib.join(dir, name)
+
+	return fs.stat(path) and fs.readFile(path) or nil
+end
 
 --[[--
 	Returns an iterator which iterates over all the full paths of all non-hidden
@@ -48,45 +70,12 @@ local function iterFolderPathsIn(dir)
 			info = iter()
 		until not info or (info.type == "directory" and info.name:sub(1, 1) ~= ".")
 
-		return info and pathlib.join(dir, info.name) or nil -- Make full path
+		if info then
+			return pathlib.join(dir, info.name), info.name
+		else
+			return nil, nil
+		end
 	end
-end
-
-
-local function cleanTitle(title)
-	return title
-		:gsub("%W+", "_") -- Replace all non-alphanum sequences with a '_'
-		:match("^_?(.+)_?$") -- Remove leading/trailing '_'s
-		:lower()
-end
-
--- Truncates a string to a max codepoints length, possibly appending an ellipsis
-local function truncate(str, max)
-	if utf8.len(str) > max then
-		local stringEnd = utf8.offset(str, max) - 1 -- Get end of previous char
-		return str:sub(1, stringEnd) .. "…"
-	else
-		return str
-	end
-end
-assert(truncate("…..…", 2) == "……") -- Quick test
-
-
--- Correctly appends to an element's class list string
-local function addClass(element, class)
-	local existing = element.className
-
-	if existing and existing ~= "" then
-		existing = existing .. " " .. class
-	else
-		existing = class
-	end
-
-	element.className = existing
-end
-
-local function insertAfter(new, reference)
-	reference.parentNode:insertBefore(new, reference.nextSibling)
 end
 
 local function insertFirstChild(new, parent)
@@ -94,115 +83,112 @@ local function insertFirstChild(new, parent)
 end
 
 --[[--
-	Looks for a <meta> tag that matches a certain name, and then overwrites one
-	of its attributes.
+	Returns the metatag whose `name` attribute matches a certain name.
 ]]
-local function setMetaTag(document, name, attribName, attribValue)
+local function getMetaTagOfName(document, name)
 	local nodes = document:getElementsByTagName("meta")
 
 	for _, node in ipairs(nodes) do
 		if node:getAttribute("name") == name then
-			node:setAttribute(attribName, attribValue)
-			break
+			return node
 		end
 	end
+
+	return nil
 end
 
 
-
-local function compileStory(dir)
-	local infoRaw = fs.readFile(pathlib.join(dir, "story.yaml"))
-	if not infoRaw then return end
-
-	print("Compiling story in directory:", dir)
-
-	local info = yaml.eval(infoRaw)
-	if not info.publish then return end
-
-
-	local pageDocument = gumbo.parseFile(TEMPLATE_FILE)
-
-	local rawMarkdown = fs.readFile(pathlib.join(dir, "story.md"))
-	local storyDocument = gumbo.parse(parseMarkdown(rawMarkdown), {
-		contextElement = STORY_PARENT_ELEMENT
-	})
-
-	local firstHeadingNode = storyDocument:getElementsByTagName("h1")[1]
-	local sampleNode = storyDocument:getElementsByTagName("p")[1]
-	local bodyElements = storyDocument.documentElement.children
-
-	local titleNode = pageDocument:getElementsByTagName("title")[1]
-	local mainNode = pageDocument:getElementsByTagName(STORY_PARENT_ELEMENT)[1]
-	local warningsListNode = pageDocument:getElementById(WARN_LIST_ID)
-	local warningComponents = pageDocument:getElementsByClassName(WARN_COMPONENT_CLASS)
-
-
-	-- Set title
-	local title = firstHeadingNode.textContent
-	titleNode.textContent = title
-
-	-- Set description
-	if sampleNode then
-		setMetaTag(pageDocument, "description", "content", truncate(sampleNode.textContent, 30))
-	end
-
-	-- Add generation comment
-	local generatedAt = getGenerationTimeString()
-	insertFirstChild(pageDocument:createComment(generatedAt), pageDocument.documentElement)
-
-	-- Add story content
-	for _, node in ipairs(bodyElements) do
-		mainNode:appendChild(node)
-	end
-
-	-- Add version aside
-	local versionNode = pageDocument:createElement("aside")
-	versionNode.id = VERSION_LABEL_ID
-	versionNode.textContent = info.version
-	addClass(firstHeadingNode, ASIDED_HEADER_CLASS)
-	versionNode:setAttribute("title", generatedAt)
-	insertAfter(versionNode, firstHeadingNode)
-
-	-- Add warnings
-	if #info.warnings > 0 then
-		-- Append warning list items to the warnings list
-		for _, warning in ipairs(info.warnings) do
-			local itemNode = pageDocument:createElement("li")
-			itemNode.textContent = assert(WARN_DESCS[warning], "invalid warning")
-
-			warningsListNode:appendChild(itemNode)
-		end
-	else
-		for _, componentNode in ipairs(warningComponents) do
-			componentNode:remove()
-		end
-		pageDocument.body:removeAttribute(WARN_PENDING_ATTRIB)
-	end
-
-	return {
-		title = title,
-		dirName = cleanTitle(title),
-		content = pageDocument:serialize(),
-	}
-end
-
-local function removeCompiled(dir)
+local function removeCompiledWork(dir)
 	if fs.stat(pathlib.join(dir, "index.html")) then -- Check whether exists
 		print("Removing existing story directory:", dir)
 		fs.rmrf(dir)
 	end
 end
 
-local function addCompiled(dir, compiledInfo)
+local function compileSinglePartWork(workId, dir)
+	local metadata = yaml.eval(read(dir, "info.yaml"))
+
+	if metadata.publish then
+		print("Compiling single-part work in directory:", dir)
+	else
+		print("Skipping unpublished")
+		return
+	end
+
+	local rawBody = parseMarkdown(read(dir, "body.md"))
+	local partBodyDocument = gumbo.parse(rawBody, {
+		contextElement = BODY_CONTAINER_TAG,
+	})
+
+	local page = gumbo.parseFile(PAGE_TEMPLATE_FILE)
+
+	local pageTitleNode = page:getElementsByTagName("title")[1]
+	local descMetaNode = getMetaTagOfName(page, "description")
+	local titleHeaderNode = page:getElementById(TITLE_HEADER_ID)
+	local versionLabelNode = page:getElementById(VERSION_LABEL_ID)
+	local bodyContainerNode = page:getElementById(BODY_CONTAINER_ID)
+	local warningsListNode = page:getElementById(WARNS_LIST_ID)
+	local warningNodes = page:getElementsByClassName(WARN_COMPONENT_CLASS)
+
+	local generatedAt = getGenerationTimeString()
+
+	-- Title
+	pageTitleNode.textContent = metadata.title
+	titleHeaderNode.textContent = metadata.title
+
+	-- Description
+	if metadata.description then
+		descMetaNode:setAttribute("content", metadata.description)
+	else
+		descMetaNode:remove()
+	end
+
+	-- Version
+	versionLabelNode.textContent = metadata.version
+	versionLabelNode:setAttribute("title", generatedAt)
+
+	-- Generated-at comment
+	insertFirstChild(page:createComment(generatedAt), page.documentElement)
+
+	-- Content
+	-- bodyContainerNode.innerHTML = rawBody -- Not implemented by gumbo yet
+	for _, child in ipairs(partBodyDocument.documentElement.children) do
+		bodyContainerNode:appendChild(child)
+	end
+
+	-- Warnings
+	if #metadata.warnings > 0 then
+		-- Append warning list items to the warnings list
+		for _, warning in ipairs(metadata.warnings) do
+			local itemNode = page:createElement("li")
+			itemNode.textContent = assert(WARN_DESCS[warning], "invalid warning")
+
+			warningsListNode:appendChild(itemNode)
+		end
+	else
+		-- Remove all warning-related nodes and attributes
+		for _, componentNode in ipairs(warningNodes) do
+			componentNode:remove()
+		end
+		page.body:removeAttribute(WARN_PENDING_ATTRIB)
+	end
+
+
 	-- Create folder
-	local dirName = pathlib.join(dir, compiledInfo.dirName)
-	print("Creating story directory:", dirName)
-	fs.mkdir(dirName)
+	local compiledDirName = pathlib.join(COMPILED_STORIES_DIR, workId)
+	print("Creating story directory:", compiledDirName)
+	fs.mkdir(compiledDirName)
 
 	-- Create index.html
-	local mainName = pathlib.join(dirName, "index.html")
-	print("Writing to file:", mainName)
-	fs.writeFile(mainName, compiledInfo.content)
+	local indexFileName = pathlib.join(compiledDirName, "index.html")
+	print("Writing to file:", indexFileName)
+	fs.writeFile(indexFileName, page:serialize())
+
+
+	return {
+		title = metadata.title,
+		dirName = workId,
+	}
 end
 
 local function updateIndex(infos)
@@ -255,26 +241,24 @@ end
 
 --- LOGIC STARTS ---
 
-local compiledInfos = {}
+local compilationInfos = {}
 local clonedDir = args[2]
 print("Cloned directory:", clonedDir)
 
 -- Remove existing folders
 for path in iterFolderPathsIn(COMPILED_STORIES_DIR) do
-	removeCompiled(path)
+	removeCompiledWork(path)
 end
 
 -- Compile stories
-for path in iterFolderPathsIn(clonedDir) do
-	local compiledInfo = compileStory(path)
-	if not compiledInfo then goto continue end
+for path, workId in iterFolderPathsIn(clonedDir) do
+	local compilationInfo = compileSinglePartWork(workId, path)
+	if compilationInfo then
+		print("Compiled story:", compilationInfo.title, compilationInfo.dirName)
 
-	print("Compiled story:", compiledInfo.title, compiledInfo.dirName)
-	addCompiled(COMPILED_STORIES_DIR, compiledInfo) -- Create the folder
-	table.insert(compiledInfos, compiledInfo)
-
-	::continue::
+		table.insert(compilationInfos, compilationInfo)
+	end
 end
 
 -- Update story index file
-updateIndex(compiledInfos)
+updateIndex(compilationInfos)
