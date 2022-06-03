@@ -616,6 +616,10 @@ main.error-page-main > h3 {
 	margin: auto;
 }
 
+#game-end-bar button {
+	font-size: min(2em, 8vw);
+}
+
 #game-end-bar[data-is-playing="false"] {
 	top: calc((100% - var(--game-end-bar-height)) / 2); /* Center the bar in the middle */
 	height: var(--game-end-bar-height);
