@@ -13,11 +13,11 @@
 
 	<script src="/assets/inserts/insert.js" defer></script>
 	<script src="/assets/scripts/search.js" async></script>
-	<script src="/stories/warning-manager.js" defer class="story-warning-component"></script>
+	<script src="/stories/warning-manager.js" async class="story-warning-component"></script>
 </head>
 
 
-<body data-searchable>
+<body data-searchable data-warning-accept-pending>
 	<div id="warning-overlay" class="story-warning-component">
 		<h1>! Warning !</h1>
 		<h2>This written work may contain the following:</h2>
@@ -26,7 +26,9 @@
 		
 		<div class="warning-spacer"></div>
 		
-		<button id="warning-accept-button">If you're okay with that, click here to continue</button>
+		<button id="warning-accept-button" onclick="onWarningAccept()">
+			If you're okay with that, click here to continue
+		</button>
 		<p>Otherwise, you can go <a href="javascript:history.back()">back</a>.</p>
 	</div>
 

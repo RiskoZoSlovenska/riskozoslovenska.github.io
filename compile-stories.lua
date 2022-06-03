@@ -10,12 +10,16 @@ local STORY_INDEX_FILE = "./stories/index.html"
 local TEMPLATE_FILE = "./assets/story-template.html"
 
 local STORY_PARENT_ELEMENT = "main"
-local WARN_OVERLAY_ID = "warning-overlay"
 local WARN_COMPONENT_CLASS = "story-warning-component"
 local VERSION_LABEL_ID = "version-label"
 local ASIDED_HEADER_CLASS = "asided-header"
-local WARNS_ATTRIB_NAME = "data-warnings"
+local WARN_LIST_ID = "story-warnings-list"
+local WARN_PENDING_ATTRIB = "data-warning-accept-pending"
 local STORY_LIST_ID = "story-list"
+
+local WARN_DESCS = {
+	gore = "Graphic descriptions of violence/injury",
+}
 
 -- TODO: Support for other files and such
 
@@ -129,7 +133,7 @@ local function compileStory(dir)
 
 	local titleNode = pageDocument:getElementsByTagName("title")[1]
 	local mainNode = pageDocument:getElementsByTagName(STORY_PARENT_ELEMENT)[1]
-	local warningOverlayNode = pageDocument:getElementById(WARN_OVERLAY_ID)
+	local warningsListNode = pageDocument:getElementById(WARN_LIST_ID)
 	local warningComponents = pageDocument:getElementsByClassName(WARN_COMPONENT_CLASS)
 
 
@@ -161,11 +165,18 @@ local function compileStory(dir)
 
 	-- Add warnings
 	if #info.warnings > 0 then
-		warningOverlayNode:setAttribute(WARNS_ATTRIB_NAME, table.concat(info.warnings, ";"))
+		-- Append warning list items to the warnings list
+		for _, warning in ipairs(info.warnings) do
+			local itemNode = pageDocument:createElement("li")
+			itemNode.textContent = assert(WARN_DESCS[warning], "invalid warning")
+
+			warningsListNode:appendChild(itemNode)
+		end
 	else
 		for _, componentNode in ipairs(warningComponents) do
 			componentNode:remove()
 		end
+		pageDocument.body:removeAttribute(WARN_PENDING_ATTRIB)
 	end
 
 	return {
