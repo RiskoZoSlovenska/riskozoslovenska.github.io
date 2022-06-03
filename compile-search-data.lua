@@ -5,6 +5,8 @@
 	For the specification of the resulting object, see /assets/scripts/search.js
 ]]
 
+-- TODO: Make sure parsing/processing doesn't fail on malformed HTML pages
+
 local fs = require("coro-fs")
 local pathlib = require("path")
 local json = require("json")

@@ -1,3 +1,19 @@
+--[[--
+	Fetches the creative-writing repository and compiles works into website
+	pages. The specification for the work format can be found in the
+	creative-writing repo itself. This script assumes that files in said repo
+	adhere to the specification.
+
+	Does not support (yet!):
+		* Author's notes
+		* Contributors
+		* Multi-part stories
+		* Multi-file stories (having images, etc)
+
+	Other TODO:
+		* Make story links on the index page show description?
+]]
+
 local fs = require("coro-fs")
 local pathlib = require("path")
 
@@ -22,8 +38,6 @@ local STORY_LIST_ID = "story-list"
 local WARN_DESCS = {
 	gore = "Graphic descriptions of violence/injury",
 }
-
--- TODO: Support for other files and such
 
 
 local opts = {}
