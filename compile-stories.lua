@@ -112,13 +112,6 @@ local function getMetaTagOfName(document, name)
 end
 
 
-local function removeCompiledWork(dir)
-	if fs.stat(pathlib.join(dir, "index.html")) then -- Check whether exists
-		print("Removing existing story directory:", dir)
-		fs.rmrf(dir)
-	end
-end
-
 local function compileSinglePartWork(workId, dir)
 	local metadata = yaml.eval(read(dir, "info.yaml"))
 
@@ -210,11 +203,6 @@ local function updateIndex(infos)
 	local indexDocument = gumbo.parseFile(STORY_INDEX_FILE)
 	local storyList = indexDocument:getElementById(STORY_LIST_ID)
 
-	-- Remove all children of list
-	while storyList.firstChild do
-		storyList:removeChild(storyList.lastChild)
-	end
-
 	-- Append autogeneration notice
 	storyList:appendChild(
 		indexDocument:createComment(getGenerationTimeString())
@@ -239,16 +227,8 @@ local function updateIndex(infos)
 		storyList:appendChild(itemNode)
 	end
 
-	--[[
-		For whatever reason, gumbo adds an extra newline right after the
-		</main> tag and these newlines accumulate. This is a HACK to get rid
-		of them.
-	]]
-	local content = indexDocument:serialize()
-		:gsub("</main>%s*</body>%s*</html>%s*$", "</main>\n</body></html>")
-
 	print("Writing to story index file")
-	fs.writeFile(STORY_INDEX_FILE, content)
+	fs.writeFile(STORY_INDEX_FILE, indexDocument:serialize())
 end
 
 
@@ -258,11 +238,6 @@ end
 local compilationInfos = {}
 local clonedDir = args[2]
 print("Cloned directory:", clonedDir)
-
--- Remove existing folders
-for path in iterFolderPathsIn(COMPILED_STORIES_DIR) do
-	removeCompiledWork(path)
-end
 
 -- Compile stories
 for path, workId in iterFolderPathsIn(clonedDir) do
