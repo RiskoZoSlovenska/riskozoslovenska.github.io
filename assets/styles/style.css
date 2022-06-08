@@ -234,18 +234,17 @@ div.bottom-disclaimer {
 
 
 
-/* Asides */
-aside {
-	color: var(--dull-text-color);
-	font-size: 0.8em;
-}
-
-.asided-header {
+/* Heading splashes */
+.splashed-heading {
 	margin-bottom: 0;
 }
 
-.asided-header + aside {
-	margin-bottom: 2em;
+.splashed-heading + * {
+	color: var(--dull-text-color);
+	font-size: 0.8em;
+
+	margin-top: 0;
+	margin-bottom: 2em; /* Or whatever the original margin was */
 }
 
 
