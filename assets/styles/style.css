@@ -405,6 +405,13 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 
 
 
+/* Other story-related */
+.story-body-container {
+	margin-bottom: 2em;
+}
+
+
+
 /* Story index page */
 #story-list {
 	margin-top: 2em;
