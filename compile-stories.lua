@@ -27,7 +27,7 @@ local PAGE_TEMPLATE_FILE = "./assets/story-template.html"
 
 local TITLE_HEADER_ID = "title-header"
 local VERSION_LABEL_ID = "version-label"
-local BODY_CONTAINER_ID = "body-container"
+local BODY_CONTAINER_ID = "story-body-container"
 local BODY_CONTAINER_TAG = "div"
 local WARNS_LIST_ID = "story-warnings-list"
 local WARN_COMPONENT_CLASS = "story-warning-component"
