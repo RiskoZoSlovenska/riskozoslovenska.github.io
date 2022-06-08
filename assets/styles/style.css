@@ -224,14 +224,20 @@ footer {
 
 
 
+/* Disclaimer */
+div.bottom-disclaimer {
+	color: var(--dull-text-color);
+	font-size: 0.8em;
+	
+	margin-top: 25%;
+}
+
+
+
 /* Asides */
 aside {
 	color: var(--dull-text-color);
 	font-size: 0.8em;
-}
-
-aside.bottom-disclaimer {
-	margin-top: 25%;
 }
 
 .asided-header {
