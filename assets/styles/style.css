@@ -249,6 +249,13 @@ div.bottom-disclaimer {
 
 
 
+/* Details */
+details > summary ~ * {
+	margin-left: 1.5ch;
+}
+
+
+
 /* Loading elements */
 .loading {
 	font-style: italic;

@@ -25,7 +25,9 @@ local COMPILED_STORIES_DIR = "./stories/"
 local STORY_INDEX_FILE = "./stories/index.html"
 local PAGE_TEMPLATE_FILE = "./assets/story-template.html"
 
-local TITLE_HEADER_ID = "title-header"
+local TITLE_HEADER_ID = "title-heading"
+local DETAILS_MAIN_ID = "story-details-main"
+local DETAILS_CONTAINER_ID = "story-details-container"
 local VERSION_LABEL_ID = "version-label"
 local BODY_CONTAINER_ID = "story-body-container"
 local BODY_CONTAINER_TAG = "div"
@@ -37,6 +39,12 @@ local STORY_LIST_ID = "story-list"
 
 local WARN_DESCS = {
 	gore = "Graphic descriptions of violence/injury",
+}
+
+local DETAIL_NAMES = {
+	{ "Created at: ",   "created-at",   "time" , "[UNKNOWN]"},
+	{ "Updated at: ",   "updated-at",   "time" , "[UNKNOWN]"},
+	{ "Contributors: ", "contributors", "list" , "None"},
 }
 
 
@@ -58,6 +66,29 @@ local parseMarkdown = lunamark.reader.markdown.new(writer, opts)
 
 local function getGenerationTimeString()
 	return os.date("Automatically generated on %F %T")
+end
+
+-- Patch for lua-yaml being sucky (https://github.com/exosite/lua-yaml/blob/master/yaml.lua#L565-L573)
+local function fixYamlTimestampOffset(time)
+	return time
+		and time + os.time{ year = 1970, month = 1, day = 1, hour = 8 }
+		or nil
+end
+
+--[[--
+	Creates a new Node holding a timestamp, or the default value if the time
+	value is nil.
+]]
+local function createTimeNode(document, time, default)
+	local textNode = document:createTextNode(time and os.date("!%F", time) or default)
+
+	if time then
+		local timeNode = document:createElement("time")
+		timeNode:appendChild(textNode)
+		return timeNode
+	else
+		return textNode
+	end
 end
 
 
@@ -132,6 +163,8 @@ local function compileSinglePartWork(workId, dir)
 	local pageTitleNode = page:getElementsByTagName("title")[1]
 	local descMetaNode = getMetaTagOfName(page, "description")
 	local titleHeaderNode = page:getElementById(TITLE_HEADER_ID)
+	local detailsMainNode = page:getElementById(DETAILS_MAIN_ID)
+	local detailsContainerNode = page:getElementById(DETAILS_CONTAINER_ID)
 	local versionLabelNode = page:getElementById(VERSION_LABEL_ID)
 	local bodyContainerNode = page:getElementById(BODY_CONTAINER_ID)
 	local warningsListNode = page:getElementById(WARNS_LIST_ID)
@@ -150,9 +183,29 @@ local function compileSinglePartWork(workId, dir)
 		descMetaNode:remove()
 	end
 
-	-- Version
+	-- Details
 	versionLabelNode.textContent = metadata.version
-	versionLabelNode:setAttribute("title", generatedAt)
+	detailsMainNode:setAttribute("title", generatedAt)
+	for _, detailInfo in ipairs(DETAIL_NAMES) do
+		local displayName, propertyName, t, default = table.unpack(detailInfo)
+		local value = metadata[propertyName]
+
+		-- Property display text
+		detailsContainerNode:appendChild(page:createTextNode(displayName))
+
+		if t == "time" then -- Timestamp (do default string if nil)
+			value = fixYamlTimestampOffset(value)
+			detailsContainerNode:appendChild(createTimeNode(page, value, default))
+
+		elseif t == "list" then -- List (do default string if nil or empty)
+			local list = (value and #value > 0) and table.concat(value, ", ") or default
+
+			detailsContainerNode:appendChild(page:createTextNode(list))
+		end
+
+		-- Trailing <br>
+		detailsContainerNode:appendChild(page:createElement("br"))
+	end
 
 	-- Generated-at comment
 	insertFirstChild(page:createComment(generatedAt), page.documentElement)
