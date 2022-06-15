@@ -558,6 +558,30 @@ main.error-page-main > h3 {
 
 
 
+/* Under Contruction page */
+main#construction-main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	min-height: 100vh;
+	font-size: min(4vw, 2em);
+}
+
+main#construction-main h1 img {
+	margin: 0 1ch;
+}
+
+/* Put the heading at the top instead of the middle on thinner screens */
+@media only screen and (max-aspect-ratio: 1 / 1) and (max-width: 1000px) {
+	main#construction-main {
+		align-items: unset;
+		padding-top: 20%;
+	}
+}
+
+
+
 /* == Hangman (and possibly other games?) == */
 /* God, tuning this took so long (.-. ) */
 
