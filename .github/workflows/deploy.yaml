@@ -1,4 +1,4 @@
-name: Deploy page
+name: Deploy Site
 # Heavily inspired by https://github.com/truemedian/discordia-docs/blob/a214cfeca711f0e33d0fa3b0ffc6545d09ee1c73/.github/workflows/release.yml
 
 on:
