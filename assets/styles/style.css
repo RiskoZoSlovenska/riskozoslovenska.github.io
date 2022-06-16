@@ -225,7 +225,7 @@ footer {
 
 
 /* Disclaimer */
-div.bottom-disclaimer {
+.bottom-disclaimer {
 	color: var(--dull-text-color);
 	font-size: 0.8em;
 	
