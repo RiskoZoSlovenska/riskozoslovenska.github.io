@@ -59,7 +59,7 @@ html {
 /* Body and main */
 body {
 	font-family: var(--main-font);
-	font-size: 1.15em;
+	font-size: 1.25em;
 
 	background-color: var(--main-bg-color);
 	color: var(--main-text-color);
