@@ -244,7 +244,7 @@ footer {
 	font-size: 0.8em;
 
 	margin-top: 0;
-	margin-bottom: 2em; /* Or whatever the original margin was */
+	margin-bottom: 2rem; /* Or whatever the original margin was */
 }
 
 
@@ -414,7 +414,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 
 /* Other story-related */
 #story-body-container {
-	margin-bottom: 2em;
+	margin-bottom: 2rem;
 }
 
 
