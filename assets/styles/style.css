@@ -158,7 +158,7 @@ button:active {
 
 
 
-/* Styled text */
+/* General styles */
 b {
 	color: var(--accent-color-1);
 }
@@ -180,6 +180,10 @@ b {
 	align-items: center;
 	justify-content: center;
 	text-align: center;
+}
+
+.loading {
+	font-style: italic;
 }
 
 
@@ -235,6 +239,13 @@ footer {
 
 
 
+/* Details */
+details > summary ~ * {
+	margin-left: 1.5ch;
+}
+
+
+
 /* Disclaimer */
 .bottom-disclaimer {
 	color: var(--dull-text-color);
@@ -256,20 +267,6 @@ footer {
 
 	margin-top: 0;
 	margin-bottom: 2rem; /* Or whatever the original margin was */
-}
-
-
-
-/* Details */
-details > summary ~ * {
-	margin-left: 1.5ch;
-}
-
-
-
-/* Loading elements */
-.loading {
-	font-style: italic;
 }
 
 
