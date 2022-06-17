@@ -81,6 +81,10 @@ main.full-width-main {
 	width: initial;
 }
 
+main.full-height-main {
+	min-height: inherit;
+}
+
 /* Adjustments for small screens such as mobiles */
 @media only screen and (max-aspect-ratio: 1 / 1) and (max-width: 1000px) {
 	main {
@@ -169,6 +173,13 @@ b {
 
 .monospace-override {
 	font-family: var(--monospace-font);
+}
+
+.centering {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
 }
 
 
@@ -536,37 +547,33 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 
 
 /* == Error Page == */
-main.error-page-main {
-	text-align: center;
-	padding-top: 6em;
+main.error-page-main h1,
+main.error-page-main h2,
+main.error-page-main h3 {
+	margin-top: 0;
+	margin-bottom: 0.6rem;
+}
+main.error-page-main > div > :last-child {
+	margin-top: 20vh;
+	margin-bottom: 0;
 }
 
-main.error-page-main .aside {
-	color: var(--dull-text-color);
-}
-
-/* Hard-coded values go brrrrr */
-main.error-page-main > h1 {
+main.error-page-main h1 {
 	font-size: 3em;
+	color: var(--accent-color-1);
 }
-main.error-page-main > h2 {
-	font-size: min(max(4vw, 0.5em), 1.5em);
+main.error-page-main h2 {
+	font-size: min(max(3vw, 1em), 1.25em);
 }
-main.error-page-main > h3 {
-	font-size: min(max(3vw, 0.3em), 1.17em)
+main.error-page-main h3 {
+	font-size: min(max(2vw, 0.6em), 1em)
 }
 
 
 
 /* Under Contruction page */
-#construction-main {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	min-height: 100vh;
-
-	font-size: min(4vw, 2em); /* Prevent huge size on wide screens */
-	text-align: center;
+#construction-main h1 {
+	font-size: min(8vw, 4em); /* Prevent huge size on wide screens */
 }
 
 #construction-main h1 img {
@@ -574,8 +581,8 @@ main.error-page-main > h3 {
 }
 
 @media only screen and (max-aspect-ratio: 1 / 1) and (max-width: 1000px) {
-	#construction-main {
-		font-size: 5vw; /* Use a slightly larger font */
+	#construction-main h1 {
+		font-size: 10vw; /* Use a slightly larger font */
 	}
 
 	#construction-main h1 img {
