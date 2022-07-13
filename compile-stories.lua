@@ -39,6 +39,7 @@ local STORY_LIST_ID = "story-list"
 
 local WARN_DESCS = {
 	gore = "Graphic descriptions of violence/injury",
+	shocking = "Other shocking content",
 }
 
 local DETAIL_NAMES = {
