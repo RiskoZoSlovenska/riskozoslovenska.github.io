@@ -49,7 +49,8 @@ end
 local function countWordsInString(str)
 	local words = {}
 
-	for word in string.gmatch(str:lower(), "%w+") do
+	for word in string.gmatch(str:lower(), "%S+") do
+		word = word:gsub("%W+", "") -- Collapse punctuation
 		words[word] = (words[word] or 0) + 1
 	end
 
