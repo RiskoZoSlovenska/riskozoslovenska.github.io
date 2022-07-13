@@ -21,6 +21,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: RiskoZoSlovenska/creative-writing
+          ref: c4f72a370d30703e268266dba5679c645279552b # Temporary. Processing any newer commits are blocked by lcmark atm
           path: creative-writing
           submodules: recursive
           token: ${{ secrets.GIT_CREDENTIALS }}
