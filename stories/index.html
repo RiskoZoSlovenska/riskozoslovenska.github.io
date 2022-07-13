@@ -10,12 +10,12 @@
 	<link rel="stylesheet" href="/assets/styles/normalize.css">
 	<link rel="stylesheet" href="/assets/styles/style.css">
 
-	<script src="/assets/inserts/insert.js" defer=""></script>
-	<script src="/assets/scripts/search.js" async=""></script>
+	<script src="/assets/inserts/insert.js" defer></script>
+	<script src="/assets/scripts/search.js" async></script>
 </head>
 
 
-<body data-searchable="">
+<body data-searchable>
 	<div id="sidebar-insert"></div>
 
 	<main>
@@ -28,7 +28,12 @@
 		</p>
 		<hr>
 
-		<ul id="story-list"></ul>
+		<ul id="story-list">
+			<!-- $generatedAt$ -->
+			$for(data)$
+			<li><a href="$data.link$">$data.title$</a></li>
+			$endfor$
+		</ul>
 	</main>
 </body>
 </html>

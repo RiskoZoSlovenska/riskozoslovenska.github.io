@@ -5,8 +5,6 @@
 	adhere to the specification.
 
 	Does not support (yet!):
-		* Author's notes
-		* Contributors
 		* Multi-part stories
 		* Multi-file stories (having images, etc)
 
@@ -14,293 +12,146 @@
 		* Make story links on the index page show description?
 ]]
 
-local fs = require("coro-fs")
+local fs = require("fs")
 local pathlib = require("path")
+local cmark = require("cmark")
+local lcmark = require("lcmark")
 
-local lunamark = require("lunamark")
-local gumbo = require("gumbo")
-local yaml = require("yaml")
-
-local COMPILED_STORIES_DIR = "./stories/"
+local SOURCE_DIR = "../creative-writing"
+local OUTPUT_DIR = "./stories/"
+local STORY_TEMPLATE_FILE = "./assets/story-template.html"
 local STORY_INDEX_FILE = "./stories/index.html"
-local PAGE_TEMPLATE_FILE = "./assets/story-template.html"
-
-local TITLE_HEADER_ID = "title-heading"
-local DETAILS_MAIN_ID = "story-details-main"
-local DETAILS_CONTAINER_ID = "story-details-container"
-local VERSION_LABEL_ID = "version-label"
-local BODY_CONTAINER_ID = "story-body-container"
-local BODY_CONTAINER_TAG = "div"
-local WARNS_LIST_ID = "story-warnings-list"
-local WARN_COMPONENT_CLASS = "story-warning-component"
-local WARN_PENDING_ATTRIB = "data-warning-accept-pending"
-
-local STORY_LIST_ID = "story-list"
 
 local WARN_DESCS = {
-	gore = "Graphic descriptions of violence/injury",
+	gore = "Graphic violence/injury",
+	shocking = "Other shocking content",
+	cringe = "Very bad and cringy writing",
 }
 
-local DETAIL_NAMES = {
-	{ "Created at: ",   "created-at",   "time" , "[UNKNOWN]"},
-	{ "Updated at: ",   "updated-at",   "time" , "[UNKNOWN]"},
-	{ "Contributors: ", "contributors", "list" , "None"},
+local LCMARK_OPTIONS = {
+	yaml_metadata = true,
+	safe = false,
+	smart = true,
+	filters = {
+		-- Increase heading level by 1
+		function(doc, meta, to)
+			for node, entering, nodeType in cmark.walk(doc) do
+				if nodeType == cmark.NODE_HEADING and entering then
+					local curLevel = cmark.get_heading_level(node)
+					cmark.set_heading_level(node, math.min(curLevel + 1, 6))
+				end
+			end
+		end,
+		-- Make sure notes are wrapped in paragraphs
+		function(doc, meta, to)
+
+			local function wrap(field)
+				local fieldNode = meta[field]
+				if not fieldNode then
+					return
+				end
+
+				local first = cmark.node_first_child(fieldNode)
+
+				if cmark.node_get_type(first) == cmark.NODE_CUSTOM_INLINE and not cmark.node_next(first) then
+
+				end
+			end
+		end,
+	},
 }
 
+local generatedAt = os.date("Automatically generated on %F %T")
 
-local opts = {}
-local writer = lunamark.writer.html.new(opts)
-do
-	-- Make sure the headers found in the body are one level higher than the
-	-- ones on the story page itself
-	local oldHeader = writer.header
+local storyTemplateRaw = assert(fs.readFileSync(STORY_TEMPLATE_FILE))
+local storyTemplate = assert(lcmark.compile_template(storyTemplateRaw))
 
-	function writer.header(s, level)
-		return oldHeader(s, level + 1)
-	end
-end
-
-local parseMarkdown = lunamark.reader.markdown.new(writer, opts)
+local indexTemplateRaw = assert(fs.readFileSync(STORY_INDEX_FILE))
+local indexTemplate = assert(lcmark.compile_template(indexTemplateRaw))
 
 
 
-local function getGenerationTimeString()
-	return os.date("Automatically generated on %F %T")
-end
-
--- Patch for lua-yaml being sucky (https://github.com/exosite/lua-yaml/blob/master/yaml.lua#L565-L573)
-local function fixYamlTimestampOffset(time)
-	return time
-		and time + os.time{ year = 1970, month = 1, day = 1, hour = 8 }
-		or nil
-end
-
---[[--
-	Creates a new Node holding a timestamp, or the default value if the time
-	value is nil.
-]]
-local function createTimeNode(document, time, default)
-	local textNode = document:createTextNode(time and os.date("!%F", time) or default)
-
-	if time then
-		local timeNode = document:createElement("time")
-		timeNode:appendChild(textNode)
-		return timeNode
-	else
-		return textNode
-	end
-end
-
-
---[[--
-	Reads the contents of file in a directory. Returns nil if the file doesn't
-	exist.
-]]
-local function read(dir, name)
-	local path = pathlib.join(dir, name)
-
-	return fs.stat(path) and fs.readFile(path) or nil
-end
-
---[[--
-	Returns an iterator which iterates over all the full paths of all non-hidden
-	subdirectories in a directory.
-]]
-local function iterFolderPathsIn(dir)
-	local iter = assert(fs.scandir(dir))
-
-	return function()
-		local info
-		repeat
-			info = iter()
-		until not info or (info.type == "directory" and info.name:sub(1, 1) ~= ".")
-
-		if info then
-			return pathlib.join(dir, info.name), info.name
-		else
-			return nil, nil
-		end
-	end
-end
-
-local function insertFirstChild(new, parent)
-	parent:insertBefore(new, parent.firstChild)
-end
-
---[[--
-	Returns the metatag whose `name` attribute matches a certain name.
-]]
-local function getMetaTagOfName(document, name)
-	local nodes = document:getElementsByTagName("meta")
-
-	for _, node in ipairs(nodes) do
-		if node:getAttribute("name") == name then
-			return node
-		end
-	end
-
-	return nil
-end
-
-
-local function compileSinglePartWork(workId, dir)
-	local metadata = yaml.eval(read(dir, "info.yaml"))
-
-	if metadata.publish then
-		print("Compiling single-part work in directory:", dir)
-	else
-		print("Skipping unpublished")
+local function convertWarnings(warnings)
+	if not warnings then
 		return
 	end
 
-	local rawBody = parseMarkdown(read(dir, "body.md"))
-	local partBodyDocument = gumbo.parse(rawBody, {
-		contextElement = BODY_CONTAINER_TAG,
-	})
+	for i, name in ipairs(warnings) do
+		warnings[i] = assert(WARN_DESCS[name], "invalid warning")
+	end
+end
 
-	local page = gumbo.parseFile(PAGE_TEMPLATE_FILE)
-
-	local pageTitleNode = page:getElementsByTagName("title")[1]
-	local descMetaNode = getMetaTagOfName(page, "description")
-	local titleHeaderNode = page:getElementById(TITLE_HEADER_ID)
-	local detailsMainNode = page:getElementById(DETAILS_MAIN_ID)
-	local detailsContainerNode = page:getElementById(DETAILS_CONTAINER_ID)
-	local versionLabelNode = page:getElementById(VERSION_LABEL_ID)
-	local bodyContainerNode = page:getElementById(BODY_CONTAINER_ID)
-	local warningsListNode = page:getElementById(WARNS_LIST_ID)
-	local warningNodes = page:getElementsByClassName(WARN_COMPONENT_CLASS)
-
-	local generatedAt = getGenerationTimeString()
-
-	-- Title
-	pageTitleNode.textContent = metadata.title
-	titleHeaderNode.textContent = metadata.title
-
-	-- Description
-	if metadata.description then
-		descMetaNode:setAttribute("content", metadata.description)
+local function wrapParagraph(text)
+	if not text or text:sub(1, 3) == "<p>" then
+		return text
 	else
-		descMetaNode:remove()
+		return "<p>" .. text .. "</p>"
+	end
+end
+
+local function compileSinglePartWork(name, dir)
+	-- Read
+	local contentPath = pathlib.join(dir, "main.md")
+	local raw = assert(fs.readFileSync(contentPath))
+
+	local body, meta, err = lcmark.convert(raw, "html", LCMARK_OPTIONS)
+	assert(body, err)
+
+	-- Process
+	if not meta.publish then
+		return nil
 	end
 
-	-- Details
-	versionLabelNode.textContent = metadata.version
-	detailsMainNode:setAttribute("title", generatedAt)
-	for _, detailInfo in ipairs(DETAIL_NAMES) do
-		local displayName, propertyName, t, default = table.unpack(detailInfo)
-		local value = metadata[propertyName]
+	meta.body = body
+	meta.generatedAt = generatedAt
+	convertWarnings(meta.warnings)
+	meta["note-before"] = wrapParagraph(meta["note-before"])
+	meta["note-after"] = wrapParagraph(meta["note-after"])
 
-		-- Property display text
-		detailsContainerNode:appendChild(page:createTextNode(displayName))
+	local rendered = lcmark.apply_template(storyTemplate, meta)
 
-		if t == "time" then -- Timestamp (do default string if nil)
-			value = fixYamlTimestampOffset(value)
-			detailsContainerNode:appendChild(createTimeNode(page, value, default))
+	-- Write
+	local compiledDirName = pathlib.join(OUTPUT_DIR, name)
+	local storyFileName = pathlib.join(compiledDirName, "index.html")
 
-		elseif t == "list" then -- List (do default string if nil or empty)
-			local list = (value and #value > 0) and table.concat(value, ", ") or default
-
-			detailsContainerNode:appendChild(page:createTextNode(list))
-		end
-
-		-- Trailing <br>
-		detailsContainerNode:appendChild(page:createElement("br"))
-	end
-
-	-- Generated-at comment
-	insertFirstChild(page:createComment(generatedAt), page.documentElement)
-
-	-- Content
-	-- bodyContainerNode.innerHTML = rawBody -- Not implemented by gumbo yet
-	for _, child in ipairs(partBodyDocument.documentElement.children) do
-		bodyContainerNode:appendChild(child)
-	end
-
-	-- Warnings
-	if #metadata.warnings > 0 then
-		-- Append warning list items to the warnings list
-		for _, warning in ipairs(metadata.warnings) do
-			local itemNode = page:createElement("li")
-			itemNode.textContent = assert(WARN_DESCS[warning], "invalid warning")
-
-			warningsListNode:appendChild(itemNode)
-		end
-	else
-		-- Remove all warning-related nodes and attributes
-		for _, componentNode in ipairs(warningNodes) do
-			componentNode:remove()
-		end
-		page.body:removeAttribute(WARN_PENDING_ATTRIB)
-	end
-
-
-	-- Create folder
-	local compiledDirName = pathlib.join(COMPILED_STORIES_DIR, workId)
-	print("Creating story directory:", compiledDirName)
-	fs.mkdir(compiledDirName)
-
-	-- Create index.html
-	local indexFileName = pathlib.join(compiledDirName, "index.html")
-	print("Writing to file:", indexFileName)
-	fs.writeFile(indexFileName, page:serialize())
-
+	assert(fs.mkdirSync(compiledDirName))
+	assert(fs.writeFileSync(storyFileName, rendered))
 
 	return {
-		title = metadata.title,
-		dirName = workId,
+		name = name,
+		title = meta.title,
+		desc = meta.description,
+		link = "./" .. name,
 	}
 end
 
-local function updateIndex(infos)
-	-- Parse story index file
-	local indexDocument = gumbo.parseFile(STORY_INDEX_FILE)
-	local storyList = indexDocument:getElementById(STORY_LIST_ID)
-
-	-- Append autogeneration notice
-	storyList:appendChild(
-		indexDocument:createComment(getGenerationTimeString())
-	)
-
-	-- Sort by title
-	table.sort(infos, function(a, b)
-		return a.title < b.title
-	end)
-
-	-- Create link and list item for each story
-	for _, info in ipairs(infos) do
-		local textNode = indexDocument:createTextNode(info.title)
-
-		local linkNode = indexDocument:createElement("a")
-		linkNode:setAttribute("href", "./" .. info.dirName)
-		linkNode:appendChild(textNode)
-
-		local itemNode = indexDocument:createElement("li")
-		itemNode:appendChild(linkNode)
-
-		storyList:appendChild(itemNode)
-	end
-
-	print("Writing to story index file")
-	fs.writeFile(STORY_INDEX_FILE, indexDocument:serialize())
+local function compileIndex(indexData)
+	local rendered = lcmark.apply_template(indexTemplate, {
+		data = indexData,
+		generatedAt = generatedAt,
+	})
+	assert(fs.writeFileSync(STORY_INDEX_FILE, rendered))
 end
 
 
 
---- LOGIC STARTS ---
+local indexData = {}
 
-local compilationInfos = {}
-local clonedDir = args[2]
-print("Cloned directory:", clonedDir)
+for name, t in assert(fs.scandirSync(SOURCE_DIR)) do
+	if t == "directory" and name:sub(1, 1) ~= "." then
+		local path = pathlib.join(SOURCE_DIR, name)
+		local data = compileSinglePartWork(path)
+		if data then
+			table.insert(indexData, data)
 
--- Compile stories
-for path, workId in iterFolderPathsIn(clonedDir) do
-	local compilationInfo = compileSinglePartWork(workId, path)
-	if compilationInfo then
-		print("Compiled story:", compilationInfo.title, compilationInfo.dirName)
-
-		table.insert(compilationInfos, compilationInfo)
+			print("SUCCESS: " .. name)
+		else
+			print("SKIP")
+		end
 	end
 end
 
--- Update story index file
-updateIndex(compilationInfos)
+compileIndex(indexData)
+
+print("WROTE INDEX")
+print("DONE")

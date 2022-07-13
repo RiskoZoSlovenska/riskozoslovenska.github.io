@@ -40,9 +40,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          luarocks install lunamark
+          luarocks install lcmark
+          luarocks install lyaml
           luarocks install gumbo
-          luarocks install lua-yaml
 
           ./lit install creationix/coro-fs
         shell: bash
