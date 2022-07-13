@@ -436,6 +436,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 
 #story-list > li {
 	font-size: 1.2em;
+	margin: 0.3em 0;
 }
 
 
