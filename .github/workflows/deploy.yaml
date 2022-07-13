@@ -43,8 +43,6 @@ jobs:
           luarocks install lcmark
           luarocks install lyaml
           luarocks install gumbo
-
-          ./lit install creationix/coro-fs
         shell: bash
 
 
