@@ -48,7 +48,7 @@ const WORD_MATCH_WEIGHT = 3
 
 const SEARCH_RESULT_CLASS = "search-result"
 
-let searchData = undefined;
+let searchData = null;
 fetch("/search_data.json")
 	.then(res => res.json())
 	.then(json => {
@@ -56,7 +56,7 @@ fetch("/search_data.json")
 		console.log("Search data loaded!")
 	})
 
-let resultTemplate = undefined;
+let resultTemplate = null;
 fetch("/assets/search-result-template.html")
 	.then(res => res.text())
 	.then(text => {
