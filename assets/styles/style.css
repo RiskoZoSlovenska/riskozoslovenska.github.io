@@ -366,7 +366,7 @@ body[data-warning-accept-pending] {
 	width: 100vw;
 	height: 100vh;
 
-	padding: 10%;
+	padding: 10vh 10%;
 	text-align: center;
 
 	background-color: var(--main-bg-color);
@@ -383,39 +383,50 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 	pointer-events: none; /* Don't sink mouse events */
 }
 
-#warning-overlay > h1 {
+#warning-overlay > * {
+	margin-top: 0;
+	margin-bottom: 1.25rem;
+}
+
+#warning-overlay > *:last-child {
+	margin-bottom: 0;
+}
+
+#warning-overlay h1 {
 	color: var(--accent-color-1);
 	text-decoration: underline;
 }
 
-#warning-overlay > h2 {
+#warning-overlay h2 {
 	color: var(--dull-text-color);
 }
 
-#warning-overlay > ul {
+#warning-overlay ul {
 	color: var(--dull-text-color);
+
+	min-height: 4em;
 
 	list-style-position: inside; /* Make bullet points align properly on all browsers */
 	padding-left: 0; /* Make the list items be fully centered */
 }
 
-#warning-overlay > .warning-spacer {
-	display: block;
-	height: 30%;
-}
-@media only screen and (max-aspect-ratio: 3 / 4) { /* Helps with really thin screens */
-	#warning-overlay > .warning-spacer {
-		height: 10%;
-	}
-}
-
-#warning-overlay > button {
+#warning-overlay button {
 	background-color: var(--accent-color-1);
 
 	font-size: 1.3em;
 	padding: 0.4em;
-	
+	/* margin-top: min(max(5vw, 2.5em), 50vh); */
+	margin-top: auto;
+
 	max-width: 80%;
+}
+
+@media only screen and (max-aspect-ratio: 3 / 4) {
+
+	/* Helps with really thin screens */
+	#warning-overlay .warning-spacer {
+		height: 10%;
+	}
 }
 
 
