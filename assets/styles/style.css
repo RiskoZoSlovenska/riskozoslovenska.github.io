@@ -270,6 +270,24 @@ details > summary ~ * {
 }
 
 
+/* Darkener */
+.darkener {
+	background-color: #000000;
+	opacity: 0;
+
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+
+	transition-property: opacity;
+
+	z-index: 125;
+	pointer-events: none; /* Don't sink mouse events */
+}
+
+
 
 /* Search bar */
 .search-results-container, .search-bar {
@@ -437,25 +455,6 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 #story-list > li {
 	font-size: 1.2em;
 	margin: 0.4em 0;
-}
-
-
-
-/* Darkener */
-.darkener {
-	background-color: #000000;
-	opacity: 0;
-
-	position: fixed;
-	width: 100vw;
-	height: 100vh;
-	margin: 0;
-	padding: 0;
-
-	transition-property: opacity;
-
-	z-index: 125;
-	pointer-events: none; /* Don't sink mouse events */
 }
 
 
