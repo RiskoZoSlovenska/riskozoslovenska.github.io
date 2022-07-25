@@ -780,7 +780,7 @@ main.error-page-main h3 {
 #fragments-canvas > * {
 	position: absolute;
 	max-width: 50vw;
-	padding: 1em 1ch;
+	padding: 2em 2ch;
 
 	opacity: 0%;
 	transition: opacity 500ms;
