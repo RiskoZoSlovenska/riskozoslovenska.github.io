@@ -183,6 +183,15 @@ b {
 	text-align: center;
 }
 
+.fullscreen {
+	position: fixed;
+	box-sizing: border-box;
+	width: 100vw;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+}
+
 .loading {
 	font-style: italic;
 }
@@ -275,12 +284,6 @@ details > summary ~ * {
 .darkener {
 	background-color: #000000;
 	opacity: 0;
-
-	position: fixed;
-	width: 100vw;
-	height: 100vh;
-	margin: 0;
-	padding: 0;
 
 	transition-property: opacity;
 
