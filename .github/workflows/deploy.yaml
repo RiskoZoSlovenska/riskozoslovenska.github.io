@@ -50,12 +50,12 @@ jobs:
 
 
       - name: Compile stories
-        run: ../luvit compile-stories.lua ../creative-writing
+        run: ../luvit deploy-scripts/compile-stories.lua ../creative-writing
         shell: bash
         working-directory: site
 
       - name: Compile search data
-        run: ../luvit compile-search-data.lua
+        run: ../luvit deploy-scripts/compile-search-data.lua
         shell: bash
         working-directory: site
 
