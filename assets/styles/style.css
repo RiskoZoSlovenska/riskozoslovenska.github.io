@@ -44,6 +44,7 @@
 	155 - Search bar
 	156 - Search results
 	175 - Story warning overlay
+	185 - Cheated overlay
 */
 
 
@@ -544,6 +545,30 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 }
 #sidebar li a:hover {
 	text-decoration: underline solid;
+}
+
+
+/* == Cheated Overlay == */
+#cheating-overlay {
+	z-index: 185;
+
+	background-color: var(--main-bg-color);
+	color: var(--dull-text-color);
+
+	text-align: center;
+	padding: 1em;
+	font-size: min(2vh + 2vw, 1.3em);
+	font-weight: 900;
+
+	pointer-events: none;
+
+	opacity: 0%;
+	transition: opacity 700ms;
+}
+
+#cheating-overlay[data-devtools-open="true"] {
+	opacity: 97%;
+	pointer-events: revert;
 }
 
 
