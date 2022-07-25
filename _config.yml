@@ -1,0 +1,3 @@
+exclude:
+  - "/deploy-scripts"
+  - "/README.md"
