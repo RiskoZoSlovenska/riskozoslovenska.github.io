@@ -120,7 +120,7 @@ function assertHasResultTemplate() {
 }
 
 function extractWordsFromQuery(query) {
-	let raw = query.match(/\w+/g)
+	let raw = query.match(/[a-zA-Z0-9']+/g)?.map(word => word.replaceAll(/[^a-zA-Z0-9]+/g, ""))
 	return [...new Set(raw)] // Remove duplicates (https://stackoverflow.com/a/9229821)
 }
 
