@@ -589,10 +589,10 @@ main.error-page-main h1 {
 	color: var(--accent-color-1);
 }
 main.error-page-main h2 {
-	font-size: min(max(3vw, 1em), 1.25em);
+	font-size: clamp(1em, 3vw, 1.25em);
 }
 main.error-page-main h3 {
-	font-size: min(max(2vw, 0.6em), 1em)
+	font-size: clamp(0.6em, 2vw, 1em);
 }
 
 
