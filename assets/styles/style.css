@@ -734,3 +734,53 @@ main.error-page-main h3 {
 		max-width: initial;
 	}
 }
+
+
+
+/* Fragments page */
+#fragments-canvas {
+	position: relative;
+	height: 90vh; /* Will likely cause overflow; that's ok. We want the canvas to be big enough anyways. */
+	margin: 0;
+	padding: 0;
+
+	overflow: hidden;
+}
+
+#fragments-canvas > * {
+	position: absolute;
+	max-width: 50vw;
+	padding: 1em 1ch;
+
+	opacity: 0%;
+	transition: opacity 500ms;
+
+	pointer-events: none; /* Don't sink mouse input when inactive */
+
+	/* We don't want hidden fragments to be selectable */
+	/* (https://stackoverflow.com/a/4407335) */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+#fragments-canvas > #dummy-fragment {
+	width: 35vw;
+	height: 1em;
+}
+
+#fragments-canvas > *[data-active] {
+	pointer-events: revert;
+}
+
+#fragments-canvas > *[data-active]:hover {
+	opacity: revert;
+}
+
+@media only screen and (max-aspect-ratio: 1 / 1) and (max-width: 1000px) {
+	#fragments-canvas > *:not(#dummy-fragment) {
+		padding: 0;
+	}
+}
