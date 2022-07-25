@@ -1,18 +1,17 @@
 const INSERTS_DIR = "/assets/inserts/"
-const INSERTS = [
-	"footer-insert",  "footer.html",
-	"sidebar-insert", "sidebar.html",
-]
 
+for (let element of document.querySelectorAll("*[id$='-insert']")) {
+	let template = element.id.match(/^(\w+)\-insert$/)?.[1]
+	if (!template) {
+		console.warn("Invalid insert template: " + element.id)
+		continue
+	}
 
-for (let i = 0; i < INSERTS.length; i += 2) {
-	let element = document.getElementById(INSERTS[i])
-	if (!element) { continue }
-
-	let path = INSERTS_DIR + INSERTS[i + 1]
+	let path = INSERTS_DIR + template + ".html"
 
 	console.log("Fetching " + path)
 	fetch(path)
+		.then(res => { return res.ok ? res : Promise.reject("Fetching template failed: " + res.status) })
 		.then(res => res.text())
 		.then(rawHtml => {
 			element.outerHTML = rawHtml
