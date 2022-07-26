@@ -449,6 +449,22 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 }
 
 
+.authors-note {
+	margin-bottom: 2rem;
+}
+
+.authors-note > h2 {
+	font-size: 0.95em;
+	font-style: italic;
+	margin: 0;
+}
+
+.authors-note > h2 ~ * {
+	font-size: 0.9em;
+	margin: 0;
+}
+
+
 
 /* Story index page */
 #story-list {

@@ -21,7 +21,6 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: RiskoZoSlovenska/creative-writing
-          ref: c4f72a370d30703e268266dba5679c645279552b # Temporary. Processing any newer commits are blocked by lcmark atm
           path: creative-writing
           submodules: recursive
           token: ${{ secrets.GIT_CREDENTIALS }}
@@ -38,12 +37,21 @@ jobs:
       - name: Install luvit
         run: curl -L https://github.com/luvit/lit/raw/master/get-lit.sh | sh
         shell: bash
+      
+      # I dunno how to get this working without manually installing libyaml
+      - name: Install libyaml
+        run: | # https://unix.stackexchange.com/a/85195
+          wget -qO- http://pyyaml.org/download/libyaml/yaml-0.2.5.tar.gz | tar xvz
+          cd yaml-0.2.5
+          ./configure
+          make
+          sudo make install
 
       - name: Install dependencies
         run: |
-          luarocks install lunamark
+          luarocks install lcmark
+          luarocks install lyaml
           luarocks install gumbo
-          luarocks install lua-yaml
 
           ./lit install creationix/coro-fs
         shell: bash

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+<!-- $generatedAt$ -->
 <html lang="en" dir="ltr">
 <head>
-	<title>STORY_TITLE</title>
+	<title>$title$</title>
 	<link rel="icon" type="image/svg" href="/assets/images/icon.svg">
-	<meta name="description" content="STORY_DESCRIPTION">
+	$if(description)$<meta name="description" content="$description$">$endif$
 	<meta name="theme-color" content="#ff3232">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -13,16 +14,21 @@
 
 	<script src="/assets/scripts/insert.js" defer></script>
 	<script src="/assets/scripts/search.js" async></script>
-	<script src="/stories/warning-manager.js" async class="story-warning-component"></script>
+	$if(warnings)$<script src="/stories/warning-manager.js" async></script>$endif$
 </head>
 
 
-<body data-searchable data-warning-accept-pending>
-	<div id="warning-overlay" class="story-warning-component">
+<body data-searchable $if(warnings)$data-warning-accept-pending$endif$>
+	$if(warnings)$
+	<div id="warning-overlay">
 		<h1>! Warning !</h1>
 		<h2>This written work may contain the following:</h2>
 		
-		<ul id="story-warnings-list"></ul>
+		<ul>
+			$for(warnings)$
+			<li>$warnings$</li>
+			$endfor$
+		</ul>
 		
 		<div class="warning-spacer"></div>
 		
@@ -31,17 +37,38 @@
 		</button>
 		<p>Otherwise, you can go <a href="javascript:history.back()">back</a>.</p>
 	</div>
+	$endif$
 
 	<div id="sidebar-insert"></div>
 
 	<main>
-		<h1 class="splashed-heading" id="title-heading"></h1>
-		<details id="story-details-main">
-			<summary id="version-label">1.0.3</summary>
-			<div id="story-details-container"></div>
+		<h1 class="splashed-heading">$title$</h1>
+		<details title="$generatedAt$">
+			<summary>$version$</summary>
+			<div>
+				Created at: $if(created-at)$<time>$created-at$</time>$else$[UNKNOWN]$endif$<br>
+				Updated at: $if(updated-at)$<time>$updated-at$</time>$else$[UNKNOWN]$endif$<br>
+				Contributors: $if(contributors)$$for(contributors)$$contributors$$sep$, $endfor$$else$None$endif$
+			</div>
 		</details>
 
-		<div id="story-body-container"></div>
+		$if(note-before)$
+		<section class="authors-note less-visible">
+			<h2>Author's Note:</h2>
+			$note-before$
+		</section>
+		$endif$
+
+		<div id="story-body-container">
+			$body$
+		</div>
+
+		$if(note-after)$
+		<section class="authors-note less-visible">
+			<h2>Author's Note:</h2>
+			$note-after$
+		</section>
+		$endif$
 	</main>
 </body>
 </html>
