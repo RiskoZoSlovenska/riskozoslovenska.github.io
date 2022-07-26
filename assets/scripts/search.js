@@ -222,7 +222,7 @@ function updateSearch(event) {
 	let resultsContainer = searchBox.nextElementSibling
 
 	if (document.activeElement == searchBox) {
-		let query = searchBox.value
+		let query = searchBox.value.toLowerCase()
 		let queryWords = extractWordsFromQuery(query)
 
 		let results = buildBlankResults()
