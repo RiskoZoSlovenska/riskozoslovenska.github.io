@@ -7,10 +7,9 @@
 
 -- TODO: Make sure parsing/processing doesn't fail on malformed HTML pages
 
-local fs = require("coro-fs")
+local fs = require("fs")
 local pathlib = require("path")
 local json = require("json")
-
 local gumbo = require("gumbo")
 
 local SEARCHABLE_ATTRIB = "data-searchable"
@@ -100,16 +99,16 @@ local function getDataForFolder(startPath)
 	while pathStack[1] do
 		local path = table.remove(pathStack)
 
-		for info in fs.scandir(path) do
-			local childPath = pathlib.join(path, info.name)
+		for name, t in assert(fs.scandirSync(path)) do
+			local childPath = pathlib.join(path, name)
 
 			if mustIgnorePath(childPath) then
 				print("Ignoring: " .. childPath) -- Ignore
 
-			elseif info.type == "directory" then
+			elseif t == "directory" then
 				table.insert(pathStack, childPath) -- Push to stack
 
-			elseif info.name:find(".%.html$") then
+			elseif name:find(".%.html$") then
 				if addDataForFile(data, nextFileIndex, childPath) then -- Process
 					nextFileIndex = nextFileIndex + 1
 				end
@@ -125,6 +124,6 @@ end
 
 local data = getDataForFolder(".")
 local encoded = json.encode(data)
-fs.writeFile(RES_FILE_PATH, encoded)
+assert(fs.writeFileSync(RES_FILE_PATH, encoded))
 
 print("Finished")
