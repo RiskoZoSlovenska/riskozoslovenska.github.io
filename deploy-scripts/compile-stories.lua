@@ -58,7 +58,12 @@ local function convertWarnings(warnings)
 	end
 
 	for i, name in ipairs(warnings) do
-		warnings[i] = assert(WARN_DESCS[name], "invalid warning: " .. tostring(name))
+		local desc = WARN_DESCS[name]
+		if not desc then
+			print("! WARNING: unknown warning: " .. tostring(name))
+		end
+
+		warnings[i] = desc or name
 	end
 end
 
