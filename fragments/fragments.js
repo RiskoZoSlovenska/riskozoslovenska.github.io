@@ -16,7 +16,7 @@ const DUMMY_ID = "dummy-fragment"
 const ACTIVE_ATTRIBUTE = "data-active"
 const UNFOCUS_EVENT = "mouseleave"
 
-const FRAGMENT_CHANCE = 0.25
+const FRAGMENT_CHANCE = 0.15
 
 let canvas = document.getElementById(CANVAS_ID)
 let dummyFragment = document.getElementById(DUMMY_ID)
