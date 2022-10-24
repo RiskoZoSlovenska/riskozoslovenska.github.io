@@ -118,7 +118,7 @@ local function compileSinglePartWork(dirMap, partName)
 	local compiledDirName = pathlib.join(OUTPUT_DIR, partName)
 	local storyFileName = pathlib.join(compiledDirName, "index.html")
 
-	assert(fs.mkdirSync(compiledDirName))
+	assert(fs.mkdirpSync(compiledDirName))
 	assert(fs.writeFileSync(storyFileName, rendered))
 
 	return {
