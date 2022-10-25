@@ -123,8 +123,12 @@ a:active {
 
 
 /* Lists */
-.larger-list > li {
+ul.larger-list > li {
 	margin: 1em 0;
+}
+
+ul.compact-list {
+	margin: 0;
 }
 
 
