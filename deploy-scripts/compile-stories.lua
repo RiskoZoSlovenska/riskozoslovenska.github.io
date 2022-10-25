@@ -65,6 +65,8 @@ local function convertWarnings(warnings)
 
 		warnings[i] = desc or name
 	end
+
+	warnings.hasMajorWarning = true
 end
 
 -- lcmark strips the paragraph from single-line metadata, which is usually what

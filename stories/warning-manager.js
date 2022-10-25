@@ -1,11 +1,5 @@
-const PENDING_ATTRIB = "data-warning-accept-pending"
-
-function onWarningAccept() { // Exported function invoked by the button
-	if (!document.body) {
-		throw "Body hasn't loaded in yet... somehow??"
-	}
-
-	document.body.removeAttribute(PENDING_ATTRIB)
+function warningsAccepted() { // Exported function invoked by the button
+	document.body.removeAttribute("data-warning-accept-pending")
 	console.log("Accept button clicked")
 }
 

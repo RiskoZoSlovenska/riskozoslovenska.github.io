@@ -387,24 +387,22 @@ details[open] + details {
 
 
 /* Story warning overlay */
-body[data-warning-accept-pending] {
-	overflow: hidden;
+#story-body-container {
+	position: relative;
 }
 
 #warning-overlay {
-	position: fixed;
+	position: absolute;
 	box-sizing: border-box; /* Fixes bad sizing */
-	width: 100vw;
-	height: 100vh;
+	width: 100%;
+	height: 100%;
 
-	padding: 10%;
+	padding: 2em 1em;
 	text-align: center;
-
-	background-color: var(--main-bg-color);
-	opacity: 99.9%;
 	overflow: auto;
 
-	z-index: 175;
+	background-color: var(--alt-bg-color);
+	opacity: 100%;
 }
 
 body:not([data-warning-accept-pending]) #warning-overlay {
@@ -414,39 +412,14 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 	pointer-events: none; /* Don't sink mouse events */
 }
 
-#warning-overlay > h1 {
-	color: var(--accent-color-1);
-	text-decoration: underline;
-}
-
-#warning-overlay > h2 {
+#warning-overlay p {
 	color: var(--dull-text-color);
-}
-
-#warning-overlay > ul {
-	color: var(--dull-text-color);
-
-	list-style-position: inside; /* Make bullet points align properly on all browsers */
-	padding-left: 0; /* Make the list items be fully centered */
-}
-
-#warning-overlay > .warning-spacer {
-	display: block;
-	height: 30%;
-}
-@media only screen and (max-aspect-ratio: 3 / 4) { /* Helps with really thin screens */
-	#warning-overlay > .warning-spacer {
-		height: 10%;
-	}
+	margin-bottom: 2em;
 }
 
 #warning-overlay > button {
 	background-color: var(--accent-color-1);
-
-	font-size: 1.3em;
-	padding: 0.4em;
-	
-	max-width: 80%;
+	font-size: 1em;
 }
 
 
@@ -490,7 +463,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 
 /* == Sidebar == */
 #sidebar        ~ *,
-#sidebar-insert ~ *{
+#sidebar-insert ~ * {
 	margin-left: var(--sidebar-ribbon-size);
 }
 
