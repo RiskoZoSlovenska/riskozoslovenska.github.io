@@ -434,14 +434,16 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 	margin-bottom: 2rem;
 }
 
+.authors-note * {
+	font-size: 0.9em;
+}
+
 .authors-note > h2 {
-	font-size: 0.95em;
 	font-style: italic;
 	margin: 0;
 }
 
 .authors-note > h2 ~ * {
-	font-size: 0.9em;
 	margin: 0;
 }
 
