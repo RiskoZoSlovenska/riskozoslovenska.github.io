@@ -47,6 +47,8 @@ const TITLE_TOTAL_WEIGHT = 1
 const WORD_MATCH_WEIGHT = 3
 
 const SEARCH_RESULT_CLASS = "search-result"
+const SEARCH_RESULT_TITLE_CLASS = "search-result-title"
+const SEARCH_RESULT_DESC_CLASS = "search-result-desc"
 
 let searchData = null;
 fetch("/search_data.json")
@@ -183,8 +185,8 @@ function finalizeResults(results) {
 
 function createSearchResultNode(resultData) {
 	let node = resultTemplate.cloneNode(true)
-	node.getElementsByTagName("h1")[0].textContent = resultData.title
-	node.getElementsByTagName("p")[0].textContent = 
+	node.getElementsByClassName(SEARCH_RESULT_TITLE_CLASS)[0].textContent = resultData.title
+	node.getElementsByClassName(SEARCH_RESULT_DESC_CLASS)[0].textContent = 
 		resultData.matches ?
 		("Matches: " + resultData.matches) :
 		("Score: "   + resultData.score)

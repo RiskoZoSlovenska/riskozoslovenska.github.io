@@ -364,7 +364,6 @@ details[open] + details {
 }
 
 .search-bar:focus-visible {
-	/* outline: var(--search-bar-border-size) inset var(--accent-color-2); */ /* Alternate outline */
 	outline: none;
 	border-color: var(--accent-color-2);
 }
@@ -374,7 +373,7 @@ details[open] + details {
 	z-index: 155; /* Lower than the search bar */
 }
 
-.search-results-container div {
+.search-result {
 	width: inherit; /* Must explicitly inherit width (using 100% doesn't work) */
 	padding: 0.2em;
 	border-style: solid;
@@ -384,34 +383,32 @@ details[open] + details {
 	transition-property: filter;
 }
 
-.search-results-container div:hover,
-.search-results-container div:focus {
+.search-result:hover,
+.search-result:focus {
 	filter: brightness(120%);
 }
 
-.search-results-container div:active {
+.search-result:active {
 	filter: brightness(150%);
 	transition-duration: 0ms;
 }
 
-.search-results-container div:hover h1,
-.search-results-container div:focus h1,
-.search-results-container div:active h1 {
+.search-result:hover .search-result-title,
+.search-result:focus .search-result-title,
+.search-result:active .search-result-title {
 	text-decoration: underline;
 }
 
-.search-results-container div h1 {
+.search-result .search-result-title {
 	font-size: 1em;
-
-	/* Must override the #sidebar h1 rule */
-	text-align: left !important;
-	margin-bottom: 0.2em !important;
-	padding: 0;
-
+	font-weight: 900;
 	color: var(--accent-color-1);
+
+	margin: 0 0 0.2em;
+	padding: 0;
 }
 
-.search-results-container div p {
+.search-result .search-result-desc {
 	margin: 0;
 	padding: 0;
 
@@ -553,7 +550,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 
 
 /* Sidebar components */
-.sidebar-main-content {
+#sidebar-main-content {
 	height: inherit;
 	padding: 1em 2em;
 	box-sizing: border-box; /* Fixes incorrect margins */
@@ -573,9 +570,9 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 	overflow: visible; /* Makes the inline SVG be not cut-off slightly (https://stackoverflow.com/a/46344280) */
 }
 
-#sidebar h1 {
-	margin: 0;
-	margin-bottom: 0.5em;
+#sidebar h2 {
+	font-size: 2em;
+	margin: 0 0 0.5em; /* Bottom */
 	text-align: center;
 }
 
