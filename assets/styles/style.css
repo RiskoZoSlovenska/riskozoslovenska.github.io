@@ -120,6 +120,28 @@ a:active {
 	transition-duration: 0ms;
 }
 
+/* Taken from https://css-tricks.com/block-links-are-a-pain-and-maybe-just-a-bad-idea.
+   This does prevent text selection (which requires JS to fix; see
+   https://css-tricks.com/block-links-the-search-for-a-perfect-solution), but
+   there are no other clickable things where this is used, and using an anchor
+   like this makes browsers correctly display the destination link in the bottom
+   left corner. In other words, good enough for me.
+
+   Beware, this assumes the target is the ancestor of only one link.
+*/
+.entire-link-target {
+	position: relative;
+}
+
+.entire-link-target a::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
 
 
 /* Lists */
