@@ -231,6 +231,11 @@ function updateSearch(event) {
 
 		putResults(finalizeResults(results), resultsContainer)
 	} else {
-		clearResults()
+		/*
+			Workaround for not being able to click the search results due to
+			them disappearing when the search bar loses focus: If one of the
+			search items is being hovered, wait a small delay before clearing.
+		*/
+		setTimeout(clearResults, resultsContainer.querySelector(":hover") ? 150 : 0)
 	}
 }
