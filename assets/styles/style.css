@@ -478,14 +478,27 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 
 /* Story index page */
 #story-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(max(20vw, 12.5em), 1fr)); /* Tweak me later */
+	gap: 1ch;
+
 	margin-top: 2em;
-	padding-left: 1em;
-	list-style-type: none;
 }
 
-#story-list > li {
-	font-size: 1.2em;
-	margin: 0.4em 0;
+#story-list > * {
+	padding: 0.5em;
+	background-color: var(--alt-bg-color);
+}
+
+#story-list > * > h2 {
+	font-size: inherit;
+	margin: inherit;
+}
+
+#story-list > * > .story-list-item-desc {
+	margin-top: 0.4ex;
+	font-size: 0.7em;
+	color: var(--dull-text-color);
 }
 
 

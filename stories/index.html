@@ -27,12 +27,17 @@
 			great.
 		</p>
 
-		<ul id="story-list">
+		<div id="story-list">
 			<!-- $generatedAt$ -->
 			$for(data)$
-			<li$if(data.description)$ title="$data.description$"$endif$><a href="$data.link$">$data.title$</a></li>
+			<div title="Get reading!" class="entire-link-target highlight-on-hover">
+				<h2><a href="$data.link$">$data.title$</a></h2>
+				<div class="story-list-item-desc">
+					$if(data.description)$$data.description$$else$<em>No description.</em>$endif$
+				</div>
+			</div>
 			$endfor$
-		</ul>
+		</div>
 	</main>
 </body>
 </html>
