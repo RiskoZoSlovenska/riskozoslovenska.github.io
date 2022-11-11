@@ -533,8 +533,10 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 	border-right: var(--sidebar-ribbon-size) solid var(--accent-color-1);
 
 	position: fixed;
+	box-sizing: border-box;
 	transform: translateX(-100%) translate(var(--sidebar-ribbon-size));
 	height: 100%;
+	max-width: 85vw; /* Make sure the sidebar doesn't take up the whole screen on slim devices */
 	z-index: 150;
 
 	transition-property: transform;
