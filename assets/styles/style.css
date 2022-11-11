@@ -546,6 +546,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 }
 #sidebar:hover + #sidebar-darkener {
 	opacity: 0.5;
+	pointer-events: auto; /* Prevents mobile users from triggering stuff when they press away from the sidebar. */
 }
 
 
