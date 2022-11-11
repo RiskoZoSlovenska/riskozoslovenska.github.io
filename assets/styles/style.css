@@ -60,7 +60,7 @@ html {
 /* Body and main */
 body {
 	font-family: var(--main-font);
-	font-size: 1.25em;
+	font-size: 1.35em;
 
 	background-color: var(--main-bg-color);
 	color: var(--main-text-color);
@@ -96,6 +96,15 @@ main.full-height-main {
 	body {
 		font-size: 1.05em;
 	}
+}
+
+
+
+/* Paragraphs */
+p.long-p, .long-p-container p {
+	/* These values were taken from AO3 */
+	line-height: 1.5;
+	margin: 1.286em auto;
 }
 
 
