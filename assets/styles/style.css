@@ -177,23 +177,19 @@ button {
 	border: 0;
 }
 
-button, .highlight-on-hover {
+button {
 	transition: 400ms ease-out;	
 	transition-property: background-color, filter; /* Specify this separately so the other properties apply properly */
 }
 
 button:hover,
-button:focus,
-.highlight-on-hover:hover,
-.highlight-on-hover:focus {
+button:focus {
 	filter: brightness(150%);
-
 	transition-duration: 200ms;
 }
 
-button:active, .highlight-on-hover:active {
+button:active {
 	filter: brightness(200%);
-
 	transition-duration: 0ms;
 }
 
@@ -322,6 +318,23 @@ details[open] + details {
 
 	margin-top: 0;
 	margin-bottom: 2rem; /* Or whatever the original margin was */
+}
+
+
+/* Highlight on hover */
+.highlight-on-hover {
+	transition: filter 400ms ease-out;
+}
+
+.highlight-on-hover:hover,
+.highlight-on-hover:focus {
+	filter: brightness(120%);
+	transition-duration: 200ms;
+}
+
+.highlight-on-hover:active {
+	filter: brightness(150%);
+	transition-duration: 0ms;
 }
 
 
