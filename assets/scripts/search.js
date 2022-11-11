@@ -190,8 +190,8 @@ function createSearchResultNode(resultData) {
 		resultData.matches ?
 		("Matches: " + resultData.matches) :
 		("Score: "   + resultData.score)
-	
-	node.setAttribute("onclick", "location.href='" + resultData.link + "'")
+
+	node.getElementsByTagName("a")[0].setAttribute("href", resultData.link)
 
 	return node
 }

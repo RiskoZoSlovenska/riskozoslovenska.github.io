@@ -391,25 +391,6 @@ details[open] + details {
 	padding: 0.2em;
 	border-style: solid;
 	cursor: pointer;
-
-	transition: 200ms ease-out;
-	transition-property: filter;
-}
-
-.search-result:hover,
-.search-result:focus {
-	filter: brightness(120%);
-}
-
-.search-result:active {
-	filter: brightness(150%);
-	transition-duration: 0ms;
-}
-
-.search-result:hover .search-result-title,
-.search-result:focus .search-result-title,
-.search-result:active .search-result-title {
-	text-decoration: underline;
 }
 
 .search-result .search-result-title {
@@ -419,6 +400,12 @@ details[open] + details {
 
 	margin: 0 0 0.2em;
 	padding: 0;
+}
+
+.search-result:hover .search-result-title,
+.search-result:focus .search-result-title,
+.search-result:active .search-result-title {
+	text-decoration: underline;
 }
 
 .search-result .search-result-desc {
