@@ -43,13 +43,12 @@
 	150 - Sidebar
 	155 - Search bar
 	156 - Search results
-	175 - Story warning overlay
 	185 - Cheated overlay
 */
 
 
 
-/* Page */
+/* == Page == */
 html {
 	scroll-behavior: smooth;
 	scrollbar-color: var(--accent-color-1) var(--main-bg-color);
@@ -57,7 +56,7 @@ html {
 
 
 
-/* Body and main */
+/* == Body and Main == */
 body {
 	font-family: var(--main-font);
 	font-size: 1.35em;
@@ -100,7 +99,7 @@ main {
 
 
 
-/* Paragraphs */
+/* == Paragraphs == */
 .long-p, .long-p-container p {
 	/* These values were taken from AO3 */
 	line-height: 1.5;
@@ -108,8 +107,7 @@ main {
 }
 
 
-
-/* Links */
+/* == Links == */
 a {
 	text-decoration: none;
 	color: var(--accent-color-2);
@@ -152,8 +150,7 @@ a:active {
 }
 
 
-
-/* Lists */
+/* == Lists == */
 .larger-list > li {
 	margin: 1em 0;
 }
@@ -163,8 +160,7 @@ a:active {
 }
 
 
-
-/* Buttons (and highlighting) */
+/* == Buttons (and highlighting) == */
 button {
 	color: var(--main-text-color);
 	background-color: var(--alt-bg-color);
@@ -194,12 +190,121 @@ button:active {
 }
 
 
+/* == Code == */
+code {
+	font-family: var(--monospace-font);
 
-/* General styles */
+	color: var(--code-fg-color);
+	background-color: var(--code-bg-color);
+	
+	border-radius: 0.2em;
+	padding: 0.05em 0.2em;
+}
+
+
+/* == Images == */
+svg .main-text-colored {
+	fill: var(--main-text-color);
+}
+
+.character-like-image {
+	height: 1em;
+	vertical-align: sub;
+	margin: 0 0.1em
+}
+
+
+/* == Footer == */
+footer, #footer-insert {
+	font-size: 1rem;
+
+	margin: auto 0 0 0;
+	padding: 0.5em 3em;
+	box-sizing: border-box; /* Makes it not exceed page size */
+
+	color: var(--dull-text-color);
+	background-color: var(--alt-bg-color);
+
+	z-index: 110;
+}
+
+
+/* == Details == */
+details > summary ~ * {
+	margin-left: 1.5ch;
+}
+
+details[open] + details {
+	margin-top: 0.7em;
+}
+
+
+/* == Other Elements == */
+hr {
+	height: 3px;
+	background-color: var(--hr-color);
+	border-style: none; /* Usually defaults to inset border */
+}
+
 b {
 	color: var(--accent-color-1);
 }
 
+
+
+/* == Disclaimer == */
+.bottom-disclaimer {
+	color: var(--dull-text-color);
+	font-size: 0.8em;
+	
+	margin-top: 25%;
+}
+
+
+/* == Heading Splashes == */
+.splashed-heading {
+	margin-bottom: 0;
+}
+
+.splashed-heading + * {
+	color: var(--dull-text-color);
+	font-size: 0.8em;
+
+	margin-top: 0;
+	margin-bottom: 2rem; /* Or whatever the original margin was */
+}
+
+
+/* == Highlight on Hover == */
+.highlight-on-hover {
+	transition: filter 400ms ease-out;
+}
+
+.highlight-on-hover:hover,
+.highlight-on-hover:focus {
+	filter: brightness(120%);
+	transition-duration: 200ms;
+}
+
+.highlight-on-hover:active {
+	filter: brightness(150%);
+	transition-duration: 0ms;
+}
+
+
+/* == Darkener == */
+.darkener {
+	background-color: #000000;
+	opacity: 0;
+
+	transition-property: opacity;
+
+	z-index: 125;
+	pointer-events: none; /* Don't sink mouse events */
+}
+
+
+/* == General Styles == */
 .less-visible {
 	filter: brightness(50%);
 }
@@ -235,123 +340,7 @@ b {
 
 
 
-/* Code */
-code {
-	font-family: var(--monospace-font);
-
-	color: var(--code-fg-color);
-	background-color: var(--code-bg-color);
-	
-	border-radius: 0.2em;
-	padding: 0.05em 0.2em;
-}
-
-
-
-/* Images */
-svg .main-text-colored {
-	fill: var(--main-text-color);
-}
-
-.character-like-image {
-	height: 1em;
-	vertical-align: sub;
-	margin: 0 0.1em
-}
-
-
-
-/* Other elements */
-hr {
-	height: 3px;
-	background-color: var(--hr-color);
-	border-style: none; /* Usually defaults to inset border */
-}
-
-
-
-/* Footer */
-footer, #footer-insert {
-	font-size: 1rem;
-
-	margin: auto 0 0 0;
-	padding: 0.5em 3em;
-	box-sizing: border-box; /* Makes it not exceed page size */
-
-	color: var(--dull-text-color);
-	background-color: var(--alt-bg-color);
-
-	z-index: 110;
-}
-
-
-
-/* Details */
-details > summary ~ * {
-	margin-left: 1.5ch;
-}
-
-details[open] + details {
-	margin-top: 0.7em;
-}
-
-
-
-/* Disclaimer */
-.bottom-disclaimer {
-	color: var(--dull-text-color);
-	font-size: 0.8em;
-	
-	margin-top: 25%;
-}
-
-
-
-/* Heading splashes */
-.splashed-heading {
-	margin-bottom: 0;
-}
-
-.splashed-heading + * {
-	color: var(--dull-text-color);
-	font-size: 0.8em;
-
-	margin-top: 0;
-	margin-bottom: 2rem; /* Or whatever the original margin was */
-}
-
-
-/* Highlight on hover */
-.highlight-on-hover {
-	transition: filter 400ms ease-out;
-}
-
-.highlight-on-hover:hover,
-.highlight-on-hover:focus {
-	filter: brightness(120%);
-	transition-duration: 200ms;
-}
-
-.highlight-on-hover:active {
-	filter: brightness(150%);
-	transition-duration: 0ms;
-}
-
-
-/* Darkener */
-.darkener {
-	background-color: #000000;
-	opacity: 0;
-
-	transition-property: opacity;
-
-	z-index: 125;
-	pointer-events: none; /* Don't sink mouse events */
-}
-
-
-
-/* Search bar */
+/* == Search Bar == */
 .search-results-container, .search-bar {
 	width: 180px; /* As much as I hate concrete values this is the only way it works */
 	position: relative;
@@ -419,7 +408,7 @@ details[open] + details {
 
 
 
-/* Story warning overlay */
+/* == Story Pages == */
 #story-body-container {
 	position: relative;
 }
@@ -455,13 +444,9 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 	font-size: 1em;
 }
 
-
-
-/* Other story-related */
 #story-body-container {
 	margin-bottom: 2rem;
 }
-
 
 .authors-note {
 	margin-bottom: 2rem;
@@ -482,7 +467,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 
 
 
-/* Story index page */
+/* == Story Index Page == */
 #story-list {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(max(20vw, 12.5em), 1fr)); /* Tweak me later */
@@ -595,6 +580,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 #sidebar li a:hover {
 	text-decoration: underline solid;
 }
+
 
 
 /* == Cheated Overlay == */
@@ -819,7 +805,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 
 
 
-/* == Fragments page == */
+/* == Fragments Page == */
 #fragments-canvas {
 	position: relative;
 	height: 85vh; /* Will likely cause overflow; that's ok. We want the canvas to be big enough anyways. */
