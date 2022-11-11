@@ -31,12 +31,12 @@ const END_BAR_TEXTS = {
 	}
 }
 
-const BUTTON_CONTAINER = document.getElementById("button-container")
+const BUTTON_CONTAINER = document.getElementById("hangman-button-container")
 const WORD = document.getElementById("hangman-word")
 const END_BAR = document.getElementById("game-end-bar")
 const END_BAR_HEADING = document.getElementById("game-end-bar-heading")
 const END_BAR_REMARK = document.getElementById("game-end-bar-remark")
-const NEXT_ROUND_BUTTON = document.getElementById("next-round-button")
+const NEXT_ROUND_BUTTON = document.getElementById("game-end-bar-next-button")
 
 const IMAGE_PARTS = document.getElementById("hangman-svg-parts").children
 

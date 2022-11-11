@@ -78,11 +78,11 @@ main {
 	padding: 2em 3em;
 }
 
-main.full-width-main {
+.full-width-main {
 	width: initial;
 }
 
-main.full-height-main {
+.full-height-main {
 	min-height: inherit;
 }
 
@@ -101,7 +101,7 @@ main.full-height-main {
 
 
 /* Paragraphs */
-p.long-p, .long-p-container p {
+.long-p, .long-p-container p {
 	/* These values were taken from AO3 */
 	line-height: 1.5;
 	margin: 1.286em auto;
@@ -154,11 +154,11 @@ a:active {
 
 
 /* Lists */
-ul.larger-list > li {
+.larger-list > li {
 	margin: 1em 0;
 }
 
-ul.compact-list {
+.compact-list {
 	margin: 0;
 }
 
@@ -393,7 +393,7 @@ details[open] + details {
 	cursor: pointer;
 }
 
-.search-result .search-result-title {
+.search-result-title {
 	font-size: 1em;
 	font-weight: 900;
 	color: var(--accent-color-1);
@@ -408,7 +408,7 @@ details[open] + details {
 	text-decoration: underline;
 }
 
-.search-result .search-result-desc {
+.search-result-desc {
 	margin: 0;
 	padding: 0;
 
@@ -445,12 +445,12 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 	pointer-events: none; /* Don't sink mouse events */
 }
 
-#warning-overlay p {
+#warning-overlay-text {
 	color: var(--dull-text-color);
 	margin-bottom: 2em;
 }
 
-#warning-overlay > button {
+#warning-overlay-button {
 	background-color: var(--accent-color-1);
 	font-size: 1em;
 }
@@ -471,12 +471,12 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 	font-size: 0.9em;
 }
 
-.authors-note > h2 {
+.authors-note-title {
 	font-style: italic;
 	margin: 0;
 }
 
-.authors-note > h2 ~ * {
+.authors-note-title ~ * {
 	margin: 0;
 }
 
@@ -491,17 +491,17 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 	margin: 2em 0;
 }
 
-#story-list > * {
+.story-list-item {
 	padding: 0.5em;
 	background-color: var(--alt-bg-color);
 }
 
-#story-list > * > h2 {
+.story-list-item-title {
 	font-size: inherit;
 	margin: inherit;
 }
 
-#story-list > * > .story-list-item-desc {
+.story-list-item-desc {
 	margin-top: 0.4ex;
 	font-size: 0.7em;
 	color: var(--dull-text-color);
@@ -534,7 +534,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 
 	position: fixed;
 	box-sizing: border-box;
-	transform: translateX(-100%) translate(var(--sidebar-ribbon-size));
+	transform: translateX(-100%) translateX(var(--sidebar-ribbon-size));
 	height: 100%;
 	max-width: 85vw; /* Make sure the sidebar doesn't take up the whole screen on slim devices */
 	z-index: 150;
@@ -573,7 +573,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 	overflow: visible; /* Makes the inline SVG be not cut-off slightly (https://stackoverflow.com/a/46344280) */
 }
 
-#sidebar h2 {
+.sidebar-title {
 	font-size: 2em;
 	margin: 0 0 0.5em; /* Bottom */
 	text-align: center;
@@ -622,37 +622,37 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 
 
 /* == Error Page == */
-main.error-page-main h1,
-main.error-page-main h2,
-main.error-page-main h3 {
+.error-page-main * {
 	margin-top: 0;
 	margin-bottom: 0.6rem;
 }
-main.error-page-main > div > :last-child {
-	margin-top: 20vh;
-	margin-bottom: 0;
-}
 
-main.error-page-main h1 {
+.error-page-main h1 {
 	font-size: 3em;
 	color: var(--accent-color-1);
 }
-main.error-page-main h2 {
+
+.error-page-remark {
 	font-size: clamp(1em, 3vw, 1.25em);
 }
-main.error-page-main h3 {
-	font-size: clamp(0.6em, 2vw, 1em);
+
+.error-page-remark + .error-page-remark {
+	font-size: 0.8em;
+}
+
+.error-page-spacer {
+	height: 20vh;
 }
 
 
 
-/* Under Contruction page */
+/* == Under Contruction page == */
 #construction-main h1 {
 	font-size: min(8vw, 4em); /* Prevent huge size on wide screens */
 }
 
 #construction-main h1 img {
-	margin: 0 1ch;
+	margin: 0ex 1ch;
 }
 
 @media only screen and (max-aspect-ratio: 1 / 1) and (max-width: 1000px) {
@@ -672,7 +672,7 @@ main.error-page-main h3 {
 /* God, tuning this took so long (.-. ) */
 
 /* Main Elements */
-#game-flex {
+#hangman-game-flex {
 	display: flex;
 	flex-direction: row;
 
@@ -692,7 +692,7 @@ main.error-page-main h3 {
 	color: #E53D3D;
 }
 
-#game-flex, #hangman-word {
+#hangman-game-flex, #hangman-word {
 	font-family: var(--monospace-font);
 	text-align: center;
 }
@@ -745,8 +745,12 @@ main.error-page-main h3 {
 	margin: auto;
 }
 
-#game-end-bar button {
-	font-size: min(2em, 8vw);
+#game-end-bar-heading {
+	font-size: 2em;
+}
+
+#game-end-bar-next-button {
+	font-size: 1.5em;
 }
 
 #game-end-bar[data-is-playing="false"] {
@@ -765,23 +769,23 @@ main.error-page-main h3 {
 
 
 /* Buttons and other stuff */
-#game-flex > div {
+#hangman-button-container {
 	flex: 1;
 
 	max-height: inherit;
 	max-width: inherit;
 }
 
-#game-flex button {
+#hangman-button-container button {
 	font-size: calc(2.25vh + 2vw);
 	font-weight: 900;
 }
 
-#game-flex button.clicked-correct {
+#hangman-button-container button.clicked-correct {
 	background-color: #48ca48;
 }
 
-#game-flex button.clicked-incorrect {
+#hangman-button-container button.clicked-incorrect {
 	background-color: #ca4848;
 }
 
@@ -792,10 +796,10 @@ main.error-page-main h3 {
 	On smaller screens:
 	* Flex in a column (so remove height/width limitations)
 	* Float hangman in center (so remove right marging)
-	* Set explicit hangman max-height (so remove width limit) (since game-flex's limitation was removed)
+	* Set explicit hangman max-height (so remove width limit) (since hangman-game-flex's limitation was removed)
 */
 @media only screen and (max-aspect-ratio: 3 / 4) {
-	#game-flex {
+	#hangman-game-flex {
 		flex-direction: column;
 		margin-left: initial;
 		
@@ -815,7 +819,7 @@ main.error-page-main h3 {
 
 
 
-/* Fragments page */
+/* == Fragments page == */
 #fragments-canvas {
 	position: relative;
 	height: 85vh; /* Will likely cause overflow; that's ok. We want the canvas to be big enough anyways. */

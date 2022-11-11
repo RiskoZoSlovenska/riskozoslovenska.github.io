@@ -47,7 +47,7 @@
 
 		$if(note-before)$
 		<section class="authors-note less-visible">
-			<h2>Author's Note:</h2>
+			<h2 class="authors-note-title">Author's Note:</h2>
 			$note-before$
 		</section>
 		$endif$
@@ -55,8 +55,8 @@
 		<div id="story-body-container" class="long-p-container">
 			$if(warnings.hasMajorWarning)$
 			<div id="warning-overlay">
-				<p>This one may be a bit heavy.</p>
-				<button onclick="warningsAccepted()">I've read the warnings. Lemme read!</button>
+				<p id="warning-overlay-text">This one may be a bit heavy.</p>
+				<button id="warning-overlay-button" onclick="warningsAccepted()">I've read the warnings. Lemme read!</button>
 			</div>
 			$endif$
 			
@@ -65,7 +65,7 @@
 
 		$if(note-after)$
 		<section class="authors-note less-visible">
-			<h2>Author's Note:</h2>
+			<h2 class="authors-note-title">Author's Note:</h2>
 			$note-after$
 		</section>
 		$endif$

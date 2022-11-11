@@ -30,8 +30,8 @@
 		<div id="story-list">
 			<!-- $generatedAt$ -->
 			$for(data)$
-			<div title="Get reading!" class="entire-link-target highlight-on-hover">
-				<h2><a href="$data.link$">$data.title$</a></h2>
+			<div title="Get reading!" class="story-list-item entire-link-target highlight-on-hover">
+				<h2 class="story-list-item-title"><a href="$data.link$">$data.title$</a></h2>
 				<div class="story-list-item-desc">
 					$if(data.description)$$data.description$$else$<em>No description.</em>$endif$
 				</div>
