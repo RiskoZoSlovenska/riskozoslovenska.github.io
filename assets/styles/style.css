@@ -395,6 +395,7 @@ b {
 .search-result:focus .search-result-title,
 .search-result:active .search-result-title {
 	text-decoration: underline;
+	color: var(--accent-color-1); /* Override the white link color */
 }
 
 .search-result-desc {
