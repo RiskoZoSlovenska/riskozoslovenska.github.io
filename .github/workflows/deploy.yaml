@@ -27,9 +27,9 @@ jobs:
 
 
       - name: Install lua # Must install lua for luarocks to work
-        uses: leafo/gh-actions-lua@v8.0.0 
+        uses: leafo/gh-actions-lua@v9
         with:
-         luaVersion: "5.1"
+          luaVersion: "5.1"
       
       - name: Install luarocks
         uses: leafo/gh-actions-luarocks@v4
