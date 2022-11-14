@@ -1,3 +1,4 @@
 exclude:
-  - "/deploy-scripts"
-  - "/README.md"
+  - /deploy-scripts
+  - /README.md
+  - /serve.py
