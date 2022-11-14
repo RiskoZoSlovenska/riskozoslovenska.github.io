@@ -11,7 +11,7 @@ for (let element of document.querySelectorAll("*[id$='-insert']")) {
 
 	console.log("Fetching " + path)
 	fetch(path)
-		.then(res => { return res.ok ? res : Promise.reject("Fetching template failed: " + res.status) })
+		.then(res => res.ok ? res : Promise.reject("Fetching template failed: " + res.status))
 		.then(res => res.text())
 		.then(rawHtml => {
 			element.outerHTML = rawHtml

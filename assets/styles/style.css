@@ -385,7 +385,7 @@ b {
 .search-result-title {
 	font-size: 1em;
 	font-weight: 900;
-	color: var(--accent-color-1);
+	color: var(--accent-color-1) !important; /* Override the link color */
 
 	margin: 0 0 0.2em;
 	padding: 0;
@@ -395,7 +395,6 @@ b {
 .search-result:focus .search-result-title,
 .search-result:active .search-result-title {
 	text-decoration: underline;
-	color: var(--accent-color-1); /* Override the white link color */
 }
 
 .search-result-desc {
@@ -502,17 +501,6 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 }
 
 
-/* Transitions for sidebar and sidebar-darkener */
-#sidebar, #sidebar-darkener {
-	/* Specify these two separately as to not overwrite individually-defined transition-property's */
-	transition-duration: 500ms;
-	transition-timing-function: ease;
-}
-#sidebar:hover, #sidebar:hover + #sidebar-darkener {
-	transition-duration: 300ms;
-}
-
-
 /* Sidebar */
 #sidebar, #sidebar-insert {
 	background-color: var(--main-bg-color);
@@ -529,12 +517,27 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 
 	padding: 0;
 }
+
 #sidebar:hover {
 	transform: translateX(0);
 }
+
 #sidebar:hover + #sidebar-darkener {
 	opacity: 0.5;
 	pointer-events: auto; /* Prevents mobile users from triggering stuff when they press away from the sidebar. */
+}
+
+/* Transitions for sidebar and sidebar-darkener */
+#sidebar,
+#sidebar-darkener {
+	/* Specify these two separately as to not overwrite individually-defined transition-property's */
+	transition-duration: 500ms;
+	transition-timing-function: ease;
+}
+
+#sidebar:hover,
+#sidebar:hover + #sidebar-darkener {
+	transition-duration: 300ms;
 }
 
 
