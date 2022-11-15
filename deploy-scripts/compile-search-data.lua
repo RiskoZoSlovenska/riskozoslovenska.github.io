@@ -48,8 +48,9 @@ end
 local function countWordsInString(str)
 	local words = {}
 
-	for word in string.gmatch(str:lower(), "[%w']+") do
-		word = word:gsub("%W+", "") -- Collapse punctuation
+	-- (’ (U+2019) should be handled the same as ')
+	for word in str:gsub("\u{2019}", "'"):lower():gmatch("[%w']+") do
+		word = word:gsub("%W+", "") -- We only care about alphanumerics
 		words[word] = (words[word] or 0) + 1
 	end
 
