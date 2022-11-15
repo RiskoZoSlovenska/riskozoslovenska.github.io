@@ -86,7 +86,7 @@ main {
 }
 
 /* Adjustments for small screens such as mobiles */
-@media only screen and (max-aspect-ratio: 1 / 1) and (max-width: 1000px) {
+@media only screen and (max-width: 1000px) {
 	main {
 		width: initial;
 		padding: 0.5em 1.2em 1.2em;
@@ -644,7 +644,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 	margin: 0ex 1ch;
 }
 
-@media only screen and (max-aspect-ratio: 1 / 1) and (max-width: 1000px) {
+@media only screen and (max-width: 1000px) {
 	#construction-main h1 {
 		font-size: 10vw; /* Use a slightly larger font */
 	}
@@ -850,7 +850,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 	opacity: revert;
 }
 
-@media only screen and (max-aspect-ratio: 1 / 1) and (max-width: 1000px) {
+@media only screen and (max-width: 1000px) {
 	#fragments-canvas > *:not(#dummy-fragment) {
 		padding: 0;
 	}
