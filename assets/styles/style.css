@@ -564,7 +564,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 .sidebar-title {
 	font-size: 2em;
 	margin: 0 0 0.5em; /* Bottom */
-	text-align: center;
+	text-align: left;
 }
 
 #sidebar ul {
