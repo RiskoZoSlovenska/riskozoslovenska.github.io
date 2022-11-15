@@ -89,7 +89,7 @@ main {
 @media only screen and (max-width: 1000px) {
 	main {
 		width: initial;
-		padding: 0.5em 1.2em 1.2em;
+		padding: 0em 1.2em 1.2em;
 	}
 
 	body {
