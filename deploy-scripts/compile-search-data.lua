@@ -1,18 +1,17 @@
 --[[--
-	Goes through all the html files in the website and compiles then
-	search_data.json object. Only pages whose body has the data-searchable
-	attribute are processed.
-	For the specification of the resulting object, see /assets/scripts/search.js
+	Goes through all the HTML files in the website and compiles them into a
+	search_data.json object. All elements (and their descendants) with the
+	`data-unsearchable` atttribute are removed prior to parsing. If the body is
+	thusly removed, the page is ignored completely. For the specification of the
+	resulting object, see /assets/scripts/search.js.
 ]]
-
--- TODO: Make sure parsing/processing doesn't fail on malformed HTML pages
 
 local fs = require("fs")
 local pathlib = require("path")
 local json = require("json")
 local gumbo = require("gumbo")
 
-local SEARCHABLE_ATTRIB = "data-searchable"
+local UNSEARCHABLE_ATTRIB = "data-unsearchable"
 
 local RES_FILE_PATH = "search_data.json"
 local IGNORE_PATHS = { -- Paths to fully ignore
@@ -60,15 +59,23 @@ end
 local function addDataForFile(data, fileIndex, path)
 	local document = gumbo.parseFile(path)
 
-	if document.body:hasAttribute(SEARCHABLE_ATTRIB) then
-		print("Searchable: " .. path)
-	else
+	-- Remove all unsearchable elements
+	for element in document.documentElement:walk() do
+		if element.hasAttribute and element:hasAttribute(UNSEARCHABLE_ATTRIB) then
+			element:remove()
+		end
+	end
+
+	local body = document:getElementsByTagName("body")[1]
+	if not body then
 		print("Not searchable: " .. path)
 		return false
+	else
+		print("Searchable: " .. path)
 	end
 
 	-- Count and insert words
-	for word, count in pairs(countWordsInString(document.body.textContent)) do
+	for word, count in pairs(countWordsInString(body.textContent)) do
 		local arr = data.counts[word]
 		if not arr then
 			-- Create pair if it doesn't exist
