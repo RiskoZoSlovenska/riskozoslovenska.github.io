@@ -15,7 +15,6 @@
 	<script src="/assets/scripts/insert.js" defer></script>
 	<script src="/assets/scripts/search.js" async></script>
 	<script src="/assets/scripts/sidebar-touch-disable.js" async></script>
-	$if(warnings)$<script src="/stories/warning-manager.js" async></script>$endif$
 </head>
 
 
@@ -57,7 +56,9 @@
 			$if(warnings.hasMajorWarning)$
 			<div id="warning-overlay">
 				<p id="warning-overlay-text">This one may be a bit heavy.</p>
-				<button id="warning-overlay-button" onclick="warningsAccepted()">I've read the warnings. Lemme read!</button>
+				<button id="warning-overlay-button" onclick="javascript:document.body.removeAttribute('data-warning-accept-pending')">
+					I've read the warnings. Lemme read!
+				</button>
 			</div>
 			$endif$
 			
