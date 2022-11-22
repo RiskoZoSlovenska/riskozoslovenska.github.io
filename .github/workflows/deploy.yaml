@@ -53,17 +53,14 @@ jobs:
           luarocks install lcmark
           luarocks install lyaml
           luarocks install gumbo
-        shell: bash
 
 
       - name: Compile stories
         run: ../luvit deploy-scripts/compile-stories.lua ../creative-writing
-        shell: bash
         working-directory: site
 
       - name: Compile search data
         run: ../luvit deploy-scripts/compile-search-data.lua
-        shell: bash
         working-directory: site
 
 
