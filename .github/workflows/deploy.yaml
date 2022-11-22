@@ -35,13 +35,9 @@ jobs:
         uses: leafo/gh-actions-luarocks@v4
 
       - name: Install luvit
-        uses: nick-fields/retry@v2 # lit.luvit.io can be feeble, best to retry
-        with:
-          command: curl -L https://github.com/luvit/lit/raw/master/get-lit.sh | sh
-          shell: bash
-          timeout_minutes: 10 # No timeout limit should be necessary
-          max_attempts: 3
-          retry_wait_seconds: 10
+        # Borrowed (and modified) from
+        # https://github.com/Lyrth/lit-test-package/blob/f5c8897100b923b892d1a3d8b4b34af26162f562/.github/actions/lit-download-action/action.yaml#L26-L28
+        run: curl -L https://github.com/luvit/lit/raw/master/get-lit.sh | sed 's/curl /curl --retry 5 --retry-delay 10 /' | sh
       
       # I dunno how to get this working without manually installing libyaml
       - name: Install libyaml
