@@ -42,7 +42,7 @@ jobs:
       # I dunno how to get this working without manually installing libyaml
       - name: Install libyaml
         run: | # https://unix.stackexchange.com/a/85195
-          wget -qO- http://pyyaml.org/download/libyaml/yaml-0.2.5.tar.gz | tar xvz
+          curl -L --retry 5 --retry-delay 30 http://pyyaml.org/download/libyaml/yaml-0.2.5.tar.gz | tar xvz
           cd yaml-0.2.5
           ./configure
           make
