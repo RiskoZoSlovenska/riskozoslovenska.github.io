@@ -118,7 +118,7 @@ a {
   color: #0071aa;
 } */
 
-a:hover, a:focus, a:active {
+a:is(:hover, :focus, :active) {
 	color: var(--main-text-color);
 	transition-duration: 200ms;
 }
@@ -178,8 +178,7 @@ button {
 	transition-property: background-color, filter; /* Specify this separately so the other properties apply properly */
 }
 
-button:hover,
-button:focus {
+button:is(:hover, :focus) {
 	filter: brightness(150%);
 	transition-duration: 200ms;
 }
@@ -280,8 +279,7 @@ b {
 	transition: filter 400ms ease-out;
 }
 
-.highlight-on-hover:hover,
-.highlight-on-hover:focus {
+.highlight-on-hover:is(:hover, :focus) {
 	filter: brightness(120%);
 	transition-duration: 200ms;
 }
@@ -391,9 +389,7 @@ b {
 	padding: 0;
 }
 
-.search-result:hover .search-result-title,
-.search-result:focus .search-result-title,
-.search-result:active .search-result-title {
+.search-result:is(:hover, :focus, :active) .search-result-title {
 	text-decoration: underline;
 }
 
@@ -495,8 +491,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 
 
 /* == Sidebar == */
-#sidebar        ~ *,
-#sidebar-insert ~ * {
+:is(#sidebar, #sidebar-insert) ~ * {
 	margin-left: var(--sidebar-ribbon-size);
 }
 
@@ -527,15 +522,13 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 }
 
 /* Transitions for sidebar and sidebar-darkener */
-#sidebar,
-#sidebar-darkener {
+#sidebar, #sidebar-darkener {
 	/* Specify these two separately as to not overwrite individually-defined transition-property's */
 	transition-duration: 500ms;
 	transition-timing-function: ease;
 }
 
-#sidebar:hover,
-#sidebar:hover + #sidebar-darkener {
+#sidebar:hover, #sidebar:hover + #sidebar-darkener {
 	transition-duration: 300ms;
 }
 
@@ -580,6 +573,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 	font-size: 1.3rem;
 	margin-bottom: 0.7rem;
 }
+
 #sidebar li a:hover {
 	text-decoration: underline solid;
 }
@@ -699,6 +693,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 
 	transition: opacity 200ms ease-out;
 }
+
 #hangman-svg-parts > .visible-hangman-part {
 	opacity: 1;
 }
@@ -752,6 +747,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 #game-end-bar[data-end-state="won"] {
 	border-color: #23c41e;
 }
+
 #game-end-bar[data-end-state="lost"] {
 	border-color: #d20a0a;
 }
@@ -839,16 +835,16 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 	height: 1em;
 }
 
-#fragments-canvas > *[data-active] {
+#fragments-canvas > [data-active] {
 	pointer-events: revert;
 }
 
-#fragments-canvas > *[data-active]:hover {
+#fragments-canvas > [data-active]:hover {
 	opacity: revert;
 }
 
 @media only screen and (max-width: 1000px) {
-	#fragments-canvas > *:not(#dummy-fragment) {
+	#fragments-canvas > :not(#dummy-fragment) {
 		padding: 0;
 	}
 }
