@@ -212,6 +212,30 @@ svg .main-text-colored {
 	margin: 0 0.1em
 }
 
+img {
+	max-width: 100%; /* Never overflow horizontally */
+	height: auto; /* Maintain aspect ratio */
+}
+
+/* Following three rules were taken from https://gist.github.com/MoritzBuetzer/4c89d9da1e15745cf2b0 */
+figure {
+	display: table;
+}
+
+figure img {
+	display: block;
+}
+
+figure figcaption {
+	display: table-caption;
+	caption-side: bottom;
+
+	text-align: center;
+	font-size: 0.85rem;
+	color: var(--dull-text-color);
+	margin-top: 0.2rem;
+}
+
 
 /* == Footer == */
 footer, #footer-insert {
@@ -321,6 +345,19 @@ b {
 	align-items: center;
 	justify-content: center;
 	text-align: center;
+}
+
+.horizontal-centered {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.float-right {
+	float: right;
+}
+
+.float-left {
+	float: left;
 }
 
 .fullscreen {
