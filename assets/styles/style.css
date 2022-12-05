@@ -100,7 +100,7 @@ main {
 
 
 /* == Paragraphs == */
-.long-p, .long-p-container p {
+:where(.long-p, .long-p-container p) {
 	/* These values were taken from AO3 */
 	line-height: 1.5;
 	margin: 1.286em auto;
