@@ -1,0 +1,93 @@
+/* Personal code theme for highlight.js */
+
+/* Base */
+.hljs {
+	display: block;
+	overflow-x: auto;
+	padding: 0.5em;
+}
+
+.hljs, .hljs-subst {
+	color: #d4d4d4;
+}
+
+
+/* Red */
+.hljs-keyword,
+.hljs-operator,
+.hljs-literal,
+.hljs-symbol,
+.hljs-variable.language_,
+.hljs-variable.constant_,
+.hljs-name,
+.hljs-attribute,
+.hljs-selector-tag,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-deletion {
+	color: #ff3232;
+}
+
+.hljs-property {
+	color: #FFA6A6;
+}
+
+
+/* Blue */
+.hljs-built_in,
+.hljs-type,
+.hljs-class,
+.hljs-title.class_,
+.hljs-attr,
+.hljs-link,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-bullet,
+.hljs-section {
+	color: #00aaff;
+}
+
+.hljs-function .hljs-title,
+.hljs-title.function_,
+.hljs-code {
+	color: #A6E1FF;
+}
+
+
+/* Green */
+.hljs-regexp,
+.hljs-string,
+.hljs-addition {
+	color: #058C00;
+}
+
+.hljs-char.escape_ {
+	color: #68CF66;
+}
+
+
+/* Yellow */
+.hljs-number,
+.hljs-doctag {
+	color: #FFC600;
+}
+
+
+/* Gray */
+.hljs-comment,
+.hljs-quote {
+	color: #8E908C
+}
+
+
+/* Italics */
+.hljs-emphasis,
+.hljs-variable.constant_ {
+	font-style: italic;
+}
+
+
+/* Bold */
+.hljs-strong {
+	font-weight: 900;
+}

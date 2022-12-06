@@ -60,6 +60,7 @@ html {
 body {
 	font-family: var(--main-font);
 	font-size: 1.25em;
+	tab-size: 4;
 
 	background-color: var(--main-bg-color);
 	color: var(--main-text-color);
@@ -192,12 +193,26 @@ button:active {
 /* == Code == */
 code {
 	font-family: var(--monospace-font);
+	white-space: pre-wrap;
 
 	color: var(--code-fg-color);
 	background-color: var(--code-bg-color);
 	
-	border-radius: 0.2em;
+	border-radius: 3px;
 	padding: 0.05em 0.2em;
+}
+
+pre code {
+	display: block;
+	padding: 0.5em;
+	background-color: revert;
+	white-space: inherit;
+}
+
+pre.has-code /* pre:has(code) */ {
+	background-color: var(--code-bg-color);
+	border-radius: 4px;
+	overflow-x: auto;
 }
 
 
