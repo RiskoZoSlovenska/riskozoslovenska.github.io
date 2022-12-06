@@ -900,3 +900,55 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 		padding: 0;
 	}
 }
+
+
+/* == Switching to Linux Page == */
+.linux-issues-list {
+	list-style-type: '→ ';
+	color: var(--dull-text-color);
+}
+
+.linux-issue {
+	margin: 2.5em 0;
+}
+
+.linux-issue.solved {
+	filter: brightness(60%);
+}
+
+.linux-issue-title, .linux-issue::marker {
+	font-weight: 900;
+	font-style: italic;
+	text-decoration: underline;
+}
+
+.linux-issue-desc {
+	line-height: revert;
+	margin: 0 0 1ex 0;
+}
+
+.linux-issue-solutions-list {
+	list-style-type: disc;
+	padding-left: 2em;
+}
+
+.linux-issue-solutions-list > li {
+	margin: 0.5ex 0;
+}
+
+@media only screen and (max-width: 1000px) {
+	.linux-issues-list {
+		padding-left: 1em;
+	}
+
+	.linux-issue-solutions-list {
+		padding-left: 1.5em;
+	}
+}
+
+@media only screen and (max-width: 400px) {
+	.linux-issue-solutions-list {
+		list-style-position: inside;
+		padding-left: 0.5em;
+	}
+}

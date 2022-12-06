@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+	<title>How I Switched To Linux</title>
+	<link rel="icon" type="image/svg" href="/assets/images/icon.svg">
+	<meta name="description" content="Epic story.">
+	<meta name="theme-color" content="#ff3232">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+	<link rel="stylesheet" href="/assets/styles/normalize.css">
+	<link rel="stylesheet" href="/assets/styles/style.css">
+
+	<script src="/assets/scripts/insert.js" defer></script>
+	<script src="/assets/scripts/search.js" async></script>
+	<script src="/assets/scripts/sidebar-touch-disable.js" async></script>
+	<script src="/assets/scripts/code-blocks.js" type="module"></script>
+</head>
+
+
+<body>
+	<div id="sidebar-insert"></div>
+
+	<main class="long-p-container">
+		<h1>How I Switched To Linux</h1>
+		<figure class="float-right">
+			<img src="ntfs.png" width="364" height="149" alt="Screenshot of six files with the same name on Windows 7">
+			<figcaption>I stumbled upon this while clearing out my old Win 7 laptop. And yes, those are all unique and in the
+				same folder.</figcaption>
+		</figure>
+		<p>
+			I’ve grown up on Windows 7 and 10, and for the most part, I’ve had no issues with them. However, recently
+			I’ve been lucky enough to be in a community where Linux was practically everyone’s daily driver and it sort
+			of began to rub off on me. I don’t remember what exactly made me make the switch, but I had heard good
+			things about Linux and at some point I just took the leap of faith.
+		</p>
+		<p>
+			I spent a few days trying out different Linux distributions. I wanted something practical: something less
+			spoonfeed-y than Windows, but nothing that would be a nightmare to get into or troubleshoot. I admit, my
+			trial process was neither systematic nor robust — I tried out only a small handful of distros, and judged
+			mostly by first impressions — but in the end, two distros caught my attention: Solus and Zorin. In the end,
+			I decided to go for Zorin, mostly because it’s Ubuntu-based and therefore there’s an abundance of both apps
+			and troubleshooting resources for it.
+		</p>
+		<figure class="horizontal-centered">
+			<img src="zorin.png" width="1366" height="768" alt="Screenshot of the Zorin OS 16 desktop">
+			<figcaption>Random but authentic screenshot I took while triaging Zorin.</figcaption>
+		</figure>
+		<p>
+			It took me a moment to appreciate GNOME. After spending a few days trying and failing to theme it to look like Windows 10
+			(I really liked sharp corners), I gave up and just rolled with it. The filesystem structure was a bit new to me,
+			but it wasn’t anything that a little bit of research and asking around couldn’t fix. I found a new workflow in
+			a matter of days. Looking back, Zorin still has a few annoyances which simply aren’t present on Windows (see below),
+			but also has its own benefits, which are too numerous to list here and have already been documented thoroughly elsewhere
+			on the internet.
+		</p>
+		<p>
+			The switch was far from painless. I hit countless issues and nuisances, some of which I’ve resolved only
+			thanks to the help of some friends. Following is a list of all the problems I’ve encountered, past and
+			present, as well as all the solutions I’ve attempted. This list may seem dauntingly long, but it was and
+			still is worth it.
+		</p>
+		<ul class="linux-issues-list">
+			<!-- $ ONGOING $ -->
+			<li class="linux-issue" id="colors-are-wrong">
+				<div class="linux-issue-title">Ongoing:</div>
+				<p class="linux-issue-desc">
+					Colors are somehow… wrong. Too much contrast or something.
+					Reds look sorta like purples, for example.
+				</p>
+				<div class="linux-issue-title">Attempted Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li>
+						Possibly related
+						<a href="https://www.reddit.com/r/linuxquestions/comments/i2mkms/why_do_colours_look_wrong_in_linux_compared_to/">Reddit post</a>
+						and <a href="https://gitlab.freedesktop.org/drm/amd/-/issues/476">issue</a>.
+					</li>
+					<li>Tried fiddling around with monitor settings, to no avail.</li>
+					<li>Tried switching monitors — no difference.</li>
+					<li>Tried switching GPUs — no difference.</li>
+					<li>I recall a Fedora LiveCD didn’t have this issue. Could something be messed up with my installation?</li>
+					<li>
+						Some faint memory tells me that I had this issue on Windows 10 too and fixed it via	some Radeon
+						(I had an AMD card at that time) setting about color formats or something. Changing a similar
+						setting under NVIDIA’s control panel had no effect.
+					</li>
+					<li>
+						Tweaked some NVIDIA settings, and while the colors still aren’t perfectly correct, they’re close
+						enough for me to not be bothered by it.
+					</li>
+					<li>Perhaps it’s all just a matter of viewing angle and I just need a taller monitor stand?</li>
+				</ul>
+			</li>
+			<li class="linux-issue" id="login-mouse-speed">
+				<div class="linux-issue-title">Ongoing:</div>
+				<p class="linux-issue-desc">
+					Mouse sensitivity is inconsistent between the lockscreen and the actual desktop. IIRC this happens
+					only after boot and before the first login.
+				</p>
+				<div class="linux-issue-title">Attempted Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li>
+						I’m guessing that this is because user settings can’t apply themselves when there’s no user
+						logged in.
+					</li>
+					<li>Either way, it’s not that big of an issue.</li>
+				</ul>
+			</li>
+			<li class="linux-issue" id="discord-badge">
+				<div class="linux-issue-title">Ongoing:</div>
+				<p class="linux-issue-desc">Discord doesn’t display the notifications badge on the taskbar icon.</p>
+				<div class="linux-issue-title">Attempted Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li>Looks like a <a href="https://github.com/flathub/com.discordapp.Discord/issues/228">Discord issue</a>.</li>
+				</ul>
+			</li>
+			<li class="linux-issue" id="exit-on-close">
+				<div class="linux-issue-title">Ongoing:</div>
+				<p class="linux-issue-desc">Spotify and (sometimes) Discord <a href="https://community.spotify.com/t5/Desktop-Linux/Cannot-minimize-to-tray-on-Linux/td-p/1703131">exit if they’re closed (instead of sitting in the icon area)</a>.</p>
+				<div class="linux-issue-title">Attempted Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li><a href="https://www.addictivetips.com/ubuntu-linux-tips/spotify-system-tray-linux/">Article with meh solutions</a>.</li>
+					<li><a href="https://www.maketecheasier.com/minimize-spotify-to-system-tray-linux/">Another one</a>.</li>
+					<li>Just gotten used to it.</li>
+				</ul>
+			</li>
+			<li class="linux-issue" id="spotify-links">
+				<div class="linux-issue-title">Ongoing:</div>
+				<p class="linux-issue-desc">
+					Spotify cannot open links in the app. Clicking on a Spotify link launches a new broken instance
+					instead of redirecting the existing one.
+				</p>
+				<div class="linux-issue-title">Attempted Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li>Tried switching the packaging, but none gives.</li>
+				</ul>
+			</li>
+			<li class="linux-issue" id="image-borders">
+				<div class="linux-issue-title">Ongoing:</div>
+				<p class="linux-issue-desc"><a href="https://ubuntugenius.wordpress.com/2011/10/14/how-to-change-white-border-around-image-video-thumbnails-to-drop-shadow-in-ubuntus-file-manager-nautilus/">Image thumbnails have ugly white borders</a>.</p>
+				<div class="linux-issue-title">Attempted Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li>The solution mentioned above doesn’t really work, might have to <a href="https://answers.launchpad.net/cover-thumbnailer/+question/186685">recompile Nautilus</a>.</li>
+					<li>As I’m too lazy/don’t care enough to go ahead and recompile stuff, I just got used to it. It’s not that bad.</li>
+				</ul>
+			</li>
+			<li class="linux-issue" id="recent-tab">
+				<div class="linux-issue-title">Ongoing:</div>
+				<ol class="linux-issue-desc">
+					<li><a href="https://askubuntu.com/questions/1240286/how-to-show-folders-on-nautilus-recent-list">The 'Recent' tab in Nautilus doesn’t show folders</a>.</li>
+					<li>The 'Recent' tab in Nautilus doesn’t show up in the ’Save As’ dialog.</li>
+				</ol>
+				<div class="linux-issue-title">Attempted Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li>No other file explorers play as nicely with (non-Lite) Zorin, so those aren’t an option.</li>
+					<li>
+						Despite having used the "Recent Places" (or whatever it was called) feature extensively in
+						Windows 7, I’ve sort of gotten used to not having it.
+					</li>
+				</ul>
+			</li>
+			<li class="linux-issue" id="folder-previews">
+				<div class="linux-issue-title">Ongoing:</div>
+				<p class="linux-issue-desc"><a href="https://askubuntu.com/questions/992947/how-to-preview-images-in-folders-icons">Folders don’t preview their contents in their icon</a>.</p>
+				<div class="linux-issue-title">Attempted Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li>
+						<a href="https://github.com/flozz/cover-thumbnailer">flozz/cover-thumbnailer</a>.
+						Apparently not the best (can’t say for sure as I haven’t used it), especially for Nautilus, but
+						it could work for some people.
+					</li>
+					<li>I personally have gotten used to no previews.</li>
+				</ul>
+			</li>
+
+
+			<!-- $ RESOLVED $ -->
+
+			<li class="linux-issue solved" id="laptop-bluetooth">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc">Bluetooth doesn’t work on my laptop</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li><a href="https://fosspost.org/fix-bluetooth-rtl8761b-problem-on-linux-ubuntu-22-04/">Force Linux to use the correct firmware</a>.</li>
+				</ul>
+			</li>
+			<li class="linux-issue solved" id="wake-on-suspend">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc"><a href="https://www.reddit.com/r/gigabyte/comments/mxqvja/b550i_aorus_pro_ax_f13h_instantly_wakes_from_sleep/">PC wakes up immediately after being put into suspend</a>.</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li><a href="https://www.reddit.com/r/gigabyte/comments/p5ewjn/b550i_pro_ax_f13_bios_sleep_issue_on_linux/">“Disable GPP0 wakeup”</a> (I don't actually know what that means, but it works).</li>
+				</ul>
+			</li>
+			<li class="linux-issue solved" id="no-wifi">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc">WiFi adapter isn’t being detected.</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li><a href="https://forum.zorin.com/t/wifi-is-not-showing-no-wifi-adapter-found-error-in-zorin/428/12">Possibly related post</a>.</li>
+					<li>Started working when I swapped out my ancient GPU for a newer one. Hardware conflict?</li>
+				</ul>
+			</li>
+			<li class="linux-issue solved" id="black-screen-on-wakeup">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc">Laptop screen occassionally remains off after waking up from sleep.</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li>Possibly caused by <a href="https://bugs.launchpad.net/ubuntu/+source/xubuntu-default-settings/+bug/1303736">this bug</a>.</li>
+					<li>I’m currently using <a href="https://bugs.launchpad.net/ubuntu/+source/xubuntu-default-settings/+bug/1303736/comments/11">this</a> workaround.</li>
+				</ul>
+			</li>
+			<li class="linux-issue solved" id="audio-breaks">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc">Audio occasionally breaks (turns into static).</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li>
+						Restarting PulseAudio fixes this. However, when PulseAudio is restarted, some apps (Spotify in
+						my case) need to be restarted as well. I made a quick Bash function for this:
+<pre class="has-code"><code class="language-bash"># Audio breaks sometimes and resetting PulseAudio seems to fix it.
+# Spotify also needs a restart to work after PulseAudio is restarted.
+function restartpulse() {
+	pulseaudio --kill
+	pkill -x spotify
+	nohup spotify > /dev/null 2>&1 &
+	disown $!
+}</code></pre>
+					</li>
+					<li>At some point, this problem stopped happening.</li>
+				</ul>
+			</li>
+			<li class="linux-issue solved" id="obs-nvenc-breaks">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc">
+					<a href="https://bbs.archlinux.org/viewtopic.php?id=272472">OBS NVENC breaks if the</a> <a href="https://www.reddit.com/r/linux_gaming/comments/uul5ns/obs_error_failed_to_open_nvenc_codec_after_pc/">PC suspends while OBS is open</a>.
+				</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li>
+						<code>pkill -x obs</code> <a href="https://blog.christophersmart.com/2016/05/11/running-scripts-before-and-after-suspend-with-systemd/">before every suspend</a>.
+					</li>
+				</ul>
+			</li>
+			<li class="linux-issue solved" id="flatpak-cursor-theme">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc">Flatpaks don’t use the system cursor theme.</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li><a href="https://github.com/flatpak/flatpak/issues/709#issuecomment-741883444">Grant Flatpaks permissions to access cursors</a>.</li>
+				</ul>
+			</li>
+			<li class="linux-issue solved" id="disk-mount">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc">Secondary disk is mounted in <code>/media</code> and has an unmount button.</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li>Set the mount point to <code>~/data1</code>.</li>
+					<li>Apparently the mount button can be hidden from the Disks app, but that also hides the disk itself.</li>
+					<li>Either way, a minor imperfection at most.</li>
+				</ul>
+			</li>
+			<li class="linux-issue solved" id="lock-screen-buttons">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc">No Power Off/Restart buttons on the lock screen (only Suspend).</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li>
+						This is Linux’s stricter equivalent of Windows’ “other users may lose unsaved work” prompt and
+						is actually probably for the better. Either way, it can’t really be “fixed”.
+					</li>
+				</ul>
+			</li>
+			<li class="linux-issue solved" id="notification-position">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc">Desktop notifications show up top centre instead of bottom right.</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li>
+						<a href="https://ubuntuhandbook.org/index.php/2018/05/change-notification-position-ubuntu-18-04/">Install</a>
+						the <a href="https://extensions.gnome.org/extension/708/panel-osd/">Panel OSD extension</a>.
+					</li>
+				</ul>
+			</li>
+			<li class="linux-issue solved" id="no-webp">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc">Can’t open WebP images.</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li><a href="https://askubuntu.com/a/1346951">Install aruiz/webp-pixbuf-loader</a>.</li>
+				</ul>
+			</li>
+			<li class="linux-issue solved" id="no-sound-chooser">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc">Can’t change the audio output device from the taskbar.</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li>Install the <a href="https://extensions.gnome.org/extension/906/sound-output-device-chooser/">Sound Input & Output Device Chooser</a> extension.</li>
+				</ul>
+			</li>
+			<li class="linux-issue solved" id="no-open-in-code">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc">No “Open In Code” context action in Nautilus/Thunar.</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li>Nautilus: <a href="https://github.com/harry-cpp/code-nautilus">Install an extension</a>.</li>
+					<li>Thunar: <a href="https://docs.xfce.org/xfce/thunar/custom-actions">Add a custom action</a>.</li>
+				</ul>
+			</li>
+			<li class="linux-issue solved" id="no-code-workspace">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc">VS Code doesn’t understand <code>.code-workspace</code> files.</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li><a href="https://unix.stackexchange.com/a/564888">Register a custom MIME type</a>.</li>
+				</ul>
+			</li>
+			<li class="linux-issue solved" id="ugly-chromium">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc">
+					The context menu in Chromium doesn’t respect the theme
+					(and Chromium looks terrible in general).
+				</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li>Switch to Firefox (which is better anyway).</li>
+				</ul>
+			</li>
+			<li class="linux-issue solved" id="ugly-topbars">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc">Discord and VS Code topbars are ugly.</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li>Change the <code>window.titleBarStyle</code> setting in VS Code.</li>
+					<li>Unfortunately, Discord doesn’t have such a setting, but I’ve gotten completely used to it anyway.</li>
+				</ul>
+			</li>
+			<li class="linux-issue solved" id="no-auto-open">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc">Discord/Spotify/etc. doesn’t automatically open after booting.</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li>Tweak the "Startup Applications" system setting.</li>
+				</ul>
+			</li>
+			<li class="linux-issue solved" id="spotify-download-path">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc">Spotify doesn’t let me specify the offline download location.</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li>
+						This fixed itself somehow and I’m not sure how. Probably was an issue only with a specific
+						packaging of Spotify that I switched away from.
+					</li>
+				</ul>
+			</li>
+			<li class="linux-issue solved" id="spotify-volume-not-saving">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc">Spotify doesn’t save volume.</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li>Fixed itself at some point.</li>
+				</ul>
+			</li>
+			<li class="linux-issue solved" id="thunar-no-file-sizes">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc">
+					Thunar doesn’t display the sizes of the currently selected folder in the bottom right corner like
+					other file managers do.
+				</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li><a href="https://forum.zorin.com/t/can-thunar-show-file-count-for-folders/3443">Enable the statusbar</a>.</li>
+				</ul>
+			</li>
+			<li class="linux-issue solved" id="no-copy-file-path">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc">No “copy file path” context option in Nautilus.</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li><a href="https://askubuntu.com/a/225676">The clipboard is context-sensitive</a>; no fix is required.</li>
+				</ul>
+			</li>
+			<li class="linux-issue solved" id="no-hwinfo">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc">No HWInfo/better resource monitoring software</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					The functionality I wanted was filled in by the System Monitor (basically the Linux version of Task
+					Manager) as well as some extensions (some of which are built-in, and
+					<a href="https://extensions.gnome.org/extension/841/freon/">some of which</a> you need to install).
+				</ul>
+			</li>
+			<li class="linux-issue solved" id="no-g-hub">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc">Logitech G Hub doesn’t exist on Linux.</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li><a href="https://www.reddit.com/r/LogitechG/comments/gmuogw/logitech_g_hub_for_linux/">Probably isn’t coming any time soon</a>,</li>
+					<li>…but there are some <a href="https://github.com/libratbag/piper">open source alternatives</a>,</li>
+					<li>…but I don’t really need it anymore.</li>
+				</ul>
+			</li>
+		</ul>
+	</main>
+</body>
+</html>
