@@ -38,7 +38,6 @@
 
 	50  - Game end bar
 
-	110 - Footer
 	125 - Sidebar darkener
 	150 - Sidebar
 	155 - Search bar
@@ -65,7 +64,6 @@ body {
 	background-color: var(--main-bg-color);
 	color: var(--main-text-color);
 
-	/* These three keep the footer in place */
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
@@ -249,21 +247,6 @@ figure figcaption {
 	font-size: 0.85rem;
 	color: var(--dull-text-color);
 	margin-top: 0.2rem;
-}
-
-
-/* == Footer == */
-footer, #footer-insert {
-	font-size: 1rem;
-
-	margin: auto 0 0 0;
-	padding: 0.5em 3em;
-	box-sizing: border-box; /* Makes it not exceed page size */
-
-	color: var(--dull-text-color);
-	background-color: var(--alt-bg-color);
-
-	z-index: 110;
 }
 
 
