@@ -52,15 +52,16 @@ const SEARCH_RESULT_DESC_CLASS = "search-result-desc"
 
 let searchData = null;
 fetch("/search_data.json")
-	.then(res => res.json())
+	.then(res => res.ok ? res.json() : Promise.reject(res.status + " " + res.statusText))
 	.then(json => {
 		searchData = json
 		console.log("Search data loaded!")
 	})
+	.catch(err => console.error("Search data error: " + err))
 
 let resultTemplate = null;
 fetch("/assets/search-result-template.html")
-	.then(res => res.text())
+	.then(res => res.ok ? res.text() : Promise.reject(res.status + " " + res.statusText))
 	.then(text => {
 		let parser = new DOMParser()
 		let document = parser.parseFromString(text, "text/html")
@@ -68,6 +69,7 @@ fetch("/assets/search-result-template.html")
 		resultTemplate = document.body.firstChild
 		console.log("Result template loaded!", resultTemplate)
 	})
+	.catch(err => console.error("Search template error: " + err))
 
 
 

@@ -91,15 +91,16 @@ function fetchWords() {
 	console.log("Fetching words...")
 
 	fetch(WORDS_FETCH_URL)
-		.then(data => data.json())
+		.then(res => res.ok ? res.json() : Promise.reject(res.status + " " + res.statusText))
 		.then(words => {
 			let filtered = words
 				.map(word => word.toUpperCase())
 				.filter(isWordValid)
 
-			console.log("Successfully fetched " + filtered.length)
+			console.log("Successfully fetched " + filtered.length + " words.")
 			wordQueue = wordQueue.concat(filtered)
 		})
+		.catch(err => console.error("Words fetch error: " + err))
 }
 
 
