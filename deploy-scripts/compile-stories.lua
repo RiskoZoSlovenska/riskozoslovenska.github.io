@@ -12,18 +12,14 @@
 local fs = require("fs")
 local pathlib = require("path")
 local cmark = require("cmark")
+local lyaml = require("lyaml")
 local lcmark = require("lcmark")
 
 local SOURCE_DIR = assert(args[2], "no source directory provided")
 local OUTPUT_DIR = "./stories/"
+local WARNINGS_FILE = pathlib.join(SOURCE_DIR, "warnings.yaml")
 local STORY_TEMPLATE_FILE = "./assets/story-template.html"
 local STORY_INDEX_FILE = "./stories/index.html"
-
-local WARN_DESCS = {
-	gore = "Graphic violence/injury",
-	shocking = "Other shocking content",
-	cringe = "Very bad and cringy writing",
-}
 
 local LCMARK_OPTIONS = {
 	yaml_metadata = true,
@@ -42,6 +38,8 @@ local LCMARK_OPTIONS = {
 	},
 }
 
+local function warn(msg) return print("\027[33m! WARNING: " .. msg .. "\027[0m") end
+
 local generatedAt = os.date("Automatically generated on %F %T")
 
 local storyTemplateRaw = assert(fs.readFileSync(STORY_TEMPLATE_FILE))
@@ -50,6 +48,9 @@ local storyTemplate = assert(lcmark.compile_template(storyTemplateRaw))
 local indexTemplateRaw = assert(fs.readFileSync(STORY_INDEX_FILE))
 local indexTemplate = assert(lcmark.compile_template(indexTemplateRaw))
 
+local warningNamesRaw = assert(fs.readFileSync(WARNINGS_FILE))
+local warningNames = assert(lyaml.load(warningNamesRaw))
+
 
 
 local function convertWarnings(warnings)
@@ -57,16 +58,28 @@ local function convertWarnings(warnings)
 		return
 	end
 
-	for i, name in ipairs(warnings) do
-		local desc = WARN_DESCS[name]
-		if not desc then
-			print("! WARNING: unknown warning: " .. tostring(name))
+	for i, id in ipairs(warnings) do
+		-- Minor warning
+		local name = warningNames.minor[id]
+		if name then
+			warnings[i] = name
+			goto continue
 		end
 
-		warnings[i] = desc or name
-	end
+		-- Major warning
+		name = warningNames.major[id]
+		if name then
+			warnings[i] = name
+			warnings.hasMajorWarning = true
+			goto continue
+		end
 
-	warnings.hasMajorWarning = true
+		-- Unknown warning
+		warnings[i] = name or id
+		warn("unknown warning: " .. tostring(id))
+
+		::continue::
+	end
 end
 
 -- lcmark strips the paragraph from single-line metadata, which is usually what
