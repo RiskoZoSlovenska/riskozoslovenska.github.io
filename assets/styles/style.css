@@ -725,12 +725,12 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 
 #hangman-svg-parts > * {
 	opacity: 0;
-
-	transition: opacity 200ms ease-out;
+	transition: opacity 150ms linear;
 }
 
 #hangman-svg-parts > .visible-hangman-part {
 	opacity: 1;
+	transition-duration: 250ms;
 }
 
 
