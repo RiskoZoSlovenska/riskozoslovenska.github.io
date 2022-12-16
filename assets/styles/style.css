@@ -103,6 +103,25 @@ main {
 }
 
 
+/* == Headings == */
+.splashed-heading {
+	margin-bottom: 0;
+}
+
+.splashed-heading + * {
+	color: var(--dull-text-color);
+	font-size: 0.8em;
+
+	margin-top: 0;
+	margin-bottom: 2rem;
+}
+
+@media only screen and (min-width: 1000px) {
+	h1, h1.splashed-heading + * {
+		margin-bottom: 2.5rem;
+	}
+}
+
 
 /* == Paragraphs == */
 :where(.long-p, .long-p-container p) {
@@ -283,22 +302,7 @@ b {
 .bottom-disclaimer {
 	color: var(--dull-text-color);
 	font-size: 0.8em;
-	
 	margin-top: 25%;
-}
-
-
-/* == Heading Splashes == */
-.splashed-heading {
-	margin-bottom: 0;
-}
-
-.splashed-heading + * {
-	color: var(--dull-text-color);
-	font-size: 0.8em;
-
-	margin-top: 0;
-	margin-bottom: 2rem; /* Or whatever the original margin was */
 }
 
 
@@ -486,7 +490,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 }
 
 .authors-note {
-	margin-bottom: 2rem;
+	margin-bottom: 2.5rem;
 }
 
 .authors-note * {
@@ -500,6 +504,12 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 
 .authors-note-title ~ * {
 	margin: 0;
+}
+
+@media only screen and (max-width: 1000px) {
+	.authors-note {
+		margin-bottom: 2.25rem;
+	}
 }
 
 
