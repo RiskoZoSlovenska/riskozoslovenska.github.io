@@ -8,6 +8,7 @@
 
 	--main-bg-color: #1e1e1e;
 	--alt-bg-color: #252525;
+	--deep-bg-color: #1a1a1a;
 
 	--code-fg-color: #a5a5a5;
 	--code-bg-color: #161616;
@@ -61,7 +62,7 @@ body {
 	font-size: 1.25em;
 	tab-size: 4;
 
-	background-color: var(--main-bg-color);
+	background-color: var(--deep-bg-color);
 	color: var(--main-text-color);
 
 	display: flex;
@@ -71,23 +72,28 @@ body {
 
 main {
 	box-sizing: border-box;
-	width: 80%;
-	
-	padding: 1em 3em 2em;
-}
-
-.full-width-main {
-	width: initial;
-}
-
-.full-height-main {
 	min-height: inherit;
+	width: initial;
+
+	padding: 1em 3em 2em;
+
+	background-color: var(--main-bg-color);
+}
+
+@media only screen and (min-width: 1000px) {
+	main:not(.full-width-main) {
+		width: 1000px;
+		margin: 0 auto;
+	}
+
+	:where(#sidebar-insert, #sidebar) ~ main:not(.full-width-main) {
+		max-width: calc(100% - var(--sidebar-ribbon-size) * 2);
+	}
 }
 
 /* Adjustments for small screens such as mobiles */
 @media only screen and (max-width: 1000px) {
 	main {
-		width: initial;
 		padding: 0em 1.2em 1.2em;
 	}
 
@@ -526,7 +532,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 
 
 /* == Sidebar == */
-:is(#sidebar, #sidebar-insert) ~ * {
+:where(#sidebar, #sidebar-insert) ~ * {
 	margin-left: var(--sidebar-ribbon-size);
 }
 
