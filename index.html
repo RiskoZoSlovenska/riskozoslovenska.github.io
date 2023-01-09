@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-	<title>Risko's Corner</title>
+	<title>Home</title>
 	<link rel="icon" type="image/svg" href="/assets/images/icon.svg">
-	<meta name="description" content="Risko's little internet corner.">
+	<meta name="description" content="Welcome to my little corner of the internet.">
 	<meta name="theme-color" content="#ff3232">
 	<meta charset="utf-8">
 	<!-- https://www.w3schools.com/css/css_rwd_viewport.asp -->
@@ -15,23 +15,24 @@
 	<script src="/assets/scripts/insert.js" defer></script>
 	<script src="/assets/scripts/search.js" async></script>
 	<script src="/assets/scripts/sidebar-touch-disable.js" async></script>
+	<script src="dots.js" defer></script>
 </head>
 
 
 <body>
 	<div id="sidebar-insert"></div>
 
-	<main class="full-width-main">
-		<h1>Risko's Little Corner</h1>
-		<p>
-			Welcome, whoever you are, to my little corner in this vast plane of existence. I'm
-			<b>RiskoZoSlovenska</b> (alternatively, <b>RiskoZS</b>, if I don't have the luxury of
-			all 16 characters), but people call me just <b>Risko</b>.
-		</p>
-		<p>
-			I do <a href="https://github.com/RiskoZoSlovenska">programming</a> and some
-			<a href="/stories/">creative writing</a>, among other things.
-		</p>
+	<main class="full-width-main centering">
+		<canvas id="dots-canvas"></canvas>
+		<h1 id="main-page-title">
+			Hi there. I'm<br>
+			<span id="main-page-giant-text"><b>RiskoZoSlovenska</b></span><br>
+			and you've stumbled into my little corner of the internet.
+		</h1>
+		<ul id="main-page-links-list">
+			<li><a href="https://github.com/RiskoZoSlovenska">Programming</a></li>
+			<li><a href="/stories/">Creative Writing</a></li>
+		</ul>
 	</main>
 </body>
 </html>

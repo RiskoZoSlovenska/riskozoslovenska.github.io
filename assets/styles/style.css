@@ -655,6 +655,64 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 }
 
 
+/* == Home Page */
+#dots-canvas {
+	position: absolute;
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-color: var(--main-bg-color);
+}
+
+#dots-canvas ~ * {
+	position: relative;
+}
+
+#main-page-title {
+	font-size: inherit;
+	margin-top: 2rem;
+	margin-bottom: 25vh;
+}
+
+#main-page-giant-text {
+	font-size: clamp(1em, 8.5vw, 4em);
+}
+
+#main-page-links-list {
+	padding: 0;
+	list-style: none;
+}
+
+#main-page-links-list > li {
+	display: inline;
+}
+
+#main-page-links-list > li + li::before { /* https://stackoverflow.com/a/16133869 */
+	content: "|";
+	margin: 0 0.75em;
+}
+
+@media only screen and (max-width: 500px) {
+	#main-page-links-list > li {
+		display: block;
+	}
+
+	#main-page-links-list > li + li::before {
+		content: "―";
+		display: block;
+		margin: revert;
+	}
+}
+
+@media only screen and (max-height: 300px) {
+	#main-page-title {
+		margin-bottom: 10vh;
+	}
+}
+
+
 /* == Error Page == */
 .error-page-main * {
 	margin-top: 0;
