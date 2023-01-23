@@ -7,8 +7,8 @@
 	--dull-text-color: #8e8e8e;
 
 	--main-bg-color: #1e1e1e;
+	--deep-bg-color: var(--main-bg-color) /* #1a1a1a */;
 	--alt-bg-color: #252525;
-	--deep-bg-color: #1a1a1a;
 
 	--code-fg-color: #a5a5a5;
 	--code-bg-color: #161616;
