@@ -23,7 +23,7 @@
 	--monospace-font: "Inconsolata", "Consolas", monospace;
 
 	/* Sizes */
-	--sidebar-ribbon-size: 1.5rem;
+	--sidebar-ribbon-size: 0.5rem;
 	--game-end-bar-height: 35%;
 	--search-bar-border-size: 2px;
 }
@@ -564,14 +564,6 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 	padding: 0;
 }
 
-#sidebar:hover {
-	transform: translateX(0);
-}
-
-#sidebar:hover + #sidebar-darkener {
-	opacity: 0.5;
-}
-
 /* Transitions for sidebar and sidebar-darkener */
 #sidebar, #sidebar-darkener {
 	/* Specify these two separately as to not overwrite individually-defined transition-property's */
@@ -579,7 +571,15 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 	transition-timing-function: ease;
 }
 
-#sidebar:hover, #sidebar:hover + #sidebar-darkener {
+#sidebar:is(:hover, .swipe-focus) {
+	transform: translateX(0);
+}
+
+#sidebar:is(:hover, .swipe-focus) + #sidebar-darkener {
+	opacity: 0.5;
+}
+
+#sidebar:is(:hover, .swipe-focus), #sidebar:is(:hover, .swipe-focus) + #sidebar-darkener {
 	transition-duration: 300ms;
 }
 
@@ -593,15 +593,16 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 	overflow-y: auto;
 }
 
-.sidebar-ribbon-image {
-	position: fixed;
-	transform: translateX(var(--sidebar-ribbon-size)); /* Move the image into the ribbon */
+#sidebar-ribbon-image {
+	--image-width: 18px;
 
-	top: 0;
-	right: 0;
+	position: fixed;
 	box-sizing: border-box;
-	width: var(--sidebar-ribbon-size);
-	padding: calc(var(--sidebar-ribbon-size) * 0.4); /* This is padding, so actual image size is 20% of ribbon */
+	top: 5px; /* Top padding */
+	right: calc(-5px - var(--sidebar-ribbon-size) - var(--image-width));
+	width: var(--image-width);
+	
+	fill: var(--accent-color-1);
 	overflow: visible; /* Makes the inline SVG be not cut-off slightly (https://stackoverflow.com/a/46344280) */
 }
 

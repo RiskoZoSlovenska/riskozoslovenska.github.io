@@ -1,12 +1,10 @@
 <nav id="sidebar" onmouseenter="onSidebarMouseEnter(event)" onmouseleave="onSidebarMouseLeave(event)">
 	<div id="sidebar-main-content"> <!-- This wrapper div is required to make the sidebar scrollable -->
-		<svg class="sidebar-ribbon-image" viewBox="0 0 2 8" xmlns="http://www.w3.org/2000/svg">
-			<g class="main-text-colored">
-				<!-- Defining just main circle color does not work on some browsers -->
-				<circle id="sidebar-dots-main" cx="1" cy="1" r="1" />
-				<use href="#sidebar-dots-main" y="3" />
-				<use href="#sidebar-dots-main" y="6" />
-			</g>
+		<svg id="sidebar-ribbon-image" viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
+			<!-- I stole these proportions from the Gmail site -->
+			<path id="sidebar-grill-main" d="M 0 0   h 18   v 2   h -18   v -2    z" />
+			<use href="#sidebar-grill-main" y="5" />
+			<use href="#sidebar-grill-main" y="10" />
 		</svg>
 		
 		<h2 class="sidebar-title">Navigation</h2>
@@ -19,7 +17,7 @@
 
 			onkeyup="updateSearch(event)"
 			onfocus="updateSearch(event)"
-			onblur= "updateSearch(event)"
+			onblur ="updateSearch(event)"
 		>
 		<div class="search-results-container"></div>
 		<ul>
