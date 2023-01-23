@@ -720,7 +720,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 }
 
 .error-page-main h1 {
-	font-size: 3em;
+	font-size: clamp(3em, 10vw, 4.5em);
 	color: var(--accent-color-1);
 }
 
