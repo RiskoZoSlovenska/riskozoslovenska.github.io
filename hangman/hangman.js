@@ -106,6 +106,14 @@ function fetchWords() {
 
 
 
+function bindButtonToKeystroke(button, key) {
+	document.addEventListener("keydown", event => {
+		if (event.key.toUpperCase() == key.toUpperCase()) {
+			button.click()
+		}
+	})
+}
+
 function initButtons() {
 	removeAllChildren(BUTTON_CONTAINER)
 
@@ -113,6 +121,7 @@ function initButtons() {
 		const button = document.createElement("button")
 		button.textContent = char
 		button.addEventListener("click", onButtonClick)
+		bindButtonToKeystroke(button, char)
 
 		BUTTON_CONTAINER.appendChild(button)
 	}
@@ -260,6 +269,7 @@ function main() {
 	initButtons()
 	startRound()
 	NEXT_ROUND_BUTTON.addEventListener("click", startRound)
+	bindButtonToKeystroke(NEXT_ROUND_BUTTON, "Enter")
 }
 main()
 
