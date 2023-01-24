@@ -38,7 +38,7 @@
 	Scores below or equal to 0 are removed; the remaining are sorted in
 	descending order and then the list is truncated and displayed.
  */
-let updateSearch
+let ex_updateSearch
 {
 
 const MAX_RESULTS = 5
@@ -225,7 +225,7 @@ function clearResults() {
 
 
 // Export function which will get called by search bar
-updateSearch = function(event) {
+ex_updateSearch = function(event) {
 	let searchBox = event.target
 	let resultsContainer = searchBox.nextElementSibling
 

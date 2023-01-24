@@ -1,4 +1,4 @@
-<nav id="sidebar" onmouseenter="onSidebarMouseEnter(event)" onmouseleave="onSidebarMouseLeave(event)">
+<nav id="sidebar" onmouseenter="ex_onSidebarMouseEnter(event)" onmouseleave="ex_onSidebarMouseLeave(event)">
 	<div id="sidebar-main-content"> <!-- This wrapper div is required to make the sidebar scrollable -->
 		<svg id="sidebar-ribbon-image" viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
 			<!-- I stole these proportions from the Gmail site -->
@@ -15,9 +15,9 @@
 			type="text"
 			placeholder="Search..."
 
-			onkeyup="updateSearch(event)"
-			onfocus="updateSearch(event)"
-			onblur ="updateSearch(event)"
+			onkeyup="ex_updateSearch(event)"
+			onfocus="ex_updateSearch(event)"
+			onblur ="ex_updateSearch(event)"
 		>
 		<div class="search-results-container"></div>
 		<ul>
