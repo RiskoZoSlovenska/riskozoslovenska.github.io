@@ -9,6 +9,7 @@
 
 const OVERLAY_ID = "cheating-overlay"
 const OPEN_ATTRIB_NAME = "data-devtools-open"
+const EVENT_NAME = "custom_devtools-changed"
 const UPDATE_INTERVAL = 250 // Milliseconds
 const THRESHOLD = 160; // idk
 
@@ -21,6 +22,7 @@ function update(isOpened) {
 
 	console.log("Devtools were " + (isOpened ? "opened" : "closed"))
 	overlay.setAttribute(OPEN_ATTRIB_NAME, isOpened)
+	document.dispatchEvent(new CustomEvent(EVENT_NAME, { detail: isOpened }))
 }
 
 
