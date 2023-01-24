@@ -15,6 +15,7 @@ const CANVAS_ID = "fragments-canvas"
 const DUMMY_ID = "dummy-fragment"
 const ACTIVE_ATTRIBUTE = "data-active"
 const UNFOCUS_EVENT = "mouseleave"
+const DEVTOOLS_EVENT = "custom_devtools-changed"
 
 const FRAGMENT_CHANCE = 0.15
 
@@ -130,4 +131,13 @@ function nextFragment() {
 
 
 window.addEventListener("resize", repositionCurrentFragment)
+document.addEventListener(DEVTOOLS_EVENT, event => {
+	for (let fragment of fragments) {
+		if (event.detail) {
+			fragment.remove()
+		} else {
+			canvas.appendChild(fragment)
+		}
+	}
+})
 nextFragment()
