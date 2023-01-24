@@ -244,6 +244,10 @@ svg .main-text-colored {
 	fill: var(--main-text-color);
 }
 
+svg .main-bg-colored {
+	fill: var(--main-bg-color);
+}
+
 .character-like-image {
 	height: 1em;
 	vertical-align: sub;
