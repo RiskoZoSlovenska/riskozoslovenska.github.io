@@ -9,6 +9,8 @@
 	sidebar is active to prevent users from accidentally clicking on links when
 	trying to collapse the sidebar.
 */
+let onSidebarMouseEnter, onSidebarMouseLeave
+{
 
 const MIN_SWIPE_DISTANCE = 0.3 // Percentage of the screen width
 const TOUCH_EVENTS_DELAY = 200 // ms
@@ -92,10 +94,12 @@ document.addEventListener("touchend", event => {
 })
 
 // These two functions get called by inline event attributes
-function onSidebarMouseEnter() {
+onSidebarMouseEnter = function() {
 	sidebarShow(false)
 }
 
-function onSidebarMouseLeave() {
+onSidebarMouseLeave = function() {
 	sidebarHide()
+}
+
 }

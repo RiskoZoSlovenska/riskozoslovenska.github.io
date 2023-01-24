@@ -1,3 +1,4 @@
+{
 let canvas = document.getElementById("dots-canvas")
 let canvasContext = canvas.getContext("2d")
 
@@ -331,3 +332,4 @@ setInterval(() => {
 
 
 console.log("Dots initialized")
+}

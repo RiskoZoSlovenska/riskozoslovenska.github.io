@@ -38,6 +38,8 @@
 	Scores below or equal to 0 are removed; the remaining are sorted in
 	descending order and then the list is truncated and displayed.
  */
+let updateSearch
+{
 
 const MAX_RESULTS = 5
 const TITLE_HITS_WEIGHT = 3
@@ -221,7 +223,7 @@ function clearResults() {
 
 
 // Export function which will get called by search bar
-function updateSearch(event) {
+updateSearch = function(event) {
 	let searchBox = event.target
 	let resultsContainer = searchBox.nextElementSibling
 
@@ -242,4 +244,6 @@ function updateSearch(event) {
 		*/
 		setTimeout(clearResults, resultsContainer.querySelector(":hover") ? 150 : 0)
 	}
+}
+
 }

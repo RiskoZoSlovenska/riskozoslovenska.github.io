@@ -6,6 +6,7 @@
 		https://random-word-api.herokuapp.com/
 		https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 */
+{
 
 const EndState = { // Values should correspond to the data-game-state attribute values
 	Won: "won",
@@ -261,3 +262,5 @@ function main() {
 	NEXT_ROUND_BUTTON.addEventListener("click", startRound)
 }
 main()
+
+}

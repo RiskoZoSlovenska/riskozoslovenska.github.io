@@ -5,6 +5,7 @@
  * Heavily adapted from https://github.com/sindresorhus/devtools-detect
  * Permalink: https://github.com/sindresorhus/devtools-detect/blob/73719507f1ade1da63f64d3c72c487e3d2667aba/index.js
  */
+{
 
 const OVERLAY_ID = "cheating-overlay"
 const OPEN_ATTRIB_NAME = "data-devtools-open"
@@ -37,3 +38,5 @@ setInterval(() => {
 		wasOpened = isOpened
 	}
 }, UPDATE_INTERVAL)
+
+}

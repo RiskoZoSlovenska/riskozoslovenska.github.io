@@ -1,3 +1,4 @@
+{
 const INSERTS_DIR = "/assets/inserts/"
 
 for (let element of document.querySelectorAll("*[id$='-insert']")) {
@@ -18,4 +19,5 @@ for (let element of document.querySelectorAll("*[id$='-insert']")) {
 			console.log("Inserted " + path)
 		})
 		.catch(err => console.error("Inserting template failed: " + err))
+}
 }
