@@ -12,7 +12,8 @@
 let onSidebarMouseEnter, onSidebarMouseLeave
 {
 
-const MIN_SWIPE_DISTANCE = 0.3 // Percentage of the screen width
+const SHOW_MIN_SWIPE_LENGTH = 0.25 // Percentage of the screen width
+const HIDE_MIN_SWIPE_LENGTH = 0.15
 const TOUCH_EVENTS_DELAY = 200 // ms
 
 const DARKENER_ID = "sidebar-darkener"
@@ -82,12 +83,12 @@ document.addEventListener("touchend", event => {
 	let swipeLength = (touchEnd - touchStart) / window.innerWidth
 
 	// Show sidebar on right swipe
-	if (swipeLength >= MIN_SWIPE_DISTANCE) {
+	if (swipeLength >= SHOW_MIN_SWIPE_LENGTH) {
 		console.log("Showing sidebar due to gesture")
 		sidebarShow(true)
 
 	// Hide sidebar on left swipe or press outside of it
-	} else if (swipeLength <= -MIN_SWIPE_DISTANCE || touchEnd > sidebar.clientWidth) {
+	} else if (swipeLength <= -HIDE_MIN_SWIPE_LENGTH || touchEnd > sidebar.clientWidth) {
 		console.log("Hiding sidebar due to gesture")
 		sidebarHide()
 	}
