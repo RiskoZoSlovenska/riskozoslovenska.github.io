@@ -52,8 +52,10 @@ const SEARCH_RESULT_CLASS = "search-result"
 const SEARCH_RESULT_TITLE_CLASS = "search-result-title"
 const SEARCH_RESULT_DESC_CLASS = "search-result-desc"
 
-let searchData = null;
-fetch("/search_data.json")
+const ROOT = document.currentScript.src + "/" + "../../.."
+
+let searchData = null
+fetch(ROOT + "/" + "search_data.json")
 	.then(res => res.ok ? res.json() : Promise.reject(res.status + " " + res.statusText))
 	.then(json => {
 		searchData = json
@@ -61,8 +63,8 @@ fetch("/search_data.json")
 	})
 	.catch(err => console.error("Search data error: " + err))
 
-let resultTemplate = null;
-fetch("/assets/search-result-template.html")
+let resultTemplate = null
+fetch(ROOT + "/" + "assets/search-result-template.html")
 	.then(res => res.ok ? res.text() : Promise.reject(res.status + " " + res.statusText))
 	.then(text => {
 		let parser = new DOMParser()

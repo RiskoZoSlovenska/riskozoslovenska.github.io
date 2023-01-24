@@ -2,14 +2,14 @@
 	Script for code block functionality, such as highlighting and (in the
 	future) line numbers and a "copy" button.
 
-	Use as <script src="/etc/code-blocks.js" type="module">
+	Use as <script src=".../code-blocks.js" type="module">
 */
 {
 
 // Highlighting
 let element = document.createElement("link")
 element.rel = "stylesheet"
-element.href = "/assets/styles/code-theme.css"
+element.href = new URL(import.meta.url).pathname + "/" + "../../styles/code-theme.css"
 document.head.appendChild(element)
 console.log("Loaded code styles")
 
