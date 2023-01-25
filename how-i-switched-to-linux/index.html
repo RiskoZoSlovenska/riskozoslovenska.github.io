@@ -25,85 +25,56 @@
 		<h1>How I Switched To Linux</h1>
 		<figure class="float-right">
 			<img src="./ntfs.png" width="364" height="149" alt="Screenshot of six files with the same name on Windows 7">
-			<figcaption>I stumbled upon this while clearing out my old Win 7 laptop. And yes, those are all unique and in the
-				same folder.</figcaption>
+			<figcaption>
+				I stumbled upon this while clearing out my old Win 7 laptop. And yes, those are all unique and in the same folder.
+			</figcaption>
 		</figure>
 		<p>
 			I’ve grown up on Windows 7 and 10, and for the most part, I’ve had no issues with them. However, recently
-			I’ve been lucky enough to be in a community where Linux was practically everyone’s daily driver and it sort
-			of began to rub off on me. I don’t remember what exactly made me make the switch, but I had heard good
-			things about Linux and at some point I just took the leap of faith.
+			I’ve been lucky enough to be in a community where Linux was practically everyone’s daily driver, and it sort
+			of began to rub off on me. At some point, I got bored of Windows and finally decided that I should try
+			Linux. And so I did.
 		</p>
 		<p>
-			I spent a few days trying out different Linux distributions. I wanted something practical: something less
-			spoonfeed-y than Windows, but nothing that would be a nightmare to get into or troubleshoot. I admit, my
-			trial process was neither systematic nor robust — I tried out only a small handful of distros, and judged
-			mostly by first impressions — but in the end, two distros caught my attention: Solus and Zorin. In the end,
-			I decided to go for Zorin, mostly because it’s Ubuntu-based and therefore there’s an abundance of both apps
-			and troubleshooting resources for it.
+			I spent a few days trying out different distributions. I wanted something practical: something less
+			spoonfeed-y than Windows, but nothing that would be a nightmare to get into or troubleshoot. My trial
+			process was neither systematic nor robust — I tried out only a small handful of distributions, and judged
+			mostly by first impressions — but in the end, two of them caught my eye: <a href="https://getsol.us/">Solus</a>
+			and <a href="https://zorin.com/os/">Zorin</a>. In the end, I decided to go for Zorin, mostly because it’s
+			Ubuntu-based and therefore there’s an abundance of both apps and support for it.
 		</p>
 		<figure class="horizontal-centered">
 			<img src="./zorin.png" width="1366" height="768" alt="Screenshot of the Zorin OS 16 desktop">
 			<figcaption>Random but authentic screenshot I took while triaging Zorin.</figcaption>
 		</figure>
 		<p>
-			It took me a moment to appreciate GNOME. After spending a few days trying and failing to theme it to look like Windows 10
-			(I really liked sharp corners), I gave up and just rolled with it. The filesystem structure was a bit new to me,
-			but it wasn’t anything that a little bit of research and asking around couldn’t fix. I found a new workflow in
-			a matter of days. Looking back, Zorin still has a few annoyances which simply aren’t present on Windows (see below),
-			but also has its own benefits, which are too numerous to list here and have already been documented thoroughly elsewhere
-			on the internet.
+			It took me a moment to appreciate GNOME. After spending a few days trying and failing to theme it to look
+			like Windows 10 (I really liked sharp corners), I gave up and just rolled with it. It didn't take all that
+			long for me to warm up to it. The filesystem structure was a bit new to me, but it wasn’t anything that a
+			little bit of learning couldn't remedy. I found a new workflow in a matter of days. Zorin still has a few
+			annoyances which simply aren’t present on Windows (see below), but also has its own benefits, which are too
+			numerous to list here and have already been documented thoroughly elsewhere on the internet.
 		</p>
 		<p>
-			The switch was far from painless. I hit countless issues and nuisances, some of which I’ve resolved only
-			thanks to the help of some friends. Following is a list of all the problems I’ve encountered, past and
-			present, as well as all the solutions I’ve attempted. This list may seem dauntingly long, but it was and
-			still is worth it.
+			The switch was far from painless, however. I hit countless issues and roadblocks, some of which I’ve
+			resolved only thanks to the help of some friends. Following is a list of all the problems I’ve encountered,
+			past and present, as well as all the solutions I’ve attempted. This list may seem dauntingly long, but it
+			was — and still is — completely worth it.
 		</p>
 		<ul class="linux-issues-list">
 			<!-- $ ONGOING $ -->
-			<li class="linux-issue" id="colors-are-wrong">
+
+			<li class="linux-issue" id="black-screen-on-wakeup">
 				<div class="linux-issue-title">Ongoing:</div>
 				<p class="linux-issue-desc">
-					Colors are somehow… wrong. Too much contrast or something.
-					Reds look sorta like purples, for example.
+					My laptop screen occassionally remains off after waking up from sleep. I'm pretty sure something
+					about how it's put to sleep triggers it, but I haven't been able to figure out what exactly.
 				</p>
 				<div class="linux-issue-title">Attempted Solutions:</div>
 				<ul class="linux-issue-solutions-list">
-					<li>
-						Possibly related
-						<a href="https://www.reddit.com/r/linuxquestions/comments/i2mkms/why_do_colours_look_wrong_in_linux_compared_to/">Reddit post</a>
-						and <a href="https://gitlab.freedesktop.org/drm/amd/-/issues/476">issue</a>.
-					</li>
-					<li>Tried fiddling around with monitor settings, to no avail.</li>
-					<li>Tried switching monitors — no difference.</li>
-					<li>Tried switching GPUs — no difference.</li>
-					<li>I recall a Fedora LiveCD didn’t have this issue. Could something be messed up with my installation?</li>
-					<li>
-						Some faint memory tells me that I had this issue on Windows 10 too and fixed it via	some Radeon
-						(I had an AMD card at that time) setting about color formats or something. Changing a similar
-						setting under NVIDIA’s control panel had no effect.
-					</li>
-					<li>
-						Tweaked some NVIDIA settings, and while the colors still aren’t perfectly correct, they’re close
-						enough for me to not be bothered by it.
-					</li>
-					<li>Perhaps it’s all just a matter of viewing angle and I just need a taller monitor stand?</li>
-				</ul>
-			</li>
-			<li class="linux-issue" id="login-mouse-speed">
-				<div class="linux-issue-title">Ongoing:</div>
-				<p class="linux-issue-desc">
-					Mouse sensitivity is inconsistent between the lockscreen and the actual desktop. IIRC this happens
-					only after boot and before the first login.
-				</p>
-				<div class="linux-issue-title">Attempted Solutions:</div>
-				<ul class="linux-issue-solutions-list">
-					<li>
-						I’m guessing that this is because user settings can’t apply themselves when there’s no user
-						logged in.
-					</li>
-					<li>Either way, it’s not that big of an issue.</li>
+					<li>Possibly caused by <a href="https://bugs.launchpad.net/ubuntu/+source/xubuntu-default-settings/+bug/1303736">this bug</a>.</li>
+					<li>I’m currently using <a href="https://bugs.launchpad.net/ubuntu/+source/xubuntu-default-settings/+bug/1303736/comments/11">this</a> workaround.</li>
+					<li>Sometimes, just closing and re-opening the lid works.</li>
 				</ul>
 			</li>
 			<li class="linux-issue" id="discord-badge">
@@ -111,17 +82,20 @@
 				<p class="linux-issue-desc">Discord doesn’t display the notifications badge on the taskbar icon.</p>
 				<div class="linux-issue-title">Attempted Solutions:</div>
 				<ul class="linux-issue-solutions-list">
-					<li>Looks like a <a href="https://github.com/flathub/com.discordapp.Discord/issues/228">Discord issue</a>.</li>
+					<li>Looks like an <a href="https://github.com/flathub/com.discordapp.Discord/issues/228">issue with Discord</a>.</li>
 				</ul>
 			</li>
 			<li class="linux-issue" id="exit-on-close">
 				<div class="linux-issue-title">Ongoing:</div>
-				<p class="linux-issue-desc">Spotify and (sometimes) Discord <a href="https://community.spotify.com/t5/Desktop-Linux/Cannot-minimize-to-tray-on-Linux/td-p/1703131">exit if they’re closed (instead of sitting in the icon area)</a>.</p>
+				<p class="linux-issue-desc"><a href="https://community.spotify.com/t5/Desktop-Linux/Cannot-minimize-to-tray-on-Linux/td-p/1703131">Spotify exits if it's closed (instead of sitting in the icon area)</a>.</p>
 				<div class="linux-issue-title">Attempted Solutions:</div>
 				<ul class="linux-issue-solutions-list">
 					<li><a href="https://www.addictivetips.com/ubuntu-linux-tips/spotify-system-tray-linux/">Article with meh solutions</a>.</li>
 					<li><a href="https://www.maketecheasier.com/minimize-spotify-to-system-tray-linux/">Another one</a>.</li>
-					<li>Just gotten used to it.</li>
+					<li>
+						I moved Spotify into another workspace, where it's both accessible and completely out of my way,
+						thus eliminating the need for minimizing it to the tray.
+					</li>
 				</ul>
 			</li>
 			<li class="linux-issue" id="spotify-links">
@@ -132,12 +106,20 @@
 				</p>
 				<div class="linux-issue-title">Attempted Solutions:</div>
 				<ul class="linux-issue-solutions-list">
-					<li>Tried switching the packaging, but none gives.</li>
+					<li>Install <a href="https://gist.github.com/wandernauta/6800547">sp</a>.</li>
+					<li>Create a custom Spotify launcher similar to <a href="https://technex.us/2022/05/how-to-make-a-launcher-for-spotify-in-linux-that-works-with-spotify-links/">this one</a>.</li>
+					<li>Edit your Spotify's <code>.desktop</code> file to use the custom launcher.</li>
+					<li>
+						To disable Spotify links opening in the browser, install an extension, such as 
+						<a href="https://github.com/relisher/spotify-desktop-ify">this one</a>. However, I can't get
+						Firefox to automatically close the tab that clicking on a link opens, meaning I still have to
+						interact with the browser when opening Spotify links.
+					</li>
 				</ul>
 			</li>
 			<li class="linux-issue" id="image-borders">
 				<div class="linux-issue-title">Ongoing:</div>
-				<p class="linux-issue-desc"><a href="https://ubuntugenius.wordpress.com/2011/10/14/how-to-change-white-border-around-image-video-thumbnails-to-drop-shadow-in-ubuntus-file-manager-nautilus/">Image thumbnails have ugly white borders</a>.</p>
+				<p class="linux-issue-desc"><a href="https://ubuntugenius.wordpress.com/2011/10/14/how-to-change-white-border-around-image-video-thumbnails-to-drop-shadow-in-ubuntus-file-manager-nautilus/">Image thumbnails have ugly white borders in Nautilus</a>.</p>
 				<div class="linux-issue-title">Attempted Solutions:</div>
 				<ul class="linux-issue-solutions-list">
 					<li>The solution mentioned above doesn’t really work, might have to <a href="https://answers.launchpad.net/cover-thumbnailer/+question/186685">recompile Nautilus</a>.</li>
@@ -147,15 +129,15 @@
 			<li class="linux-issue" id="recent-tab">
 				<div class="linux-issue-title">Ongoing:</div>
 				<ol class="linux-issue-desc">
-					<li><a href="https://askubuntu.com/questions/1240286/how-to-show-folders-on-nautilus-recent-list">The 'Recent' tab in Nautilus doesn’t show folders</a>.</li>
-					<li>The 'Recent' tab in Nautilus doesn’t show up in the ’Save As’ dialog.</li>
+					<li><a href="https://askubuntu.com/questions/1240286/how-to-show-folders-on-nautilus-recent-list">The ‘Recent’ tab in Nautilus doesn’t show folders</a>.</li>
+					<li>The ‘Recent’ tab in Nautilus doesn’t show up in the ‘Save As’ dialog.</li>
 				</ol>
 				<div class="linux-issue-title">Attempted Solutions:</div>
 				<ul class="linux-issue-solutions-list">
 					<li>No other file explorers play as nicely with (non-Lite) Zorin, so those aren’t an option.</li>
 					<li>
 						Despite having used the "Recent Places" (or whatever it was called) feature extensively in
-						Windows 7, I’ve sort of gotten used to not having it.
+						Windows 7, I’ve mostly gotten used to not having it.
 					</li>
 				</ul>
 			</li>
@@ -176,6 +158,42 @@
 
 			<!-- $ RESOLVED $ -->
 
+			<li class="linux-issue solved" id="colors-are-wrong">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc">
+					Colors are somehow… wrong. Too much contrast or something.
+					For example, my signature red, <span style="color: #ff3232">#FF3232</span>,
+					gets rendered as <span style="color: #ff093a">#FF093A</span>. <!-- Inline styles should be ok here -->
+				</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li>
+						Possibly related
+						<a href="https://www.reddit.com/r/linuxquestions/comments/i2mkms/why_do_colours_look_wrong_in_linux_compared_to/">Reddit post</a>
+						and <a href="https://gitlab.freedesktop.org/drm/amd/-/issues/476">issue</a>.
+					</li>
+					<li>Tried fiddling around with monitor settings, to no avail.</li>
+					<li>Tried switching monitors — no difference.</li>
+					<li>Tried switching GPUs — no difference.</li>
+					<li>I recall a Fedora LiveCD didn’t have this issue. Could something be messed up with my installation?</li>
+					<li>
+						Some faint memory tells me that I had this issue on Windows 10 too and fixed it via	some Radeon
+						(I had an AMD card at that time) setting about color formats or something. Changing a similar
+						setting under NVIDIA’s control panel had no effect.
+					</li>
+					<li>
+						Tweaked some NVIDIA settings, mainly the gamma setting, and while the colors still aren’t
+						perfectly correct, they’re close enough for me to not be bothered by it.
+					</li>
+					<li>Perhaps it’s all just a matter of viewing angle and I just need a taller monitor stand?</li>
+					<li>
+						This took me a while to figure out, and it had nothing to do with the monitor or the GPU. First,
+						I narrowed the issue down to only Electron apps, like VS Code and Discord. Then, I found out
+						that Zorin (or Ubuntu?) has this setting called ‘Device Color Profiles’, and my monitor had some
+						default profile applied. I just removed it and colors started being correct.
+					</li>
+				</ul>
+			</li>
 			<li class="linux-issue solved" id="laptop-bluetooth">
 				<div class="linux-issue-title">Resolved:</div>
 				<p class="linux-issue-desc">Bluetooth doesn’t work on my laptop.</p>
@@ -198,16 +216,7 @@
 				<div class="linux-issue-title">Solutions:</div>
 				<ul class="linux-issue-solutions-list">
 					<li><a href="https://forum.zorin.com/t/wifi-is-not-showing-no-wifi-adapter-found-error-in-zorin/428/12">Possibly related post</a>.</li>
-					<li>Started working when I swapped out my ancient GPU for a newer one. Hardware conflict?</li>
-				</ul>
-			</li>
-			<li class="linux-issue solved" id="black-screen-on-wakeup">
-				<div class="linux-issue-title">Resolved:</div>
-				<p class="linux-issue-desc">Laptop screen occassionally remains off after waking up from sleep.</p>
-				<div class="linux-issue-title">Solutions:</div>
-				<ul class="linux-issue-solutions-list">
-					<li>Possibly caused by <a href="https://bugs.launchpad.net/ubuntu/+source/xubuntu-default-settings/+bug/1303736">this bug</a>.</li>
-					<li>I’m currently using <a href="https://bugs.launchpad.net/ubuntu/+source/xubuntu-default-settings/+bug/1303736/comments/11">this</a> workaround.</li>
+					<li>Started working when I swapped out my ancient GPU for a newer one. Perhaps it was some sort of bizarre hardware conflict?</li>
 				</ul>
 			</li>
 			<li class="linux-issue solved" id="audio-breaks">
@@ -227,7 +236,7 @@ function restartpulse() {
 	disown $!
 }</code></pre>
 					</li>
-					<li>At some point, this problem stopped happening.</li>
+					<li>At some point, this stopped happening.</li>
 				</ul>
 			</li>
 			<li class="linux-issue solved" id="obs-nvenc-breaks">
@@ -257,7 +266,10 @@ function restartpulse() {
 				<ul class="linux-issue-solutions-list">
 					<li>Set the mount point to <code>~/data1</code>.</li>
 					<li>Apparently the mount button can be hidden from the Disks app, but that also hides the disk itself.</li>
-					<li>Either way, a minor imperfection at most.</li>
+					<li>
+						“Fixed” this by disabling the little ‘Removable Drives’ menu in the taskbar. Ejecting from
+						Nautilus is convenient enough for me to have practically never used that menu.
+					</li>
 				</ul>
 			</li>
 			<li class="linux-issue solved" id="lock-screen-buttons">
@@ -269,6 +281,19 @@ function restartpulse() {
 						This is Linux’s stricter equivalent of Windows’ “other users may lose unsaved work” prompt and
 						is actually probably for the better. Either way, it can’t really be “fixed”.
 					</li>
+				</ul>
+			</li>
+			<li class="linux-issue solved" id="login-mouse-speed">
+				<div class="linux-issue-title">Resolved:</div>
+				<p class="linux-issue-desc">
+					Mouse sensitivity is inconsistent between the lockscreen and the actual desktop. IIRC this happens
+					only after boot and before the first login.
+				</p>
+				<div class="linux-issue-title">Solutions:</div>
+				<ul class="linux-issue-solutions-list">
+					<li>The login screen is ran under a different user and thus has different settings.</li>
+					<li><a href="https://www.reddit.com/r/gnome/comments/qvcxpt/is_there_a_way_to_change_the_mouse_sensitivity_in/">Modify the GDM user's setting</a>.</li>
+					<li>Additionally, to change things such as the GDM background, see <a href="https://www.linuxuprising.com/2021/05/how-to-change-gdm3-login-screen-greeter.html">this</a> article.</li>
 				</ul>
 			</li>
 			<li class="linux-issue solved" id="notification-position">
@@ -332,7 +357,7 @@ function restartpulse() {
 				<div class="linux-issue-title">Solutions:</div>
 				<ul class="linux-issue-solutions-list">
 					<li>Change the <code>window.titleBarStyle</code> setting in VS Code.</li>
-					<li>Unfortunately, Discord doesn’t have such a setting, but I’ve gotten completely used to it anyway.</li>
+					<li>Unfortunately, Discord doesn’t have such a setting. However, I’ve gotten completely used to it anyway.</li>
 				</ul>
 			</li>
 			<li class="linux-issue solved" id="no-auto-open">
@@ -365,8 +390,8 @@ function restartpulse() {
 			<li class="linux-issue solved" id="thunar-no-file-sizes">
 				<div class="linux-issue-title">Resolved:</div>
 				<p class="linux-issue-desc">
-					Thunar doesn’t display the sizes of the currently selected folder in the bottom right corner like
-					other file managers do.
+					Thunar doesn’t display the size of the currently selected files/folders in the bottom right corner
+					like other file managers do.
 				</p>
 				<div class="linux-issue-title">Solutions:</div>
 				<ul class="linux-issue-solutions-list">
@@ -383,17 +408,19 @@ function restartpulse() {
 			</li>
 			<li class="linux-issue solved" id="no-hwinfo">
 				<div class="linux-issue-title">Resolved:</div>
-				<p class="linux-issue-desc">No HWInfo/better resource monitoring software</p>
+				<p class="linux-issue-desc">No <a href="https://www.hwinfo.com/">HWInfo</a>.</p>
 				<div class="linux-issue-title">Solutions:</div>
 				<ul class="linux-issue-solutions-list">
-					The functionality I wanted was filled in by the System Monitor (basically the Linux version of Task
-					Manager) as well as some extensions (some of which are built-in, and
-					<a href="https://extensions.gnome.org/extension/841/freon/">some of which</a> you need to install).
+					<li>
+						The functionality I wanted was filled in by extensions, <a href="https://extensions.gnome.org/extension/120/system-monitor/">some of which</a>
+						were built-in and <a href="https://extensions.gnome.org/extension/841/freon/">some of which</a> I needed to install. The end result is even
+						better than what I had originally wanted.
+					</li>
 				</ul>
 			</li>
 			<li class="linux-issue solved" id="no-g-hub">
 				<div class="linux-issue-title">Resolved:</div>
-				<p class="linux-issue-desc">Logitech G Hub doesn’t exist on Linux.</p>
+				<p class="linux-issue-desc">No <a href="https://www.logitechg.com/en-us/innovation/g-hub.html">Logitech G Hub</a>.</p>
 				<div class="linux-issue-title">Solutions:</div>
 				<ul class="linux-issue-solutions-list">
 					<li><a href="https://www.reddit.com/r/LogitechG/comments/gmuogw/logitech_g_hub_for_linux/">Probably isn’t coming any time soon</a>,</li>
