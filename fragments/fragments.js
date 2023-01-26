@@ -56,60 +56,14 @@ function getRandomFragment() {
 	return fragment
 }
 
-function getFragmentVertices(fragment, x, y) {
-	let left = x ?? (parseFloat(fragment.style.left) || 0)
-	let top = y ?? (parseFloat(fragment.style.top) || 0)
-	let right = left + fragment.offsetWidth
-	let bottom = top + fragment.offsetHeight
-
-	return {
-		left: left,
-		top: top,
-		right: right,
-		bottom: bottom,
-	}
-}
-
-function doFragmentsIntersect(fragment1, fragment2, fragment1X, fragment1Y) {
-	if (!fragment1 || !fragment2) {
-		return false
-	}
-
-	let vertices1 = getFragmentVertices(fragment1, fragment1X, fragment1Y)
-	let vertices2 = getFragmentVertices(fragment2)
-
-	// https://stackoverflow.com/a/306332
-	return !(
-		   vertices1.right <= vertices2.left
-		|| vertices1.left >= vertices2.right
-		|| vertices1.bottom <= vertices2.top
-		|| vertices1.top >= vertices2.bottom
-	)
-}
-
-function getRandomFragmentPosition(fragment) {
-	let attempt = 0
-	let x, y
-	do {
-		x = Math.random() * (canvas.clientWidth - fragment.offsetWidth)
-		y = Math.random() * (canvas.clientHeight - fragment.offsetHeight)
-		attempt += 1
-	} while (attempt <= 5 && doFragmentsIntersect(fragment, currentFragment, x, y))
-
-	return {
-		x: x,
-		y: y,
-	}
-}
-
-
-
 function positionFragment(fragment) {
-	let position = getRandomFragmentPosition(fragment)
-	fragment.style.left = position.x + "px"
-	fragment.style.top = position.y + "px"
+	let rect = fragment.getBoundingClientRect()
+	let x = Math.floor(Math.random() * (canvas.clientWidth - rect.width))
+	let y = Math.floor(Math.random() * (canvas.clientHeight - rect.height))
 
-	console.log("Fragment positioned")
+	fragment.style.transform = `translate(${x}px, ${y}px)` // top and left are buggy with SVGs in Firefox
+
+	console.log("Fragment positioned at " + x + "x" + y)
 }
 
 function repositionCurrentFragment() {
