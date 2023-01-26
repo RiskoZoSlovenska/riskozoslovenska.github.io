@@ -10,6 +10,7 @@
 	row because it's not visible and thus doesn't look ugly when it teleports
 	away even when "opaque".
 */
+{
 
 const CANVAS_ID = "fragments-canvas"
 const DUMMY_ID = "dummy-fragment"
@@ -141,3 +142,5 @@ document.addEventListener(DEVTOOLS_EVENT, event => {
 	}
 })
 nextFragment()
+
+}
