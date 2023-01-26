@@ -80,7 +80,7 @@ document.addEventListener("touchend", event => {
 	}
 
 	let touchEnd = event.changedTouches[0].clientX
-	let swipeLength = (touchEnd - touchStart) / window.innerWidth
+	let swipeLength = (touchEnd - touchStart) / Math.min(window.innerWidth, window.innerHeight)
 
 	// Show sidebar on right swipe
 	if (swipeLength >= SHOW_MIN_SWIPE_LENGTH) {
