@@ -240,11 +240,11 @@ pre.has-code /* pre:has(code) */ {
 
 
 /* == Images == */
-svg .main-text-colored {
+.svg-main-text-colored {
 	fill: var(--main-text-color);
 }
 
-svg .main-bg-colored {
+.svg-main-bg-colored {
 	fill: var(--main-bg-color);
 }
 
