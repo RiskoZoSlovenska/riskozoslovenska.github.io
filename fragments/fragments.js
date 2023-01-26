@@ -24,6 +24,8 @@ let canvas = document.getElementById(CANVAS_ID)
 let dummyFragment = document.getElementById(DUMMY_ID)
 let fragments = Array.from(canvas.children).filter(fragment => fragment !== dummyFragment)
 
+if (fragments.length < 2) { throw "requires at least two fragments" }
+
 let currentFragment = null
 
 
@@ -43,6 +45,8 @@ function getRandomFragment() {
 	if (Math.random() >= FRAGMENT_CHANCE) {
 		return dummyFragment;
 	}
+
+	console.log("Choosing real fragment")
 
 	let fragment
 	do {
