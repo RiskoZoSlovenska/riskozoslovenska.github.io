@@ -133,8 +133,10 @@ main {
 
 /* == Links == */
 a {
+	--link-color: var(--accent-color-2);
+
+	color: var(--link-color);
 	text-decoration: none;
-	color: var(--accent-color-2);
 	transition: color 400ms ease-out;
 }
 
