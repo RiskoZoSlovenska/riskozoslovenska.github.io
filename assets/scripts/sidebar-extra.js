@@ -23,6 +23,7 @@ const SWIPE_FOCUS_CLASS_NAME = "swipe-focus"
 
 let globalId = 0
 let touchStart = 0
+let rightSwipeAllowed = true, leftSwipeAllowed = true
 let sidebar, darkener
 
 function tryElements() {
@@ -71,7 +72,28 @@ function sidebarHide() {
 // Handle swipes (https://stackoverflow.com/a/56663695)
 
 document.addEventListener("touchstart", event => {
-	touchStart = event.changedTouches[0].clientX
+	let touch = event.changedTouches[0]
+
+	touchStart = touch.clientX
+
+	rightSwipeAllowed = true
+	leftSwipeAllowed = true
+
+	// Disallow swiping right or left if the swiping motion is trying to scroll something
+	let parent = touch.target
+	while (parent) {
+		// General idea by https://stackoverflow.com/a/36900407
+		let overflow = window.getComputedStyle(parent)["overflow-x"]
+		let scrollable = (overflow == "scroll" || overflow == "auto") && (parent.scrollWidth > parent.clientWidth)
+		let isAtLeft = (parent.scrollLeft == 0)
+		let isAtRight = (parent.scrollWidth - parent.clientWidth - parent.scrollLeft == 0)
+
+		if (scrollable && !isAtLeft)  { rightSwipeAllowed = false }
+		if (scrollable && !isAtRight) { leftSwipeAllowed  = false }
+
+		// Check all elements up the ancestry chain as well
+		parent = parent.parentElement
+	}
 })
 
 document.addEventListener("touchend", event => {
@@ -83,12 +105,12 @@ document.addEventListener("touchend", event => {
 	let swipeLength = (touchEnd - touchStart) / Math.min(window.innerWidth, window.innerHeight)
 
 	// Show sidebar on right swipe
-	if (swipeLength >= SHOW_MIN_SWIPE_LENGTH) {
+	if (rightSwipeAllowed && swipeLength >= SHOW_MIN_SWIPE_LENGTH) {
 		console.log("Showing sidebar due to gesture")
 		sidebarShow(true)
 
 	// Hide sidebar on left swipe or press outside of it
-	} else if (swipeLength <= -HIDE_MIN_SWIPE_LENGTH || touchEnd > sidebar.clientWidth) {
+	} else if (leftSwipeAllowed && (swipeLength <= -HIDE_MIN_SWIPE_LENGTH || touchEnd > sidebar.clientWidth)) {
 		console.log("Hiding sidebar due to gesture")
 		sidebarHide()
 	}
