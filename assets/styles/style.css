@@ -304,6 +304,10 @@ b {
 	color: var(--accent-color-1);
 }
 
+div.spacer {
+	height: 40px;
+}
+
 
 
 /* == Disclaimer == */
