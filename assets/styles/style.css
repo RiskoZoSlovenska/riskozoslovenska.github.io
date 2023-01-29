@@ -965,6 +965,9 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 
 #fragments-canvas > [data-active]:hover {
 	opacity: revert;
+
+    -webkit-user-select: auto;
+            user-select: auto;
 }
 
 @media only screen and (max-width: 1000px) {
