@@ -1,10 +1,10 @@
 #!/usr/bin/env python
-# Taken from https://stackoverflow.com/a/13354482, used for testing on mobile
+# Custom serving script used for development
+# Sends a no-cache header and (very dumbly) tries to resolve missing .html extensions
+# Taken from https://stackoverflow.com/a/13354482 and https://stackoverflow.com/a/73029002
 
-try:
-    from http import server # Python 3
-except ImportError:
-    import SimpleHTTPServer as server # Python 2
+from http import server
+import re
 
 class MyHTTPRequestHandler(server.SimpleHTTPRequestHandler):
     def end_headers(self):
@@ -14,6 +14,13 @@ class MyHTTPRequestHandler(server.SimpleHTTPRequestHandler):
 
     def send_my_headers(self):
         self.send_header("Cache-Control", "no-cache")
+    
+    def do_GET(self):
+        if not re.search("\.(html|xhtml|js|mjs|css|json|yaml|txt|md|lua|png|svg|jpg|jpeg|ico)|/$", self.path):
+            print("Appending extension for path: " + self.path)
+            self.path += ".html"
+
+        return server.SimpleHTTPRequestHandler.do_GET(self)
 
 
 if __name__ == '__main__':
