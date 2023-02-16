@@ -108,7 +108,9 @@ function fetchWords() {
 
 function bindButtonToKeystroke(button, key) {
 	document.addEventListener("keydown", event => {
-		if (event.key.toUpperCase() == key.toUpperCase()) {
+		if (event.ctrlKey || event.shiftKey || event.altKey || event.metaKey || event.isComposing) {
+			return
+		} else if (event.key.toUpperCase() == key.toUpperCase()) {
 			button.click()
 		}
 	})
