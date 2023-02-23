@@ -391,6 +391,22 @@ b {
 	text-align: center;
 }
 
+/*
+	Alternate implementation of the .centering class above.
+	See https://stackoverflow.com/questions/33454533/cant-scroll-to-top-of-flex-item-that-is-overflowing-container.
+	Will be removed when support for the `safe` keyword comes out (if ever) (https://caniuse.com/mdn-css_properties_justify-content_flex_context_safe_unsafe).
+*/
+.margin-centering {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+}
+
+.margin-centering > * {
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .horizontal-centered {
 	margin-left: auto;
 	margin-right: auto;
