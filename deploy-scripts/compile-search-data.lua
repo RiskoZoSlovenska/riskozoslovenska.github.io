@@ -31,15 +31,15 @@ local function mustIgnorePath(path)
 end
 
 local function pathToLink(path)
-	-- Remove trailing "index.html"
-	if pathlib.basename(path) == "index.html" then
-		path = pathlib.dirname(path)
-	end
-
 	-- Add leading slash
 	if path:sub(1, 1) ~= "/" then
 		path = "/" .. path
 	end
+
+	-- Remove trailing extension and "index.html"
+	path = path
+		:gsub("/index%.html$", "/")
+		:gsub("%.html$", "")
 
 	return path
 end

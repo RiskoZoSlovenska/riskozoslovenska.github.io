@@ -130,10 +130,8 @@ local function compileSinglePartWork(dirMap, partName)
 	local rendered = lcmark.apply_template(storyTemplate, meta)
 
 	-- Write
-	local compiledDirName = pathlib.join(OUTPUT_DIR, partName)
-	local storyFileName = pathlib.join(compiledDirName, "index.html")
+	local storyFileName = pathlib.join(OUTPUT_DIR, partName .. ".html")
 
-	assert(fs.mkdirpSync(compiledDirName))
 	assert(fs.writeFileSync(storyFileName, rendered))
 
 	return {
