@@ -21,27 +21,29 @@ const BACKUP_WORDS = [
 ]
 const END_BAR_TEXTS = {
 	[EndState.Won]: {
-		titles: ["Yay you won!", "Victory is yours!", "Nice!", "Noice!"],
-		remarks: ["ez?", "ez.", "nice.", "gg", "gg no re"],
-		buttons: ["Next", "Rematch.", "Gimme another one", "MORE"],
+		title: ["You won!", "Way to go!", "Nice!"],
+		button: ["Next"],
 	},
 	[EndState.Lost]: {
-		titles: ["You failed!", "You died!", "Nope!", "F"],
-		remarks: [";-;", "F", "cri", "gonna cry?", "git gud"],
-		buttons: ["Next", "Rematch.", "+1 life", "I don't give up", "Try again?"],
+		title: ["Oof...", "We'll get them next time", "F"],
+		button: ["Try again?"],
 	}
 }
 
 const BUTTON_CONTAINER = document.getElementById("hangman-button-container")
-const WORD = document.getElementById("hangman-word")
-const END_BAR = document.getElementById("game-end-bar")
-const END_BAR_HEADING = document.getElementById("game-end-bar-heading")
-const END_BAR_REMARK = document.getElementById("game-end-bar-remark")
-const NEXT_ROUND_BUTTON = document.getElementById("game-end-bar-next-button")
+const HANGMAN_WORD_ELEMENTS = document.getElementsByClassName("hangman-word")
+const END_OVERLAY = document.getElementById("end-overlay")
+const END_OVERLAY_HEADING = document.getElementById("end-overlay-title")
+const END_OVERLAY_DEFINITIONS_TITLE_WORD = document.getElementById("definitions-title-word")
+const END_OVERLAY_DEFINITIONS_LIST = document.getElementById("hangman-word-definitions-list")
+const NEXT_ROUND_BUTTON = document.getElementById("end-overlay-button")
+const STATS_HITS = document.getElementById("stats-hits")
+const STATS_MISSES = document.getElementById("stats-misses")
+const STATS_SECONDS = document.getElementById("stats-seconds")
 
 const IMAGE_PARTS = document.getElementById("hangman-svg-parts").children
 
-const LOADING_CLASS = "loading"
+const PART_OF_SPEECH_CLASS = "part-of-speech"
 const VISIBLE_IMAGE_PART_CLASS = "visible-hangman-part"
 const CLICKED_CORRECT_CLASS = "clicked-correct"
 const CLICKED_INCORRECT_CLASS = "clicked-incorrect"
@@ -50,17 +52,30 @@ const NOT_GUESSED_LETTER_CLASS = "not-guessed-letter"
 const QUEUE_LOW_THRESHOLD = 5 // Remember to change the fetch number in the below url as well
 const WORDS_FETCH_URL = "https://random-word-api.herokuapp.com/word?number=10"
 
+const FREE_DICTIONARY_QUERY_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/"
+const WIKTIONARY_QUERY_URL = "https://en.wiktionary.org/w/api.php?action=query&prop=extracts&format=json&origin=*&titles="
+const KNOWN_PARTS_OF_SPEECH = [ "exclamation", "noun", "verb", "adverb", "adjective" ]
+const MAX_DEFINITIONS = 3
+
 
 let playing = false
 let curWord = null
 let wordQueue = []
 let visibleLetters = {}
 let numWrong = 0
+let gameStart = null
+
+let definitions = {}
+let wordRedirections = {}
 
 
 
-function getRandomElement(arr) {
-	return arr[Math.floor(Math.random() * arr.length)]
+function elementIs(element, target) {
+	return element.tagName.toLowerCase() == target
+}
+
+function getRandomItem(array) {
+	return array[Math.floor(Math.random() * array.length)]
 }
 
 function removeAllChildren(element) {
@@ -69,6 +84,19 @@ function removeAllChildren(element) {
 	while (element.firstChild) { // ...and then remove everything else that's left
 		element.lastChild.remove()
 	}
+}
+
+function iterAllSiblings(element, callback) {
+	while (element) {
+		let shouldExit = callback(element)
+		if (shouldExit) {
+			return element
+		}
+
+		element = element.nextElementSibling
+	}
+
+	return null
 }
 
 function wasClicked(button) {
@@ -86,7 +114,122 @@ function isWordValid(word) {
 	return true
 }
 
+async function fetchWordDefinitionsFromFreeDictAPI(word) {
+	let res = await fetch(FREE_DICTIONARY_QUERY_URL + word)
+		.then(res => res.ok ? res.json() : Promise.reject(res.status + " " + res.statusText))
+		.catch(_ => {})
+	
+	if (!res) {
+		return null
+	}
 
+	let entry = res[0]
+	return {
+		source: "Free Dictionary API",
+		word: entry.word,
+		meanings: entry.meanings
+			.splice(0, MAX_DEFINITIONS)
+			.map(meaning => {
+				return {
+					part_of_speech: meaning.partOfSpeech,
+					meaning: meaning.definitions[0].definition,
+				}
+			}),
+	}
+}
+
+async function fetchWordDefinitionsFromWiktionary(word) {
+	res = await fetch(WIKTIONARY_QUERY_URL + word)
+		.then(res => res.ok ? res.json() : Promise.reject(res.status + " " + res.statusText))
+		.catch(_ => { })
+
+	if (!res) {
+		return null
+	}
+
+	let page = Object.values(res.query.pages)[0]
+	let extractDoc = new DOMParser().parseFromString(page.extract, "text/html")
+
+	let meanings = []
+	iterAllSiblings(extractDoc.querySelector("#English")?.closest("h2")?.nextElementSibling, element => {
+		// Skip over all non-h3s
+		if (elementIs(element, "h2")) {
+			return true
+		} else if (!elementIs(element, "h3")) {
+			return false
+		}
+
+		// At this point element is an h3
+		let partOfSpeech = element.textContent.toLowerCase()
+		if (KNOWN_PARTS_OF_SPEECH.indexOf(partOfSpeech) == -1) {
+			return false
+		}
+
+		// Find first list sibling
+		let list = iterAllSiblings(element, list => {
+			return elementIs(list, "ol")
+		})
+		if (!list) {
+			return false
+		}
+
+		// Extract meaning
+		let meaningNode = list.querySelector(":scope > li:not([class*=\"empty\"])")
+		if (!meaningNode) {
+			console.warning("No definition found under heading in Wiktionary")
+		} else {
+			meanings.push({
+				part_of_speech: partOfSpeech,
+				node: meaningNode,
+				meaning: meaningNode.textContent,
+			})
+		}
+
+		if (meanings.length >= MAX_DEFINITIONS) {
+			return true
+		}
+	})
+
+	if (meanings.length == 0) {
+		return null
+
+	} else if (meanings.length == 1) {
+		let node = meanings[0].node
+		let mention = node.querySelector(".mention")
+		let name = mention?.textContent
+		let isLast = !mention?.nextElementSibling
+		let isBeforeOf = /\s(of)\s+(\S+)\s*?$/.test(node.textContent) // https://stackoverflow.com/a/6603043
+
+		if (mention && isLast && isBeforeOf && !wordRedirections[name]) {
+			console.log("Redirecting Wiktionary definition")
+			wordRedirections[name] = true
+			return await fetchWordDefinitionsFromWiktionary(name)
+		}
+	}
+
+	return {
+		source: "Wiktionary",
+		word: page.title,
+		meanings: meanings,
+	}
+}
+
+async function fetchWordDefinitions(word) {
+	word = word.toLowerCase()
+
+	let definition = await fetchWordDefinitionsFromFreeDictAPI(word)
+
+	if (!definition) {
+		definition = await fetchWordDefinitionsFromWiktionary(word)
+	}
+
+	if (definition) {
+		definitions[word] = definition
+		console.log(`Fetched word definition from ${definition.source}`)
+	} else {
+		console.log(`Failed to find definition`)
+	}
+}
 
 function fetchWords() {
 	console.log("Fetching words...")
@@ -100,6 +243,7 @@ function fetchWords() {
 
 			console.log("Successfully fetched " + filtered.length + " words.")
 			wordQueue = wordQueue.concat(filtered)
+			filtered.forEach(fetchWordDefinitions)
 		})
 		.catch(err => console.error("Words fetch error: " + err))
 }
@@ -155,13 +299,15 @@ function advanceImage() {
 
 
 function forEachLetterNodeOfWord(func) {
-	removeAllChildren(WORD)
+	for (let word of HANGMAN_WORD_ELEMENTS) {
+		removeAllChildren(word)
 
-	for (let i = 0; i < curWord.length; i++) {
-		let letter = curWord[i]
-		let letterNode = document.createTextNode(letter)
-		let newNode = func(letterNode, visibleLetters[letter] == true)
-		WORD.appendChild(newNode)
+		for (let i = 0; i < curWord.length; i++) {
+			let letter = curWord[i]
+			let letterNode = document.createTextNode(letter)
+			let newNode = func(letterNode, visibleLetters[letter] == true)
+			word.appendChild(newNode)
+		}
 	}
 }
 
@@ -174,12 +320,12 @@ function wrapNotGuessedLetter(letterNode) {
 }
 
 function updateWord() {
-	WORD.classList.remove(LOADING_CLASS) // Remove loading class if it's still present
-
 	let isFullyVisible = true
 
 	forEachLetterNodeOfWord((letterNode, isVisible) => {
-		if (!isVisible) isFullyVisible = false
+		if (!isVisible) {
+			isFullyVisible = false
+		}
 
 		return isVisible ? letterNode : document.createTextNode("_")
 	})
@@ -197,34 +343,73 @@ function revealWord() {
 
 
 function endRound(endState) {
-	END_BAR.dataset.endState = endState
-	END_BAR.dataset.isPlaying = false
+	// Reveal word
 	playing = false
 	revealWord()
+
+	// Enable overlay
+	END_OVERLAY.dataset.endState = endState
+	END_OVERLAY.dataset.isPlaying = false
 	
-	const contentData = END_BAR_TEXTS[endState]
-	END_BAR_HEADING.textContent = getRandomElement(contentData.titles)
-	END_BAR_REMARK.textContent = getRandomElement(contentData.remarks)
-	NEXT_ROUND_BUTTON.textContent = getRandomElement(contentData.buttons)
+	// Set overlay remarks
+	let contentData = END_BAR_TEXTS[endState]
+	END_OVERLAY_HEADING.textContent = getRandomItem(contentData.title)
+	NEXT_ROUND_BUTTON.textContent = getRandomItem(contentData.button)
+
+	// Set overlay stats
+	STATS_HITS.textContent = Object.keys(visibleLetters).length // https://stackoverflow.com/a/14626707
+	STATS_MISSES.textContent = numWrong
+	STATS_SECONDS.textContent = Math.floor((performance.now() - gameStart) / 1000)
+	gameStart = null
+
+	// Set overlay definitions
+	let definition = definitions[curWord.toLowerCase()]
+
+	END_OVERLAY_DEFINITIONS_TITLE_WORD.textContent = definition?.word ?? curWord.toLowerCase()
+	removeAllChildren(END_OVERLAY_DEFINITIONS_LIST)
+
+	if (definition) {
+		for (let meaning of definition.meanings) {
+			let node = document.createElement("li")
+			let partOfSpeechSpan = document.createElement("span")
+
+			node.appendChild(partOfSpeechSpan)
+			partOfSpeechSpan.appendChild(document.createTextNode(meaning.part_of_speech))
+			partOfSpeechSpan.classList.add(PART_OF_SPEECH_CLASS)
+			node.appendChild(document.createTextNode(meaning.meaning))
+
+			END_OVERLAY_DEFINITIONS_LIST.appendChild(node)
+		}
+	}
 }
 
 function startRound() {
 	if (playing) return // Already playing
 	console.log("Starting round")
 
+	// Reset stuff
 	resetButtons()
 
 	numWrong = 0
 	resetImage()
 
-	curWord = (wordQueue.length == 0) ? getRandomElement(BACKUP_WORDS) : wordQueue.shift()
+	// Pick word and fetch new ones
+	if (wordQueue.length > 0) {
+		curWord = wordQueue.shift()
+	} else {
+		curWord = getRandomItem(BACKUP_WORDS)
+		fetchWordDefinitions(curWord)
+	}
+
 	if (wordQueue.length < QUEUE_LOW_THRESHOLD) {
 		fetchWords()
 	}
+
+	// Update stuff
 	visibleLetters = {}
 	updateWord()
 
-	END_BAR.dataset.isPlaying = true
+	END_OVERLAY.dataset.isPlaying = true
 	playing = true
 }
 
@@ -257,8 +442,11 @@ function clickedIncorrect(button) {
 }
 
 function onButtonClick(clickInfo) {
-	if (curWord == null) return
-	if (!playing) return
+	if (!playing || curWord == null) { return }
+
+	if (!gameStart) {
+		gameStart = performance.now()
+	}
 
 	const button = clickInfo.target
 	if (wasClicked(button)) return

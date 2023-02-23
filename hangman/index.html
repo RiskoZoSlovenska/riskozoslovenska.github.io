@@ -25,7 +25,7 @@
 		<h1 class="splashed-heading">Hangman</h1>
 		<div title="Or, well, as friendly as it gets.">A friendly game of Hangman</div>
 
-		<div id="hangman-word" class="loading" title="Staring at it ain't gonna solve it buddy.">Loading...</div>
+		<div class="hangman-word" title="Staring at it ain't gonna solve it, buddy.">Loading...</div>
 		<div id="hangman-game-flex">
 			<svg id="hangman-svg" class="svg-main-text-colored" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
 				<!-- Gallow --> <path d="M 15 0  H 80  V 17.5  H 70  V 10  H 25  V 100  H 40  V 110  H 0  V 100  H 15  Z" />
@@ -44,10 +44,22 @@
 
 			<div id="hangman-button-container"><!-- Smash. Click. Press. --></div>
 		</div>
-		<div id="game-end-bar" data-is-playing="true">
-			<h2 id="game-end-bar-heading">Heading</h2>
-			<p id="game-end-bar-remark">Remark</p>
-			<button id="game-end-bar-next-button" tabindex="-1">Button</button>
+		<div id="end-overlay" class="margin-centering fullscreen darkener" data-is-playing="true">
+			<h2 id="end-overlay-title">You won!</h2>
+			<div>The word was: <!-- Must be in div to be centered--></div>
+			<div class="hangman-word">WORD</div>
+			<ul class="inline-list">
+				<li><span id="stats-hits"    style="color: #48ca48">?</span> hits</li>
+				<li><span id="stats-misses"  style="color: #ca4848"  >?</span> misses</li>
+				<li><span id="stats-seconds" style="color: #00aaff" >?</span> seconds</li>
+			</ul>
+
+			<h3>Definitions found for <b id="definitions-title-word"></b>:</h3>
+			<ul id="hangman-word-definitions-list" class="word-definitions">
+			</ul>
+			<div class="less-visible no-definitions-label">No definitions found.</div>
+			
+			<button id="end-overlay-button" tabindex="-1">Play Again</button>
 		</div>
 
 		<div class="bottom-disclaimer less-visible">
@@ -61,6 +73,11 @@
 				<li>the provided words are real English words,</li>
 				<li>or that provided words will be family-friendly (even though they should be).</li>
 			</ol>
+			<p>
+				Definitions are fetched from the <a href="https://dictionaryapi.dev/">Free Dictionary API</a>
+				or from <a href="https://en.wiktionary.org/">Wiktionary</a> and as such may be subject to the
+				terms of the <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0 License</a>.
+			</p>
 		</div>
 	</main>
 </body>
