@@ -267,6 +267,7 @@ function initButtons() {
 	for (const char of ALPHA) {
 		const button = document.createElement("button")
 		button.textContent = char
+		button.setAttribute("tabindex", "-1")
 		button.addEventListener("click", onButtonClick)
 		bindButtonToKeystroke(button, char)
 
