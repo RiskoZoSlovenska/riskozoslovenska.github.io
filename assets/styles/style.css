@@ -801,6 +801,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 /* == Under Contruction page == */
 #construction-main h1 {
 	font-size: min(8vw, 4em); /* Prevent huge size on wide screens */
+	margin: 0;
 }
 
 #construction-main h1 img {
