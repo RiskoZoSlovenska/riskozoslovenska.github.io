@@ -674,6 +674,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 	box-sizing: border-box; /* Fixes incorrect margins */
 
 	overflow-y: auto;
+	overscroll-behavior: contain;
 }
 
 #sidebar-ribbon-image {
