@@ -838,7 +838,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 	letter-spacing: 0.075em;
 	overflow-wrap: break-word;
 
-	margin: 1em 0em 0.5em;
+	margin: 1em -0.4em 0.5em;
 }
 
 .hangman-word > .not-guessed-letter {
