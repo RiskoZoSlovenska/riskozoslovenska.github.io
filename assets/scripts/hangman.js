@@ -48,6 +48,7 @@ const VISIBLE_IMAGE_PART_CLASS = "visible-hangman-part"
 const CLICKED_CORRECT_CLASS = "clicked-correct"
 const CLICKED_INCORRECT_CLASS = "clicked-incorrect"
 const NOT_GUESSED_LETTER_CLASS = "not-guessed-letter"
+const NO_SCROLL_CLASS = "no-scroll"
 
 const QUEUE_LOW_THRESHOLD = 5 // Remember to change the fetch number in the below url as well
 const WORDS_FETCH_URL = "https://random-word-api.herokuapp.com/word?number=10"
@@ -350,6 +351,7 @@ function endRound(endState) {
 	// Enable overlay
 	END_OVERLAY.dataset.endState = endState
 	END_OVERLAY.dataset.isPlaying = false
+	document.body.classList.add(NO_SCROLL_CLASS)
 	
 	// Set overlay remarks
 	let contentData = END_BAR_TEXTS[endState]
@@ -410,6 +412,7 @@ function startRound() {
 	updateWord()
 
 	END_OVERLAY.dataset.isPlaying = true
+	document.body.classList.remove(NO_SCROLL_CLASS)
 	playing = true
 }
 

@@ -401,6 +401,10 @@ b {
 
 
 /* == General Styles == */
+.no-scroll {
+	overflow: hidden;
+}
+
 .less-visible {
 	filter: brightness(50%);
 }
