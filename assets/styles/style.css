@@ -59,6 +59,7 @@ html {
 body {
 	font-family: var(--main-font);
 	font-size: 1.25em;
+	letter-spacing: 0.01em;
 	tab-size: 4;
 
 	background-color: var(--deep-bg-color);
