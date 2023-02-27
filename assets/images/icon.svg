@@ -1,22 +1,41 @@
-<svg viewBox="0 0 15.45 15.7" xmlns="http://www.w3.org/2000/svg">
-	<path
+<svg viewBox="0 0 13.66025 14.06901" xmlns="http://www.w3.org/2000/svg">
+	<defs>
+		<clipPath id="cube-clip-path">
+			<use href="#cube" />
+		</clipPath>
+	</defs>
+
+	<g
+		clip-path="url(#cube-clip-path)"
 		stroke="#ff3232"
-		stroke-width="1.5"
-		stroke-linejoin="miter-clip"
-		stroke-miterlimit="1.4"
-		fill="none"
-		d="
-			M14.66025,2.51010
-			v9.39693 v-9.39693
-			L6,0.8
-			L1,3.76198
-			l0,9.39693
-			L9.66025,14.86901
-			L14.66025,11.90703
-			v-1 v1
-			L6.00000,10.19693
-			v-9.39693 v9.39693
-			L1,13.15891
+		stroke-width="1.2"
+	>
+		<line x1="5" y1="9.39693" x2="5"        y2="0"        />
+		<line x1="5" y1="9.39693" x2="0"        y2="12.35891" />
+		<line x1="5" y1="9.39693" x2="13.66025" y2="11.10703" />
+	</g>
+
+	<polygon
+		id="cube"
+		fill="#ff3232"
+		opacity="0.4"
+		points="
+			13.66025,1.71010
+			5,0
+			0,2.96198
+			0,12.35891
+			8.66025,14.06901
+			13.66025,11.10703
+		"
+	/>
+	<polygon
+		fill="#ff3232"
+		opacity="0.2"
+		points="
+			5,9.39693
+			0,12.35891
+			8.66025,14.06901
+			13.66025,11.10703
 		"
 	/>
 </svg>
