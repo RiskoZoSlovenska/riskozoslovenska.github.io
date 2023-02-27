@@ -1,7 +1,22 @@
-<svg viewBox="0 0 19.70104 19.27761" xmlns="http://www.w3.org/2000/svg">
-	<g stroke="#ff3232" stroke-width="2" >
-		<line x1="6.11264" y1="14.71285" x2="6.11264"  y2="0"        />
-		<line x1="6.11264" y1="14.71285" x2="19.70104" y2="16.52941" />
-		<line x1="6.11264" y1="14.71285" x2="0"        y2="19.27761" />
-	</g>
+<svg viewBox="0 0 15.45 15.7" xmlns="http://www.w3.org/2000/svg">
+	<path
+		stroke="#ff3232"
+		stroke-width="1.5"
+		stroke-linejoin="miter-clip"
+		stroke-miterlimit="1.4"
+		fill="none"
+		d="
+			M14.66025,2.51010
+			v9.39693 v-9.39693
+			L6,0.8
+			L1,3.76198
+			l0,9.39693
+			L9.66025,14.86901
+			L14.66025,11.90703
+			v-1 v1
+			L6.00000,10.19693
+			v-9.39693 v9.39693
+			L1,13.15891
+		"
+	/>
 </svg>
