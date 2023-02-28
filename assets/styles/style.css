@@ -17,6 +17,7 @@
 
 	--accent-color-1: #ff3232; /* Red for titles, highlights, sidebar, etc. */
 	--accent-color-2: #00aaff; /* Blue for links, etc */
+	--error-color: #E53D3D;
 
 	/* Fonts */
 	--main-font: "Lato", "Calibri", "Roboto", sans-serif;
@@ -859,7 +860,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 }
 
 .hangman-word > .not-guessed-letter {
-	color: #E53D3D;
+	color: var(--error-color);
 }
 
 #hangman-game-flex, .hangman-word {
