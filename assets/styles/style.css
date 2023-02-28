@@ -303,7 +303,7 @@ pre.has-code /* pre:has(code) */ {
 
 
 /* == Input */
-input[type="text"] {
+input:is([type="text"], [type="search"]) {
 	box-sizing: border-box;
 
 	background-color: var(--main-bg-color);
@@ -314,7 +314,7 @@ input[type="text"] {
 	border-width: 2px;
 }
 
-input[type="text"]:focus-visible {
+input:is([type="text"], [type="search"]):focus-visible {
 	border-color: var(--accent-color-2);
 }
 
