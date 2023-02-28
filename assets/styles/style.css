@@ -24,7 +24,6 @@
 
 	/* Sizes */
 	--sidebar-ribbon-size: 0.5rem;
-	--search-bar-border-size: 2px;
 }
 
 /* 
@@ -303,6 +302,23 @@ pre.has-code /* pre:has(code) */ {
 }
 
 
+/* == Input */
+input[type="text"] {
+	box-sizing: border-box;
+
+	background-color: var(--main-bg-color);
+	color: var(--main-text-color);
+
+	outline: none;
+	border-color: var(--accent-color-1);
+	border-width: 2px;
+}
+
+input[type="text"]:focus-visible {
+	border-color: var(--accent-color-2);
+}
+
+
 /* == Images == */
 .svg-main-text-colored {
 	fill: var(--main-text-color);
@@ -473,15 +489,15 @@ b {
 	position: relative;
 }
 
-.search-results-container > *, .search-bar {
+.search-results-container > * {
 	box-sizing: border-box; /* Fixes weird sizes */
 
 	background-color: var(--main-bg-color);
 	color: var(--main-text-color);
 
 	border-color: var(--accent-color-1);
-	border-width: var(--search-bar-border-size);
-	margin: calc(-1 * var(--search-bar-border-size)) 0;
+	border-width: 2px;
+	margin: -2px 0;
 }
 
 .search-bar {
