@@ -1,0 +1,209 @@
+/*
+	I couldn't find any way to give Ace my own custom theme, I resorted to using
+	one of Ace's built-in themes (the Chaos theme) and overriding the styles
+	manually. Inspired by https://github.com/ajaxorg/ace/issues/3445.
+
+	Currently I'm only using Ace for the SVG Editor page which only uses the SVG
+	mode, so colors for other languages may be wrong.
+
+	For the original, see:
+	https://github.com/ajaxorg/ace/blob/60a4c5c46a72eaf14c420326c7808cb71747cf46/src/theme/chaos.css.js
+*/
+
+.ace-chaos {
+	--text: #d4d4d4;
+	--red: #ff3232;
+	--blue: #00aaff;
+	--gray: #8e908c;
+}
+
+.ace-chaos .ace_gutter {
+	background: #141414;
+	color: #595959;
+	border-right: 1px solid #2d2d2d;
+}
+
+.ace-chaos .ace_gutter-cell.ace_warning {
+	background-image: none;
+	background: #FC0;
+	border-left: none;
+	padding-left: 0;
+	color: #000;
+}
+
+.ace-chaos .ace_gutter-cell.ace_error {
+	background-position: -6px center;
+	background-image: none;
+	background: #F10;
+	border-left: none;
+	padding-left: 0;
+	color: #000;
+}
+
+.ace-chaos .ace_print-margin {
+	border-left: 1px solid #555;
+	right: 0;
+	background: #1D1D1D;
+}
+
+.ace-chaos {
+	background-color: #161616;
+	color: var(--text);
+	padding-top: 10px;
+}
+
+.ace-chaos .ace_cursor {
+	border-left: 2px solid var(--text);
+}
+
+.ace-chaos .ace_cursor.ace_overwrite {
+	border-left: 0px;
+	border-bottom: 1px solid var(--text);
+}
+
+.ace-chaos .ace_marker-layer .ace_selection {
+	background: #4c86a2;
+}
+
+.ace-chaos .ace_marker-layer .ace_step {
+	background: rgb(198, 219, 174);
+}
+
+.ace-chaos .ace_marker-layer .ace_bracket {
+	margin: -1px 0 0 -1px;
+	border: 1px solid var(--gray);
+}
+
+.ace-chaos .ace_marker-layer .ace_active-line {
+	background: #252525;
+}
+
+.ace-chaos .ace_gutter-active-line {
+	background-color: #1d1d1d;
+}
+
+.ace-chaos .ace_invisible {
+	color: var(--gray);
+}
+
+.ace-chaos .ace_keyword {
+	color: var(--red);
+}
+
+.ace-chaos .ace_keyword.ace_operator {
+	color: var(--red);
+}
+
+.ace-chaos .ace_constant {
+	color: var(--red);
+}
+
+.ace-chaos .ace_constant.ace_language {
+	color: var(--blue);
+}
+
+.ace-chaos .ace_constant.ace_library {
+	color: var(--blue);
+}
+
+.ace-chaos .ace_constant.ace_numeric {
+	color: #ffc600;
+}
+
+.ace-chaos .ace_invalid {
+	color: #FFFFFF;
+	background-color: #990000;
+}
+
+.ace-chaos .ace_invalid.ace_deprecated {
+	color: #FFFFFF;
+	background-color: #990000;
+}
+
+.ace-chaos .ace_support {
+	color: #999;
+}
+
+.ace-chaos .ace_support.ace_function {
+	color: #00AEEF;
+}
+
+.ace-chaos .ace_function {
+	color: #a6e1ff;
+}
+
+.ace-chaos .ace_string {
+	color: #058c00;
+}
+
+.ace-chaos .ace_comment {
+	color: var(--gray);
+	font-style: italic;
+	padding-bottom: 0px;
+}
+
+.ace-chaos .ace_variable {
+	color: var(--text);
+}
+
+.ace-chaos .ace_meta.ace_tag {
+	color: var(--red);
+}
+
+.ace-chaos .ace_entity.ace_other.ace_attribute-name {
+	color: var(--blue);
+}
+
+.ace-chaos .ace_markup.ace_underline {
+	text-decoration: underline;
+}
+
+.ace-chaos .ace_fold-widget {
+	text-align: center;
+}
+
+.ace-chaos .ace_fold-widget:hover {
+	color: #777;
+}
+
+.ace-chaos .ace_fold-widget.ace_start,
+.ace-chaos .ace_fold-widget.ace_end,
+.ace-chaos .ace_fold-widget.ace_closed {
+	background: none !important;
+	border: none;
+	box-shadow: none;
+}
+
+.ace-chaos .ace_fold-widget.ace_start:after {
+	content: '▾'
+}
+
+.ace-chaos .ace_fold-widget.ace_end:after {
+	content: '▴'
+}
+
+.ace-chaos .ace_fold-widget.ace_closed:after {
+	content: '‣'
+}
+
+.ace-chaos .ace_indent-guide {
+	border-right: 1px dotted #333333;
+	margin-right: -1px;
+}
+
+.ace-chaos .ace_indent-guide-active {
+	border-right: 1px dotted #afafaf;
+	margin-right: -1px;
+}
+
+.ace-chaos .ace_fold {
+	background: #222;
+	border-radius: 3px;
+	color: #7AF;
+	border: none;
+}
+
+.ace-chaos .ace_fold:hover {
+	background: #CCC;
+	color: #000;
+}

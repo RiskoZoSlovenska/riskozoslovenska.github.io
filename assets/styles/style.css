@@ -302,6 +302,16 @@ pre.has-code /* pre:has(code) */ {
 	overflow-x: auto;
 }
 
+#ace-editor {
+	max-width: 100%;
+	min-height: 10em;
+	border-radius: 3px;
+}
+
+#ace-editor.has-error {
+	outline: var(--error-color) solid 2px;
+}
+
 
 /* == Input */
 input:is([type="text"], [type="search"]) {
@@ -431,6 +441,11 @@ b {
 	white-space: nowrap;
 }
 
+.selected {
+	outline: var(--accent-color-2) solid 1px;
+	filter: brightness(150%);
+}
+
 .monospace-override {
 	font-family: var(--monospace-font);
 }
@@ -480,6 +495,14 @@ b {
 	top: 0;
 	left: 0;
 	margin: 0;
+}
+
+.mouse-cross {
+	position: fixed;
+	margin: 0;
+	padding: 0;
+	pointer-events: none;
+	background-color: var(--main-text-color);
 }
 
 
@@ -1082,5 +1105,70 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 	.linux-issue-solutions-list {
 		list-style-position: inside;
 		padding-left: 0.5em;
+	}
+}
+
+
+/* == SVG Editor == */
+/* Main flex */
+#editor-flex {
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	gap: 1em;
+	margin-bottom: 1em;
+}
+
+#editor-flex > * {
+	flex-grow: 1;
+	flex-basis: 0;
+
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+#editor-flex > #editor-container {
+	flex-grow: 1.5;
+}
+
+#editor-container > #ace-editor {
+	height: 100%;
+}
+
+/* SVG preview */
+#svg-canvas {
+	position: relative;
+	width: 100%;
+	max-height: 60vh;
+	aspect-ratio: 1/1;
+}
+
+#svg-canvas > svg {
+	position: absolute;
+	max-width: 100%;
+	max-height: 100%;
+
+	background-color: var(--code-bg-color);
+}
+
+/* Other labels and boxes */
+#selected-label {
+	font-size: 0.8em;
+	margin-left: 1em;
+}
+
+#step-box {
+	width: 2.6em;
+	text-align: center;
+}
+
+@media only screen and (max-width: 750px) {
+	#editor-flex {
+		flex-direction: column;
+	}
+
+	#svg-canvas {
+		max-height: unset;
 	}
 }
