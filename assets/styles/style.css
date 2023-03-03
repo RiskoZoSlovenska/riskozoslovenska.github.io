@@ -247,6 +247,12 @@ a.heading-link {
 	display: block;
 }
 
+@media only screen and (max-width: 500px) {
+	.word-definitions > li > .part-of-speech {
+		width: 0;
+	}
+}
+
 
 /* == Buttons (and highlighting) == */
 button {
@@ -912,7 +918,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 
 /* Game end overlay */
 #end-overlay {
-	padding: min(3em, 5vmax) 2em 4em; /* Top padding is a hack to fix janky Flexboxes on slim screens */
+	padding: min(3em, 5vmax) 2em 10vh; /* Top padding is a hack to fix janky Flexboxes on slim screens */
 	overflow: auto;
 	pointer-events: none;
 
@@ -944,7 +950,8 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 }
 
 #end-overlay-button {
-	font-size: 2em;
+	font-size: 2.5em;
+	padding: 0.3em;
 	margin-top: auto;
 }
 
@@ -954,7 +961,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 }
 
 #hangman-word-definitions-list {
-	width: 60vw;
+	width: clamp(13em, 60vw, 30em);
 }
 
 
