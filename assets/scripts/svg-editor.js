@@ -13,8 +13,8 @@
 
 {
 const DEFAULT_SVG = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-	<rect fill="#252525" x="1" y="1" width="98" height="98" />
-	<circle fill="#ff3232" cx="50" cy="50" r="30" />
+	<rect fill="#252525" x="1" y="1" width="98" height="98"/>
+	<circle fill="#ff3232" cx="50" cy="50" r="30"/>
 </svg>`
 
 // Testing <path>:
@@ -199,6 +199,9 @@ function selectElement(element) {
 function deselectElement(element) {
 	selection.delete(element)
 	element.classList.remove(SELECTED_CLASS)
+	if (element.classList.length == 0) {
+		element.removeAttribute("class")
+	}	
 }
 
 function clearSelection() {
