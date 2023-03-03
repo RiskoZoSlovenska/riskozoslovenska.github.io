@@ -19,6 +19,7 @@ const TOUCH_EVENTS_DELAY = 200 // ms
 const DARKENER_ID = "sidebar-darkener"
 const SIDEBAR_ID = "sidebar"
 const SWIPE_FOCUS_CLASS_NAME = "swipe-focus"
+const CUSTOM_SCROLLABLE_CLASS_NAME = "custom-scrollable"
 
 
 let globalId = 0
@@ -85,11 +86,16 @@ document.addEventListener("touchstart", event => {
 		// General idea by https://stackoverflow.com/a/36900407
 		let overflow = window.getComputedStyle(parent)["overflow-x"]
 		let scrollable = (overflow == "scroll" || overflow == "auto") && (parent.scrollWidth > parent.clientWidth)
+		let customScrollable = parent.classList.contains(CUSTOM_SCROLLABLE_CLASS_NAME)
 		let isAtLeft = (parent.scrollLeft == 0)
 		let isAtRight = (parent.scrollWidth - parent.clientWidth - parent.scrollLeft == 0)
 
-		if (scrollable && !isAtLeft)  { rightSwipeAllowed = false }
-		if (scrollable && !isAtRight) { leftSwipeAllowed  = false }
+		if (scrollable && !isAtLeft  || customScrollable) { rightSwipeAllowed = false }
+		if (scrollable && !isAtRight || customScrollable) { leftSwipeAllowed  = false }
+
+		if (!rightSwipeAllowed && !leftSwipeAllowed) {
+			break
+		}
 
 		// Check all elements up the ancestry chain as well
 		parent = parent.parentElement
