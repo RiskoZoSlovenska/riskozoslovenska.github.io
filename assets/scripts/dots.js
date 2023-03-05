@@ -310,21 +310,23 @@ setInterval(() => {
 // Fading loop
 let fadeStep = 1 / FADE_STEPS
 setInterval(() => {
-	for (let point of fadingIn) {
+	for (let i = fadingIn.length - 1; i >= 0; i--) {
+		let point = fadingIn[i]
+
 		point[3] += fadeStep
 
-		if (point[3] >= 1) {
-			// Point is faded in
-			fadingIn.splice(fadingIn.indexOf(point), 1)
+		if (point[3] >= 1) { // Point is faded in
+			fadingIn.splice(i, 1)
 		}
 	}
 
-	for (let point of fadingOut) {
-		point[3] -= (fadeStep * 0.01)
+	for (let i = fadingOut.length - 1; i >= 0; i--) {
+		let point = fadingOut[i]
+		
+		point[3] -= fadeStep * 1.01 // Fade out slightly faster to avoid getting stuck if fading both in and out (rare)
 
-		if (point[3] <= 0) {
-			// Point has been faded out
-			fadingOut.splice(fadingOut.indexOf(point), 1)
+		if (point[3] <= 0) { // Point has been faded out
+			fadingOut.splice(i, 1)
 			points.splice(points.indexOf(point), 1)
 		}
 	}
