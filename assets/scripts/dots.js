@@ -16,7 +16,7 @@ const MAX_VER_DIST = 50
 const POINT_RATE = 50 // Points per second
 const MAX_POINTS = 500
 
-const MIN_SIZE = 0.2
+const MIN_SIZE = 0.15
 const MAX_SIZE = 0.2
 
 const COLOR = "#FF3232"
