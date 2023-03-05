@@ -23,6 +23,7 @@ const COLOR = "#FF3232"
 const ALT_COLOR = "#00AAFF"
 const ALT_COLOR_CHANCE = 0.1
 const COLOR_MAPPING_FUNC = (dist => 1 - dist**2) // Maps distance ([0, 1]) to alpha ([0, 1])
+const EXTRA_RENDER_DIST = 10
 
 const FADE_TIME = 3
 const FADE_STEPS = 30
@@ -70,8 +71,8 @@ function randomInRange(min, max) {
 	return Math.random() * (max - min) + min
 }
 
-function getDist(x, z) {
-	return Math.sqrt(x**2 + z**2)
+function getDist(x, y, z) {
+	return Math.sqrt(x**2 + y**2 + z**2)
 }
 
 function lerp(a, b, alpha) {
@@ -210,8 +211,9 @@ function renderPoints() {
 			continue // Don't render points off-screen
 		}
 
-		let normalizedZ = (z - MIN_HOR_DIST) / (MAX_HOR_DIST - MIN_HOR_DIST)
-		let alpha = COLOR_MAPPING_FUNC(normalizedZ)
+		let dist = getDist(x, y, z)
+		let normalizedDist = (dist - MIN_HOR_DIST) / (MAX_HOR_DIST - MIN_HOR_DIST + ROT_DIST + EXTRA_RENDER_DIST)
+		let alpha = COLOR_MAPPING_FUNC(normalizedDist)
 
 		canvasContext.beginPath()
 		canvasContext.fillStyle = c
@@ -227,7 +229,7 @@ function newRandomPoint() {
 	let y = randomInRange(-MAX_VER_DIST, MAX_VER_DIST)
 	let z = randomInRange(-MAX_HOR_DIST, MAX_HOR_DIST)
 
-	let dist = getDist(x, z)
+	let dist = getDist(x, 0, z)
 	if (dist < MIN_HOR_DIST || dist > MAX_HOR_DIST) {
 		return newRandomPoint() // Retry
 	}
