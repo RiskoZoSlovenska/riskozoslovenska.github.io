@@ -428,6 +428,22 @@ function restartpulse() {
 					<li>…but I don’t really need it anymore.</li>
 				</ul>
 			</li>
+			<li class="linux-issue solved" id="kdenlive-blurry-rendering">
+				<div class="linux-issue-title"><a class="heading-link" href="#kdenlive-blurry-rendering">Resolved:</a></div>
+				<p class="linux-issue-desc">
+					Rendering a project in <a href="https://kdenlive.org/en/">Kdenlive</a> produces blurry output (even
+					when rendering to a lossless format).
+				</p>
+				<div class="linux-issue-title">Notes & Steps Taken:</div>
+				<ul class="linux-issue-solutions-list">
+					<li>
+						See <a href="https://forum.kde.org/viewtopic.php?f=272&t=120227">this post</a> and use
+						desired/up-to-date values. For me, those were <code>pix_fmt=yuv444p</code> and
+						<code>mlt_image_format=rgb</code> (not <code>rgb24</code>, that's probably old — see the
+						<a href="https://www.mltframework.org/plugins/ProducerColor/#mlt_image_format">MLT docs</a>).
+					</li>
+				</ul>
+			</li>
 		</ul>
 	</main>
 </body>
