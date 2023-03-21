@@ -397,8 +397,15 @@ function handleKeypress(event) {
 		mod = 3
 	} else if (event.shiftKey) {
 		mod = 0.5
-		// Shift + arrow keys can select text on the page; we don't want that (https://stackoverflow.com/a/50709103)
-		window.getSelection().empty()
+	}
+	
+	switch (event.code) {
+		case "ArrowUp":
+		case "ArrowDown":
+		case "ArrowRight":
+		case "ArrowLeft":
+			event.preventDefault() // Don't scroll the page (https://stackoverflow.com/a/8916697)
+			event.shiftKey && window.getSelection().empty() // Don't select text (https://stackoverflow.com/a/50709103)
 	}
 
 	switch (event.code) {
