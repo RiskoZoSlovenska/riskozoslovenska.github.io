@@ -21,7 +21,7 @@
 
 	/* Fonts */
 	--main-font: "Lato", "Calibri", "Roboto", sans-serif;
-	--monospace-font: "Inconsolata", "Consolas", monospace;
+	--monospace-font: "Inconsolata", "Consolas", ui-monospace;
 
 	/* Sizes */
 	--sidebar-ribbon-size: 0.5rem;
