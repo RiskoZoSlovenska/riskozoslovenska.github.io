@@ -74,7 +74,7 @@ let movers; {
 	}
 
 	function addCoords(str, num) {
-		return roundSvgCoord(parseFloat(str) + num)
+		return roundSvgCoord((parseFloat(str) || 0) + num)
 	}
 
 	function increaseAttrib(element, attrib, value) {
