@@ -50,6 +50,7 @@
 	background-color: #161616;
 	color: var(--text);
 	padding-top: 10px;
+	font-family: "Inconsolata", "Consolas", ui-monospace;
 }
 
 .ace-chaos .ace_cursor {

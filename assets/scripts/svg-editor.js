@@ -54,7 +54,7 @@ document.body.appendChild(horCross)
 
 const editor = ace.edit(EDITOR_ID)
 editor.setOptions({
-	fontSize: 16,
+	fontSize: 18,
 	tabSize: 4,
 	useSoftTabs: false,
 	cursorStyle: "slim",
