@@ -56,6 +56,7 @@ const editor = ace.edit(EDITOR_ID)
 editor.setOptions({
 	fontSize: 16,
 	tabSize: 4,
+	useSoftTabs: false,
 	cursorStyle: "slim",
 	scrollPastEnd: 0.25,
 	autoScrollEditorIntoView: true,
