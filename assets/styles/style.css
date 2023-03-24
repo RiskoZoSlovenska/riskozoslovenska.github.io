@@ -130,6 +130,12 @@ main {
 	margin: 1.286em auto;
 }
 
+@media only screen and (max-width: 600px) {
+	p {
+		clear: both;
+	}
+}
+
 
 /* == Links == */
 a {
@@ -503,6 +509,14 @@ b {
 
 .float-left {
 	float: left;
+}
+
+@media only screen and (max-width: 600px) {
+	.float-right, .float-left {
+		float: none;
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
 
 .fullscreen {
