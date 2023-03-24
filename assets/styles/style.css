@@ -374,6 +374,11 @@ img:not([data-transparent]) {
 	background-color: var(--alt-bg-color);
 }
 
+.tight-top-image {
+	margin-top: 0;
+	margin-bottom: 0.5em;
+}
+
 /* Following three rules were taken from https://gist.github.com/MoritzBuetzer/4c89d9da1e15745cf2b0 */
 figure {
 	display: table;
