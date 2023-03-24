@@ -355,6 +355,17 @@ input:is([type="text"], [type="search"]):focus-visible {
 img {
 	max-width: 100%; /* Never overflow horizontally */
 	height: auto; /* Maintain aspect ratio */
+	object-fit: contain; /* Don't stretch */
+	margin: 1em 40px;
+
+	/* Center any alt text */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+img:not([data-transparent]) {
+	background-color: var(--alt-bg-color);
 }
 
 /* Following three rules were taken from https://gist.github.com/MoritzBuetzer/4c89d9da1e15745cf2b0 */
@@ -363,7 +374,7 @@ figure {
 }
 
 figure img {
-	display: block;
+	margin: 0;
 }
 
 figure figcaption {
@@ -852,6 +863,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 }
 
 #construction-main h1 img {
+	display: inline;
 	margin: 0ex 1ch;
 }
 
