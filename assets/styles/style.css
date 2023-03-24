@@ -849,6 +849,65 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 	}
 }
 
+/* == About Page == */
+.contacts-list {
+	list-style: none;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 2.5em;
+
+	padding: 0 0 1.5em;
+}
+
+.contacts-list li {
+	position: relative;
+	display: block;
+}
+
+.contacts-list img {
+	width: 3em;
+	height: 3em;
+	margin: 0;
+}
+
+.contacts-list div {
+	position: absolute;
+	left: 50%; /* https://stackoverflow.com/a/1777282 */
+	transform: translateX(-50%);
+	text-align: center;
+	font-size: 0.5em;
+	width: 10em;
+
+	color: var(--dull-text-color);
+	padding-top: 1ex;
+}
+
+/* Enable hover when large */
+@media only screen and (min-width: 500px) {
+	.contacts-list div {
+		width: max-content; /* Don't wrap */
+		font-size: 1em;
+		padding: 1ex 2em 1em;
+
+		pointer-events: none; /* Prevents hover triggering and untriggering during transitions */
+
+		transition: font-size 125ms, transform 125ms, opacity 100ms;
+		transition-timing-function: ease-out;
+	}
+
+	.contacts-list li:hover div { /* I dunno why this works but it does and I'm thankful */
+		pointer-events: all;
+	}
+	
+	.contacts-list li:not(:hover) div:not(:hover) {
+		transform: translateX(-50%) translateY(-100%);
+		opacity: 0%;
+		font-size: 0.5em;
+	}
+}
+
 
 /* == Error Page == */
 .error-page-main * {
