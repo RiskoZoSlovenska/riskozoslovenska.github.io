@@ -884,8 +884,8 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 	padding-top: 1ex;
 }
 
-/* Enable hover when large */
-@media only screen and (min-width: 500px) {
+/* Enable hover if available */
+@media only screen and (hover: hover) {
 	.contacts-list div {
 		width: max-content; /* Don't wrap */
 		font-size: 1em;
@@ -1148,7 +1148,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
             user-select: auto;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (hover: none) {
 	#fragments-canvas > :not(#dummy-fragment) {
 		padding: 0;
 	}
