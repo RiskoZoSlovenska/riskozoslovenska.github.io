@@ -19,12 +19,17 @@ const UNFOCUS_EVENT = "mouseleave"
 const DEVTOOLS_EVENT = "custom_devtools-changed"
 
 const FRAGMENT_CHANCE = 0.15
+const REMOVE_DELAY = 1000
 
 let canvas = document.getElementById(CANVAS_ID)
 let dummyFragment = document.getElementById(DUMMY_ID)
 let fragments = Array.from(canvas.children).filter(fragment => fragment !== dummyFragment)
 
-if (fragments.length < 2) { throw "requires at least two fragments" }
+if (fragments.length < 2) {
+	throw "requires at least two fragments"
+} else {
+	fragments.forEach(fragment => fragment.remove())
+}
 
 let currentFragment = null
 
@@ -36,6 +41,7 @@ function onMouseLeave(event) {
 	// Unbind, deactivate, invoke next fragment
 	fragment.removeEventListener(UNFOCUS_EVENT, onMouseLeave)
 	fragment.removeAttribute(ACTIVE_ATTRIBUTE)
+	setTimeout(() => (fragment !== currentFragment) && fragment.remove(), REMOVE_DELAY)
 
 	nextFragment()
 }
@@ -76,6 +82,8 @@ function repositionCurrentFragment() {
 
 
 function readyFragment(fragment) {
+	canvas.appendChild(fragment)
+
 	positionFragment(fragment)
 
 	fragment.setAttribute(ACTIVE_ATTRIBUTE, true)
@@ -91,12 +99,12 @@ function nextFragment() {
 
 window.addEventListener("resize", repositionCurrentFragment)
 document.addEventListener(DEVTOOLS_EVENT, event => {
-	for (let fragment of fragments) {
-		if (event.detail) {
-			fragment.remove()
-		} else {
-			canvas.appendChild(fragment)
-		}
+	if (!currentFragment) { return }
+
+	if (event.detail) {
+		currentFragment.remove()
+	} else {
+		canvas.appendChild(currentFragment)
 	}
 })
 nextFragment()
