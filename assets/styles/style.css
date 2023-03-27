@@ -891,14 +891,12 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 		font-size: 1em;
 		padding: 1ex 2em 1em;
 
-		pointer-events: none; /* Prevents hover triggering and untriggering during transitions */
-
 		transition: font-size 125ms, transform 125ms, opacity 100ms;
 		transition-timing-function: ease-out;
 	}
 
-	.contacts-list li:hover div { /* I dunno why this works but it does and I'm thankful */
-		pointer-events: all;
+	.contacts-list li:not(:hover) div {
+		pointer-events: none; /* Prevents hover triggering and untriggering during transitions. Dunno why it works. */
 	}
 	
 	.contacts-list li:not(:hover) div:not(:hover) {
