@@ -125,7 +125,15 @@ let movers; {
 	}
 
 	const pathMover = (path, x, y) => {
-		path.setAttribute("d", path.getAttribute("d").replaceAll(/([a-zA-Z])[^a-zA-Z]*/g, (command, name) => {
+		let d = path.getAttribute("d")
+		let firstLetter = d.match(/^\s*([a-zA-Z])/)?.[1]
+		if (firstLetter == "m") {
+			d = d.replace("m", "M") // Should convert only first "m"
+		} else if (firstLetter && firstLetter != "M") {
+			d = "M0,0 " + d
+		}
+
+		path.setAttribute("d", d.replaceAll(/([a-zA-Z])[^a-zA-Z]*/g, (command, name) => {
 			switch (name) {
 				// Always increase by x
 				case "H":
