@@ -42,7 +42,7 @@ let crossesAreHidden = true
 let step = 1
 let selection = new Set()
 let stashedSelection = []
-let stashedSelectionSize = 0
+let stashedSelectionDomainSize = 0
 
 let horCross = document.createElement("div")
 let verCross = document.createElement("div")
@@ -213,27 +213,23 @@ function deselectElement(element) {
 	}	
 }
 
-function clearSelection() {
-	selection.forEach(deselectElement)
-}
-
-/** Clears the current selection and stores it into the `stashedSelection` variable */
+/** Clears the current selection and stores it into the global `stashedSelection` variable */
 function stashSelection() {
 	let ordered = getNodesOrdered(svg)
 
 	stashedSelection = []
-	stashedSelectionSize = ordered.length
+	stashedSelectionDomainSize = ordered.length
 	for (let selected of selection) {
 		stashedSelection.push(ordered.indexOf(selected))
 		deselectElement(selected)
 	}
 }
 
-/** Takes the selection in the `stashedSelection` variable and applies it if possible. */
+/** Takes the selection in the global `stashedSelection` variable and applies it if possible. */
 function applyStashedSelection() {
 	let ordered = getNodesOrdered(svg)
 
-	if (stashedSelectionSize != ordered.length) {
+	if (ordered.length != stashedSelectionDomainSize) {
 		return
 	}
 
@@ -281,10 +277,9 @@ function updateEditor() {
 	}
 
 	// Must de-select and then re-select for serialization
-	let selectionCopy = new Set(selection)
-	clearSelection()
+	stashSelection()
 	let serialized = SERIALIZER.serializeToString(svg)
-	selectionCopy.forEach(selectElement)
+	applyStashedSelection()
 
 	editor.setValue(serialized, serialized.length)
 }
@@ -317,7 +312,7 @@ function updateSvg() {
 		stashSelection()
 	}
 
-	let err;[svg, err] = parseSvg(editor.getValue())
+	let err; [svg, err] = parseSvg(editor.getValue())
 
 	// Handle errors
 	if (err) {
@@ -388,14 +383,24 @@ function handleClick(event) {
 		return
 	} else if (svg.contains(target) && target != svg) { // https://htmldom.dev/check-if-an-element-is-a-descendant-of-another/
 		!selection.has(target) ? selectElement(target) : deselectElement(target)
-	} else if (target != svg) {
-		clearSelection()
+	} else if (target != svg && selection.size > 0) {
+		stashSelection()
 	}
 
 	updateDisplay()
 }
 
 function handleKeypress(event) {
+	if (editor.isFocused()) {
+		return
+	}
+
+	if (event.code == "Space") {
+		selection.size > 0 ? stashSelection() : applyStashedSelection()
+		updateDisplay()
+		return
+	} 
+	
 	if (selection.size <= 0) {
 		return
 	}
@@ -417,10 +422,6 @@ function handleKeypress(event) {
 	}
 
 	switch (event.code) {
-		case "Space":
-			clearSelection()
-			updateDisplay()
-			break
 		case "ArrowUp":
 			moveSelection(0, -1, mod)
 			break
@@ -439,7 +440,7 @@ function handleKeypress(event) {
 function updateStep() {
 	let value = parseFloat(stepBox.value)
 
-	if (typeof (value) == "number" && value > 0) {
+	if (typeof(value) == "number" && value > 0) {
 		step = value
 		console.log("Step changed to " + value)
 	} else {
