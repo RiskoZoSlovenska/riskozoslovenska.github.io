@@ -6,9 +6,6 @@
 	* Move elements using the arrow keys
 
 	Depends on the Ace editor.
-
-	Side effects:
-	* Clears any text selections when moving selected elements.
 */
 
 {
@@ -421,8 +418,7 @@ function handleKeypress(event) {
 		case "ArrowDown":
 		case "ArrowRight":
 		case "ArrowLeft":
-			event.preventDefault() // Don't scroll the page (https://stackoverflow.com/a/8916697)
-			event.shiftKey && window.getSelection().empty() // Don't select text (https://stackoverflow.com/a/50709103)
+			event.preventDefault() // Don't scroll the page or do anything (https://stackoverflow.com/a/8916697)
 	}
 
 	switch (event.code) {
