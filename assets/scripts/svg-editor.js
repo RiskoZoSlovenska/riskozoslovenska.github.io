@@ -43,7 +43,6 @@ let stashedSelectionDomainSize = 0
 
 let horCross = document.createElement("div")
 let verCross = document.createElement("div")
-
 horCross.classList.add(CROSS_CLASS)
 verCross.classList.add(CROSS_CLASS)
 document.body.appendChild(verCross)
@@ -60,8 +59,8 @@ editor.setOptions({
 	copyWithEmptySelection: true,
 	showPrintMargin: false,
 	theme: "ace/theme/chaos",
+	mode: "ace/mode/svg",
 })
-editor.session.setMode("ace/mode/svg")
 editor.setValue(DEFAULT_SVG, DEFAULT_SVG.length)
 
 // Randomize the input textarea name attribute to prevent Firefox from messing
@@ -127,6 +126,8 @@ let movers; {
 
 	const pathMover = (path, x, y) => {
 		let d = path.getAttribute("d")
+
+		// Absolute-ify paths starting with relative directions (shouldn't break the SVG)
 		let firstLetter = d.match(/^\s*([a-zA-Z])/)?.[1]
 		if (firstLetter == "m") {
 			d = d.replace("m", "M") // Should convert only first "m"
@@ -397,13 +398,15 @@ function handleKeypress(event) {
 		return
 	}
 
+	// Handle pressing space (must trigger even when no selection)
 	if (event.code == "Space") {
-		selection.size > 0 ? stashSelection() : applyStashedSelection()
+		(selection.size > 0) ? stashSelection() : applyStashedSelection()
 		updateDisplay()
 		event.preventDefault() // Don't scroll the page... (???)
 		return
 	} 
 	
+	// All following cases need a selection
 	if (selection.size <= 0) {
 		return
 	}
@@ -446,7 +449,7 @@ function updateStep() {
 		step = value
 		console.log("Step changed to " + value)
 	} else {
-		console.log("Invalid step value")
+		console.log("Invalid step value; step remains at " + step)
 	}
 }
 
