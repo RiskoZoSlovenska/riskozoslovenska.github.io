@@ -392,13 +392,15 @@ function handleClick(event) {
 }
 
 function handleKeypress(event) {
-	if (editor.isFocused()) {
+	// Ignore keystrokes when focused on some element
+	if (editor.isFocused() || document.activeElement !== document.body) {
 		return
 	}
 
 	if (event.code == "Space") {
 		selection.size > 0 ? stashSelection() : applyStashedSelection()
 		updateDisplay()
+		event.preventDefault() // Don't scroll the page... (???)
 		return
 	} 
 	
