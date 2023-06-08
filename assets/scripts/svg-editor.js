@@ -67,6 +67,10 @@ editor.setOptions({
 editor.session.setMode("ace/mode/svg")
 editor.setValue(DEFAULT_SVG, DEFAULT_SVG.length)
 
+// Randomize the input textarea name attribute to prevent Firefox from messing
+// with it when duplicating pages. Random string code: https://stackoverflow.com/a/33146982
+document.querySelector("textarea.ace_text-input")?.setAttribute("name", Math.random().toString(36).slice(-5))
+
 
 let movers; {
 	function roundSvgCoord(num) { // Round floating point errors
