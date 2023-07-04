@@ -363,6 +363,7 @@ img {
 	height: auto; /* Maintain aspect ratio */
 	object-fit: contain; /* Don't stretch */
 	margin: 1em 40px;
+	border-radius: 2px; /* Small enough */
 
 	/* Center any alt text */
 	display: flex;
@@ -856,9 +857,9 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 	flex-direction: row;
 	justify-content: center;
 	flex-wrap: wrap;
-	gap: 2.5em;
+	gap: 3em;
 
-	padding: 0 0 1.5em;
+	padding: 0.5em 0em 1.5em;
 }
 
 .contacts-list li {
@@ -888,7 +889,7 @@ body:not([data-warning-accept-pending]) #warning-overlay {
 @media only screen and (hover: hover) {
 	.contacts-list div {
 		width: max-content; /* Don't wrap */
-		font-size: 1em;
+		font-size: 0.9em;
 		padding: 1ex 2em 1em;
 
 		transition: font-size 125ms, transform 125ms, opacity 100ms;
