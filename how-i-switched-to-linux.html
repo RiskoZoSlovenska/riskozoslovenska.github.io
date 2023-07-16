@@ -251,6 +251,22 @@ function restartpulse() {
 					</li>
 				</ul>
 			</li>
+			<li class="linux-issue solved" id="sunshine-nvenc-breaks">
+				<div class="linux-issue-title"><a class="heading-link" href="#sunshine-nvenc-breaks">Resolved:</a></div>
+				<p class="linux-issue-desc">
+					When using <a href="https://github.com/LizardByte/Sunshine">Sunshine</a> to stream, if the computer
+					goes to sleep while streaming, Sunshine will fail to use NVENC upon waking up. This problem is most
+					likely related to the <a href="#obs-nvenc-breaks">aforementioned issue with OBS</a>.
+				</p>
+				<div class="linux-issue-title">Notes & Steps Taken:</div>
+				<ul class="linux-issue-solutions-list">
+					<li>I wasn't able to get Sunshine to stop after a suspend and then start up again.</li>
+					<li>
+						<a href="https://askubuntu.com/a/1309807">This fix</a> resolved the issue. Note that step 3 was
+						already done, perhaps thanks to Zorin?
+					</li>
+				</ul>
+			</li>
 			<li class="linux-issue solved" id="flatpak-cursor-theme">
 				<div class="linux-issue-title"><a class="heading-link" href="#flatpak-cursor-theme">Resolved:</a></div>
 				<p class="linux-issue-desc">Flatpaks don’t use the system cursor theme.</p>
