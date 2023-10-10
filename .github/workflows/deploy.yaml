@@ -1,5 +1,6 @@
 name: Deploy Site
 # Heavily inspired by https://github.com/truemedian/discordia-docs/blob/a214cfeca711f0e33d0fa3b0ffc6545d09ee1c73/.github/workflows/release.yml
+# and https://github.com/actions/starter-workflows/blob/main/pages/static.yml.
 
 on:
   workflow_dispatch:
@@ -7,11 +8,20 @@ on:
     branches:
       - main
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    permissions:
+      pages: write
+      id-token: write
+
     steps:
+      # Checkout
       - name: Checkout site repository
         uses: actions/checkout@v3
         with:
@@ -26,21 +36,21 @@ jobs:
           token: ${{ secrets.GIT_CREDENTIALS }}
 
 
-      - name: Install lua # Must install lua for luarocks to work
+      # Install dependencies
+      - name: Install Lua # Must install lua for luarocks to work
         uses: leafo/gh-actions-lua@v9
         with:
           luaVersion: "5.1"
       
-      - name: Install luarocks
+      - name: Install Luarocks
         uses: leafo/gh-actions-luarocks@v4
 
-      - name: Install luvit
+      - name: Install Luvit
         # Borrowed (and modified) from
         # https://github.com/Lyrth/lit-test-package/blob/f5c8897100b923b892d1a3d8b4b34af26162f562/.github/actions/lit-download-action/action.yaml#L26-L28
         run: curl -L https://github.com/luvit/lit/raw/master/get-lit.sh | sed 's/curl /curl --retry 5 --retry-delay 10 /' | sh
       
-      # I dunno how to get this working without manually installing libyaml
-      - name: Install libyaml
+      - name: Install libyaml # I dunno how to get this working without manually installing libyaml
         run: | # https://unix.stackexchange.com/a/85195
           curl -L --retry 5 --retry-delay 30 http://pyyaml.org/download/libyaml/yaml-0.2.5.tar.gz | tar xvz
           cd yaml-0.2.5
@@ -48,13 +58,14 @@ jobs:
           make
           sudo make install
 
-      - name: Install dependencies
+      - name: Install Lua dependencies
         run: |
           luarocks install lcmark
           luarocks install lyaml
           luarocks install gumbo
 
 
+      # Build
       - name: Compile stories
         run: ../luvit deploy-scripts/compile-stories.lua ../creative-writing
         working-directory: site
@@ -64,12 +75,11 @@ jobs:
         working-directory: site
 
 
-      - name: Push to deployment branch
-        uses: stefanzweifel/git-auto-commit-action@v4
+      # Deploy
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          repository: site
-          branch: gh-pages
-          push_options: --force
-          skip_checkout: true
-          commit_message: Publish site
-          commit_author: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
+          path: site
+
+      - name: Deploy Pages artifact
+        uses: actions/deploy-pages@v2
