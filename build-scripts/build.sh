@@ -1,6 +1,6 @@
 #!/bin/sh
 
-src_dir=src
+src_dir=files
 build_dir=build
 
 if [ -e "$build_dir" ]; then

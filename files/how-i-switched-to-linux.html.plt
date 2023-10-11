@@ -15,6 +15,9 @@
 	<script src="./assets/scripts/search.js" async></script>
 	<script src="./assets/scripts/sidebar-extra.js" async></script>
 	<script src="./assets/scripts/code-blocks.js" type="module"></script>
+# 	for i = 1, 10 do
+	<!--hi-->
+# 	end
 </head>
 
 
@@ -228,7 +231,7 @@
 						Restarting PulseAudio fixes this. However, when PulseAudio is restarted, some apps (Spotify in
 						my case) need to be restarted as well. I made a quick Bash function for this:
 <pre class="has-code"><code class="language-bash"># Audio breaks sometimes and resetting PulseAudio seems to fix it.
-# Spotify also needs a restart to work after PulseAudio is restarted.
+$("#") Spotify also needs a restart to work after PulseAudio is restarted.
 function restartpulse() {
 	pulseaudio --kill
 	pkill -x spotify
