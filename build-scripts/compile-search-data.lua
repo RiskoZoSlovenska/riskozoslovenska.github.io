@@ -12,9 +12,10 @@ local gumbo = require("gumbo")
 
 local UNSEARCHABLE_ATTRIB = "data-unsearchable"
 
-local RES_FILE_PATH = "src/search_data.json"
+local SITE_DIR = "build"
+local RES_FILE_PATH = "build/search_data.json"
 local IGNORE_PATHS = { -- Paths to fully ignore
-	"src/assets",
+	utils.path.join(SITE_DIR, "assets"),
 }
 
 
@@ -104,9 +105,7 @@ local function getDataForFolder(startPath)
 	local nextFileIndex = 0
 
 	while pathStack[1] do
-		local path = table.remove(pathStack)
-
-		for name, fullPath, isDir in utils.iterdir(path) do
+		for name, fullPath, isDir in utils.iterdir(table.remove(pathStack)) do
 			if mustIgnorePath(fullPath) then
 				print("Ignoring: " .. fullPath) -- Ignore
 
@@ -127,8 +126,10 @@ end
 
 --- LOGIC STARTS ---
 
-local data = getDataForFolder("src")
+local data = getDataForFolder(SITE_DIR)
 local encoded = json.encode(data)
+
+print("Writing to " .. RES_FILE_PATH)
 assert(utils.writefile(RES_FILE_PATH, encoded))
 
-print("Finished")
+print("SEARCH DATA DONE")

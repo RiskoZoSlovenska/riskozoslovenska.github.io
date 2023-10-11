@@ -62,12 +62,8 @@ jobs:
 
 
       # Build
-      - name: Compile stories
-        run: lua builds-scripts/compile-stories.lua ../creative-writing
-        working-directory: site
-
-      - name: Compile search data
-        run: lua build-scripts/compile-search-data.lua
+      - name: Build
+        run: build-scripts/build.sh ../creative-writing
         working-directory: site
 
 
@@ -75,7 +71,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: site/src
+          path: site/build
 
       - name: Deploy Pages artifact
         uses: actions/deploy-pages@v2

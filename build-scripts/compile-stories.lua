@@ -14,11 +14,11 @@ local lyaml = require("lyaml")
 local lcmark = require("lcmark")
 local cmark = require("cmark")
 
-local SOURCE_DIR = assert(arg[1], "no source directory provided")
-local OUTPUT_DIR = "./src/stories/"
-local WARNINGS_FILE = utils.path.join(SOURCE_DIR, "warnings.yaml")
-local STORY_TEMPLATE_FILE = "./src/assets/story-template.html"
-local STORY_INDEX_FILE = "./src/stories/index.html"
+local STORIES_DIR = assert(arg[1], "no stories directory provided")
+local OUTPUT_DIR = "build/stories/"
+local WARNINGS_FILE = utils.path.join(STORIES_DIR, "warnings.yaml")
+local STORY_TEMPLATE_FILE = "build/assets/story-template.html"
+local STORY_INDEX_FILE = "build/stories/index.html"
 
 local LCMARK_OPTIONS = {
 	yaml_metadata = true,
@@ -155,7 +155,7 @@ local function compileIndex(indexData)
 end
 
 local function processWork(workName)
-	local workDir = utils.path.join(SOURCE_DIR, workName)
+	local workDir = utils.path.join(STORIES_DIR, workName)
 
 	local dirMap = mapWorkDir(workDir)
 	if not dirMap then
@@ -169,22 +169,25 @@ end
 
 local indexData = {}
 
-print("SOURCE: " .. SOURCE_DIR)
+print("Story dir: " .. STORIES_DIR)
 
-for workName, fullName, isDir in utils.iterdir(SOURCE_DIR) do
+for workName, fullName, isDir in utils.iterdir(STORIES_DIR) do
 	if isDir and not workName:find("^[%._]") then
 		local data = processWork(workName)
 		if data then
 			table.insert(indexData, data)
 
-			print("SUCCESS: " .. workName)
+			print("Success: " .. workName)
 		else
-			print("SKIP")
+			print("Skipping")
 		end
 	end
 end
 
 compileIndex(indexData)
-print("WROTE INDEX")
+print("Wrote index")
 
-print("DONE")
+assert(os.remove(STORY_TEMPLATE_FILE))
+print("Removed story template")
+
+print("STORIES DONE")
