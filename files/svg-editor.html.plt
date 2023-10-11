@@ -1,24 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-	<title>SVG Editor</title>
-	<link rel="icon" type="image/svg" href="./assets/images/icon.svg">
-	<meta name="description" content="Experimental.">
-	<meta name="theme-color" content="#ff3232">
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-	<link rel="stylesheet" href="./assets/styles/normalize.css">
-	<link rel="stylesheet" href="./assets/styles/style.css">
-	<link rel="stylesheet" href="./assets/styles/ace-theme.css">
-
-	<script src="./assets/scripts/insert.js" defer></script>
-	<script src="./assets/scripts/search.js" async></script>
-	<script src="./assets/scripts/sidebar-extra.js" async></script>
+	$(head{ name = "SVG Editor", desc = "Experimental." })
 	<script src="https://cdn.jsdelivr.net/npm/ace-builds@1.15.2/src-min-noconflict/ace.js"></script>
 	<script src="./assets/scripts/svg-editor.js" defer></script>
 </head>
-
 
 <body>
 	<div id="sidebar-insert"></div>

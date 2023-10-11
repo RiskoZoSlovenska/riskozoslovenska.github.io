@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr"><head>
-	<title>Stories</title>
-	<link rel="icon" type="image/svg" href="../assets/images/icon.svg">
-	<meta name="description" content="Just some words.">
-	<meta name="theme-color" content="#ff3232">
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-	<link rel="stylesheet" href="../assets/styles/normalize.css">
-	<link rel="stylesheet" href="../assets/styles/style.css">
-
-	<script src="../assets/scripts/insert.js" defer></script>
-	<script src="../assets/scripts/search.js" async></script>
-	<script src="../assets/scripts/sidebar-extra.js" async></script>
+	$(head{ name = "Stories", desc = "Just some words.", root = ".." })
 </head>
 
 

@@ -1,19 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-	<title>Fragments</title>
-	<link rel="icon" type="image/svg" href="./assets/images/icon.svg">
-	<meta name="description" content="Twinkling like the forgotten stars of the Abyss.">
-	<meta name="theme-color" content="#ff3232">
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-	<link rel="stylesheet" href="./assets/styles/normalize.css">
-	<link rel="stylesheet" href="./assets/styles/style.css">
-
-	<script src="./assets/scripts/insert.js" defer></script>
-	<script src="./assets/scripts/search.js" async></script>
-	<script src="./assets/scripts/sidebar-extra.js" async></script>
+	$(head{ name = "Fragments", desc = "Twinkling like the forgotten stars of the Abyss." })
 	<script src="./assets/scripts/cheating.js" defer></script>
 	<script src="./assets/scripts/fragments.js" defer></script>
 </head>

@@ -1,22 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-	<title>Hangman</title>
-	<link rel="icon" type="image/svg" href="./assets/images/icon.svg">
-	<meta name="description" content="A friendly game of hangman.">
-	<meta name="theme-color" content="#ff3232">
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-	<link rel="stylesheet" href="./assets/styles/normalize.css">
-	<link rel="stylesheet" href="./assets/styles/style.css">
-
-	<script src="./assets/scripts/insert.js" defer></script>
-	<script src="./assets/scripts/search.js" async></script>
-	<script src="./assets/scripts/sidebar-extra.js" async></script>
+	$(head{ name = "Hangman", desc = "A friendly game of hangman." })
 	<script src="./assets/scripts/hangman.js" defer></script>
 </head>
-
 
 <body>
 	<div id="sidebar-insert"></div>
