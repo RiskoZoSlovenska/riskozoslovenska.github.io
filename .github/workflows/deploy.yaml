@@ -63,11 +63,11 @@ jobs:
 
       # Build
       - name: Compile stories
-        run: lua compile-stories.lua ../creative-writing
+        run: lua builds-scripts/compile-stories.lua ../creative-writing
         working-directory: site
 
       - name: Compile search data
-        run: lua compile-search-data.lua
+        run: lua build-scripts/compile-search-data.lua
         working-directory: site
 
 
