@@ -1,4 +1,0 @@
-exclude:
-  - /deploy-scripts
-  - /README.md
-  - /serve.py

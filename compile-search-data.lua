@@ -13,9 +13,9 @@ local gumbo = require("gumbo")
 
 local UNSEARCHABLE_ATTRIB = "data-unsearchable"
 
-local RES_FILE_PATH = "search_data.json"
+local RES_FILE_PATH = "src/search_data.json"
 local IGNORE_PATHS = { -- Paths to fully ignore
-	"assets",
+	"src/assets",
 }
 
 
@@ -130,7 +130,7 @@ end
 
 --- LOGIC STARTS ---
 
-local data = getDataForFolder(".")
+local data = getDataForFolder("src")
 local encoded = json.encode(data)
 assert(fs.writeFileSync(RES_FILE_PATH, encoded))
 

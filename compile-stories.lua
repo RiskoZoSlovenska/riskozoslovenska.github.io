@@ -16,10 +16,10 @@ local lyaml = require("lyaml")
 local lcmark = require("lcmark")
 
 local SOURCE_DIR = assert(args[2], "no source directory provided")
-local OUTPUT_DIR = "./stories/"
+local OUTPUT_DIR = "./src/stories/"
 local WARNINGS_FILE = pathlib.join(SOURCE_DIR, "warnings.yaml")
-local STORY_TEMPLATE_FILE = "./assets/story-template.html"
-local STORY_INDEX_FILE = "./stories/index.html"
+local STORY_TEMPLATE_FILE = "./src/assets/story-template.html"
+local STORY_INDEX_FILE = "./src/stories/index.html"
 
 local LCMARK_OPTIONS = {
 	yaml_metadata = true,
