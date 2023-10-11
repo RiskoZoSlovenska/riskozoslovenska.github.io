@@ -9,15 +9,15 @@
 		* Multi-file stories (having images, etc)
 ]]
 
-local fs = require("fs")
-local pathlib = require("path")
-local cmark = require("cmark")
+local pl_path = require("pl.path")
+local pl_utils = require("pl.utils")
 local lyaml = require("lyaml")
 local lcmark = require("lcmark")
+local cmark = require("cmark")
 
-local SOURCE_DIR = assert(args[2], "no source directory provided")
+local SOURCE_DIR = assert(arg[1], "no source directory provided")
 local OUTPUT_DIR = "./src/stories/"
-local WARNINGS_FILE = pathlib.join(SOURCE_DIR, "warnings.yaml")
+local WARNINGS_FILE = pl_path.join(SOURCE_DIR, "warnings.yaml")
 local STORY_TEMPLATE_FILE = "./src/assets/story-template.html"
 local STORY_INDEX_FILE = "./src/stories/index.html"
 
@@ -42,13 +42,13 @@ local function warn(msg) return print("\027[33m! WARNING: " .. msg .. "\027[0m")
 
 local generatedAt = os.date("Automatically generated on %F %T")
 
-local storyTemplateRaw = assert(fs.readFileSync(STORY_TEMPLATE_FILE))
+local storyTemplateRaw = assert(pl_utils.readfile(STORY_TEMPLATE_FILE))
 local storyTemplate = assert(lcmark.compile_template(storyTemplateRaw))
 
-local indexTemplateRaw = assert(fs.readFileSync(STORY_INDEX_FILE))
+local indexTemplateRaw = assert(pl_utils.readfile(STORY_INDEX_FILE))
 local indexTemplate = assert(lcmark.compile_template(indexTemplateRaw))
 
-local warningNamesRaw = assert(fs.readFileSync(WARNINGS_FILE))
+local warningNamesRaw = assert(pl_utils.readfile(WARNINGS_FILE))
 local warningNames = assert(lyaml.load(warningNamesRaw))
 
 
@@ -98,9 +98,9 @@ local function wrapParagraph(text)
 end
 
 local function mapWorkDir(dir)
-	local mainFilePath = pathlib.join(dir, "main.md")
+	local mainFilePath = pl_path.join(dir, "main.md")
 
-	if fs.existsSync(mainFilePath) then
+	if pl_path.exists(mainFilePath) then
 		return {
 			type = "single",
 			mainPath = mainFilePath,
@@ -112,7 +112,7 @@ end
 
 local function compileSinglePartWork(dirMap, partName)
 	-- Read
-	local rawContent = assert(fs.readFileSync(dirMap.mainPath))
+	local rawContent = assert(pl_utils.readfile(dirMap.mainPath))
 	local body, meta, err = lcmark.convert(rawContent, "html", LCMARK_OPTIONS)
 	assert(body, err)
 
@@ -130,9 +130,9 @@ local function compileSinglePartWork(dirMap, partName)
 	local rendered = lcmark.apply_template(storyTemplate, meta)
 
 	-- Write
-	local storyFileName = pathlib.join(OUTPUT_DIR, partName .. ".html")
+	local storyFileName = pl_path.join(OUTPUT_DIR, partName .. ".html")
 
-	assert(fs.writeFileSync(storyFileName, rendered))
+	assert(pl_utils.writefile(storyFileName, rendered))
 
 	return {
 		type = dirMap.type,
@@ -148,11 +148,11 @@ local function compileIndex(indexData)
 		data = indexData,
 		generatedAt = generatedAt,
 	})
-	assert(fs.writeFileSync(STORY_INDEX_FILE, rendered))
+	assert(pl_utils.writefile(STORY_INDEX_FILE, rendered))
 end
 
 local function processWork(workName)
-	local workDir = pathlib.join(SOURCE_DIR, workName)
+	local workDir = pl_path.join(SOURCE_DIR, workName)
 
 	local dirMap = mapWorkDir(workDir)
 	if not dirMap then
@@ -168,8 +168,12 @@ local indexData = {}
 
 print("SOURCE: " .. SOURCE_DIR)
 
-for workName, t in assert(fs.scandirSync(SOURCE_DIR)) do
-	if t == "directory" and not workName:find("^[%._]") then
+for workName in pl_path.dir(SOURCE_DIR) do
+	if workName == "." or workName == ".." then
+		goto continue
+	end
+
+	if pl_path.isdir(pl_path.join(SOURCE_DIR, workName)) and not workName:find("^[%._]") then
 		local data = processWork(workName)
 		if data then
 			table.insert(indexData, data)
@@ -179,6 +183,8 @@ for workName, t in assert(fs.scandirSync(SOURCE_DIR)) do
 			print("SKIP")
 		end
 	end
+
+	::continue::
 end
 
 compileIndex(indexData)

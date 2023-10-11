@@ -37,20 +37,13 @@ jobs:
 
 
       # Install dependencies
-      - name: Install Lua # Must install lua for luarocks to work
-        uses: leafo/gh-actions-lua@v9
-        with:
-          luaVersion: "5.1"
+      - name: Install Lua
+        uses: leafo/gh-actions-lua@v10
       
       - name: Install Luarocks
         uses: leafo/gh-actions-luarocks@v4
 
-      - name: Install Luvit
-        # Borrowed (and modified) from
-        # https://github.com/Lyrth/lit-test-package/blob/f5c8897100b923b892d1a3d8b4b34af26162f562/.github/actions/lit-download-action/action.yaml#L26-L28
-        run: curl -L https://github.com/luvit/lit/raw/master/get-lit.sh | sed 's/curl /curl --retry 5 --retry-delay 10 /' | sh
-      
-      - name: Install libyaml # I dunno how to get this working without manually installing libyaml
+      - name: Install libyaml # Needed for lyaml
         run: | # https://unix.stackexchange.com/a/85195
           curl -L --retry 5 --retry-delay 30 http://pyyaml.org/download/libyaml/yaml-0.2.5.tar.gz | tar xvz
           cd yaml-0.2.5
@@ -60,18 +53,21 @@ jobs:
 
       - name: Install Lua dependencies
         run: |
-          luarocks install lcmark
+          luarocks install penlight
+          luarocks install dkjson
           luarocks install lyaml
+          luarocks install lcmark
+          luarocks install cmark
           luarocks install gumbo
 
 
       # Build
       - name: Compile stories
-        run: ../luvit compile-stories.lua ../creative-writing
+        run: lua compile-stories.lua ../creative-writing
         working-directory: site
 
       - name: Compile search data
-        run: ../luvit compile-search-data.lua
+        run: lua compile-search-data.lua
         working-directory: site
 
 

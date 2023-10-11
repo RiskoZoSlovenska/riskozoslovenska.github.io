@@ -6,9 +6,9 @@
 	resulting object, see /assets/scripts/search.js.
 ]]
 
-local fs = require("fs")
-local pathlib = require("path")
-local json = require("json")
+local pl_path = require("pl.path")
+local pl_utils = require("pl.utils")
+local json = require("dkjson")
 local gumbo = require("gumbo")
 
 local UNSEARCHABLE_ATTRIB = "data-unsearchable"
@@ -22,7 +22,7 @@ local IGNORE_PATHS = { -- Paths to fully ignore
 
 local function mustIgnorePath(path)
 	for _, mustIgnore in ipairs(IGNORE_PATHS) do
-		if pathlib.pathsEqual(mustIgnore, path) then
+		if pl_path.normpath(mustIgnore) == pl_path.normpath(path) then
 			return true
 		end
 	end
@@ -107,13 +107,17 @@ local function getDataForFolder(startPath)
 	while pathStack[1] do
 		local path = table.remove(pathStack)
 
-		for name, t in assert(fs.scandirSync(path)) do
-			local childPath = pathlib.join(path, name)
+		for name in pl_path.dir(path) do
+			if name == "." or name == ".." then
+				goto continue
+			end
+
+			local childPath = pl_path.join(path, name)
 
 			if mustIgnorePath(childPath) then
 				print("Ignoring: " .. childPath) -- Ignore
 
-			elseif t == "directory" then
+			elseif pl_path.isdir(childPath) then
 				table.insert(pathStack, childPath) -- Push to stack
 
 			elseif name:find(".%.html$") then
@@ -121,6 +125,8 @@ local function getDataForFolder(startPath)
 					nextFileIndex = nextFileIndex + 1
 				end
 			end
+
+		    ::continue::
 		end
 	end
 
@@ -132,6 +138,6 @@ end
 
 local data = getDataForFolder("src")
 local encoded = json.encode(data)
-assert(fs.writeFileSync(RES_FILE_PATH, encoded))
+assert(pl_utils.writefile(RES_FILE_PATH, encoded))
 
 print("Finished")
