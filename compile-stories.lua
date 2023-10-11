@@ -144,6 +144,10 @@ local function compileSinglePartWork(dirMap, partName)
 end
 
 local function compileIndex(indexData)
+	table.sort(indexData, function(a, b)
+		return a.name < b.name
+	end)
+
 	local rendered = lcmark.apply_template(indexTemplate, {
 		data = indexData,
 		generatedAt = generatedAt,
