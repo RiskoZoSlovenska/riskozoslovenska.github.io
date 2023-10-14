@@ -10,25 +10,24 @@
 
 {
 const DEFAULT_SVG = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-	<rect fill="#252525" x="1" y="1" width="98" height="98"/>
+	<rect fill="#252525" x="3" y="3" width="94" height="94"/>
 	<circle fill="#ff3232" cx="50" cy="50" r="30"/>
-</svg>`
+</svg>
+`
 
 // Testing <path>:
 // <path fill="#ff3232" d="M0,1 10,10 L30,40 40,40 H3,15 V-10,10 C 10,10 40,110 90,90   100,80 50,120,90,10  S50,50 60,70  100,100 50,30 Q 0  100 10,  80  T50,15-30,20 L 30,80 A20,20,140,0,0, 40,80 ZZ"></path>
 
 const EDITOR_ID = "ace-editor"
-const CODE_BOX_ERROR_CLASS = "has-error"
-const CROSS_CLASS = "mouse-cross"
 const SELECTED_CLASS = "selected"
 
 const COORD_PLACEHOLDER = "--.-"
 
-const editorElement = document.getElementById(EDITOR_ID)
 const stepBox = document.getElementById("step-box")
 const canvas = document.getElementById("svg-canvas")
 const coordsLabel = document.getElementById("coords-label")
 const selectedLabel = document.getElementById("selected-label")
+const mouseCrossTemplate = document.getElementById("mouse-cross-template").content.firstElementChild
 
 const PARSER = new DOMParser()
 const SERIALIZER = new XMLSerializer()
@@ -41,10 +40,8 @@ let selection = new Set()
 let stashedSelection = []
 let stashedSelectionDomainSize = 0
 
-let horCross = document.createElement("div")
-let verCross = document.createElement("div")
-horCross.classList.add(CROSS_CLASS)
-verCross.classList.add(CROSS_CLASS)
+let verCross = mouseCrossTemplate.cloneNode(true)
+let horCross = mouseCrossTemplate.cloneNode(true)
 document.body.appendChild(verCross)
 document.body.appendChild(horCross)
 
@@ -288,7 +285,7 @@ function updateEditor() {
 
 function parseSvg(raw) {
 	if (raw == "") {
-		return [null, "Content is empty"]
+		return [null, "Nothing to display."]
 	}
 
 	let err = null
@@ -303,7 +300,7 @@ function parseSvg(raw) {
 	// Extract SVG (https://stackoverflow.com/a/67309255)
 	let parsed = doc.getElementsByTagNameNS("http://www.w3.org/2000/svg", "svg").item(0)
 	if (!parsed) {
-		err = err || "Not an SVG!"
+		err = err || "Not a valid SVG!"
 	}
 
 	return [parsed, err]
@@ -316,16 +313,10 @@ function updateSvg() {
 
 	let err; [svg, err] = parseSvg(editor.getValue())
 
-	// Handle errors
-	if (err) {
-		editorElement.classList.add(CODE_BOX_ERROR_CLASS)
-	} else {
-		editorElement.classList.remove(CODE_BOX_ERROR_CLASS)
-	}
-
-	// Replace SVG
 	canvas.firstChild?.remove()
-	if (svg) {
+	if (err) {
+		canvas.textContent = err
+	} else if (svg) {
 		canvas.appendChild(svg)
 		applyStashedSelection()
 	}

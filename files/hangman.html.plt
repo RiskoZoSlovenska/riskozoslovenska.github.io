@@ -8,54 +8,86 @@
 <body>
 	<div id="sidebar-insert"></div>
 
-	<main class="full-width-main">
-		<h1 class="splashed-heading">Hangman</h1>
-		<div title="Or, well, as friendly as it gets.">A friendly game of Hangman</div>
+	<main class="padded-main">
+		<h1 class="mb-0">Hangman</h1>
+		<div class="h1-splash" title="Or, well, as friendly as it gets.">A friendly game of Hangman</div>
 
-		<div class="hangman-word" title="Staring at it ain't gonna solve it, buddy.">Loading...</div>
-		<div id="hangman-game-flex">
-			<svg id="hangman-svg" class="svg-main-text-colored" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
+# 		function word(title)
+		<div class="hangman-word
+			text-[clamp(2.5em,8vw,3.75em)] -mx-2 font-mono tracking-widest text-center break-words
+			[&_>_.not-guessed]:text-incorrect
+		" title="$(title)">Loading...</div>
+# 		end
+# 
+# 		word("Staring at it ain't gonna solve it, buddy.")
+
+		<div class="flex flex-col max-w-[70vw] mx-auto mt-8 md:flex-row text-center">
+			<svg class="fill-gray-100 max-w-[40vw] mx-auto mb-4 sm:max-h-[35vmin]
+				" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
 				<!-- Gallow --> <path d="M 15 0  H 80  V 17.5  H 70  V 10  H 25  V 100  H 40  V 110  H 0  V 100  H 15  Z" />
-		
-				<g id="hangman-svg-parts">
+
+				<g id="hangman-svg-parts" class="
+					child:opacity-0 [&>.shown]:opacity-100
+					transition-opacity duration-150 ease-linear [&>.shown]:duration-500
+				">
 					<!-- Head      --> <circle cx="75" cy="30" r="12.5" />
 					<!-- Body      --> <rect x="72.6" y="42.24745" width="5" height="40.075" />
 					<!-- Left Arm  --> <polygon points="73.96447, 47.24745   77.50000, 50.78298   59.82233, 68.46065   56.28680, 64.92512" />
 					<!-- Left Leg  --> <polygon points="72.50000, 78.78680   76.03553, 82.32233   58.35786, 100.0000   54.82233, 96.46447" />
 					<!-- Right Arm --> <polygon points="76.03553, 47.24745   93.71320, 64.92512   90.17767, 68.46065   72.50000, 50.78298" />
 					<!-- Right Leg --> <polygon points="77.50000, 78.78680   95.17767, 96.46447   91.64214, 100.0000   73.96447, 82.32233" />
-					<!-- Left Eye  --> <path class="svg-main-bg-colored" d="M68.5,25  l2,2  l2,-2  l1,1  l-2,2  l2,2  l-1,1  l-2,-2  l-2,2  l-1,-1  l2,-2  l-2,-2" />
-					<!-- Right Eye --> <path class="svg-main-bg-colored" d="M77.5,25  l2,2  l2,-2  l1,1  l-2,2  l2,2  l-1,1  l-2,-2  l-2,2  l-1,-1  l2,-2  l-2,-2" />
+					<!-- Left Eye  --> <path class="fill-gray-800" d="M68.5,25  l2,2  l2,-2  l1,1  l-2,2  l2,2  l-1,1  l-2,-2  l-2,2  l-1,-1  l2,-2  l-2,-2" />
+					<!-- Right Eye --> <path class="fill-gray-800" d="M77.5,25  l2,2  l2,-2  l1,1  l-2,2  l2,2  l-1,1  l-2,-2  l-2,2  l-1,-1  l2,-2  l-2,-2" />
 				</g>
 			</svg>
 
-			<div id="hangman-button-container"><!-- Smash. Click. Press. --></div>
+			<div id="hangman-button-container" class="flex-1"><!-- Smash. Click. Press. -->
+				<template id="button-template">
+					<button tabindex="-1" class="
+						text-[calc(2.25vh + 2vw)] p-2 md:p-3 m-1.5 text-sm md:text-xl rounded-lg font-medium bg-gray-700
+						data-[clicked='correct']:bg-correct data-[clicked='incorrect']:bg-incorrect
+						transition-all duration-400 hofoac-highlight
+					" data-clicked="none"></button>
+				</template>
+			</div>
 		</div>
-		<div id="end-overlay" class="margin-centering fullscreen darkener" data-is-playing="true">
-			<h2 id="end-overlay-title">You won!</h2>
-			<div>The word was: <!-- Must be in div to be centered--></div>
-			<div class="hangman-word">WORD</div>
-			<ul class="inline-list">
-				<li><span id="stats-hits"    style="color: #48ca48">?</span> hits</li>
-				<li><span id="stats-misses"  style="color: #ca4848"  >?</span> misses</li>
-				<li><span id="stats-seconds" style="color: #00aaff" >?</span> seconds</li>
-			</ul>
-
-			<h3>Definitions found for <b id="definitions-title-word"></b>:</h3>
-			<ul id="hangman-word-definitions-list" class="word-definitions">
-			</ul>
-			<div class="less-visible no-definitions-label">No definitions found.</div>
-			
-			<button id="end-overlay-button" tabindex="-1">Play Again</button>
+		<div id="end-overlay" class="
+			fixed left-0 top-0 w-full h-full bg-gray-900 opacity-0 pointer-events-none z-20 overflow-auto
+			transition-opacity duration-700 ease-[ease]
+			data-[is-playing='false']:opacity-[98%] data-[is-playing='false']:pointer-events-auto
+			p-10 pt-5 sm:pt-10 pb-20 flex flex-col items-center text-center
+		" data-is-playing="true">
+			<div class="flex-none w-full">
+				<h2 id="end-overlay-title" class="mb-4 text-xl">You won!</h2>
+				<div>The word was: <!-- Must be in div to be centered--></div>
+# 				word("Damn, get over it already.")
+				<ul class="inline-list">
+					<li><span id="stats-hits"    class="text-correct    ">?</span>&nbsp;hits</li>
+					<li><span id="stats-misses"  class="text-incorrect  ">?</span>&nbsp;misses</li>
+					<li><span id="stats-seconds" class="text-accent-blue">?</span>&nbsp;seconds</li>
+				</ul>
+			</div>
+			<div class="flex-1 flex flex-col justify-center py-5 max-w-2xl">
+				<h3 id="definitions-title">Definitions found for <b></b>:</h3>
+				<ul id="hangman-word-definitions-list" class="table border-spacing-3">
+					<template id="definition-template">
+						<li class="table-row text-left">
+							<span class="table-cell text-right font-bold w-1/3 pr-5"></span>
+						</li>
+					</template>
+				</ul>
+			</div>
+			<button class="flex-none text-xl bg-gray-700 rounded-lg p-3"
+				id="end-overlay-button" tabindex="-1">Play Again</button>
 		</div>
 
-		<div class="bottom-disclaimer less-visible">
+		<div class="mt-32 text-xs text-gray-400 brightness-50">
 			<p>
 				This game is (unofficially) powered by
 				<a href="https://random-word-api.herokuapp.com/">https://random-word-api.herokuapp.com/</a>
 				and as such I cannot <em>guarantee</em> that:
 			</p>
-			<ol>
+			<ol class="list-disc ml-10 mt-1 mb-4">
 				<li>the difficulty is reasonable,</li>
 				<li>the provided words are real English words,</li>
 				<li>or that provided words will be family-friendly (even though they should be).</li>

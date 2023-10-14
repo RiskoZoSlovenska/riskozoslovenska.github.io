@@ -8,9 +8,9 @@
 <body>
 	<div id="sidebar-insert"></div>
 
-	<main class="long-p-container">
+	<main class="article-main">
 		<h1>How I Switched To Linux</h1>
-		<figure class="float-right">
+		<figure class="mx-auto md:m-0 md:ml-5 md:float-right">
 			<img src="./assets/images/ntfs.png" width="364" height="149" alt="Screenshot of six files with the same name on Windows 7">
 			<figcaption>
 				I stumbled upon this while clearing out my old Win 7 laptop. And yes, those are all unique and in the same folder.
@@ -342,15 +342,17 @@
 # 
 # 		local buff = {}
 # 
-		<ul class="linux-issues-list">
+		<ul class="list-['→_'] pl-5 md:pl-10 text-gray-300">
 # 			for _, issue in ipairs(unresolvedIssues) do
-			<li class="linux-issue" id="$(issue.id)">
-				<div class="linux-issue-title"><a class="heading-link" href="#$(issue.id)">Ongoing:</a></div>
-				<p class="linux-issue-desc">$(issue.desc)</p>
-				<div class="linux-issue-title">Notes & Steps Taken:</div>
-				<ul class="linux-issue-solutions-list">
+			<li class="my-10 marker:italic marker:font-bold" id="$(issue.id)">
+				<div class="italic font-bold underline mb-1">
+					<a class="text-inherit-color hofoac:text-inherit-color" href="#$(issue.id)">Ongoing:</a>
+				</div>
+				<p class="mb-3 leading-none">$(issue.desc)</p>
+				<div class="italic font-bold underline">Notes/Things Tried:</div>
+				<ul class="list-disc pl-8">
 # 					for _, step in ipairs(issue.steps) do
-					<li>$(step)</li>
+					<li class="my-1">$(step)</li>
 # 					end					
 				</ul>
 			</li>
@@ -358,13 +360,15 @@
 # 
 # 
 # 			for _, issue in ipairs(resolvedIssues) do
-			<li class="linux-issue solved" id="$(issue.id)">
-				<div class="linux-issue-title"><a class="heading-link" href="#$(issue.id)">Resolved:</a></div>
-				<p class="linux-issue-desc">$(issue.desc)</p>
-				<div class="linux-issue-title">Notes & Steps Taken:</div>
-				<ul class="linux-issue-solutions-list">
+			<li class="my-10 marker:italic marker:font-bold brightness-[65%]" id="$(issue.id)">
+				<div class="italic font-bold underline mb-1">
+					<a class="text-inherit-color hofoac:text-inherit-color" href="#$(issue.id)">Resolved:</a>
+				</div>
+				<p class="mb-3 leading-none">$(issue.desc)</p>
+				<div class="italic text-sm font-bold underline">Notes/Steps Taken:</div>
+				<ul class="list-disc pl-8">
 # 					for _, step in ipairs(issue.steps) do
-					<li>$(step)</li>
+					<li class="my-1">$(step)</li>
 # 					end					
 				</ul>
 			</li>

@@ -31,10 +31,12 @@ const END_BAR_TEXTS = {
 }
 
 const BUTTON_CONTAINER = document.getElementById("hangman-button-container")
+const BUTTON_TEMPLATE = document.getElementById("button-template").content.firstElementChild
+const DEFINITION_TEMPLATE = document.getElementById("definition-template").content.firstElementChild
 const HANGMAN_WORD_ELEMENTS = document.getElementsByClassName("hangman-word")
 const END_OVERLAY = document.getElementById("end-overlay")
 const END_OVERLAY_HEADING = document.getElementById("end-overlay-title")
-const END_OVERLAY_DEFINITIONS_TITLE_WORD = document.getElementById("definitions-title-word")
+const END_OVERLAY_DEFINITIONS_TITLE = document.getElementById("definitions-title")
 const END_OVERLAY_DEFINITIONS_LIST = document.getElementById("hangman-word-definitions-list")
 const NEXT_ROUND_BUTTON = document.getElementById("end-overlay-button")
 const STATS_HITS = document.getElementById("stats-hits")
@@ -43,12 +45,13 @@ const STATS_SECONDS = document.getElementById("stats-seconds")
 
 const IMAGE_PARTS = document.getElementById("hangman-svg-parts").children
 
-const PART_OF_SPEECH_CLASS = "part-of-speech"
-const VISIBLE_IMAGE_PART_CLASS = "visible-hangman-part"
-const CLICKED_CORRECT_CLASS = "clicked-correct"
-const CLICKED_INCORRECT_CLASS = "clicked-incorrect"
-const NOT_GUESSED_LETTER_CLASS = "not-guessed-letter"
-const NO_SCROLL_CLASS = "no-scroll"
+const VISIBLE_IMAGE_PART_CLASS = "shown"
+const NOT_GUESSED_LETTER_CLASS = "not-guessed"
+const BUTTON_CLICK_STATE = {
+	none: "none",
+	correct: "correct",
+	incorrect: "incorrect",
+}
 
 const QUEUE_LOW_THRESHOLD = 5 // Remember to change the fetch number in the below url as well
 const WORDS_FETCH_URL = "https://random-word-api.herokuapp.com/word?number=10"
@@ -100,8 +103,12 @@ function iterAllSiblings(element, callback) {
 	return null
 }
 
+function toggleBodyScroll(enable) {
+	document.body.style.overflow = enable ? null : "hidden"
+}
+
 function wasClicked(button) {
-	return button.classList.contains(CLICKED_CORRECT_CLASS) || button.classList.contains(CLICKED_INCORRECT_CLASS)
+	return button.dataset.clicked != BUTTON_CLICK_STATE.none;
 }
 
 function isWordValid(word) {
@@ -265,9 +272,8 @@ function initButtons() {
 	removeAllChildren(BUTTON_CONTAINER)
 
 	for (const char of ALPHA) {
-		const button = document.createElement("button")
+		const button = BUTTON_TEMPLATE.cloneNode(true)
 		button.textContent = char
-		button.setAttribute("tabindex", "-1")
 		button.addEventListener("click", onButtonClick)
 		bindButtonToKeystroke(button, char)
 
@@ -281,8 +287,7 @@ function resetButtons() {
 	for (let i = 0; i < buttons.length; i++) {
 		const button = buttons[i]
 
-		button.classList.remove(CLICKED_CORRECT_CLASS)
-		button.classList.remove(CLICKED_INCORRECT_CLASS)
+		button.dataset.clicked = BUTTON_CLICK_STATE.none
 	}
 }
 
@@ -352,7 +357,7 @@ function endRound(endState) {
 	// Enable overlay
 	END_OVERLAY.dataset.endState = endState
 	END_OVERLAY.dataset.isPlaying = false
-	document.body.classList.add(NO_SCROLL_CLASS)
+	toggleBodyScroll(false)
 	
 	// Set overlay remarks
 	let contentData = END_BAR_TEXTS[endState]
@@ -368,21 +373,21 @@ function endRound(endState) {
 	// Set overlay definitions
 	let definition = definitions[curWord.toLowerCase()]
 
-	END_OVERLAY_DEFINITIONS_TITLE_WORD.textContent = definition?.word ?? curWord.toLowerCase()
 	removeAllChildren(END_OVERLAY_DEFINITIONS_LIST)
+	let word = definition?.word ?? curWord.toLowerCase()
 
 	if (definition) {
-		for (let meaning of definition.meanings) {
-			let node = document.createElement("li")
-			let partOfSpeechSpan = document.createElement("span")
+		END_OVERLAY_DEFINITIONS_TITLE.innerHTML = `Definitions found for <b>${word}</b>:`
 
-			node.appendChild(partOfSpeechSpan)
-			partOfSpeechSpan.appendChild(document.createTextNode(meaning.part_of_speech))
-			partOfSpeechSpan.classList.add(PART_OF_SPEECH_CLASS)
+		for (let meaning of definition.meanings) {
+			let node = DEFINITION_TEMPLATE.cloneNode(true)
+			node.querySelector("span").textContent = meaning.part_of_speech
 			node.appendChild(document.createTextNode(meaning.meaning))
 
 			END_OVERLAY_DEFINITIONS_LIST.appendChild(node)
 		}
+	} else {
+		END_OVERLAY_DEFINITIONS_TITLE.innerHTML = `No definitions found for <b>${word}</b>.`
 	}
 }
 
@@ -413,14 +418,14 @@ function startRound() {
 	updateWord()
 
 	END_OVERLAY.dataset.isPlaying = true
-	document.body.classList.remove(NO_SCROLL_CLASS)
+	toggleBodyScroll(true)
 	playing = true
 }
 
 
 
 function clickedCorrect(button) {
-	button.classList.add(CLICKED_CORRECT_CLASS)
+	button.dataset.clicked = BUTTON_CLICK_STATE.correct
 
 	const letter = button.textContent
 	visibleLetters[letter] = true
@@ -433,7 +438,7 @@ function clickedCorrect(button) {
 }
 
 function clickedIncorrect(button) {
-	button.classList.add(CLICKED_INCORRECT_CLASS)
+	button.dataset.clicked = BUTTON_CLICK_STATE.incorrect
 
 	numWrong += 1
 	advanceImage()

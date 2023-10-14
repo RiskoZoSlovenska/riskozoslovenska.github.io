@@ -48,7 +48,6 @@ const TITLE_LENGTH_WEIGHT = -0.5
 const TITLE_TOTAL_WEIGHT = 1
 const WORD_MATCH_WEIGHT = 3
 
-const SEARCH_RESULT_CLASS = "search-result"
 const SEARCH_RESULT_TITLE_CLASS = "search-result-title"
 const SEARCH_RESULT_DESC_CLASS = "search-result-desc"
 
@@ -203,7 +202,7 @@ function createSearchResultNode(resultData) {
 }
 
 function putResults(results, container) {
-	clearResults()
+	clearResults(container)
 	assertHasResultTemplate()
 
 	for (let resultData of results) {
@@ -215,11 +214,9 @@ function putResults(results, container) {
 }
 
 
-function clearResults() {
-	const nodes = document.getElementsByClassName(SEARCH_RESULT_CLASS)
-
-	for (let i = nodes.length - 1; i >= 0; i--) { // Iter backwards since we're removing elements
-		nodes[i].remove()
+function clearResults(container) {
+	while (container.firstChild) {
+		container.lastChild.remove()
 	}
 }
 
@@ -244,7 +241,7 @@ ex_updateSearch = function(event) {
 			them disappearing when the search bar loses focus: If one of the
 			search items is being hovered, wait a small delay before clearing.
 		*/
-		setTimeout(clearResults, resultsContainer.querySelector(":hover") ? 150 : 0)
+		setTimeout(clearResults, resultsContainer.querySelector(":hover") ? 150 : 0, resultsContainer)
 	}
 }
 

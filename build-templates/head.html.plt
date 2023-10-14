@@ -8,7 +8,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<link rel="stylesheet" href="$(root)/assets/styles/normalize.css">
 <link rel="stylesheet" href="$(root)/assets/styles/style.css">
 
 <script src="$(root)/assets/scripts/insert.js" defer></script>

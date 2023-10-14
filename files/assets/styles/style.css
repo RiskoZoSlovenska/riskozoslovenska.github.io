@@ -2,1270 +2,156 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
 :root {
-	/* Colors */
-	--main-text-color: #d4d4d4;
-	--dull-text-color: #8e8e8e;
-
-	--main-bg-color: #1e1e1e;
-	--deep-bg-color: var(--main-bg-color) /* #1a1a1a */;
-	--alt-bg-color: #252525;
-
-	--code-fg-color: #a5a5a5;
-	--code-bg-color: #161616;
-
-	--hr-color: #2d2d2d;
-
-	--accent-color-1: #ff3232; /* Red for titles, highlights, sidebar, etc. */
-	--accent-color-2: #00aaff; /* Blue for links, etc */
-	--error-color: #E53D3D;
-
-	/* Fonts */
-	--main-font: "Lato", "Calibri", "Roboto", sans-serif;
-	--monospace-font: "Inconsolata", "Consolas", ui-monospace;
-
-	/* Sizes */
 	--sidebar-ribbon-size: 0.5rem;
 }
 
-/* 
-	z-indexes:
-
-	0   - 99 : Main content
-	100 - 199: Front stuff like footer, sidebar, darkeners, overlays, etc
-
-
-	Currently used indexes:
-
-	50  - Game end bar
-
-	125 - Sidebar darkener
-	150 - Sidebar
-	155 - Search bar
-	156 - Search results
-	185 - Cheated overlay
-*/
-
-
-
-/* == Page == */
-html {
-	scroll-behavior: smooth;
-	scrollbar-color: var(--accent-color-1) var(--main-bg-color);
-}
-
-
-
-/* == Body and Main == */
-body {
-	font-family: var(--main-font);
-	font-size: 1.25em;
-	letter-spacing: 0.01em;
-	tab-size: 4;
-
-	background-color: var(--deep-bg-color);
-	color: var(--main-text-color);
-
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-}
-
-main {
-	box-sizing: border-box;
-	min-height: inherit;
-	width: initial;
-
-	padding: 1em 3em 2em;
-
-	background-color: var(--main-bg-color);
-}
-
-@media only screen and (min-width: 1000px) {
-	main:not(.full-width-main) {
-		width: 1000px;
-		margin: 0 auto;
-	}
-
-	:where(#sidebar-insert, #sidebar) ~ main:not(.full-width-main) {
-		max-width: calc(100% - var(--sidebar-ribbon-size) * 2);
-	}
-}
-
-/* Adjustments for small screens such as mobiles */
-@media only screen and (max-width: 1000px) {
-	main {
-		padding: 0.25em 1.2em 1.2em;
+@tailwind base;
+@layer base {
+	html {
+		@apply scroll-smooth;
+		scrollbar-color: theme(colors.accent-red) theme(colors.gray.800);
 	}
 
 	body {
-		font-size: 1.05em;
+		@apply text-sm lg:text-base h-screen tracking-wide leading-tight bg-gray-800 text-gray-100;
+		tab-size: 4;
+	}
+
+	main {
+		@apply min-h-full overflow-x-hidden;
+	}
+
+	h1 {
+		@apply text-xl md:text-2xl font-bold;
+	}
+
+	h2 {
+		@apply text-lg md:text-xl font-bold;
+	}
+
+	h3 {
+		@apply text-base md:text-lg font-bold;
+	}
+
+	ol {
+		@apply list-decimal ml-10; /* It is very rare to have an ordered list without the markers */
+	}
+
+	b {
+		@apply text-accent-red
+	}
+
+	a {
+		@apply text-accent-blue transition-colors duration-400 ease-out
+			hofoac:text-gray-100 hofonoac:duration-200 active:duration-0;
+	}
+
+	hr {
+		@apply h-[2px] w-8/12 my-10 mx-auto bg-gray-500 border-0;
+	}
+
+	input:is([type="text"], [type="search"]) {
+		@apply px-[2px] py-[1px] bg-gray-800 text-gray-100
+			border-2 outline-none border-accent-red focus-visible:border-accent-blue
+			placeholder:italic placeholder:text-gray-300
+	}
+
+	img {
+		@apply
+			max-w-full /* Never overflow horizontally */
+			h-auto /* Maintain aspect ratio */
+			object-contain /* Don't stretch */
+
+			/* Center any alt text */
+			text-sm text-gray-200 grid place-content-center text-center
+	}
+
+	/* Figures. https://gist.github.com/MoritzBuetzer/4c89d9da1e15745cf2b0 */
+	figure {
+		@apply table mb-3;
+	}
+
+	figure figcaption {
+		@apply table-caption caption-bottom mt-2 text-xs text-center text-gray-300 ;
+	}
+
+	/* Code */
+	code {
+		@apply font-mono whitespace-pre-wrap py-0.5 px-1 rounded-sm text-gray-200 bg-gray-900;
+	}
+
+	pre > code {
+		@apply block py-1 px-2 whitespace-pre overflow-x-auto;
+	}
+
+	pre.has-code /* pre:has(> code) */ {
+		@apply my-1 bg-gray-900 rounded overflow-x-auto;
+	}
+
+	/* Button */
+	button {
+		@apply p-1 rounded;
 	}
 }
 
+@tailwind components;
+@layer components {
+	#sidebar-insert {
+		@apply fixed h-full w-[--sidebar-ribbon-size] bg-accent-red;
+	}
 
-/* == Headings == */
-.splashed-heading {
-	margin-bottom: 0;
-}
+	.hofoac-highlight {
+		@apply transition-[filter] duration-400 ease-out
+			hofonoac:brightness-125 hofonoac:duration-200
+			active:brightness-150 active:duration-0;
+	}
 
-.splashed-heading + * {
-	color: var(--dull-text-color);
-	font-size: 0.8em;
+	.h1-splash {
+		@apply text-gray-400 text-xs mb-h1;
+	}
 
-	margin-top: 0;
-	margin-bottom: 2rem;
-}
+	/* Article pages; I figure these are used often enough */
+	.padded-main {
+		@apply p-7 lg:pt-10 lg:px-16 lg:pb-14;
+	}
 
-@media only screen and (min-width: 1000px) {
-	h1, h1.splashed-heading + * {
-		margin-bottom: 2.5rem;
+	.article-main {
+		@apply padded-main mx-auto max-w-5xl;
+	}
+
+	.article-main :where(h1) {
+		@apply mb-h1;
+	}
+
+	.article-main :where(p, h2, h3) {
+		@apply leading-normal mb-6;
+	}
+
+	/* Inline lists */
+	.inline-list > li {
+		@apply inline
+	}
+
+	.inline-list > li:not(:first-child)::before {
+		@apply inline content-["|_"] mx-2
+	}
+
+	/*
+		Container for externally-loaded content (such as stories) which mainly
+		just provides more sensible defaults, such as list markers.
+	*/
+	.container-for-external ul {
+		@apply list-disc ml-10;
 	}
 }
 
-
-/* == Paragraphs == */
-:where(.long-p, .long-p-container p) {
-	/* These values were taken from AO3 */
-	line-height: 1.5;
-	margin: 1.286em auto;
-}
-
-@media only screen and (max-width: 600px) {
-	p {
-		clear: both;
-	}
-}
-
-
-/* == Links == */
-a {
-	--link-color: var(--accent-color-2);
-
-	color: var(--link-color);
-	text-decoration: none;
-	transition: color 400ms ease-out;
-}
-
-/* a:visited {
-  color: #0071aa;
-} */
-
-a:is(:hover, :focus, :active) {
-	color: var(--main-text-color);
-	transition-duration: 200ms;
-}
-
-a:active {
-	transition-duration: 0ms;
-}
-
-a.heading-link {
-	color: inherit;
-}
-
-/* Taken from https://css-tricks.com/block-links-are-a-pain-and-maybe-just-a-bad-idea.
-   This does prevent text selection (which requires JS to fix; see
-   https://css-tricks.com/block-links-the-search-for-a-perfect-solution), but
-   there are no other clickable things where this is used, and using an anchor
-   like this makes browsers correctly display the destination link in the bottom
-   left corner. In other words, good enough for me.
-
-   Beware, this assumes the target is the ancestor of only one link.
-*/
-.entire-link-target {
-	position: relative;
-}
-
-.entire-link-target a::before {
-	content: "";
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-}
-
-
-/* == Lists == */
-.larger-list > li {
-	margin: 1em 0;
-}
-
-.compact-list {
-	margin: 0;
-}
-
-
-.inline-list {
-	padding: 0;
-	list-style: none;
-}
-
-.inline-list > li {
-	display: inline;
-}
-
-.inline-list > li + li::before { /* https://stackoverflow.com/a/16133869 */
-	content: "|";
-	margin: 0 0.75em;
-}
-
-@media only screen and (max-width: 500px) {
-	.shrinking.inline-list > li {
-		display: block;
+@tailwind utilities;
+@layer utilities {
+	.text-inherit-color {
+		color: inherit;
 	}
 
-	.shrinking.inline-list > li + li::before {
-		content: "―";
-		display: block;
-		margin: revert;
-	}
-}
-
-
-/* == Word Definitions List == */
-/* Used mostly on the Hangman page, but could probably used somewhere else too. */
-.word-definitions {
-	display: table;
-	list-style-type: none;
-	padding: 0;
-	margin: 0 0 1em;
-}
-
-.word-definitions > li {
-	display: table-row;
-	text-align: left;
-}
-
-.word-definitions > li > .part-of-speech {
-	display: table-cell;
-	text-align: right;
-	font-weight: bold;
-	width: 30%;
-	padding-right: 1em;
-}
-
-.word-definitions:empty, .no-definitions-label {
-	display: none;
-}
-
-.word-definitions:empty + .no-definitions-label {
-	display: block;
-}
-
-@media only screen and (max-width: 500px) {
-	.word-definitions > li > .part-of-speech {
-		width: 0;
-	}
-}
-
-
-/* == Buttons (and highlighting) == */
-button {
-	color: var(--main-text-color);
-	background-color: var(--alt-bg-color);
-
-	font-size: 2em;
-	padding: 0.25em;
-	margin: 5px;
-
-	border-radius: 0.25em;
-	border: 0;
-}
-
-button {
-	transition: 400ms ease-out;	
-	transition-property: background-color, filter; /* Specify this separately so the other properties apply properly */
-}
-
-button:is(:hover, :focus) {
-	filter: brightness(150%);
-	transition-duration: 200ms;
-}
-
-button:active {
-	filter: brightness(200%);
-	transition-duration: 0ms;
-}
-
-
-/* == Code == */
-code {
-	font-family: var(--monospace-font);
-	white-space: pre-wrap;
-
-	color: var(--code-fg-color);
-	background-color: var(--code-bg-color);
-	
-	border-radius: 3px;
-	padding: 0.05em 0.2em;
-}
-
-pre code {
-	display: block;
-	padding: 0.3em 0.5em;
-	background-color: revert;
-	white-space: inherit;
-	overflow-x: auto;
-}
-
-pre.has-code /* pre:has(code) */ {
-	background-color: var(--code-bg-color);
-	border-radius: 4px;
-	overflow-x: auto;
-}
-
-#ace-editor {
-	max-width: 100%;
-	min-height: 10em;
-	border-radius: 3px;
-}
-
-#ace-editor.has-error {
-	outline: var(--error-color) solid 2px;
-}
-
-
-/* == Input */
-input:is([type="text"], [type="search"]) {
-	box-sizing: border-box;
-
-	background-color: var(--main-bg-color);
-	color: var(--main-text-color);
-
-	outline: none;
-	border-color: var(--accent-color-1);
-	border-width: 2px;
-}
-
-input:is([type="text"], [type="search"]):focus-visible {
-	border-color: var(--accent-color-2);
-}
-
-
-/* == Images == */
-.svg-main-text-colored {
-	fill: var(--main-text-color);
-}
-
-.svg-main-bg-colored {
-	fill: var(--main-bg-color);
-}
-
-.character-like-image {
-	height: 1em;
-	vertical-align: sub;
-	margin: 0 0.1em
-}
-
-img {
-	max-width: 100%; /* Never overflow horizontally */
-	height: auto; /* Maintain aspect ratio */
-	object-fit: contain; /* Don't stretch */
-	margin: 1em 40px;
-	border-radius: 2px; /* Small enough */
-
-	/* Center any alt text */
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-img:not([data-transparent]) {
-	background-color: var(--alt-bg-color);
-}
-
-.tight-top-image {
-	margin-top: 0;
-	margin-bottom: 0.5em;
-}
-
-/* Following three rules were taken from https://gist.github.com/MoritzBuetzer/4c89d9da1e15745cf2b0 */
-figure {
-	display: table;
-}
-
-figure img {
-	margin: 0;
-}
-
-figure figcaption {
-	display: table-caption;
-	caption-side: bottom;
-
-	text-align: center;
-	font-size: 0.85rem;
-	color: var(--dull-text-color);
-	margin-top: 0.2rem;
-}
-
-
-/* == Details == */
-details > summary ~ * {
-	margin-left: 1.5ch;
-}
-
-details[open] + details {
-	margin-top: 0.7em;
-}
-
-
-/* == Other Elements == */
-hr {
-	height: 3px;
-	background-color: var(--hr-color);
-	border-style: none; /* Usually defaults to inset border */
-}
-
-b {
-	color: var(--accent-color-1);
-}
-
-
-/* == Disclaimer == */
-.bottom-disclaimer {
-	color: var(--dull-text-color);
-	font-size: 0.8em;
-	margin-top: 25%;
-}
-
-
-/* == Highlight on Hover == */
-.highlight-on-hover {
-	transition: filter 400ms ease-out;
-}
-
-.highlight-on-hover:is(:hover, :focus) {
-	filter: brightness(120%);
-	transition-duration: 200ms;
-}
-
-.highlight-on-hover:active {
-	filter: brightness(150%);
-	transition-duration: 0ms;
-}
-
-
-/* == Darkener == */
-.darkener {
-	background-color: #000000;
-	opacity: 0;
-
-	transition-property: opacity;
-
-	z-index: 125;
-	pointer-events: none; /* Don't sink mouse events */
-}
-
-
-/* == General Styles == */
-.no-scroll {
-	overflow: hidden;
-}
-
-.less-visible {
-	filter: brightness(50%);
-}
-
-.no-wrap {
-	white-space: nowrap;
-}
-
-.selected {
-	outline: var(--accent-color-2) solid 1px;
-	filter: brightness(150%);
-}
-
-.monospace-override {
-	font-family: var(--monospace-font);
-}
-
-.centering {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-}
-
-/*
-	Alternate implementation of the .centering class above.
-	See https://stackoverflow.com/questions/33454533/cant-scroll-to-top-of-flex-item-that-is-overflowing-container.
-	Will be removed when support for the `safe` keyword comes out (if ever) (https://caniuse.com/mdn-css_properties_justify-content_flex_context_safe_unsafe).
-*/
-.margin-centering {
-	display: flex;
-	flex-direction: column;
-	text-align: center;
-}
-
-.margin-centering > * {
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.horizontal-centered {
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.float-right {
-	float: right;
-}
-
-.float-left {
-	float: left;
-}
-
-@media only screen and (max-width: 600px) {
-	.float-right, .float-left {
-		float: none;
-		margin-left: auto;
-		margin-right: auto;
-	}
-}
-
-.fullscreen {
-	position: fixed;
-	box-sizing: border-box;
-	width: 100vw;
-	height: 100vh;
-	top: 0;
-	left: 0;
-	margin: 0;
-}
-
-.mouse-cross {
-	position: fixed;
-	margin: 0;
-	padding: 0;
-	pointer-events: none;
-	background-color: var(--main-text-color);
-}
-
-
-
-/* == Search Bar == */
-.search-results-container, .search-bar {
-	width: 180px; /* As much as I hate concrete values this is the only way it works */
-	position: relative;
-}
-
-.search-results-container > * {
-	box-sizing: border-box; /* Fixes weird sizes */
-
-	background-color: var(--main-bg-color);
-	color: var(--main-text-color);
-
-	border-color: var(--accent-color-1);
-	border-width: 2px;
-	margin: -2px 0;
-}
-
-.search-bar {
-	z-index: 156; /* Higher than the results container */
-}
-
-.search-bar::placeholder {
-	font-style: italic;
-}
-
-.search-bar:focus-visible {
-	outline: none;
-	border-color: var(--accent-color-2);
-}
-
-.search-results-container {
-	height: 0; /* Don't take up space */
-	z-index: 155; /* Lower than the search bar */
-}
-
-.search-result {
-	width: inherit; /* Must explicitly inherit width (using 100% doesn't work) */
-	padding: 0.2em;
-	border-style: solid;
-	cursor: pointer;
-}
-
-.search-result-title {
-	font-size: 1em;
-	font-weight: 900;
-	color: var(--accent-color-1) !important; /* Override the link color */
-
-	margin: 0 0 0.2em;
-	padding: 0;
-}
-
-.search-result:is(:hover, :focus, :active) .search-result-title {
-	text-decoration: underline;
-}
-
-.search-result-desc {
-	margin: 0;
-	padding: 0;
-
-	font-size: 0.5em;
-
-	color: var(--dull-text-color);
-}
-
-
-
-/* == Story Pages == */
-#story-body-container {
-	position: relative;
-}
-
-#warning-overlay {
-	position: absolute;
-	box-sizing: border-box; /* Fixes bad sizing */
-	width: 100%;
-	height: 100%;
-
-	padding: 2em 1em;
-	text-align: center;
-	overflow: auto;
-
-	background-color: var(--alt-bg-color);
-	opacity: 100%;
-}
-
-body:not([data-warning-accept-pending]) #warning-overlay {
-	opacity: 0%;
-	transition: opacity 300ms;
-
-	pointer-events: none; /* Don't sink mouse events */
-}
-
-#warning-overlay-text {
-	color: var(--dull-text-color);
-	margin-bottom: 2em;
-}
-
-#warning-overlay-button {
-	background-color: var(--accent-color-1);
-	font-size: 1em;
-}
-
-#story-body-container {
-	margin-bottom: 2rem;
-}
-
-.authors-note {
-	margin-bottom: 2.5rem;
-}
-
-.authors-note * {
-	font-size: 0.9em;
-}
-
-.authors-note-title {
-	font-style: italic;
-	margin: 0;
-}
-
-.authors-note-title ~ * {
-	margin: 0;
-}
-
-@media only screen and (max-width: 1000px) {
-	.authors-note {
-		margin-bottom: 2.25rem;
-	}
-}
-
-
-
-/* == Story Index Page == */
-#story-list {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(max(20vw, 12.5em), 1fr)); /* Tweak me later */
-	gap: 1ch;
-
-	margin: 2em 0;
-}
-
-.story-list-item {
-	padding: 0.5em;
-	background-color: var(--alt-bg-color);
-}
-
-.story-list-item-title {
-	font-size: inherit;
-	margin: inherit;
-}
-
-.story-list-item-desc {
-	margin-top: 0.4ex;
-	font-size: 0.7em;
-	color: var(--dull-text-color);
-}
-
-
-
-/* == Sidebar == */
-:where(#sidebar, #sidebar-insert) ~ * {
-	margin-left: var(--sidebar-ribbon-size);
-}
-
-
-/* Sidebar */
-#sidebar, #sidebar-insert {
-	background-color: var(--main-bg-color);
-	border-right: var(--sidebar-ribbon-size) solid var(--accent-color-1);
-
-	position: fixed;
-	box-sizing: border-box;
-	transform: translateX(-100%) translateX(var(--sidebar-ribbon-size));
-	height: 100%;
-	max-width: 85vw; /* Make sure the sidebar doesn't take up the whole screen on slim devices */
-	z-index: 150;
-
-	transition-property: transform;
-
-	padding: 0;
-}
-
-/* Transitions for sidebar and sidebar-darkener */
-#sidebar, #sidebar-darkener {
-	/* Specify these two separately as to not overwrite individually-defined transition-property's */
-	transition-duration: 500ms;
-	transition-timing-function: ease;
-}
-
-#sidebar:is(:hover, .swipe-focus) {
-	transform: translateX(0);
-}
-
-#sidebar:is(:hover, .swipe-focus) + #sidebar-darkener {
-	opacity: 0.5;
-}
-
-#sidebar:is(:hover, .swipe-focus), #sidebar:is(:hover, .swipe-focus) + #sidebar-darkener {
-	transition-duration: 300ms;
-}
-
-
-/* Sidebar components */
-#sidebar-main-content {
-	height: inherit;
-	padding: 1em 2em;
-	box-sizing: border-box; /* Fixes incorrect margins */
-
-	overflow-y: auto;
-	overscroll-behavior: contain;
-}
-
-#sidebar-ribbon-image {
-	--image-width: 18px;
-
-	position: fixed;
-	box-sizing: border-box;
-	top: 5px; /* Top padding */
-	right: calc(-5px - var(--sidebar-ribbon-size) - var(--image-width));
-	width: var(--image-width);
-	
-	fill: var(--accent-color-1);
-	overflow: visible; /* Makes the inline SVG be not cut-off slightly (https://stackoverflow.com/a/46344280) */
-}
-
-.sidebar-title {
-	font-size: 2em;
-	margin: 0 0 0.5em; /* Bottom */
-	text-align: left;
-}
-
-#sidebar ul {
-	list-style-type: none;
-	padding-left: 0;
-}
-
-#sidebar ul ul { /* Any nested uls should have left padding */
-	padding-left: 1em;
-}
-
-#sidebar li {
-	font-size: 1.3rem;
-	margin-bottom: 0.7rem;
-}
-
-#sidebar li a:hover {
-	text-decoration: underline solid;
-}
-
-
-
-/* == Cheated Overlay == */
-#cheating-overlay {
-	z-index: 185;
-
-	background-color: var(--main-bg-color);
-	color: var(--dull-text-color);
-
-	text-align: center;
-	padding: 1em;
-	font-size: min(2vh + 2vw, 1.3em);
-	font-weight: 900;
-
-	pointer-events: none;
-
-	opacity: 0%;
-	transition: opacity 700ms;
-}
-
-#cheating-overlay[data-devtools-open="true"] {
-	opacity: 97%;
-	pointer-events: revert;
-}
-
-
-/* == Home Page */
-#dots-canvas {
-	position: absolute;
-	box-sizing: border-box;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	background-color: var(--main-bg-color);
-}
-
-#dots-canvas ~ * {
-	position: relative;
-}
-
-#main-page-title {
-	font-size: inherit;
-	margin-top: 2rem;
-	margin-bottom: 25vh;
-}
-
-#main-page-giant-text {
-	font-size: clamp(1em, 8.5vw, 4em);
-}
-
-@media only screen and (max-height: 300px) {
-	#main-page-title {
-		margin-bottom: 10vh;
-	}
-}
-
-/* == About Page == */
-.contacts-list {
-	list-style: none;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	flex-wrap: wrap;
-	gap: 3em;
-
-	padding: 0.5em 0em 1.5em;
-}
-
-.contacts-list li {
-	position: relative;
-	display: block;
-}
-
-.contacts-list img {
-	width: 3em;
-	height: 3em;
-	margin: 0;
-}
-
-.contacts-list div {
-	position: absolute;
-	left: 50%; /* https://stackoverflow.com/a/1777282 */
-	transform: translateX(-50%);
-	text-align: center;
-	font-size: 0.6em;
-	width: 10em;
-
-	color: var(--dull-text-color);
-	padding-top: 1ex;
-}
-
-/* Enable hover if available */
-@media only screen and (hover: hover) {
-	.contacts-list div {
-		width: max-content; /* Don't wrap */
-		font-size: 0.9em;
-		padding: 1ex 2em 1em;
-
-		transition: font-size 125ms, transform 125ms, opacity 100ms;
-		transition-timing-function: ease-out;
-	}
-
-	.contacts-list li:not(:hover) div {
-		pointer-events: none; /* Prevents hover triggering and untriggering during transitions. Dunno why it works. */
-	}
-	
-	.contacts-list li:not(:hover) div:not(:hover) {
-		transform: translateX(-50%) translateY(-100%);
-		opacity: 0%;
-		font-size: 0.5em;
-	}
-}
-
-
-/* == Error Page == */
-.error-page-main * {
-	margin-top: 0;
-	margin-bottom: 0.6rem;
-}
-
-.error-page-main h1 {
-	font-size: clamp(3em, 10vw, 4.5em);
-	color: var(--accent-color-1);
-}
-
-.error-page-remark {
-	font-size: clamp(1em, 3vw, 1.25em);
-}
-
-.error-page-remark + .error-page-remark {
-	font-size: 0.8em;
-}
-
-.error-page-spacer {
-	height: 20vh;
-}
-
-
-
-/* == Under Contruction page == */
-#construction-main h1 {
-	font-size: min(8vw, 4em); /* Prevent huge size on wide screens */
-	margin: 0;
-}
-
-#construction-main h1 img {
-	display: inline;
-	margin: 0ex 1ch;
-}
-
-@media only screen and (max-width: 1000px) {
-	#construction-main h1 {
-		font-size: 10vw; /* Use a slightly larger font */
-	}
-
-	#construction-main h1 img {
-		display: block; /* Display images on separate lines */
-		margin: 0.5em auto; /* Center images in their lines */
-	}
-}
-
-
-
-/* == Hangman (and possibly other games?) == */
-/* God, tuning this took so long (.-. ) */
-
-/* Main Elements */
-#hangman-game-flex {
-	display: flex;
-	flex-direction: row;
-
-	max-height: 40vh;
-	max-width: 70vw;
-	margin-left: 10vw;
-}
-
-.hangman-word {
-	font-size: clamp(2em, 8vw, 3em);
-	letter-spacing: 0.075em;
-	overflow-wrap: break-word;
-
-	margin: 1em -0.4em 0.5em;
-}
-
-.hangman-word > .not-guessed-letter {
-	color: var(--error-color);
-}
-
-#hangman-game-flex, .hangman-word {
-	font-family: var(--monospace-font);
-	text-align: center;
-}
-
-#hangman-svg {
-	max-height: inherit;
-	max-width: 35vw;
-
-	float: right;
-	margin: 0 3em 0 0;
-}
-
-#hangman-svg-parts > * {
-	opacity: 0;
-	transition: opacity 150ms linear;
-}
-
-#hangman-svg-parts > .visible-hangman-part {
-	opacity: 1;
-	transition-duration: 250ms;
-}
-
-/* Game end overlay */
-#end-overlay {
-	padding: min(3em, 5vmax) 2em 10vh; /* Top padding is a hack to fix janky Flexboxes on slim screens */
-	overflow: auto;
-	pointer-events: none;
-
-	transition: 600ms ease;
-	transition-property: opacity;
-
-	z-index: 50;
-}
-
-#end-overlay > .inline-list {
-	flex-grow: 0.4;
-}
-
-#end-overlay h2 {
-	font-size: 2em;
-	margin-top: 0;
-	margin-bottom: 1rem;
-}
-
-#end-overlay h3 {
-	font-size: 1.2em;
-	margin-bottom: 0.5rem;
-}
-
-#end-overlay .hangman-word {
-	margin-top: 0;
-	margin-bottom: 0;
-	overflow-wrap: break-word;
-}
-
-#end-overlay-button {
-	font-size: 2.5em;
-	padding: 0.3em;
-	margin-top: auto;
-}
-
-#end-overlay[data-is-playing="false"] {
-	pointer-events: all;
-	opacity: 96%;
-}
-
-#hangman-word-definitions-list {
-	width: clamp(13em, 60vw, 30em);
-}
-
-
-/* Buttons and other stuff */
-#hangman-button-container {
-	flex: 1;
-
-	max-height: inherit;
-	max-width: inherit;
-}
-
-#hangman-button-container button {
-	font-size: calc(2.25vh + 2vw);
-	font-weight: 500;
-}
-
-#hangman-button-container button.clicked-correct {
-	background-color: #48ca48;
-}
-
-#hangman-button-container button.clicked-incorrect {
-	background-color: #ca4848;
-}
-
-
-/*
-	Media adjustments
-
-	On smaller screens:
-	* Flex in a column (so remove height/width limitations)
-	* Float hangman in center (so remove right marging)
-	* Set explicit hangman max-height (so remove width limit) (since hangman-game-flex's limitation was removed)
-*/
-@media only screen and (max-aspect-ratio: 3 / 4) {
-	#hangman-game-flex {
-		flex-direction: column;
-		margin-left: initial;
-		
-		max-height: initial;
-		max-width: initial;
-	}
-
-	#hangman-svg {
-		float: none;
-
-		margin: 0 0 1em 0;
-
-		max-height: 25vh;
-		max-width: initial;
-	}
-}
-
-
-
-/* == Fragments Page == */
-#fragments-canvas {
-	position: relative;
-	height: 85vh; /* Will likely cause overflow; that's ok. We want the canvas to be big enough anyways. */
-	margin: 0;
-	padding: 0;
-
-	overflow: hidden;
-}
-
-#fragments-canvas > * {
-	position: absolute;
-	max-width: 50vw;
-	padding: 4em 4ch;
-
-	opacity: 0%;
-	transition: opacity 500ms;
-
-	pointer-events: none; /* Don't sink mouse input when inactive */
-
-	/* We don't want hidden fragments to be selectable */
-	/* (https://stackoverflow.com/a/4407335) */
-    -webkit-user-select: none; /* Prefix mainly for Safari */
-            user-select: none;
-}
-
-#fragments-canvas > #dummy-fragment {
-	width: 35vw;
-	height: 1em;
-}
-
-#fragments-canvas > [data-active] {
-	pointer-events: revert;
-}
-
-#fragments-canvas > [data-active]:hover {
-	opacity: revert;
-
-    -webkit-user-select: auto;
-            user-select: auto;
-}
-
-@media only screen and (hover: none) {
-	#fragments-canvas > :not(#dummy-fragment) {
-		padding: 0;
-	}
-}
-
-
-/* == Switching to Linux Page == */
-.linux-issues-list {
-	list-style-type: '→ ';
-	color: var(--dull-text-color);
-}
-
-.linux-issue {
-	margin: 2.5em 0;
-}
-
-.linux-issue.solved {
-	filter: brightness(60%);
-}
-
-.linux-issue-title, .linux-issue::marker {
-	font-weight: 900;
-	font-style: italic;
-	text-decoration: underline;
-}
-
-.linux-issue-desc {
-	line-height: revert;
-	margin: 0 0 1ex 0;
-}
-
-.linux-issue-solutions-list {
-	list-style-type: disc;
-	padding-left: 2em;
-}
-
-.linux-issue-solutions-list > li {
-	margin: 0.5ex 0;
-}
-
-@media only screen and (max-width: 1000px) {
-	.linux-issues-list {
-		padding-left: 1em;
-	}
-
-	.linux-issue-solutions-list {
-		padding-left: 1.5em;
-	}
-}
-
-@media only screen and (max-width: 400px) {
-	.linux-issue-solutions-list {
-		list-style-position: inside;
-		padding-left: 0.5em;
-	}
-}
-
-
-/* == SVG Editor == */
-/* Main flex */
-#editor-flex {
-	display: flex;
-	flex-direction: row;
-	align-items: stretch;
-	gap: 1em;
-	margin-bottom: 1em;
-}
-
-#editor-flex > * {
-	flex-grow: 1;
-	flex-basis: 0;
-
-	display: flex;
-	flex-direction: column;
-	position: relative;
-}
-
-#editor-flex > #editor-container {
-	flex-grow: 1.5;
-}
-
-#editor-container > #ace-editor {
-	height: 100%;
-}
-
-/* SVG preview */
-#svg-canvas {
-	position: relative;
-	width: 100%;
-	max-height: 60vh;
-	aspect-ratio: 1/1;
-}
-
-#svg-canvas > svg {
-	position: absolute;
-	max-width: 100%;
-	max-height: 100%;
-
-	background-color: var(--code-bg-color);
-}
-
-/* Other labels and boxes */
-#selected-label {
-	font-size: 0.8em;
-	margin-left: 1em;
-}
-
-#step-box {
-	width: 2.6em;
-	text-align: center;
-}
-
-@media only screen and (max-width: 750px) {
-	#editor-flex {
-		flex-direction: column;
-	}
-
-	#svg-canvas {
-		max-height: unset;
+	.mb-h1 {
+		@apply mb-5 md:mb-10;
 	}
 }

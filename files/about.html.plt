@@ -7,11 +7,11 @@
 <body>
 	<div id="sidebar-insert"></div>
 
-	<main class="long-p-container">
+	<main class="article-main">
 		<h1>About Me</h1>
 
-		<figure class="float-right tight-top-image">
-			<img src="./assets/images/pfp.png" width="200" height="200" alt="My PFP">
+		<figure class="mx-auto md:mx-10 md:mb-0 md:float-right">
+			<img class="bg-gray-700" src="./assets/images/pfp.png" width="200" height="200" alt="My PFP">
 			<figcaption>Art by Choir</figcaption>
 		</figure>
 		<p>
@@ -35,43 +35,31 @@
 		</p>
 
 		<h2>Get In Touch</h2>
-		<ul class="contacts-list horizontal-centered">
-			<li>
-				<a href="https://github.com/RiskoZoSlovenska">
-					<img src="./assets/images/github.svg" data-transparent alt="The GitHub logo">
+		<ul class="flex justify-center flex-wrap gap-14 mb-14 px-5">
+# 			for _, contact in ipairs({
+# 				{"https://github.com/RiskoZoSlovenska", "github.svg", "The GitHub logo", "RiskoZoSlovenska"},
+# 				{"https://discord.com/users/469641305669107713", "discord.svg", "The Discord logo", "riskozoslovenska"},
+# 				{"mailto:riskozoslovenska@gmail.com", "mail.svg", "The Gmail logo", "riskozoslovenska<wbr>@gmail.com"},
+# 				{"https://www.youtube.com/channel/UCWCC6wm037u-lSeF2yfFKbw", "youtube.png", "The YouTube logo", "RiskoZoSlovenska"},
+# 				{"https://steamcommunity.com/profiles/76561199122286912", "steam.svg", "The Steam logo", "RiskoZoSlovenska"},
+# 				{"https://open.spotify.com/user/4u4zs2216n18n40u46mail4cb?si=CitKmACMTwOQKFYN8pFIQg", "spotify.png", "The Spotify logo", "RiskoZoSlovenska"},
+# 			}) do
+			<li class="relative block group">
+				<a href="$(contact[1])">
+					<img class="w-14 h-14" src="./assets/images/$(contact[2])" alt="$(contact[3])">
 				</a>
-				<div>RiskoZoSlovenska</div>
+				<!-- https://stackoverflow.com/a/1777282 -->
+				<div class="
+					absolute left-[50%] -translate-x-[50%] max-w-min pt-2 text-center text-3xs text-gray-300
+					transition-all duration-100 ease-out
+					has-hover:w-max has-hover:text-sm has-hover:p-8 has-hover:pt-1
+					has-hover:group-nohover:translate-x-[-50%]
+					has-hover:group-nohover:translate-y-[-50%]
+					has-hover:group-nohover:opacity-0
+					has-hover:group-nohover:pointer-events-none
+				">$(contact[4])</div>
 			</li>
-			<li>
-				<a href="https://discord.com/users/469641305669107713">
-					<img src="./assets/images/discord.svg" data-transparent alt="The Discord logo">
-				</a>
-				<div>riskozoslovenska</div>
-			</li>
-			<li>
-				<a href="mailto:riskozoslovenska@gmail.com">
-					<img src="./assets/images/mail.svg" data-transparent alt="The Gmail logo">
-				</a>
-				<div>riskozoslovenska<wbr>@gmail.com</div>
-			</li>
-			<li>
-				<a href="https://www.youtube.com/channel/UCWCC6wm037u-lSeF2yfFKbw">
-					<img src="./assets/images/youtube.png" data-transparent alt="The YouTube logo">
-				</a>
-				<div>RiskoZoSlovenska</div>
-			</li>
-			<li>
-				<a href="https://steamcommunity.com/profiles/76561199122286912">
-					<img src="./assets/images/steam.svg" data-transparent alt="The Steam logo">
-				</a>
-				<div>RiskoZoSlovenska</div>
-			</li>
-			<li>
-				<a href="https://open.spotify.com/user/4u4zs2216n18n40u46mail4cb?si=CitKmACMTwOQKFYN8pFIQg">
-					<img src="./assets/images/spotify.png" data-transparent alt="The Spotify logo">
-				</a>
-				<div>RiskoZoSlovenska</div>
-			</li>
+# 			end
 		</ul>
 
 		<h2>What about this website? What's it for?</h2>
@@ -95,27 +83,27 @@
 			Either way, this site wouldn't be possible without a bunch of wonderful people and resources. I'd like to
 			thank:
 		</p>
-		<ul class="larger-list">
-			<li>
-				<a href="https://blobs.ca/" style="--link-color: hsl(260, 100%, 75%);">Blob</a> for:
-				<ul>
+		<ul class="list-disc ml-10">
+			<li class="mb-5">
+				<a href="https://blobs.ca/" class="text-[hsl(260,100%,75%)]">Blob</a> for:
+				<ul class="list-[circle] ml-10">
 					<li>inspiring me to make this site,</li>
 					<li>letting me use her site as a <a href="https://github.com/Cobalium/cobalium.github.io/">reference</a>,</li>
 					<li>putting up with my smooth-brain questions,</li>
 					<li>and helping me out a bit with the site icon.</li>
 				</ul>
 			</li>
-			<li>
+			<li class="mb-5">
 				<a href="https://developer.mozilla.org/">MDN Web Docs</a>,
 				<a href="https://stackoverflow.com/">Stack Overflow</a> and
 				<a href="https://www.w3schools.com/">W3Schools</a> for answering
 				all my inquiries about all this HTML, CSS and <span title="JS sucks ok">(ick) JS</span> magic.
 			</li>
-			<li title="Hi Eti">
+			<li class="mb-5" title="Hi Eti">
 				<a href="https://etithespir.it/">EtiTheSpirit</a> for the idea of having
 				<a href="https://etithespir.it/site-credits.xhtml">site credits</a>.
 			</li>
-			<li title="Sorry for stealing this idea :P">
+			<li class="mb-5" title="Sorry for stealing this idea :P">
 				<a href="https://pages.github.com/">GitHub Pages</a> for hosting this site.
 			</li>
 		</ul>

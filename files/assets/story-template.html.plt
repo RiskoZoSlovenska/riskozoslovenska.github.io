@@ -6,26 +6,25 @@
 	$if(description)$<meta name="description" content="$description$">$endif$
 </head>
 
-
-<body $if(warnings)$data-warning-accept-pending$endif$>
+<body>
 	<div id="sidebar-insert"></div>
 
-	<main>
-		<h1 class="splashed-heading">$title$</h1>
-		<div>
+	<main class="article-main">
+		<h1 class="mb-0">$title$</h1>
+		<div class="h1-splash">
 			<details title="$generatedAt$">
 				<summary>$version$</summary>
-				<div>
+				<div class="ml-5 mb-3">
 					Created at: $if(created-at)$<time>$created-at$</time>$else$[UNKNOWN]$endif$<br>
 					Updated at: $if(updated-at)$<time>$updated-at$</time>$else$[UNKNOWN]$endif$<br>
 					Contributors: $if(contributors)$$for(contributors)$$contributors$$sep$, $endfor$$else$None$endif$
 				</div>
 			</details>
-			
+
 			$if(warnings)$
 			<details>
 				<summary>Content Warnings</summary>
-				<ul class="compact-list">
+				<ul class="list-disc list-inside ml-5">
 					$for(warnings)$
 					<li>$warnings$</li>
 					$endfor$
@@ -34,18 +33,23 @@
 			$endif$
 		</div>
 
-		$if(note-before)$
-		<section class="authors-note less-visible">
-			<h2 class="authors-note-title">Author's Note:</h2>
-			$note-before$
+# 		function authorsNote(noteName)
+		$if($(noteName))$
+		<section class="text-gray-400 mb-10 text-sm">
+			<h2 class="italic m-0 text-sm">Author's Note:</h2>
+			$$(noteName)$
 		</section>
 		$endif$
+# 		end
+# 
+# 		authorsNote("note-before")
 
-		<div id="story-body-container" class="long-p-container">
+		<div class="container-for-external relative">
 			$if(warnings.hasMajorWarning)$
-			<div id="warning-overlay">
-				<p id="warning-overlay-text">This one may be a bit heavy.</p>
-				<button id="warning-overlay-button" onclick="javascript:document.body.removeAttribute('data-warning-accept-pending')">
+			<div class="absolute h-full w-full text-center py-16 px-14 bg-gray-700 transition-opacity duration-300
+			data-[accepted]:opacity-0 data-[accepted]:pointer-events-none">
+				<p class="text-gray-300 mb-14">This one may be a bit heavy.</p>
+				<button class="bg-accent-red" onclick="javascript:event.target.parentElement.dataset.accepted = true">
 					I've read the warnings. Lemme read!
 				</button>
 			</div>
@@ -54,12 +58,7 @@
 			$body$
 		</div>
 
-		$if(note-after)$
-		<section class="authors-note less-visible">
-			<h2 class="authors-note-title">Author's Note:</h2>
-			$note-after$
-		</section>
-		$endif$
+# 		authorsNote("note-after")
 	</main>
 </body>
 </html>

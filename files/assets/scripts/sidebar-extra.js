@@ -8,6 +8,10 @@
 	Additionally, this script also makes the darkener sink all input while the
 	sidebar is active to prevent users from accidentally clicking on links when
 	trying to collapse the sidebar.
+
+	Elements can contain the `data-custom-scroll` property to signify that the
+	sidebar should not be swipe-focused when swiping over them. This is only
+	ever useful for things like the Ace editor.
 */
 let ex_onSidebarMouseEnter, ex_onSidebarMouseLeave
 {
@@ -19,7 +23,6 @@ const TOUCH_EVENTS_DELAY = 200 // ms
 const DARKENER_ID = "sidebar-darkener"
 const SIDEBAR_ID = "sidebar"
 const SWIPE_FOCUS_CLASS_NAME = "swipe-focus"
-const CUSTOM_SCROLLABLE_CLASS_NAME = "custom-scrollable"
 
 
 let globalId = 0
@@ -86,7 +89,7 @@ document.addEventListener("touchstart", event => {
 		// General idea by https://stackoverflow.com/a/36900407
 		let overflow = window.getComputedStyle(parent)["overflow-x"]
 		let scrollable = (overflow == "scroll" || overflow == "auto") && (parent.scrollWidth > parent.clientWidth)
-		let customScrollable = parent.classList.contains(CUSTOM_SCROLLABLE_CLASS_NAME)
+		let customScrollable = parent.dataset.customScroll != undefined
 		let isAtLeft = (parent.scrollLeft == 0)
 		let isAtRight = (parent.scrollWidth - parent.clientWidth - parent.scrollLeft == 0)
 

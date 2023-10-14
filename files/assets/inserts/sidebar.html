@@ -1,15 +1,22 @@
-<nav id="sidebar" onmouseenter="ex_onSidebarMouseEnter(event)" onmouseleave="ex_onSidebarMouseLeave(event)">
-	<div id="sidebar-main-content"> <!-- This wrapper div is required to make the sidebar scrollable -->
-		<svg id="sidebar-ribbon-image" viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
-			<!-- I stole these proportions from the Gmail site -->
-			<path id="sidebar-grill-main" d="M 0 0   h 18   v 2   h -18   v -2    z" />
+<nav id="sidebar" class="
+	peer/sidebar fixed h-full w-min max-w-[85vw] z-40 bg-gray-800
+	border-r-accent-red border-r-[length:--sidebar-ribbon-size]
+	translate-x-[calc(var(--sidebar-ribbon-size)_-_100%)] [&:is(:hover,.swipe-focus)]:translate-x-0
+	transition-transform ease-[ease] duration-500 [&:is(:hover,.swipe-focus)]:duration-300
+" onmouseenter="ex_onSidebarMouseEnter(event)" onmouseleave="ex_onSidebarMouseLeave(event)"
+>
+	<!-- This wrapper div is required to make the sidebar scrollable -->
+	<div class="h-full py-4 px-8 overflow-y-auto overscroll-contain">
+		<svg class="fixed top-2 w-[18px] -right-2 translate-x-[calc(18px_+_var(--sidebar-ribbon-size))]
+			fill-accent-red overflow-visible" viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
+			<path id="sidebar-grill-main" d="M0,0  h18  v2  h-18  v-2   z" />
 			<use href="#sidebar-grill-main" y="5" />
 			<use href="#sidebar-grill-main" y="10" />
 		</svg>
-		
-		<h2 class="sidebar-title">Navigation</h2>
+
+		<h2 class="text-2xl font-bold">Navigation</h2>
 		<input
-			class="search-bar"
+			class="relative mt-4 w-full leading-none z-50"
 			tabindex="-1"
 
 			type="search"
@@ -19,18 +26,21 @@
 			onfocus="ex_updateSearch(event)"
 			onblur ="ex_updateSearch(event)"
 		>
-		<div class="search-results-container"></div>
-		<ul>
-			<li><a href="{{ROOT}}/" tabindex="-1">Home</a></li>
-			<li><a href="{{ROOT}}/about" tabindex="-1">About</a></li>
-			<li><a href="{{ROOT}}/stories/" tabindex="-1">Stories</a></li>
-			<li><a href="{{ROOT}}/fragments" tabindex="-1">Fragments</a></li>
-			<li><a href="{{ROOT}}/how-i-switched-to-linux" tabindex="-1">Switching to Linux</a></li>
-			<li><a href="{{ROOT}}/hangman" tabindex="-1">Hangman</a></li>
-			<li><a href="{{ROOT}}/svg-editor" tabindex="-1">SVG Editor</a></li>
-			<li><a href="{{ROOT}}/under-construction" tabindex="-1">Under Contruction</a></li>
+		<div class="search-results-container h-0 z-40"></div>
+		<ul class="mt-5">
+			<li class="mb-3 text-base"><a class="hofoac:underline" href="{{ROOT}}/" tabindex="-1">Home</a></li>
+			<li class="mb-3 text-base"><a class="hofoac:underline" href="{{ROOT}}/about" tabindex="-1">About</a></li>
+			<li class="mb-3 text-base"><a class="hofoac:underline" href="{{ROOT}}/stories/" tabindex="-1">Stories</a></li>
+			<li class="mb-3 text-base"><a class="hofoac:underline" href="{{ROOT}}/fragments" tabindex="-1">Fragments</a></li>
+			<li class="mb-3 text-base"><a class="hofoac:underline" href="{{ROOT}}/how-i-switched-to-linux" tabindex="-1">Switching to Linux</a></li>
+			<li class="mb-3 text-base"><a class="hofoac:underline" href="{{ROOT}}/hangman" tabindex="-1">Hangman</a></li>
+			<li class="mb-3 text-base"><a class="hofoac:underline" href="{{ROOT}}/svg-editor" tabindex="-1">SVG Editor</a></li>
+			<li class="mb-3 text-base"><a class="hofoac:underline" href="{{ROOT}}/under-construction" tabindex="-1">Under Contruction</a></li>
 		</ul>
 	</div>
 </nav>
 
-<div id="sidebar-darkener" class="darkener fullscreen"></div>
+<div id="sidebar-darkener" class="
+	fixed h-full w-full bg-black z-30 pointer-events-none transition-opacity opacity-0 ease-[ease] duration-500 
+	peer-[&:is(:hover,.swipe-focus)]/sidebar:opacity-50 peer-[&:is(:hover,.swipe-focus)]/sidebar:duration-300
+"></div>
