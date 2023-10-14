@@ -43,14 +43,6 @@ jobs:
       - name: Install Luarocks
         uses: leafo/gh-actions-luarocks@v4
 
-      - name: Install libyaml # Needed for lyaml
-        run: | # https://unix.stackexchange.com/a/85195
-          curl -L --retry 5 --retry-delay 30 http://pyyaml.org/download/libyaml/yaml-0.2.5.tar.gz | tar xvz
-          cd yaml-0.2.5
-          ./configure
-          make
-          sudo make install
-
       - name: Install Lua dependencies
         run: |
           luarocks install penlight
