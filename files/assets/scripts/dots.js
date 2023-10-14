@@ -46,12 +46,12 @@ let cameras = []
 let points = []
 
 function recalculateSize() {
-	canvasWidth = canvas.clientWidth
-	canvasHeight = canvas.clientHeight
+	canvasWidth = canvas.clientWidth * window.devicePixelRatio
+	canvasHeight = canvas.clientHeight * window.devicePixelRatio
 
 	let halfFovRadians = rad(FOV / 2)
 	let planeWidth = Math.tan(halfFovRadians) * 2
-	scaleFactor = canvasWidth / planeWidth * window.devicePixelRatio
+	scaleFactor = canvasWidth / planeWidth
 
 	canvas.setAttribute("width", canvasWidth)
 	canvas.setAttribute("height", canvasHeight)
