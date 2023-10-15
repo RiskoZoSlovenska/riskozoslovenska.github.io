@@ -86,12 +86,15 @@
 		</p>
 		<ul class="list-disc ml-10">
 			<li class="mb-5">
-				<a href="https://blobs.ca/" class="text-[hsl(260,100%,75%)]">Blob</a> for:
+				<a href="https://amyfae.cafe/" class="text-[hsl(260,100%,75%)]">Skyla</a> for:
 				<ul class="list-[circle] ml-10">
-					<li>inspiring me to make this site,</li>
-					<li>letting me use her site as a <a href="https://github.com/Cobalium/cobalium.github.io/">reference</a>,</li>
+					<li>inspiring me to make my own site,</li>
+					<li>
+						letting me use her <a href="https://web.archive.org/web/20211224002714/https://blobs.ca/">(old) site</a>
+						as a reference,
+					</li>
 					<li>putting up with my smooth-brain questions,</li>
-					<li>and helping me out a bit with the site icon.</li>
+					<li>and helping me out with the site icon.</li>
 				</ul>
 			</li>
 			<li class="mb-5">
