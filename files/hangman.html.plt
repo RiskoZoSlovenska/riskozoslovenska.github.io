@@ -45,7 +45,7 @@
 				<template id="button-template">
 					<button tabindex="-1" class="
 						text-[calc(2.25vh + 2vw)] p-2 md:p-3 m-1.5 text-sm md:text-xl rounded-lg font-medium bg-gray-700
-						data-[clicked='correct']:bg-correct data-[clicked='incorrect']:bg-incorrect
+						data-[clicked=correct]:bg-correct data-[clicked=incorrect]:bg-incorrect
 						transition-all duration-400 hofoac-highlight
 					" data-clicked="none"></button>
 				</template>
@@ -54,7 +54,7 @@
 		<div id="end-overlay" class="
 			fixed left-0 top-0 w-full h-full bg-gray-900 opacity-0 pointer-events-none z-20 overflow-auto
 			transition-opacity duration-700 ease-[ease]
-			data-[is-playing='false']:opacity-[98%] data-[is-playing='false']:pointer-events-auto
+			data-[is-playing=false]:opacity-[98%] data-[is-playing=false]:pointer-events-auto
 			p-10 pt-5 sm:pt-10 pb-20 flex flex-col items-center text-center
 		" data-is-playing="true">
 			<div class="flex-none w-full">

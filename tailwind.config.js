@@ -59,7 +59,7 @@ module.exports = {
 		plugin(function ({ addVariant }) {
 			addVariant("hofoac", "&:is(:hover, :focus, :active)")
 			addVariant("hofonoac", "&:is(:hover, :focus):not(:active)")
-			addVariant("group-nohover", ":merge(.group):not(:hover) &")
+
 			addVariant("child", "& > *")
 		}),
 	],
