@@ -226,23 +226,14 @@ ex_updateSearch = function(event) {
 	let searchBox = event.target
 	let resultsContainer = searchBox.nextElementSibling
 
-	if (document.activeElement == searchBox) {
-		let query = searchBox.value.toLowerCase()
-		let queryWords = extractWordsFromQuery(query)
+	let query = searchBox.value.toLowerCase()
+	let queryWords = extractWordsFromQuery(query)
 
-		let results = buildBlankResults()
-		scoreResultsByTitle(results, query)
-		scoreResultsByWordMatches(results, queryWords)
+	let results = buildBlankResults()
+	scoreResultsByTitle(results, query)
+	scoreResultsByWordMatches(results, queryWords)
 
-		putResults(finalizeResults(results), resultsContainer)
-	} else {
-		/*
-			Workaround for not being able to click the search results due to
-			them disappearing when the search bar loses focus: If one of the
-			search items is being hovered, wait a small delay before clearing.
-		*/
-		setTimeout(clearResults, resultsContainer.querySelector(":hover") ? 150 : 0, resultsContainer)
-	}
+	putResults(finalizeResults(results), resultsContainer)
 }
 
 }

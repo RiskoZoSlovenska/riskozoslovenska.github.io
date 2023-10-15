@@ -56,9 +56,17 @@ module.exports = {
 		},
 	},
 	plugins: [
-		plugin(function ({ addVariant }) {
-			addVariant("hofoac", "&:is(:hover, :focus, :active)")
-			addVariant("hofonoac", "&:is(:hover, :focus):not(:active)")
+		plugin(function ({ addVariant, matchVariant }) {
+			addVariant("hofoac", "&:is(:hover, :focus-within, .custom-focus, :active)")
+			matchVariant("peer-hofoac", // https://github.com/tailwindlabs/tailwindcss/issues/11384#issuecomment-1623765604
+				(_, { modifier }) => {
+					return modifier
+						? `:merge(.peer\\/${modifier}):is(:hover, :focus-within, .custom-focus, :active) ~ &`
+						: `:merge(.peer):is(:hover, :focus-within, .custom-focus, :active) ~ &`
+				},
+				{ values: { DEFAULT: null } }
+			)
+			addVariant("hofonoac", "&:is(:hover, :focus-within, .custom-focus):not(:active)")
 
 			addVariant("child", "& > *")
 		}),
