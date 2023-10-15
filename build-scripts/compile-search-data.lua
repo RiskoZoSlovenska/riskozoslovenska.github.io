@@ -15,7 +15,7 @@ local UNSEARCHABLE_ATTRIB = "data-unsearchable"
 local SITE_DIR = "build"
 local RES_FILE_PATH = "build/search_data.json"
 local IGNORE_PATHS = { -- Paths to fully ignore
-	utils.path.join(SITE_DIR, "assets"),
+	"build/assets",
 }
 
 
@@ -31,10 +31,8 @@ local function mustIgnorePath(path)
 end
 
 local function pathToLink(path)
-	-- Add leading slash
-	if path:sub(1, 1) ~= "/" then
-		path = "/" .. path
-	end
+	-- Make relative
+	path = utils.path.relpath(utils.path.abspath(path), utils.path.abspath(SITE_DIR))
 
 	-- Remove trailing extension and "index.html"
 	path = path

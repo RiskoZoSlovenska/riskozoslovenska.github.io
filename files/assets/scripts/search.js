@@ -196,7 +196,7 @@ function createSearchResultNode(resultData) {
 		("Matches: " + resultData.matches) :
 		("Score: "   + resultData.score)
 
-	node.getElementsByTagName("a")[0].setAttribute("href", resultData.link)
+	node.getElementsByTagName("a")[0].setAttribute("href", ROOT + "/" + resultData.link)
 
 	return node
 }
