@@ -27,8 +27,8 @@
 				<!-- Gallow --> <path d="M 15 0  H 80  V 17.5  H 70  V 10  H 25  V 100  H 40  V 110  H 0  V 100  H 15  Z" />
 
 				<g id="hangman-svg-parts" class="
-					child:opacity-0 [&>.shown]:opacity-100
-					transition-opacity duration-150 ease-linear [&>.shown]:duration-500
+					child:fill-opacity-0 [&>.shown]:fill-opacity-100
+					child:transition-[fill-opacity] child:duration-300 child:ease-linear
 				">
 					<!-- Head      --> <circle cx="75" cy="30" r="12.5" />
 					<!-- Body      --> <rect x="72.6" y="42.24745" width="5" height="40.075" />

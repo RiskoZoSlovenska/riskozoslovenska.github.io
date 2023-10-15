@@ -154,4 +154,13 @@
 	.mb-h1 {
 		@apply mb-5 md:mb-10;
 	}
+
+	/* Needed for SVG transitions; see https://stackoverflow.com/a/68570975 */
+	.fill-opacity-0 {
+		fill-opacity: 0;
+	}
+
+	.fill-opacity-100 {
+		fill-opacity: 1;
+	}
 }
