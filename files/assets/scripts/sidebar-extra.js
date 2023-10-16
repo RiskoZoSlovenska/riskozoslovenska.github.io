@@ -15,9 +15,11 @@
 	3. Opens the sidebar when the mouse cursor moves off the side of the screen
 	   and holds it open until the cursor comes back. Calculation of whether the
 	   cursor is off-screen is done depending on its current position and
-	   velocity, with the additional requirement that the previous event has
-	   fired recently (to prevent touch events on opposite sides of the screen
-	   triggering the sidebar).
+	   velocity. Additionally, the following restrictions apply:
+	   - The mouse move event was triggered by a mouse
+	   - The previous move event was fired recently
+	   - The mouse is not hovering over an element with the `data-sink-sidebar`
+	     attribute
 */
 let ex_onSidebarMouseEnter, ex_onSidebarMouseLeave
 {
@@ -143,8 +145,14 @@ document.addEventListener("touchend", event => {
 	}
 })
 
-document.addEventListener("mousemove", (event) => {
+document.addEventListener("pointermove", (event) => {
 	if (!ensureElements()) { return }
+
+	if (event.pointerType != "mouse") {
+		return
+	} else if (event.target?.dataset && event.target.dataset.sinkSidebar != undefined) {
+		return
+	}
 
 	let now = performance.now()
 	let mouseX = event.clientX
