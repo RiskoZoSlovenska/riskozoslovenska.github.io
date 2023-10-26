@@ -44,10 +44,10 @@ let ex_updateSearch
 
 const MAX_RESULTS = 5
 const TITLE_HITS_WEIGHT = 3
-const TITLE_DIST_WEIGHT = -0.5
+const TITLE_DIST_WEIGHT = -1
 const TITLE_LENGTH_WEIGHT = -0.5
 const TITLE_TOTAL_WEIGHT = 1
-const WORD_MATCH_WEIGHT = 3
+const WORD_MATCH_WEIGHT = 10
 
 const SEARCH_RESULT_TITLE_CLASS = "search-result-title"
 const SEARCH_RESULT_DESC_CLASS = "search-result-desc"
@@ -195,7 +195,7 @@ function createSearchResultNode(resultData) {
 	node.getElementsByClassName(SEARCH_RESULT_DESC_CLASS)[0].textContent = 
 		resultData.matches ?
 		("Matches: " + resultData.matches) :
-		("Score: "   + resultData.score)
+		("Score: "   + Math.round(resultData.score * 100) / 100)
 
 	node.getElementsByTagName("a")[0].setAttribute("href", ROOT + "/" + resultData.link)
 
