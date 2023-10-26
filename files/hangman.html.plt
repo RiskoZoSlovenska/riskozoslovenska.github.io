@@ -22,7 +22,7 @@
 # 		word("Staring at it ain't gonna solve it, buddy.")
 
 		<div class="flex flex-col mx-auto mt-8 xs:max-w-[70vw] md:flex-row text-center">
-			<svg class="fill-gray-100 max-w-[35vmin] mx-auto mb-4
+			<svg class="fill-gray-100 w-full max-w-[35vmin] mx-auto mb-4
 				" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
 				<!-- Gallow --> <path d="M 15 0  H 80  V 17.5  H 70  V 10  H 25  V 100  H 40  V 110  H 0  V 100  H 15  Z" />
 
