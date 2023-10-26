@@ -261,6 +261,10 @@ function fetchWords() {
 
 function bindButtonToKeystroke(button, key) {
 	document.addEventListener("keydown", event => {
+		if (!document.activeElement.contains(button) && !BUTTON_CONTAINER.contains(document.activeElement)) {
+			return;
+		}
+
 		if (event.ctrlKey || event.shiftKey || event.altKey || event.metaKey || event.isComposing) {
 			return
 		} else if (event.key.toUpperCase() == key.toUpperCase()) {
