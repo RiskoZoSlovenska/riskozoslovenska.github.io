@@ -7,6 +7,9 @@ from http import server
 import re
 
 class MyHTTPRequestHandler(server.SimpleHTTPRequestHandler):
+    def __init__(self, *args, **kwargs): # https://stackoverflow.com/a/52531444
+        super().__init__(*args, directory="build", **kwargs)
+    
     def end_headers(self):
         self.send_my_headers()
 
