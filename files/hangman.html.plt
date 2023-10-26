@@ -14,15 +14,15 @@
 
 # 		function word(title)
 		<div class="hangman-word
-			text-[clamp(2.5em,8vw,3.75em)] -mx-2 font-mono tracking-widest text-center break-words
+			text-[clamp(2.25em,8vw,3.75em)] -mx-2 font-mono tracking-widest text-center break-words
 			[&_>_.not-guessed]:text-incorrect
 		" title="$(title)">Loading...</div>
 # 		end
 # 
 # 		word("Staring at it ain't gonna solve it, buddy.")
 
-		<div class="flex flex-col max-w-[70vw] mx-auto mt-8 md:flex-row text-center">
-			<svg class="fill-gray-100 max-w-[40vw] mx-auto mb-4 sm:max-h-[35vmin]
+		<div class="flex flex-col mx-auto mt-8 xs:max-w-[70vw] md:flex-row text-center">
+			<svg class="fill-gray-100 max-w-[35vmin] mx-auto mb-4
 				" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
 				<!-- Gallow --> <path d="M 15 0  H 80  V 17.5  H 70  V 10  H 25  V 100  H 40  V 110  H 0  V 100  H 15  Z" />
 
@@ -44,7 +44,7 @@
 			<div id="hangman-button-container" class="flex-1"><!-- Smash. Click. Press. -->
 				<template id="button-template">
 					<button tabindex="-1" class="
-						text-[calc(2.25vh + 2vw)] p-2 md:p-3 m-1.5 text-sm md:text-xl rounded-lg font-medium bg-gray-700
+						text-base md:text-xl p-2 md:p-3 m-1.5 rounded-lg font-medium bg-gray-700
 						data-[clicked=correct]:bg-correct data-[clicked=incorrect]:bg-incorrect
 						transition-all duration-400 hofoac-highlight
 					" data-clicked="none"></button>
@@ -55,24 +55,24 @@
 			fixed left-0 top-0 w-full h-full bg-gray-900 opacity-0 pointer-events-none z-20 overflow-auto
 			transition-opacity duration-700 ease-[ease]
 			data-[is-playing=false]:opacity-[98%] data-[is-playing=false]:pointer-events-auto
-			p-10 pt-5 sm:pt-10 pb-20 flex flex-col items-center text-center
+			p-10 pt-7 pb-15 sm:pt-10 sm:pb-20 flex flex-col items-center text-center
 		" data-is-playing="true">
 			<div class="flex-none w-full">
-				<h2 id="end-overlay-title" class="mb-4 text-xl">You won!</h2>
+				<h2 id="end-overlay-title" class="mb-4 text-lg sm:text-xl">You won!</h2>
 				<div>The word was: <!-- Must be in div to be centered--></div>
 # 				word("Damn, get over it already.")
-				<ul class="inline-list">
+				<ul class="inline-list text-xs sm:text-base">
 					<li><span id="stats-hits"    class="text-correct    ">?</span>&nbsp;hits</li>
 					<li><span id="stats-misses"  class="text-incorrect  ">?</span>&nbsp;misses</li>
 					<li><span id="stats-seconds" class="text-accent-blue">?</span>&nbsp;seconds</li>
 				</ul>
 			</div>
-			<div class="flex-1 flex flex-col justify-center py-5 max-w-2xl">
-				<h3 id="definitions-title">Definitions found for <b></b>:</h3>
+			<div class="flex-1 flex flex-col justify-center pt-5 pb-2 max-w-2xl">
+				<h3 id="definitions-title" class="text-sm sm:text-base">Definitions found for <b></b>:</h3>
 				<ul id="hangman-word-definitions-list" class="table border-spacing-3">
 					<template id="definition-template">
-						<li class="table-row text-left">
-							<span class="table-cell text-right font-bold w-1/3 pr-5"></span>
+						<li class="table-row text-left text-sm sm:text-base">
+							<span class="table-cell text-right font-bold w-1/4 pr-5"></span>
 						</li>
 					</template>
 				</ul>
@@ -81,7 +81,7 @@
 				id="end-overlay-button" tabindex="-1">Play Again</button>
 		</div>
 
-		<div class="mt-32 text-xs text-gray-400 brightness-50">
+		<div class="mt-32 text-2xs md:text-xs text-gray-400 brightness-50">
 			<p>
 				This game is (unofficially) powered by
 				<a href="https://random-word-api.herokuapp.com/">https://random-word-api.herokuapp.com/</a>
