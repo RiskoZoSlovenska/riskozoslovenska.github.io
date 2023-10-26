@@ -1,3 +1,4 @@
+"use strict";
 /*
 	Script for code block functionality, such as highlighting and (in the
 	future) line numbers and a "copy" button.

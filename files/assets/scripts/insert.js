@@ -1,4 +1,6 @@
+"use strict";
 {
+
 const ROOT = document.currentScript.src + "/" + "../../.."
 const INSERTS_DIR = ROOT + "/" + "assets/inserts"
 const ROOT_PLACEHOLDER = "{{ROOT}}"

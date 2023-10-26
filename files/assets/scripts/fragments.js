@@ -1,3 +1,4 @@
+"use strict";
 /*
 	Plays the fragments "game". One fragment at a time is chosen from the pool
 	of fragments (the empty "dummy" fragment has a very high chance of being

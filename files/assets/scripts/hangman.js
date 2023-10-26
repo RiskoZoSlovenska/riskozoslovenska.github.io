@@ -1,3 +1,4 @@
+"use strict";
 /*
 	Original script by RiskoZoSlovenska, 2021-12-06
 
@@ -147,7 +148,7 @@ async function fetchWordDefinitionsFromFreeDictAPI(word) {
 }
 
 async function fetchWordDefinitionsFromWiktionary(word) {
-	res = await fetch(WIKTIONARY_QUERY_URL + word)
+	let res = await fetch(WIKTIONARY_QUERY_URL + word)
 		.then(res => res.ok ? res.json() : Promise.reject(res.status + " " + res.statusText))
 		.catch(_ => { })
 

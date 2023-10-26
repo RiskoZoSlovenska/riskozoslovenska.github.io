@@ -1,3 +1,4 @@
+"use strict";
 /**
  * Funny meme script. Enables an overlay whenever devtools are opened. Likely
  * will break sometime soon.

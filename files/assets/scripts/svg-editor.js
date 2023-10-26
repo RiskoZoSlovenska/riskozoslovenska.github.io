@@ -1,3 +1,4 @@
+"use strict";
 /*
 	A simple code-based SVG editor, using the Ace (https://ace.c9.io/) and the
 	browser. Features:
@@ -7,8 +8,8 @@
 
 	Depends on the Ace editor.
 */
-
 {
+
 const DEFAULT_SVG = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
 	<rect fill="#252525" x="3" y="3" width="94" height="94"/>
 	<circle fill="#ff3232" cx="50" cy="50" r="30"/>

@@ -1,3 +1,4 @@
+"use strict";
 /*
 	== The search_data.json format ==
 
@@ -148,7 +149,7 @@ function buildBlankResults() {
 }
 
 function scoreResultsByTitle(results, query) {
-	for (result of results) {
+	for (let result of results) {
 		let str = result.title.toLowerCase()
 		let matchInfo = subsequenceMatch(str, query)
 
@@ -164,7 +165,7 @@ function scoreResultsByTitle(results, query) {
 function scoreResultsByWordMatches(results, queryWords) {
 	assertHasSearchData()
 
-	for (word of queryWords) {
+	for (let word of queryWords) {
 		const counts = searchData.counts[word]
 		if (!counts) { continue }
 
