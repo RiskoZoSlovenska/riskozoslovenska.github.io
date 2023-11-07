@@ -1,8 +1,8 @@
 "use strict";
 {
 
-const ROOT = document.currentScript.src + "/" + "../../.."
-const INSERTS_DIR = ROOT + "/" + "assets/inserts"
+const ROOT = new URL("../../..", document.currentScript.src)
+const INSERTS_DIR = new URL("assets/inserts/", ROOT)
 const ROOT_PLACEHOLDER = "{{ROOT}}"
 
 for (let element of document.querySelectorAll("*[id$='-insert']")) {
@@ -12,16 +12,16 @@ for (let element of document.querySelectorAll("*[id$='-insert']")) {
 		continue
 	}
 
-	let path = INSERTS_DIR + "/" + template + ".html"
-
+	let path = new URL(template + ".html", INSERTS_DIR)
 	console.log("Fetching " + path)
 	fetch(path)
 		.then(res => res.ok ? res : Promise.reject(res.status + " " + res.statusText))
 		.then(res => res.text())
 		.then(rawHtml => {
-			element.outerHTML = rawHtml.replaceAll(ROOT_PLACEHOLDER, ROOT)
+			element.outerHTML = rawHtml.replaceAll(ROOT_PLACEHOLDER, ROOT.href)
 			console.log("Inserted " + path)
 		})
 		.catch(err => console.error("Inserting template failed: " + err))
 }
+
 }

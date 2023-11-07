@@ -52,10 +52,10 @@ const WORD_MATCH_WEIGHT = 10
 const SEARCH_RESULT_TITLE_CLASS = "search-result-title"
 const SEARCH_RESULT_DESC_CLASS = "search-result-desc"
 
-const ROOT = document.currentScript.src + "/" + "../../.."
+const ROOT = new URL("../../..", document.currentScript.src)
 
 let searchData = null
-fetch(ROOT + "/" + "search_data.json")
+fetch(new URL("search_data.json", ROOT))
 	.then(res => res.ok ? res.json() : Promise.reject(res.status + " " + res.statusText))
 	.then(json => {
 		searchData = json
@@ -64,7 +64,7 @@ fetch(ROOT + "/" + "search_data.json")
 	.catch(err => console.error("Search data error: " + err))
 
 let resultTemplate = null
-fetch(ROOT + "/" + "assets/search-result-template.html")
+fetch(new URL("assets/search-result-template.html", ROOT))
 	.then(res => res.ok ? res.text() : Promise.reject(res.status + " " + res.statusText))
 	.then(text => {
 		let parser = new DOMParser()
@@ -197,7 +197,7 @@ function createSearchResultNode(resultData) {
 		("Matches: " + resultData.matches) :
 		("Score: "   + Math.round(resultData.score * 100) / 100)
 
-	node.getElementsByTagName("a")[0].setAttribute("href", ROOT + "/" + resultData.link)
+	node.getElementsByTagName("a")[0].setAttribute("href", new URL(resultData.link, ROOT).href)
 
 	return node
 }
