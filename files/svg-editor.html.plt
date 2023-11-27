@@ -26,12 +26,14 @@
 					<span id="selected-label" class="text-gray-400 ml-4"></span>
 				</div>
 				<div id="svg-canvas" class="
-					mx-auto w-full md:max-h-[60vh] aspect-square
+					w-full md:max-h-[60vh] aspect-square
 					[&>svg]:max-w-full [&>svg]:max-h-full [&>svg]:bg-gray-900
-					flex items-center justify-center text-center text-accent-red text-2xl font-bold
 					[&_.selected]:brightness-150 [&_.selected]:[outline:1px_solid_theme(colors.accent-blue)]
 				"></div>
 			</div>
+			<template id="svg-error-template">
+				<div class="h-full flex items-center text-center text-accent-red text-2xl font-bold"></div>
+			</template>
 			<template id="mouse-cross-template">
 				<div class="fixed pointer-events-none bg-gray-100"></div>
 			</template>

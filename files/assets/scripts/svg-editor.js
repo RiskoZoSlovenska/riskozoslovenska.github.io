@@ -29,6 +29,7 @@ const canvas = document.getElementById("svg-canvas")
 const coordsLabel = document.getElementById("coords-label")
 const selectedLabel = document.getElementById("selected-label")
 const mouseCrossTemplate = document.getElementById("mouse-cross-template").content.firstElementChild
+const svgErrorTemplate = document.getElementById("svg-error-template").content.firstElementChild
 
 const PARSER = new DOMParser()
 const SERIALIZER = new XMLSerializer()
@@ -316,7 +317,8 @@ function updateSvg() {
 
 	canvas.firstChild?.remove()
 	if (err) {
-		canvas.textContent = err
+		svgErrorTemplate.textContent = err
+		err == "" ? canvas.removeChild(svgErrorTemplate) : canvas.appendChild(svgErrorTemplate)
 	} else if (svg) {
 		canvas.appendChild(svg)
 		applyStashedSelection()
