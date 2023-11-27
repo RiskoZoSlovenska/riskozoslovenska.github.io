@@ -9,17 +9,14 @@ import re
 class MyHTTPRequestHandler(server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs): # https://stackoverflow.com/a/52531444
         super().__init__(*args, directory="build", **kwargs)
-    
+
     def end_headers(self):
-        self.send_my_headers()
+        self.send_header("Cache-Control", "no-cache")
 
         server.SimpleHTTPRequestHandler.end_headers(self)
 
-    def send_my_headers(self):
-        self.send_header("Cache-Control", "no-cache")
-    
     def do_GET(self):
-        if not re.search("\.(html|xhtml|js|mjs|css|json|yaml|txt|md|lua|png|svg|jpg|jpeg|ico)|/$", self.path):
+        if not re.search(r"\.(html|xhtml|js|mjs|css|json|yaml|txt|md|lua|png|svg|jpg|jpeg|ico)|/$", self.path):
             print("Appending extension for path: " + self.path)
             self.path += ".html"
 
