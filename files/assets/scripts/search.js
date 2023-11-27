@@ -197,7 +197,7 @@ function createSearchResultNode(resultData) {
 		("Matches: " + resultData.matches) :
 		("Score: "   + Math.round(resultData.score * 100) / 100)
 
-	node.getElementsByTagName("a")[0].setAttribute("href", new URL(resultData.link, ROOT).href)
+	node.getElementsByTagName("a")[0].setAttribute("href", new URL(resultData.link, ROOT).pathname)
 
 	return node
 }

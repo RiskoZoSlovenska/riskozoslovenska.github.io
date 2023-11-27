@@ -10,7 +10,7 @@
 // Highlighting
 let element = document.createElement("link")
 element.rel = "stylesheet"
-element.href = new URL(import.meta.url).pathname + "/" + "../../styles/hjs-theme.css"
+element.href = new URL("../styles/hjs-theme.css", import.meta.url).pathname
 document.head.appendChild(element)
 console.log("Loaded code styles")
 

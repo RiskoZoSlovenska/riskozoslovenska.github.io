@@ -22,7 +22,7 @@ for (let element of document.querySelectorAll("*[id$='-insert']")) {
 		.then(res => res.ok ? res : Promise.reject(res.status + " " + res.statusText))
 		.then(res => res.text())
 		.then(rawHtml => {
-			element.outerHTML = rawHtml.replaceAll(ROOT_PLACEHOLDER, ROOT.href)
+			element.outerHTML = rawHtml.replaceAll(ROOT_PLACEHOLDER, ROOT.pathname)
 			console.log("Inserted " + path)
 		})
 		.catch(err => console.error("Inserting template failed: " + err))
