@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # Custom serving script used for development
-# Sends a no-cache header and (very dumbly) tries to resolve missing .html extensions
+# Sends a no-cache header and resolves missing .html extensions
 # Taken from https://stackoverflow.com/a/13354482 and https://stackoverflow.com/a/73029002
 
 from http import server
-import re
+from os.path import splitext
 
 class MyHTTPRequestHandler(server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs): # https://stackoverflow.com/a/52531444
@@ -16,7 +16,7 @@ class MyHTTPRequestHandler(server.SimpleHTTPRequestHandler):
         server.SimpleHTTPRequestHandler.end_headers(self)
 
     def do_GET(self):
-        if not re.search(r"\.(html|xhtml|js|mjs|css|json|yaml|txt|md|lua|png|svg|jpg|jpeg|ico)|/$", self.path):
+        if splitext(self.path)[1] == "":
             print("Appending extension for path: " + self.path)
             self.path += ".html"
 
