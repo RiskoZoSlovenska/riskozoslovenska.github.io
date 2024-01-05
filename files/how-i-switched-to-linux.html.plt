@@ -445,7 +445,7 @@
 		<li id="$(issue.number)" class="py-3 px-4 mb-3 bg-gray-700 target:bg-gray-600 text-gray-300 rounded-md"
 			title="Click for details">
 			<details class="overflow-hidden">
-				<summary class="">
+				<summary>
 					<span class="float-right ml-3 text-xs md:text-sm">
 						<span class="text-$(statusColor)" title="$(statusTitle)">$(status)</span>
 						|
