@@ -92,6 +92,10 @@
 	button {
 		@apply p-1 rounded;
 	}
+
+	summary {
+		cursor: pointer;
+	}
 }
 
 @tailwind components;
