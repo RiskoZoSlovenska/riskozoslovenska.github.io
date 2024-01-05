@@ -16,7 +16,7 @@ class MyHTTPRequestHandler(server.SimpleHTTPRequestHandler):
         server.SimpleHTTPRequestHandler.end_headers(self)
 
     def do_GET(self):
-        if splitext(self.path)[1] == "":
+        if not self.path.endswith("/") and splitext(self.path)[1] == "":
             print("Appending extension for path: " + self.path)
             self.path += ".html"
 
