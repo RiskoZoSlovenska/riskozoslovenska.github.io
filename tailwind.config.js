@@ -67,8 +67,6 @@ module.exports = {
 				{ values: { DEFAULT: null } }
 			)
 			addVariant("hofonoac", "&:is(:hover, :focus-within, .custom-focus):not(:active)")
-
-			addVariant("child", "& > *")
 		}),
 	],
 }
