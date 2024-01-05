@@ -11,7 +11,7 @@
 	<div id="sidebar-insert"></div>
 
 	<main class="padded-main">
-		<h1 class="mb-0" title="Not to be confused with Echoes — those don't exist in this reality.">Fragments</h1>
+		<h1 class="mb-0" title="Not to be confused with Echoes — those don’t exist in this reality.">Fragments</h1>
 		<div class="h1-splash" title="Better get searching.">The best things have to be found.</div>
 
 
@@ -66,9 +66,9 @@
 # 				"Walking with the dead makes you feel alive.",
 # 				"Where was the part where [I] grew up?",
 # 				"Is that the future so bright or the radiation sickness?",
-# 				"The fire's brighter than all of our futures, somehow.",
-# 				"Eat the devil or there's nothing you can do.",
-# 				"[We] should be growing up, but instead [We]'re growing old.",
+# 				"The fire’s brighter than all of our futures, somehow.",
+# 				"Eat the devil or there’s nothing you can do.",
+# 				"[We] should be growing up, but instead [We]’re growing old.",
 # 				"!",
 # 				"Mayday. Mayday. Out.",
 # 				"<em>Click.</em>",

@@ -10,8 +10,8 @@
 		<h1>Stories.</h1>
 
 		<p class="leading-none">
-			Just some words. I'm not very good and I've written a solid chunk
-			of these to cope with personal problems, so don't expect anything
+			Just some words. I’m not very good and I’ve written a solid chunk
+			of these to cope with personal problems, so don’t expect anything
 			great.
 		</p>
 

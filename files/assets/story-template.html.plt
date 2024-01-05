@@ -36,7 +36,7 @@
 # 		function authorsNote(noteName)
 		$if($(noteName))$
 		<section class="text-gray-400 mb-10 text-sm">
-			<h2 class="italic m-0 text-sm">Author's Note:</h2>
+			<h2 class="italic m-0 text-sm">Author’s Note:</h2>
 			$$(noteName)$
 		</section>
 		$endif$
@@ -50,11 +50,11 @@
 			data-[accepted]:opacity-0 data-[accepted]:pointer-events-none">
 				<p class="text-gray-300 mb-14">This one may be a bit heavy.</p>
 				<button class="bg-accent-red" onclick="javascript:event.target.parentElement.dataset.accepted = true">
-					I've read the warnings. Lemme read!
+					I’ve read the warnings. Lemme read!
 				</button>
 			</div>
 			$endif$
-			
+
 			$body$
 		</div>
 

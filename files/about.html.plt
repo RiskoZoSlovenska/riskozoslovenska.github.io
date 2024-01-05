@@ -18,20 +18,20 @@
 			Hi there; you seem to have found me.
 		</p>
 		<p>
-			As you might already know, I'm <b>RiskoZoSlovenska</b>, but you can call me <b>Risko</b>.
-			I'm a writer: I write both code and words, depending on what I'm feeling like at the moment. My favourite
+			As you might already know, I’m <b>RiskoZoSlovenska</b>, but you can call me <b>Risko</b>.
+			I’m a writer: I write both code and words, depending on what I’m feeling like at the moment. My favourite
 			language is <a href="https://www.lua.org/">Lua</a>, but <a href="https://www.python.org/">Python</a> and
 			<a href="https://en.wikipedia.org/wiki/English_language">English</a> are also fine.
-			I'm afraid there's not much else to me than that at the moment, but feel free to check back in a couple of years.
+			I’m afraid there’s not much else to me than that at the moment, but feel free to check back in a couple of years.
 		</p>
 		<p>…</p>
 		<p>
 			Alright, alright, if you insist, I may as well indulge you with a bit of detail. What do you wanna know? I
 			come from <a href="https://www.google.com/maps/place/Slovakia/">Slovakia</a> and I used to live in
 			<a href="https://www.google.com/maps/place/Canada/">Canada</a>, but nowadays I take up
-			residence in my own head. I'm a music addict (go check out <a href="https://www.youtube.com/channel/UCioNNjH3S7X8byCjPDEqZkA">Aviators</a>),
+			residence in my own head. ’m a music addict (go check out <a href="https://www.youtube.com/channel/UCioNNjH3S7X8byCjPDEqZkA">Aviators</a>),
 			a fan of the Ori and R&C franchises, a FOSS supporter (go use Linux NOW!) and an amateur hobbyist CADer. Oh,
-			and also, if you're interested, you can go gawk at <a href="https://pcpartpicker.com/b/mGTCmG">my PC build</a>.
+			and also, if you’re interested, you can go gawk at <a href="https://pcpartpicker.com/b/mGTCmG">my PC build</a>.
 		</p>
 
 		<h2>Get In Touch</h2>
@@ -63,25 +63,25 @@
 # 			end
 		</ul>
 
-		<h2>What about this website? What's it for?</h2>
+		<h2>What about this website? What’s it for?</h2>
 		<p>
 			Ah, glad you asked! (Or scrolled — same thing.)
 		</p>
 		<p>
-			Honestly, hard to say. It's just a place on the web that I can call my own and where I can host
-			things like stories, projects, docs (TBA), games and other stuff. I'm trying to balance being serious
+			Honestly, hard to say. It’s just a place on the web that I can call my own and where I can host
+			things like stories, projects, docs (TBA), games and other stuff. I’m trying to balance being serious
 			with being chill, so please excuse any tonal discrepancies you may come across.
 		</p>
 		<p>
-			On a more technical side, I'm striving for something simple yet expressive with this site, with emphasis on
-			comfortable reading and mobile support. If something doesn't work for you, stop using an old/obscure
-			browser (and use Firefox instead!). If it still doesn't work, or if you have ideas for improvement, shoot me an email/DM or open an
+			On a more technical side, I’m striving for something simple yet expressive with this site, with emphasis on
+			comfortable reading and mobile support. If something doesn’t work for you, stop using an old/obscure
+			browser (and use Firefox instead!). If it still doesn’t work, or if you have ideas for improvement, shoot me an email/DM or open an
 			issue. Bonus points if you make it sound like an angry complaint to tech support :P
 		</p>
 
 		<h2>Credits</h2>
 		<p>
-			Either way, this site wouldn't be possible without a bunch of wonderful people and resources. I'd like to
+			Either way, this site wouldn’t be possible without a bunch of wonderful people and resources. I’d like to
 			thank:
 		</p>
 		<ul class="list-disc ml-10">

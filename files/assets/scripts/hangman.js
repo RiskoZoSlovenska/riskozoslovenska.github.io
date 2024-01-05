@@ -26,7 +26,7 @@ const END_BAR_TEXTS = {
 		button: ["Next"],
 	},
 	[EndState.Lost]: {
-		title: ["Oof...", "We'll get them next time", "F"],
+		title: ["Oof...", "We’ll get them next time", "F"],
 		button: ["Try again?"],
 	}
 }

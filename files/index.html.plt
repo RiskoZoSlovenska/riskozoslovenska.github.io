@@ -11,9 +11,9 @@
 	<main class="w-full relative grid place-content-center text-center p-8">
 		<canvas id="dots-canvas" class="absolute w-full h-full -z-10"></canvas>
 		<h1 class="text-sm md:text-base mb-[calc(35vh-3rem)]">
-			Hi there. I'm<br>
+			Hi there. I’m<br>
 			<span class="text-[length:clamp(1rem,_8.5vw,_5rem)] leading-none"><b>RiskoZoSlovenska</b></span><br>
-			and you've stumbled into my little corner of the internet.
+			and you’ve stumbled into my little corner of the internet.
 		</h1>
 		<ul class="xs:inline-list">
 			<li>

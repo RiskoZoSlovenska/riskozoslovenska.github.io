@@ -19,7 +19,7 @@
 		" title="$(title)">Loading...</div>
 # 		end
 # 
-# 		word("Staring at it ain't gonna solve it, buddy.")
+# 		word("Staring at it ain’t gonna solve it, buddy.")
 
 		<div class="flex flex-col mx-auto mt-8 xs:max-w-[70vw] md:flex-row text-center">
 			<svg class="fill-gray-100 w-full max-w-[35vmin] mx-auto mb-4
