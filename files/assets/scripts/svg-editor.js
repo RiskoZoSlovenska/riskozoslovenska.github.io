@@ -87,7 +87,7 @@ let movers; {
 	/**
 	 * Takes a string containing numbers and calls a callback for every number,
 	 * replacing the number in the string with the result of the callback.
-	 * 
+	 *
 	 * The callback receives two arguments: the order of the number as an integer
 	 * starting at 0, and the number itself as a string.
 	 */
@@ -211,7 +211,7 @@ function deselectElement(element) {
 	element.classList.remove(SELECTED_CLASS)
 	if (element.classList.length == 0) {
 		element.removeAttribute("class")
-	}	
+	}
 }
 
 /** Clears the current selection and stores it into the global `stashedSelection` variable */
@@ -398,8 +398,8 @@ function handleKeypress(event) {
 		updateDisplay()
 		event.preventDefault() // Don't scroll the page... (???)
 		return
-	} 
-	
+	}
+
 	// All following cases need a selection
 	if (selection.size <= 0) {
 		return
@@ -411,7 +411,7 @@ function handleKeypress(event) {
 	} else if (event.shiftKey) {
 		mod = 0.5
 	}
-	
+
 	switch (event.code) {
 		case "ArrowUp":
 		case "ArrowDown":

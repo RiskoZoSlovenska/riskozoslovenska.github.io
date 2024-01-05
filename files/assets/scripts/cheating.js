@@ -2,7 +2,7 @@
 /**
  * Funny meme script. Enables an overlay whenever devtools are opened. Likely
  * will break sometime soon.
- * 
+ *
  * Heavily adapted from https://github.com/sindresorhus/devtools-detect
  * Permalink: https://github.com/sindresorhus/devtools-detect/blob/73719507f1ade1da63f64d3c72c487e3d2667aba/index.js
  */

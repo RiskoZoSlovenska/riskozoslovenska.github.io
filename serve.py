@@ -23,5 +23,5 @@ class MyHTTPRequestHandler(server.SimpleHTTPRequestHandler):
         return server.SimpleHTTPRequestHandler.do_GET(self)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     server.test(HandlerClass=MyHTTPRequestHandler)

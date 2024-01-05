@@ -18,7 +18,7 @@
 			[&_>_.not-guessed]:text-incorrect
 		" title="$(title)">Loading...</div>
 # 		end
-# 
+#
 # 		word("Staring at it ain’t gonna solve it, buddy.")
 
 		<div class="flex flex-col mx-auto mt-8 xs:max-w-[70vw] md:flex-row text-center">

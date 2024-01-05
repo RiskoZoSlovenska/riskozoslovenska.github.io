@@ -11,7 +11,7 @@
 		- counts
 		- links
 		- titles
-	
+
 	Links and titles are arrays where the index corresponds so the index number
 	of a page.
 
@@ -192,7 +192,7 @@ function finalizeResults(results) {
 function createSearchResultNode(resultData) {
 	let node = resultTemplate.cloneNode(true)
 	node.getElementsByClassName(SEARCH_RESULT_TITLE_CLASS)[0].textContent = resultData.title
-	node.getElementsByClassName(SEARCH_RESULT_DESC_CLASS)[0].textContent = 
+	node.getElementsByClassName(SEARCH_RESULT_DESC_CLASS)[0].textContent =
 		resultData.matches ?
 		("Matches: " + resultData.matches) :
 		("Score: "   + Math.round(resultData.score * 100) / 100)

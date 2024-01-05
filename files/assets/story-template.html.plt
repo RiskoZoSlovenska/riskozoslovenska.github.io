@@ -41,7 +41,7 @@
 		</section>
 		$endif$
 # 		end
-# 
+#
 # 		authorsNote("note-before")
 
 		<div class="container-for-external relative">

@@ -1,5 +1,5 @@
-/** @type {import('tailwindcss').Config} */
-const defaultTheme = require('tailwindcss/defaultTheme')
+/** @type {import("tailwindcss").Config} */
+const defaultTheme = require("tailwindcss/defaultTheme")
 let plugin = require("tailwindcss/plugin")
 
 module.exports = {
@@ -8,7 +8,7 @@ module.exports = {
 	],
 	theme: {
 		screens: { // https://tailwindcss.com/docs/screens#adding-smaller-breakpoints
-			'xs': '475px',
+			"xs": "475px",
 			...defaultTheme.screens,
 		},
 		colors: {

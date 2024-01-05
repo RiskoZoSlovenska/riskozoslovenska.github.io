@@ -176,15 +176,15 @@
 }
 
 .ace-chaos .ace_fold-widget.ace_start:after {
-	content: '▾'
+	content: "▾"
 }
 
 .ace-chaos .ace_fold-widget.ace_end:after {
-	content: '▴'
+	content: "▴"
 }
 
 .ace-chaos .ace_fold-widget.ace_closed:after {
-	content: '‣'
+	content: "‣"
 }
 
 .ace-chaos .ace_indent-guide {

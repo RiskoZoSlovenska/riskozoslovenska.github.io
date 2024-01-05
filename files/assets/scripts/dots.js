@@ -326,7 +326,7 @@ setInterval(() => {
 
 	for (let i = fadingOut.length - 1; i >= 0; i--) {
 		let point = fadingOut[i]
-		
+
 		point[3] -= fadeStep * 1.01 // Fade out slightly faster to avoid getting stuck if fading both in and out (rare)
 
 		if (point[3] <= 0) { // Point has been faded out

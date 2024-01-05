@@ -39,7 +39,7 @@ jobs:
       # Install dependencies
       - name: Install Lua
         uses: leafo/gh-actions-lua@v10
-      
+
       - name: Install Luarocks
         uses: leafo/gh-actions-luarocks@v4
 

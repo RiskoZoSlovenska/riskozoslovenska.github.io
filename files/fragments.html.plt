@@ -89,11 +89,11 @@
 # 					<path d="M2000 1500l2664-542c374-76 1825-482 2085-571s378 15 386 163c7 148 37 557-89 1469-126 913-341 134-245-111s226-1281 115-1304c-589-3-2791 656-4871 1207 0 0 22 586-260 1068z" />
 # 				</svg>]],
 # 			} do
-# 
+#
 # 				-- When hover is available, add a generous padding. Also specify
 # 				-- a decent min-width/height so that it doesn't become extremely
 # 				-- hard with no hover.
-# 				local id = (i == 1) and 'id="dummy-fragment"' or ''
+# 				local id = (i == 1) and 'id="dummy-fragment"' or ""
 				<div $(id) class="
 					absolute select-none
 					opacity-0 transition-opacity duration-500

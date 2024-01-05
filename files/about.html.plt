@@ -112,7 +112,7 @@
 			</li>
 		</ul>
 		<p>
-			BTW, feel free to check out the 
+			BTW, feel free to check out the
 			<a href="https://github.com/RiskoZoSlovenska/riskozoslovenska.github.io">source code</a>!
 		</p>
 	</main>

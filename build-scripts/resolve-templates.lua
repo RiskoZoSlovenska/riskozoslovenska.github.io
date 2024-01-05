@@ -6,7 +6,7 @@ local FILES_DIR = "build"
 
 -- Load templates
 local templates = {
-	_parent = _G
+	_parent = _G,
 }
 for name, fullPath in utils.iterdir(TEMPLATES_DIR) do
 	local raw = assert(utils.readfile(fullPath))

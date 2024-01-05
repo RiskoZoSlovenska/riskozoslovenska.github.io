@@ -127,7 +127,7 @@ async function fetchWordDefinitionsFromFreeDictAPI(word) {
 	let res = await fetch(FREE_DICTIONARY_QUERY_URL + word)
 		.then(res => res.ok ? res.json() : Promise.reject(res.status + " " + res.statusText))
 		.catch(_ => {})
-	
+
 	if (!res) {
 		return null
 	}
@@ -363,7 +363,7 @@ function endRound(endState) {
 	END_OVERLAY.dataset.endState = endState
 	END_OVERLAY.dataset.isPlaying = false
 	toggleBodyScroll(false)
-	
+
 	// Set overlay remarks
 	let contentData = END_BAR_TEXTS[endState]
 	END_OVERLAY_HEADING.textContent = getRandomItem(contentData.title)
