@@ -207,6 +207,19 @@
 # 		Strangely, that bug report was filed against Ubuntu, which uses GNOME, not KDE. Nevertheless, the symptoms appear
 # 		identical to what I’m experiencing and the problem is probably caused by the same underlying issue in both cases.
 # 	]]),
+# 	Issue("37", "The icons of certain apps have black backgrounds/are rendered wrong", false, { FEDORA_KDE }, [[
+# 		This has been reported <a href="https://bugs.kde.org/show_bug.cgi?id=448234">here</a>.
+# 	]]),
+# 	Issue("36", "Can’t fine-tune the time and date format in KDE", true, { FEDORA_KDE }, [[
+# 		KDE uses the current locale to determine the date and time format and I wasn’t able to manually set it to ISO 8601.
+# 		Thankfully, this has been asked about and answered <a href="https://superuser.com/questions/1162283/use-iso-time-and-date-format-in-kde-5">
+# 		here</a> — the solution is to set the locale to <code>en_SE</code>.
+# 	]], [[
+# 		This is the only time I’ve seen KDE fail in terms of configurability.
+# 	]], [[
+# 		On a related note, Nextcloud also has this problem. Setting Nextcloud’s locale to <code>en_SE</code> works, but causes
+# 		relative time to be shown in Swedish.
+# 	]]),
 # 	Issue("35", "Doplhin hides <code>.old</code> and <code>.bak</code> files", true, { FEDORA_KDE }, [[
 # 		As pointed out by
 # 		<a href="https://forum.manjaro.org/t/is-it-possible-to-change-the-definition-of-a-hidden-file-in-dolphin/149923">this
