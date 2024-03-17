@@ -165,9 +165,6 @@
 # 		I’m pretty sure the Flatpak version of Spotify has a bit of trouble with this. At some point I got it working, but I don’t
 # 		remember which packaging I was using. Nowadays, I just use the default download location.
 # 	]]),
-# 	Issue(17, "Discord doesn’t display the notifications badge on the taskbar icon", false, ALL, [[
-# 		Looks like an <a href="https://github.com/flathub/com.discordapp.Discord/issues/228">issue with Discord</a>.
-# 	]]),
 # 	Issue(24, "The ‘Recent’ tab in the file explorer is sub-par", false, ALL, [[
 # 		By sub-par I mean that it <a href="https://askubuntu.com/questions/1240286/how-to-show-folders-on-nautilus-recent-list">1)
 # 		doesn’t show folders and 2) doesn’t show up in the ‘Save File’ dialog</a>.
@@ -406,6 +403,14 @@
 # 	Issue(16, "Discord and VS Code have ugly topbars", true, ALL, [[
 # 		VS Code can hide the system topbar by changing the <code>window.titleBarStyle</code> setting. Discord, of course, doesn’t
 # 		have such setting, but it’s honestly not that bad anyway.
+# 	]]),
+# 	Issue(17, "Discord doesn’t display the notifications badge on the taskbar icon", true, ALL, [[
+# 		Looks like an <a href="https://github.com/flathub/com.discordapp.Discord/issues/228">issue with Discord</a>. As of
+# 		<time>2024-03-17</time>, on Fedora/KDE, using <a href="https://github.com/RPM-Outpost/discord">the RPM packaging of
+# 		Discord</a> and <a href="https://github.com/Vencord/Vesktop/issues/298#issuecomment-1980029514">installing
+# 		<code>libunity</code></a> fixes this issue. I haven't verified it myself but it looks like
+# 		<a href="https://github.com/flathub/com.discordapp.Discord/pull/368">it should work in the Flatpak packaging too</a>. I
+# 		dunno about GNOME.
 # 	]]),
 # 	Issue(18, "Discord<wbr>/Spotify<wbr>/etc. don’t automatically open on boot", true, ALL, [[
 # 		Tweak the "Startup Applications" system setting.
