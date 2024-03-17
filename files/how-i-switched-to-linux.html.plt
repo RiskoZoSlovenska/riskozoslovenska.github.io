@@ -154,21 +154,21 @@
 # end
 #
 # local issues = {
-# 	Issue("8", "(Some) Flatpaks don’t use the system cursor theme", false, ALL, [[
+# 	Issue(8, "(Some) Flatpaks don’t use the system cursor theme", false, ALL, [[
 # 		This is caused by the Flatpaks not having the permissions to read the cursor files. The fix should be simple: just
 # 		<a href="https://github.com/flatpak/flatpak/issues/709#issuecomment-741883444">grant Flatpaks the permissions to access
 # 		cursors</a>. However, certain Flatpaks, such as Discord or the Minecraft launcher, still fail to work on Fedora/KDE (at
 # 		least). I’m going to guess that it has something to do with these apps mainly being designed for Ubuntu and related
 # 		distros.
 # 	]]),
-# 	Issue("20",  "Spotify doesn’t let me specify the offline download location.", false, ALL, [[
+# 	Issue(20,  "Spotify doesn’t let me specify the offline download location.", false, ALL, [[
 # 		I’m pretty sure the Flatpak version of Spotify has a bit of trouble with this. At some point I got it working, but I don’t
 # 		remember which packaging I was using. Nowadays, I just use the default download location.
 # 	]]),
-# 	Issue("17", "Discord doesn’t display the notifications badge on the taskbar icon", false, ALL, [[
+# 	Issue(17, "Discord doesn’t display the notifications badge on the taskbar icon", false, ALL, [[
 # 		Looks like an <a href="https://github.com/flathub/com.discordapp.Discord/issues/228">issue with Discord</a>.
 # 	]]),
-# 	Issue("24", "The ‘Recent’ tab in the file explorer is sub-par", false, ALL, [[
+# 	Issue(24, "The ‘Recent’ tab in the file explorer is sub-par", false, ALL, [[
 # 		By sub-par I mean that it <a href="https://askubuntu.com/questions/1240286/how-to-show-folders-on-nautilus-recent-list">1)
 # 		doesn’t show folders and 2) doesn’t show up in the ‘Save File’ dialog</a>.
 # 	]], [[
@@ -177,14 +177,14 @@
 # 		its convenience. 2) remains unresolved. Nevertheless, I have mostly become accustomed to this one particular
 # 		limitation.
 # 	]]),
-# 	Issue("30", "Pressing the power button while the PC is locked doesn’t put it to sleep", false, { FEDORA_KDE }, [[
+# 	Issue(30, "Pressing the power button while the PC is locked doesn’t put it to sleep", false, { FEDORA_KDE }, [[
 # 		This bug has been reported <a href="https://bugs.kde.org/show_bug.cgi?id=392798">here</a>.
 # 	]]),
-# 	Issue("31", "The screen doesn’t turn off after locking", false, { FEDORA_KDE }, [[
+# 	Issue(31, "The screen doesn’t turn off after locking", false, { FEDORA_KDE }, [[
 # 		This bug has been reported <a href="https://bugs.kde.org/show_bug.cgi?id=348529">here</a> and appears to be actively being
 # 		worked on as of this writing. There are also workarounds involving scripts but I honestly can’t be bothered.
 # 	]]),
-# 	Issue("32", "WINE applications have crackle-y audio", false, { FEDORA_KDE }, [[
+# 	Issue(32, "WINE applications have crackle-y audio", false, { FEDORA_KDE }, [[
 # 		This bug has been reported as <a href="https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/3098">
 # 		pipewire/pipewire#3098</a>. I’m currently using the workaround described
 # 		<a href="https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/3098#note_1823699">here</a> and
@@ -200,17 +200,17 @@
 # 		Note that I’m using <code>512</code> instead of <code>256</code> as the latter still caused issues. Also, remember to
 # 		<code>systemctl --user restart pipewire pipewire-pulse</code> to apply changes (or just restart the entire PC).
 # 	]]),
-# 	Issue("34",
+# 	Issue(34,
 # 		"Launching certain applications (e.g. NVIDIA X Server Settings, certain WINE ones) turns off the blue light filter",
 # 		false, ALL, [[
 # 		This seems to have been reported <a href="https://bugs.launchpad.net/ubuntu/+source/gnome-shell/+bug/1728342">here</a>.
 # 		Strangely, that bug report was filed against Ubuntu, which uses GNOME, not KDE. Nevertheless, the symptoms appear
 # 		identical to what I’m experiencing and the problem is probably caused by the same underlying issue in both cases.
 # 	]]),
-# 	Issue("37", "The icons of certain apps have black backgrounds/are rendered wrong", false, { FEDORA_KDE }, [[
+# 	Issue(37, "The icons of certain apps have black backgrounds/are rendered wrong", false, { FEDORA_KDE }, [[
 # 		This has been reported <a href="https://bugs.kde.org/show_bug.cgi?id=448234">here</a>.
 # 	]]),
-# 	Issue("36", "Can’t fine-tune the time and date format in KDE", true, { FEDORA_KDE }, [[
+# 	Issue(36, "Can’t fine-tune the time and date format in KDE", true, { FEDORA_KDE }, [[
 # 		KDE uses the current locale to determine the date and time format and I wasn’t able to manually set it to ISO 8601.
 # 		Thankfully, this has been asked about and answered <a href="https://superuser.com/questions/1162283/use-iso-time-and-date-format-in-kde-5">
 # 		here</a> — the solution is to set the locale to <code>en_SE</code>.
@@ -220,7 +220,7 @@
 # 		On a related note, Nextcloud also has this problem. Setting Nextcloud’s locale to <code>en_SE</code> works, but causes
 # 		relative time to be shown in Swedish.
 # 	]]),
-# 	Issue("35", "Doplhin hides <code>.old</code> and <code>.bak</code> files", true, { FEDORA_KDE }, [[
+# 	Issue(35, "Dolphin hides <code>.old</code> and <code>.bak</code> files", true, { FEDORA_KDE }, [[
 # 		As pointed out by
 # 		<a href="https://forum.manjaro.org/t/is-it-possible-to-change-the-definition-of-a-hidden-file-in-dolphin/149923">this
 # 		question post</a>, this is a side effect of <a href="https://bugs.kde.org/show_bug.cgi?id=3212">this feature request</a>
@@ -230,7 +230,7 @@
 # 	]], [[
 # 		Also, see <a href="https://discuss.kde.org/t/hidden-and-backup-files-in-dolphin/6129">this discussion post</a>.
 # 	]]),
-# 	Issue("33", "Discord doesn’t stream audio when screen-sharing", true, ALL, [[
+# 	Issue(33, "Discord doesn’t stream audio when screen-sharing", true, ALL, [[
 # 		This is a
 # 		<a href="https://www.reddit.com/r/linux_gaming/comments/15i9wka/whats_the_best_solution_to_discord_screenshare/">rather
 # 		well-known limitation</a> of the official Discord client on Linux, and is mostly Discord’s fault. The solution is to use
@@ -239,7 +239,7 @@
 # 		<a href="https://github.com/IceDBorn/pipewire-screenaudio">this Firefox extension</a>, open Discord in the browser and
 # 		stream from there.
 # 	]]),
-# 	Issue("29", "Black screen after logging out", true, { FEDORA_KDE }, [[
+# 	Issue(29, "Black screen after logging out", true, { FEDORA_KDE }, [[
 # 		Probably-related reports/posts/questions are
 # 		<a href="https://forum.manjaro.org/t/black-screen-when-using-switch-user-or-logout/85738">this one</a>,
 # 		<a href="https://www.reddit.com/r/kde/comments/zg1qfq/fix_to_black_screen_after_logout_with_sddm_wayland/">this one</a>,
@@ -251,7 +251,7 @@
 # 		making SDDM use X11 instead of Wayland</a> fixed the issue. However, from the looks of the other reports, other
 # 		workarounds may work as well.
 # 	]]),
-# 	Issue("28", "NVENC breaks on suspend", true, { ZORIN_CORE, ZORIN_LITE }, [[
+# 	Issue(28, "NVENC breaks on suspend", true, { ZORIN_CORE, ZORIN_LITE }, [[
 # 		If something was using NVENC when the computer went to sleep, NVENC would break until the next reboot. Apparently, this
 # 		was a pretty common issue — see <a href="https://bbs.archlinux.org/viewtopic.php?id=272472">this question</a> and
 # 		<a href="https://www.reddit.com/r/linux_gaming/comments/uul5ns/obs_error_failed_to_open_nvenc_codec_after_pc/">this Reddit
@@ -264,19 +264,19 @@
 # 		issue on Fedora at all. OBS still breaks if it’s recording during a system suspension, but that’s a separate and much more
 # 		minor issue.
 # 	]]),
-# 	Issue("1", "PC wakes up immediately after being suspended", true, ALL, [[
+# 	Issue(1, "PC wakes up immediately after being suspended", true, ALL, [[
 # 		See <a href="https://www.reddit.com/r/gigabyte/comments/mxqvja/b550i_aorus_pro_ax_f13h_instantly_wakes_from_sleep/">this
 # 		Reddit post</a>. The solution is to
 # 		<a href="https://www.reddit.com/r/gigabyte/comments/p5ewjn/b550i_pro_ax_f13_bios_sleep_issue_on_linux/">
 # 		“disable GPP0 wakeup”</a>, whatever that means.
 # 	]]),
-# 	Issue("2", "WiFi adapter isn’t being detected", true, { ZORIN_CORE }, [[
+# 	Issue(2, "WiFi adapter isn’t being detected", true, { ZORIN_CORE }, [[
 # 		Zorin didn’t see my WiFi adapter; see
 # 		<a href="https://forum.zorin.com/t/wifi-is-not-showing-no-wifi-adapter-found-error-in-zorin/428/12">this post</a> for a
 # 		possibly related occurrence. Nevertheless, things started working sometime later when I swapped out my GPU. Perhaps it was
 # 		some sort of bizarre hardware conflict?
 # 	]]),
-# 	Issue("3", "Colours are rendered incorrectly sometimes", true, { ZORIN_CORE, FEDORA_KDE }, [[
+# 	Issue(3, "Colours are rendered incorrectly sometimes", true, { ZORIN_CORE, FEDORA_KDE }, [[
 # 		For example, my signature red, <span style="color: #ff3232">#FF3232</span>, gets rendered as
 # 		<span style="color: #ff093a">#FF093A</span>. Certain applications display it correctly, but others don’t.
 # 	]], [[
@@ -291,26 +291,26 @@
 # 		Profiles’ and my monitor had a default profile applied. I just removed it and the colours started rendering correctly
 # 		after a restart.
 # 	]]),
-# 	Issue("4", "Bluetooth doesn’t work on my laptop", true, { ZORIN_CORE, ZORIN_LITE }, [[
+# 	Issue(4, "Bluetooth doesn’t work on my laptop", true, { ZORIN_CORE, ZORIN_LITE }, [[
 # 		I just needed to <a href="https://fosspost.org/fix-bluetooth-rtl8761b-problem-on-linux-ubuntu-22-04/">point Linux to the
 # 		correct firmware</a>.
 # 	]]),
-# 	Issue("5",  "My secondary disk is mounted under <code>/media</code> and has an unmount button.", true, { ZORIN_CORE }, [[
+# 	Issue(5,  "My secondary disk is mounted under <code>/media</code> and has an unmount button.", true, { ZORIN_CORE }, [[
 # 		Setting the mount point to a folder under <code>/mnt</code> wasn’t a hard fix. However, I wasn’t able to hide the unmount
 # 		button only for that disk without hiding the disk itself, so I just disabled the ‘Removable Drives’ menu in the system
 # 		tray.
 # 	]], "Fedora, on the other hand, was smart enough to not prompt me with an ‘unmount’ button in the first place."),
-# 	Issue("6", "Desktop notifications show up top centre instead of bottom right", true, { ZORIN_CORE }, [[
+# 	Issue(6, "Desktop notifications show up top centre instead of bottom right", true, { ZORIN_CORE }, [[
 # 		<a href="https://ubuntuhandbook.org/index.php/2018/05/change-notification-position-ubuntu-18-04/">Install</a>
 # 		the <a href="https://extensions.gnome.org/extension/708/panel-osd/">Panel OSD extension</a>.
 # 	]],
 # 		"Not an issue under KDE."
 # 	),
-# 	Issue("7", "Can’t open WebP images", true, { ZORIN_CORE, ZORIN_LITE },
+# 	Issue(7, "Can’t open WebP images", true, { ZORIN_CORE, ZORIN_LITE },
 # 		"<a href=\"https://askubuntu.com/a/1346951\">Install aruiz/webp-pixbuf-loader</a>.",
 # 		"Not an issue under Fedora/KDE."
 # 	),
-# 	Issue("9", "Black screen on laptop wakeup", true, { ZORIN_LITE }, [[
+# 	Issue(9, "Black screen on laptop wakeup", true, { ZORIN_LITE }, [[
 # 		My laptop screen occasionally remains off after waking up from sleep. I’m pretty sure something
 # 		about how it’s put to sleep triggers it, but I haven’t been able to figure out what exactly.
 # 	]], [[
@@ -319,11 +319,11 @@
 # 		<a href="https://bugs.launchpad.net/ubuntu/+source/xubuntu-default-settings/+bug/1303736/comments/11">this workaround</a>,
 # 		but the last time I used Zorin, just closing and re-opening the lid worked to fix it basically every time.
 # 	]]),
-# 	Issue("10", "No Power Off/Restart buttons on the lock screen (only Suspend)", true, ALL, [[
+# 	Issue(10, "No Power Off/Restart buttons on the lock screen (only Suspend)", true, ALL, [[
 # 		I found out this is Linux’s stricter equivalent of Windows’ “other users may lose unsaved work” prompt and can’t really
 # 		be “fixed”.
 # 	]]),
-# 	Issue("11", "Audio occasionally breaks (turns into static)", true, { ZORIN_CORE }, [[
+# 	Issue(11, "Audio occasionally breaks (turns into static)", true, { ZORIN_CORE }, [[
 # 		This stopped happening at some point and thus became a non-issue. Nevertheless, when it happened, I found that restarting
 # 		PulseAudio fixed it. However, restarting PulseAudio broke Spotify and other apps that depended on it, so I made a
 # 		little script to restart everything:
@@ -337,7 +337,7 @@
 #	disown $!
 #}</code></pre>
 # 	]]),
-# 	Issue("12", "The login screen uses different system settings", true, ALL, [[
+# 	Issue(12, "The login screen uses different system settings", true, ALL, [[
 # 		This mostly affects things like mouse speed, cursor icon, background, theme and so on. It happens because the login screen
 # 		is ran under a different user. To change the mouse speed for GDM (the login manager in Ubuntu, Zorin, etc.), see
 # 		<a href="https://www.reddit.com/r/gnome/comments/qvcxpt/is_there_a_way_to_change_the_mouse_sensitivity_in/">this Reddit
@@ -345,18 +345,18 @@
 # 		<a href="https://www.linuxuprising.com/2021/05/how-to-change-gdm3-login-screen-greeter.html">this article</a>. In KDE,
 # 		these settings can be changed in System Settings.
 # 	]]),
-# 	Issue("13", "Can’t change the audio output device from the system tray menu", true, { ZORIN_CORE }, [[
+# 	Issue(13, "Can’t change the audio output device from the system tray menu", true, { ZORIN_CORE }, [[
 # 		Install the <a href="https://extensions.gnome.org/extension/906/sound-output-device-chooser/">Sound Input & Output
 # 		Device Chooser extension</a>.
 # 	]], [[
 # 		Not an issue under Fedora/KDE.
 # 	]]),
-# 	Issue("14", "No “Open In Code” context action in the file explorer", true, ALL, {
+# 	Issue(14, "No “Open In Code” context action in the file explorer", true, ALL, {
 # 		'Nautilus (Zorin Core): Install <a href="https://github.com/harry-cpp/code-nautilus">this extension</a>.',
 # 		'Thunar (Zorin Lite): <a href="https://docs.xfce.org/xfce/thunar/custom-actions">Add a custom action</a>.',
 # 		'Dolphin (Fedora/KDE): Install an extension from the software store.',
 # 	}),
-# 	Issue("15", "The file explorer doesn’t understand <code>.code-workspace</code> files", true, { ZORIN_CORE, ZORIN_LITE }, [[
+# 	Issue(15, "The file explorer doesn’t understand <code>.code-workspace</code> files", true, { ZORIN_CORE, ZORIN_LITE }, [[
 # 		<a href="https://unix.stackexchange.com/a/564888">Register a custom MIME type</a>. My <code>x-code-workspace.xml</code>
 # 		file looked like this:
 # 	]], [[
@@ -368,17 +368,17 @@
 #	&lt;/mime-type&gt;
 #&lt;/mime-info&gt;</code></pre>
 # 	]], "Fedora/KDE is not affected."),
-# 	Issue("16", "Discord and VS Code have ugly topbars", true, ALL, [[
+# 	Issue(16, "Discord and VS Code have ugly topbars", true, ALL, [[
 # 		VS Code can hide the system topbar by changing the <code>window.titleBarStyle</code> setting. Discord, of course, doesn’t
 # 		have such setting, but it’s honestly not that bad anyway.
 # 	]]),
-# 	Issue("18", "Discord<wbr>/Spotify<wbr>/etc. don’t automatically open on boot", true, ALL, [[
+# 	Issue(18, "Discord<wbr>/Spotify<wbr>/etc. don’t automatically open on boot", true, ALL, [[
 # 		Tweak the "Startup Applications" system setting.
 # 	]]),
-# 	Issue("19", "Spotify doesn’t save volume", true, ALL, [[
+# 	Issue(19, "Spotify doesn’t save volume", true, ALL, [[
 # 		This fixed itself at some point.
 # 	]]),
-# 	Issue("21", "Spotify exits if it’s closed (instead of sitting in the icon area)", true, ALL, [[
+# 	Issue(21, "Spotify exits if it’s closed (instead of sitting in the icon area)", true, ALL, [[
 # 		This is on Spotify’s end and
 # 		<a href="https://community.spotify.com/t5/Desktop-Linux/Cannot-minimize-to-tray-on-Linux/td-p/1703131">has been requested
 # 		many times</a>. There are also <a href="https://www.addictivetips.com/ubuntu-linux-tips/spotify-system-tray-linux/">many
@@ -387,7 +387,7 @@
 # 		simply moved Spotify into another workspace which worked quite well. However, it looks like Spotify finally decided to fix
 # 		this, and as of a few months ago, Spotify does have a system tray icon it can minimize to.
 # 	]]),
-# 	Issue("22", "Spotify cannot open links in the app", true, ALL, [[
+# 	Issue(22, "Spotify cannot open links in the app", true, ALL, [[
 # 		Clicking on a Spotify link launches a new broken instance instead of redirecting the existing one.
 # 	]], [[
 # 		In the past, solved this using <a href="https://gist.github.com/wandernauta/6800547">sp</a>, a
@@ -399,7 +399,7 @@
 # 		</a> in conjunction with <a href="https://addons.mozilla.org/en-CA/firefox/addon/blacklist-autoclose/">this one</a> (to
 # 		close opened tabs) is sufficient. It still leaves Firefox focused, but it’s good enough for me.
 # 	]]),
-# 	Issue("23", "Image thumbnails have ugly white borders in Nautilus", true, { ZORIN_CORE }, [[
+# 	Issue(23, "Image thumbnails have ugly white borders in Nautilus", true, { ZORIN_CORE }, [[
 # 		I found <a href="https://ubuntugenius.wordpress.com/2011/10/14/how-to-change-white-border-around-image-video-thumbnails-to-drop-shadow-in-ubuntus-file-manager-nautilus/">
 # 		this article</a>, but doing what it says doesn’t work. Another answer
 # 		<a href="https://answers.launchpad.net/cover-thumbnailer/+question/186685">here</a> involves recompiling Nautilus, which
@@ -407,7 +407,7 @@
 # 	]], [[
 # 		This is no longer an issue after I switched to Dolphin (Fedora KDE’s file manager) which is better anyway.
 # 	]]),
-# 	Issue("25", "Folders don’t preview their contents in their icon.", true, { ZORIN_CORE, ZORIN_LITE }, [[
+# 	Issue(25, "Folders don’t preview their contents in their icon.", true, { ZORIN_CORE, ZORIN_LITE }, [[
 # 		See <a href="https://askubuntu.com/questions/992947/how-to-preview-images-in-folders-icons">this question</a>.
 # 		One often-suggested solution is <a href="https://github.com/flozz/cover-thumbnailer">flozz/cover-thumbnailer</a>, but I
 # 		have never tried it myself.
@@ -415,10 +415,10 @@
 # 		This issue was resolved when I moved to Fedora; Dolphin doesn’t only preview folder icons, but also animates them (both
 # 		for folder contents and for videos) when you hover over them.
 # 	]]),
-# 	Issue("26", "Thunar (Zorin Lite file manager) doesn’t show the size of the current selection", true, { ZORIN_LITE}, [[
+# 	Issue(26, "Thunar (Zorin Lite file manager) doesn’t show the size of the current selection", true, { ZORIN_LITE}, [[
 # 		<a href="https://forum.zorin.com/t/can-thunar-show-file-count-for-folders/3443">Enable the statusbar</a>.
 # 	]]),
-# 	Issue("27", "No “copy file path” context option in the file explorer", true, { ZORIN_CORE, ZORIN_LITE }, [[
+# 	Issue(27, "No “copy file path” context option in the file explorer", true, { ZORIN_CORE, ZORIN_LITE }, [[
 # 		<a href="https://askubuntu.com/a/225676">The clipboard is context-sensitive</a>; no fix is required. Additionally, Dolphin
 # 		does have this menu option.
 # 	]]),
@@ -446,6 +446,7 @@
 
 
 # local buff = {}
+# local seen, numSeen = {}, 0
 
 	<ul class="list-none text-gray-300">
 # 	for _, issue in ipairs(issues) do
@@ -454,6 +455,13 @@
 # 		local statusTitle = issue.resolved
 # 			and "This issue has been fixed or a workaround exists"
 # 			or "This issue is still occuring"
+#
+# 		-- Verify we don't have duplicate numbers
+# 		if seen[issue.number] then
+# 			error("issue with duplicate number: " .. issue.number, 0)
+# 		end
+# 		seen[issue.number] = true
+# 		numSeen = numSeen + 1
 
 		<li id="$(issue.number)" class="py-3 px-4 mb-3 bg-gray-700 target:bg-gray-600 text-gray-300 rounded-md"
 			title="Click for details">
@@ -474,6 +482,13 @@
 # 				end
 			</details>
 		</li>
+# 	end
+#
+# 	-- Check that we haven't skipped any numbers
+# 	for num = 1, numSeen do
+# 		if not seen[num] then
+# 			error("no issue with number: " .. num, 0)
+# 		end
 # 	end
 	</ul>
 	</main>
