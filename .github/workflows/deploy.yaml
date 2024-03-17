@@ -23,12 +23,12 @@ jobs:
     steps:
       # Checkout
       - name: Checkout site repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: site
 
       - name: Checkout creative writing repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: RiskoZoSlovenska/creative-writing
           path: creative-writing
@@ -67,9 +67,9 @@ jobs:
 
       # Deploy
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: site/build
 
       - name: Deploy Pages artifact
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
