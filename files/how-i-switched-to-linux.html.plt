@@ -210,6 +210,41 @@
 # 	Issue(37, "The icons of certain apps have black backgrounds/are rendered wrong", false, { FEDORA_KDE }, [[
 # 		This has been reported <a href="https://bugs.kde.org/show_bug.cgi?id=448234">here</a>.
 # 	]]),
+# 	Issue(38, "<code>os-prober</code> does not detect Windows 10", false, { FEDORA_KDE }, [[
+# 		I have a copy of Windows on a separate 128 GB SSD for when I have no other option but to deal with a Windows-only app.
+# 		However, <code>os-prober</code> does not detect it and so it is not added to the GRUB boot menu automatically, which means
+# 		I cannot programmatically reboot into Windows.
+# 	]], [[
+# 		The internet <a href="https://www.google.com/search?q=os-prober+windows+on+different+drive">is littered with many similar
+# 		questions</a>, many of which have never been resolved. <code>grub-mount</code>ing the Windows EFI partition works without
+# 		issues, but whether it's mounted or not changes nothing. The most common solution seems to be adding a menu entry
+# 		manually, which is what I ended up doing anyway. I added the following to <code>/etc/grub.d/40_custom</code> (remember to
+# 		replace <code>848F-AF37</code> with your own UUID):
+# 	]], [[
+#<pre class="has-code"><code>menuentry 'Windows Boot Manager' {
+#	search.fs_uuid 848F-AF37 root hd0,gpt1
+#	chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+#}</code></pre>
+# 	]], [[
+# 		Credit goes to <a href="https://bbs.archlinux.org/viewtopic.php?pid=1805919#p1805919">these</a>
+# 		<a href="https://bbs.archlinux.org/viewtopic.php?pid=2022765#p2022765">two</a> posts. Of course, don't forget to run
+# 		<code>sudo grub2-mkconfig -o /etc/grub2.cfg</code> to apply changes.
+# 	]]),
+# 	Issue(39, "The GRUB boot menu is occasionally skipped when restarting", true, { FEDORA_KDE }, [[
+# 		Oftentimes, when rebooting my PC, the GRUB menu doesn't come up at all despite the fact that I've explicitly enabled it
+# 		and gave it a long timeout in <code>/etc/default/grub</code>. This issue frustrated me quite a lot since I wasn't able to
+# 		consistently reproduce it; sometimes the menu would be skipped (especially after using the PC for a while) and other times
+# 		it wouldn't.
+# 	]], [[
+# 		After some digging around in the generated GRUB config file, I found out that this is the result of Fedora making
+# 		<a href="https://fedoraproject.org/wiki/Changes/HiddenGrubMenu">this change</a>; for single-boot systems (GRUB thinks my
+# 		system is single-boot; see <a href="#38">#38</a>), the GRUB menu is automatically skipped after a "successful boot",
+# 		which, according to <a href="https://hansdegoede.livejournal.com/19081.html">this FAQ</a>, is defined as a boot lasting
+# 		more than 2 minutes.
+# 	]], [[
+# 		The solution (i.e. disabling this feature) is given by <a href="https://discussion.fedoraproject.org/t/unset-menu-auto-hide-is-how-to-force-grub2-boot-menu-visibility-on-every-boot-for-kernel-parameters/76631/2">
+# 		this answer</a>: <code>sudo grub2-editenv - unset menu_auto_hide</code>. I just wish it was better documented.
+# 	]]),
 # 	Issue(36, "Can’t fine-tune the time and date format in KDE", true, { FEDORA_KDE }, [[
 # 		KDE uses the current locale to determine the date and time format and I wasn’t able to manually set it to ISO 8601.
 # 		Thankfully, this has been asked about and answered <a href="https://superuser.com/questions/1162283/use-iso-time-and-date-format-in-kde-5">
