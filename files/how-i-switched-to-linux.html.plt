@@ -214,7 +214,7 @@
 # 	]], [[
 # 		The internet <a href="https://www.google.com/search?q=os-prober+windows+on+different+drive">is littered with many similar
 # 		questions</a>, many of which have never been resolved. <code>grub-mount</code>ing the Windows EFI partition works without
-# 		issues, but whether it's mounted or not changes nothing. The most common solution seems to be adding a menu entry
+# 		issues, but whether it’s mounted or not changes nothing. The most common solution seems to be adding a menu entry
 # 		manually, which is what I ended up doing anyway. I added the following to <code>/etc/grub.d/40_custom</code> (remember to
 # 		replace <code>848F-AF37</code> with your own UUID):
 # 	]], [[
@@ -224,14 +224,14 @@
 #}</code></pre>
 # 	]], [[
 # 		Credit goes to <a href="https://bbs.archlinux.org/viewtopic.php?pid=1805919#p1805919">these</a>
-# 		<a href="https://bbs.archlinux.org/viewtopic.php?pid=2022765#p2022765">two</a> posts. Of course, don't forget to run
+# 		<a href="https://bbs.archlinux.org/viewtopic.php?pid=2022765#p2022765">two</a> posts. Of course, don’t forget to run
 # 		<code>sudo grub2-mkconfig -o /etc/grub2.cfg</code> to apply changes.
 # 	]]),
 # 	Issue(39, "The GRUB boot menu is occasionally skipped when restarting", true, { FEDORA_KDE }, [[
-# 		Oftentimes, when rebooting my PC, the GRUB menu doesn't come up at all despite the fact that I've explicitly enabled it
-# 		and gave it a long timeout in <code>/etc/default/grub</code>. This issue frustrated me quite a lot since I wasn't able to
+# 		Oftentimes, when rebooting my PC, the GRUB menu doesn’t come up at all despite the fact that I’ve explicitly enabled it
+# 		and gave it a long timeout in <code>/etc/default/grub</code>. This issue frustrated me quite a lot since I wasn’t able to
 # 		consistently reproduce it; sometimes the menu would be skipped (especially after using the PC for a while) and other times
-# 		it wouldn't.
+# 		it wouldn’t.
 # 	]], [[
 # 		After some digging around in the generated GRUB config file, I found out that this is the result of Fedora making
 # 		<a href="https://fedoraproject.org/wiki/Changes/HiddenGrubMenu">this change</a>; for single-boot systems (GRUB thinks my
@@ -408,7 +408,7 @@
 # 		Looks like an <a href="https://github.com/flathub/com.discordapp.Discord/issues/228">issue with Discord</a>. As of
 # 		<time>2024-03-17</time>, on Fedora/KDE, using <a href="https://github.com/RPM-Outpost/discord">the RPM packaging of
 # 		Discord</a> and <a href="https://github.com/Vencord/Vesktop/issues/298#issuecomment-1980029514">installing
-# 		<code>libunity</code></a> fixes this issue. I haven't verified it myself but it looks like
+# 		<code>libunity</code></a> fixes this issue. I haven’t verified it myself but it looks like
 # 		<a href="https://github.com/flathub/com.discordapp.Discord/pull/368">it should work in the Flatpak packaging too</a>. I
 # 		dunno about GNOME.
 # 	]]),
