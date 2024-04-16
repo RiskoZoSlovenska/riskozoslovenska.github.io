@@ -5,7 +5,7 @@
 </head>
 
 <body>
-	<div id="sidebar-insert"></div>
+	$(sidebar{})
 
 	<main class="article-main">
 		<h1>About Me</h1>

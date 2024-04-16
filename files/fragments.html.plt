@@ -7,8 +7,8 @@
 </head>
 
 <body>
-	<div id="cheating-insert"></div>
-	<div id="sidebar-insert"></div>
+	$(cheating{})
+	$(sidebar{})
 
 	<main class="padded-main">
 		<h1 class="mb-0" title="Not to be confused with Echoes — those don’t exist in this reality.">Fragments</h1>

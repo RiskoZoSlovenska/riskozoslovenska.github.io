@@ -9,7 +9,7 @@
 </head>
 
 <body>
-	<div id="sidebar-insert"></div>
+	$(sidebar{})
 
 	<main class="padded-main w-full">
 		<h1 class="mb-0">SVG Editor</h1>

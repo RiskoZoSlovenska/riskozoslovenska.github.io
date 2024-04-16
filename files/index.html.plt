@@ -6,7 +6,7 @@
 </head>
 
 <body>
-	<div id="sidebar-insert"></div>
+	$(sidebar{})
 
 	<main class="w-full relative grid place-content-center text-center p-8">
 		<canvas id="dots-canvas" class="absolute w-full h-full -z-10"></canvas>

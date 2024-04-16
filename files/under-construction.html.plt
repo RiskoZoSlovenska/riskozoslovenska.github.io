@@ -5,7 +5,7 @@
 </head>
 
 <body>
-	<div id="sidebar-insert"></div>
+	$(sidebar{})
 
 	<main class="w-full grid place-content-center">
 		<h1 class="whitespace-nowrap text-[min(10vw,18vh)] lg:text-[5rem]">

@@ -6,7 +6,7 @@
 </head>
 
 <body>
-	<div id="sidebar-insert"></div>
+	$(sidebar{})
 
 	<main class="padded-main">
 		<h1 class="mb-0">Hangman</h1>

@@ -6,7 +6,7 @@
 </head>
 
 <body data-unsearchable>
-	<div id="sidebar-insert"></div>
+	$(sidebar{})
 
 	<main class="w-full grid place-content-center text-center">
 		<div>

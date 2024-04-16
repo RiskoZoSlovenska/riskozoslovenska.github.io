@@ -100,10 +100,6 @@
 
 @tailwind components;
 @layer components {
-	#sidebar-insert {
-		@apply fixed h-full w-[--sidebar-ribbon-size] bg-accent-red;
-	}
-
 	.hofoac-highlight {
 		@apply transition-[filter] duration-400 ease-out
 			hofonoac:brightness-125 hofonoac:duration-200

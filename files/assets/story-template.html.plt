@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<div id="sidebar-insert"></div>
+	$(sidebar{ root = ".." })
 
 	<main class="article-main">
 		<h1 class="mb-0">$title$</h1>

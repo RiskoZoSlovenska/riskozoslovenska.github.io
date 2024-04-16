@@ -1,3 +1,5 @@
+# local root = env.root or "."
+#
 <nav id="sidebar" class="
 	peer/sidebar fixed h-full w-min max-w-[85vw] z-40 bg-gray-800 border-r-accent-red
 	border-r-[length:--sidebar-ribbon-size] translate-x-[calc(var(--sidebar-ribbon-size)_-_100%)] hofoac:translate-x-0
@@ -26,14 +28,14 @@
 		>
 		<div class="search-results-container h-0 z-40 scale-0 focus-within:scale-100 peer-focus-within/searchbar:scale-100"></div>
 		<ul class="mt-5">
-			<li class="mb-3 text-base"><a class="hofoac:underline" href="{{ROOT}}">Home</a></li>
-			<li class="mb-3 text-base"><a class="hofoac:underline" href="{{ROOT}}about">About</a></li>
-			<li class="mb-3 text-base"><a class="hofoac:underline" href="{{ROOT}}stories/">Stories</a></li>
-			<li class="mb-3 text-base"><a class="hofoac:underline" href="{{ROOT}}fragments">Fragments</a></li>
-			<li class="mb-3 text-base"><a class="hofoac:underline" href="{{ROOT}}how-i-switched-to-linux">Switching to Linux</a></li>
-			<li class="mb-3 text-base"><a class="hofoac:underline" href="{{ROOT}}hangman">Hangman</a></li>
-			<li class="mb-3 text-base"><a class="hofoac:underline" href="{{ROOT}}svg-editor">SVG Editor</a></li>
-			<li class="mb-3 text-base"><a class="hofoac:underline" href="{{ROOT}}under-construction">Under Construction</a></li>
+			<li class="mb-3 text-base"><a class="hofoac:underline" href="$(root)/">Home</a></li>
+			<li class="mb-3 text-base"><a class="hofoac:underline" href="$(root)/about">About</a></li>
+			<li class="mb-3 text-base"><a class="hofoac:underline" href="$(root)/stories/">Stories</a></li>
+			<li class="mb-3 text-base"><a class="hofoac:underline" href="$(root)/fragments">Fragments</a></li>
+			<li class="mb-3 text-base"><a class="hofoac:underline" href="$(root)/how-i-switched-to-linux">Switching to Linux</a></li>
+			<li class="mb-3 text-base"><a class="hofoac:underline" href="$(root)/hangman">Hangman</a></li>
+			<li class="mb-3 text-base"><a class="hofoac:underline" href="$(root)/svg-editor">SVG Editor</a></li>
+			<li class="mb-3 text-base"><a class="hofoac:underline" href="$(root)/under-construction">Under Construction</a></li>
 		</ul>
 	</div>
 </nav>

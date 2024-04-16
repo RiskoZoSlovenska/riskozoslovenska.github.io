@@ -6,7 +6,7 @@
 </head>
 
 <body>
-	<div id="sidebar-insert"></div>
+	$(sidebar{})
 
 	<main class="article-main">
 		<h1>How I Switched to Linux</h1>
