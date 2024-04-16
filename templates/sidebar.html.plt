@@ -3,7 +3,7 @@
 <nav id="sidebar" class="
 	peer/sidebar fixed h-full w-min max-w-[85vw] z-40 bg-gray-800 border-r-accent-red
 	border-r-[length:--sidebar-ribbon-size] translate-x-[calc(var(--sidebar-ribbon-size)_-_100%)] hofoac:translate-x-0
-	transition-transform ease-[ease] duration-500 hofoac:duration-300
+	transition-transform motion-reduce:transition-none ease-[ease] duration-500 hofoac:duration-300
 " onmouseenter="ex_onSidebarMouseEnter(event)" onmouseleave="ex_onSidebarMouseLeave(event)"
 >
 	<!-- This wrapper div is required to make the sidebar scrollable -->
@@ -41,6 +41,7 @@
 </nav>
 
 <div id="sidebar-darkener" class="
-	fixed h-full w-full bg-black z-30 pointer-events-none transition-opacity opacity-0 ease-[ease] duration-500
+	fixed h-full w-full opacity-0 bg-black z-30 pointer-events-none
+	transition-opacity motion-reduce:transition-none ease-[ease] duration-500
 	peer-hofoac/sidebar:opacity-50 peer-hofoac/sidebar:duration-300
 "></div>
