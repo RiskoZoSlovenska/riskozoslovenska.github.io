@@ -2,7 +2,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
 :root {
-	--sidebar-ribbon-size: 0.5rem;
+	--sidebar-ribbon-size: max(0.5rem, 0.5vw);
+	--sidebar-icon-size: max(18px, 0.75vw);
 }
 
 @tailwind base;

@@ -9,8 +9,9 @@
 	<!-- This wrapper div is required to make the sidebar scrollable -->
 	<div class="h-full py-4 px-8 overflow-y-auto overscroll-contain">
 		<!-- Specify SVG width attribute so it's not huge when CSS is disabled -->
-		<svg width="18" class="fixed top-2 w-[18px] -right-2 translate-x-[calc(18px_+_var(--sidebar-ribbon-size))]
-			fill-accent-red overflow-visible" viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
+		<svg width="18" class="fixed top-2 -right-2 fill-accent-red overflow-visible
+			w-[var(--sidebar-icon-size)] translate-x-[calc(var(--sidebar-icon-size)_+_var(--sidebar-ribbon-size))]
+		" viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
 			<path id="sidebar-grill-main" d="M0,0  h18  v2  h-18  v-2   z" />
 			<use href="#sidebar-grill-main" y="5" />
 			<use href="#sidebar-grill-main" y="10" />
