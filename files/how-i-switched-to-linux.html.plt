@@ -138,9 +138,9 @@
 			drawbacks.
 		</p>
 
-# local ZORIN_LITE = '<span class="py-0.5 px-1 rounded text-2xs text-gray-100 bg-[#15a6f0]">Zorin 16 Lite</span>'
-# local ZORIN_CORE = '<span class="py-0.5 px-1 rounded text-2xs text-gray-100 bg-[#15a6f0]">Zorin 16 Core</span>'
-# local FEDORA_KDE = '<span class="py-0.5 px-1 rounded text-2xs text-gray-100 bg-[#3c6eb4]">Fedora/KDE</span>'
+# local ZORIN_LITE = '<li class="inline-block py-0.5 px-1 rounded text-2xs text-gray-100 bg-[#15a6f0]">Zorin 16 Lite</li>'
+# local ZORIN_CORE = '<li class="inline-block py-0.5 px-1 rounded text-2xs text-gray-100 bg-[#15a6f0]">Zorin 16 Core</li>'
+# local FEDORA_KDE = '<li class="inline-block py-0.5 px-1 rounded text-2xs text-gray-100 bg-[#3c6eb4]">Fedora/KDE</li>'
 # local ALL = { ZORIN_CORE, ZORIN_LITE, FEDORA_KDE }
 #
 # local function Issue(number, title, resolved, systems, ...)
@@ -515,7 +515,7 @@
 					</span>
 					$(issue.title)
 				</summary>
-				<div class="text-sm md:ml-6 mt-1 mb-4">$(table.concat(issue.systems, " "))</div>
+				<ul class="text-sm md:ml-6 mt-1 mb-4">$(table.concat(issue.systems, " "))</ul>
 
 # 				for _, paragraph in ipairs(issue.paragraphs) do
 # 					makeParagragh(paragraph)
