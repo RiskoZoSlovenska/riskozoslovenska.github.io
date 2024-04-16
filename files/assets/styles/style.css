@@ -111,6 +111,10 @@
 		@apply text-gray-400 text-xs mb-h1;
 	}
 
+	.loading {
+		@apply text-gray-300 italic;
+	}
+
 	/* Article pages; I figure these are used often enough */
 	.padded-main {
 		@apply p-7 lg:pt-10 lg:px-16 lg:pb-14;

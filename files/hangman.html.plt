@@ -13,10 +13,11 @@
 		<div class="h1-splash" title="Or, well, as friendly as it gets.">A friendly game of Hangman</div>
 
 # 		function word(title)
-		<div class="hangman-word
+		<div class="hangman-word loading
 			text-[clamp(2.25em,8vw,3.75em)] -mx-2 font-mono tracking-widest text-center break-words
 			[&_>_.not-guessed]:text-incorrect
-		" title="$(title)">Loading...</div>
+			[&.loading]:font-sans [&.loading]:tracking-normal
+		" title="$(title)">Waiting for JS...</div>
 # 		end
 #
 # 		word("Staring at it ain’t gonna solve it, buddy.")

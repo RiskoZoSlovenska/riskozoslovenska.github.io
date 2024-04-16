@@ -46,6 +46,7 @@ const STATS_SECONDS = document.getElementById("stats-seconds")
 
 const IMAGE_PARTS = document.getElementById("hangman-svg-parts").children
 
+const LOADING_CLASS = "loading"
 const VISIBLE_IMAGE_PART_CLASS = "shown"
 const NOT_GUESSED_LETTER_CLASS = "not-guessed"
 const BUTTON_CLICK_STATE = {
@@ -315,6 +316,7 @@ function advanceImage() {
 function forEachLetterNodeOfWord(func) {
 	for (let word of HANGMAN_WORD_ELEMENTS) {
 		removeAllChildren(word)
+		word.classList.remove(LOADING_CLASS)
 
 		for (let i = 0; i < curWord.length; i++) {
 			let letter = curWord[i]
@@ -486,6 +488,9 @@ function main() {
 		startGame()
 	}, INITIAL_FETCH_TIMEOUT);
 
+	for (let word of HANGMAN_WORD_ELEMENTS) {
+		word.textContent = "Loading..."
+	}
 	fetchWords().then(() => {
 		if (id) {
 			clearTimeout(id)
