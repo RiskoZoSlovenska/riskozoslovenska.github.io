@@ -1,7 +1,7 @@
 local plt = require("pl.template")
 local utils = require("build-scripts.utils")
 
-local TEMPLATES_DIR = "build-templates"
+local TEMPLATES_DIR = "templates"
 local FILES_DIR = "build"
 
 -- Load templates
