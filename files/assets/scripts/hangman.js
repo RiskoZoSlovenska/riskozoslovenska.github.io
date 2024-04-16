@@ -56,6 +56,7 @@ const BUTTON_CLICK_STATE = {
 
 const QUEUE_LOW_THRESHOLD = 5 // Remember to change the fetch number in the below url as well
 const WORDS_FETCH_URL = "https://random-word-api.herokuapp.com/word?number=10"
+const INITIAL_FETCH_TIMEOUT = 5000 // ms
 
 const FREE_DICTIONARY_QUERY_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/"
 const WIKTIONARY_QUERY_URL = "https://en.wiktionary.org/w/api.php?action=query&prop=extracts&format=json&origin=*&titles="
@@ -70,6 +71,7 @@ let visibleLetters = {}
 let numWrong = 0
 let gameStart = null
 
+// FIXME: These dicts are only ever added to and never cleared; will hog memory if used long enough
 let definitions = {}
 let wordRedirections = {}
 
@@ -243,7 +245,7 @@ async function fetchWordDefinitions(word) {
 function fetchWords() {
 	console.log("Fetching words...")
 
-	fetch(WORDS_FETCH_URL)
+	return fetch(WORDS_FETCH_URL)
 		.then(res => res.ok ? res.json() : Promise.reject(res.status + " " + res.statusText))
 		.then(words => {
 			let filtered = words
@@ -410,6 +412,7 @@ function startRound() {
 	if (wordQueue.length > 0) {
 		curWord = wordQueue.shift()
 	} else {
+		console.log("No words in queue, falling back to built-in")
 		curWord = getRandomItem(BACKUP_WORDS)
 		fetchWordDefinitions(curWord)
 	}
@@ -471,9 +474,24 @@ function onButtonClick(clickInfo) {
 
 function main() {
 	initButtons()
-	startRound()
-	NEXT_ROUND_BUTTON.addEventListener("click", startRound)
-	bindButtonToKeystroke(NEXT_ROUND_BUTTON, "Enter")
+
+	function startGame() {
+		startRound()
+		NEXT_ROUND_BUTTON.addEventListener("click", startRound)
+		bindButtonToKeystroke(NEXT_ROUND_BUTTON, "Enter")
+	}
+
+	let id = setTimeout(() => {
+		id = null
+		startGame()
+	}, INITIAL_FETCH_TIMEOUT);
+
+	fetchWords().then(() => {
+		if (id) {
+			clearTimeout(id)
+			startGame()
+		}
+	})
 }
 main()
 
