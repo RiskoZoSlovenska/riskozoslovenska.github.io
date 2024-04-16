@@ -11,7 +11,7 @@
 		<h1>About Me</h1>
 
 		<figure class="mx-auto md:mx-10 md:mb-0 md:float-right">
-			<img class="bg-gray-700 rounded-md" src="./assets/images/pfp.png" width="200" height="200" alt="My PFP">
+			<img class="bg-gray-700 rounded-md" width="200" height="200" src="./assets/images/pfp.png" alt="My PFP">
 			<figcaption>Art by Choir</figcaption>
 		</figure>
 		<p>
@@ -46,7 +46,7 @@
 # 			}) do
 			<li class="relative block group">
 				<a href="$(contact[1])">
-					<img class="w-14 h-14" src="./assets/images/$(contact[2])" alt="$(contact[3])">
+					<img class="w-14 h-14" width="56" src="./assets/images/$(contact[2])" alt="$(contact[3])">
 				</a>
 				<!-- https://stackoverflow.com/a/1777282 -->
 				<div class="
