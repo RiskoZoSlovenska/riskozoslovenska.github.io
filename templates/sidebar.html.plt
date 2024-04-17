@@ -22,10 +22,7 @@
 			class="peer/searchbar relative mt-4 w-full leading-none z-50"
 
 			type="search"
-			placeholder="Search…"
-
-			onkeyup="ex_updateSearch(event)"
-			onsearch="ex_updateSearch(event)"
+			placeholder="Waiting for JS…"
 		>
 		<div class="search-results-container h-0 z-40 scale-0 focus-within:scale-100 peer-focus-within/searchbar:scale-100"></div>
 		<ul class="mt-5">

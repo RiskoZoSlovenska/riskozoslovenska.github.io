@@ -39,7 +39,6 @@
 	Scores below or equal to 0 are removed; the remaining are sorted in
 	descending order and then the list is truncated and displayed.
  */
-let ex_updateSearch
 {
 
 const MAX_RESULTS = 5
@@ -49,8 +48,11 @@ const TITLE_LENGTH_WEIGHT = -0.5
 const TITLE_TOTAL_WEIGHT = 1
 const WORD_MATCH_WEIGHT = 10
 
+const SEARCH_BAR_CLASS = "peer/searchbar"
 const SEARCH_RESULT_TITLE_CLASS = "search-result-title"
 const SEARCH_RESULT_DESC_CLASS = "search-result-desc"
+
+const DEFAULT_PLACEHOLDER = "Search…"
 
 const ROOT = new URL("../../..", document.currentScript.src)
 
@@ -222,8 +224,7 @@ function clearResults(container) {
 }
 
 
-// Export function which will get called by search bar
-ex_updateSearch = function(event) {
+function updateSearch(event) {
 	let searchBox = event.target
 	let resultsContainer = searchBox.nextElementSibling
 
@@ -235,6 +236,13 @@ ex_updateSearch = function(event) {
 	scoreResultsByWordMatches(results, queryWords)
 
 	putResults(finalizeResults(results), resultsContainer)
+}
+
+
+for (let searchbar of document.getElementsByClassName(SEARCH_BAR_CLASS)) {
+	searchbar.placeholder = searchbar.dataset.loadedPlaceholder || DEFAULT_PLACEHOLDER
+	searchbar.addEventListener("keyup", updateSearch)
+	searchbar.addEventListener("search", updateSearch)
 }
 
 }

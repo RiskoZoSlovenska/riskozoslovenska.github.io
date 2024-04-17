@@ -12,5 +12,5 @@
 
 <link rel="stylesheet" href="$(root)/assets/styles/style.css">
 
-<script src="$(root)/assets/scripts/search.js" async></script>
+<script src="$(root)/assets/scripts/search.js" defer></script>
 <script src="$(root)/assets/scripts/sidebar-extra.js" async></script>
