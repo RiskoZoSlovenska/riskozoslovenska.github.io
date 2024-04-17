@@ -18,13 +18,17 @@
 		</svg>
 
 		<h2 class="text-2xl font-bold">Navigation</h2>
-		<input
-			class="peer/searchbar relative mt-4 w-full leading-none z-50"
-
-			type="search"
-			placeholder="Waiting for JS…"
-		>
-		<div class="search-results-container h-0 z-40 scale-0 focus-within:scale-100 peer-focus-within/searchbar:scale-100"></div>
+		<search>
+			<input
+				class="peer/searchbar relative mt-4 w-full leading-none z-50"
+				type="search"
+				placeholder="Waiting for JS…"
+			>
+			<ul
+				class="search-results-container h-0 z-40 scale-0 focus-within:scale-100 peer-focus-within/searchbar:scale-100"
+				aria-live="polite"
+			></ul>
+		</search>
 		<ul class="mt-5">
 			<li class="mb-3 text-base"><a class="hofoac:underline" href="$(root)/">Home</a></li>
 			<li class="mb-3 text-base"><a class="hofoac:underline" href="$(root)/about">About</a></li>
