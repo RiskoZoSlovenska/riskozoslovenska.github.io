@@ -17,7 +17,11 @@
 
 		<div class="flex flex-col md:flex-row items-stretch gap-5 mb-5">
 			<div class="relative grow-[1.5] basis-0">
-				<div id="ace-editor" data-custom-scroll class="h-full min-h-[12.5rem] rounded"></div>
+				<div
+					id="ace-editor"
+					class="loading h-full min-h-[12.5rem] rounded [&.loading]:grid [&.loading]:place-content-center"
+					data-custom-scroll
+				>Waiting for JS...</div>
 			</div>
 
 			<div class="relative grow basis-0">

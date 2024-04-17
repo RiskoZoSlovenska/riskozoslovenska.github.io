@@ -21,6 +21,7 @@ const DEFAULT_SVG = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/sv
 
 const EDITOR_ID = "ace-editor"
 const SELECTED_CLASS = "selected"
+const LOADING_CLASS = "loading"
 
 const COORD_PLACEHOLDER = "--.-"
 
@@ -46,6 +47,8 @@ let verCross = mouseCrossTemplate.cloneNode(true)
 let horCross = mouseCrossTemplate.cloneNode(true)
 document.body.appendChild(verCross)
 document.body.appendChild(horCross)
+
+document.getElementById(EDITOR_ID).classList.remove(LOADING_CLASS)
 
 const editor = ace.edit(EDITOR_ID)
 editor.setOptions({
@@ -446,6 +449,7 @@ function updateStep() {
 		console.log("Invalid step value; step remains at " + step)
 	}
 }
+
 
 editor.session.on("change", updateSvg)
 document.addEventListener("mousemove", handleMouseMove)
