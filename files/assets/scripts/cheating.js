@@ -16,14 +16,16 @@ const THRESHOLD = 160; // idk
 
 
 function update(isOpened) {
+	console.log("Devtools were " + (isOpened ? "opened" : "closed"))
+
+	document.dispatchEvent(new CustomEvent(EVENT_NAME, { detail: isOpened }))
+
 	let overlay = document.getElementById(OVERLAY_ID)
-	if (!overlay) {
+	if (overlay) {
+		overlay.setAttribute(OPEN_ATTRIB_NAME, isOpened)
+	} else {
 		throw "No overlay found!"
 	}
-
-	console.log("Devtools were " + (isOpened ? "opened" : "closed"))
-	overlay.setAttribute(OPEN_ATTRIB_NAME, isOpened)
-	document.dispatchEvent(new CustomEvent(EVENT_NAME, { detail: isOpened }))
 }
 
 

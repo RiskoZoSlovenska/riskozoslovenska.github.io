@@ -15,7 +15,7 @@
 	text-[min(2vh_+_2vw,_1.3em)] font-bold opacity-0 transition-opacity duration-700
 	data-[devtools-open=true]:opacity-[97%] data-[devtools-open=true]:pointer-events-auto
 " data-devtools-open="false" data-sink-sidebar>
-	<div class="text-gray-500">
+	<div class="text-gray-400">
 		<p class="mb-10">You cheated not only the game, but yourself.</p>
 		<p class="mb-10">
 			You didn’t grow.<br>
