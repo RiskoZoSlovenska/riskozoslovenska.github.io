@@ -87,23 +87,20 @@
 	color: var(--gray);
 }
 
-.ace-chaos .ace_keyword {
+.ace-chaos .ace_variable {
+	color: var(--text);
+}
+
+.ace-chaos .ace_keyword,
+.ace-chaos .ace_keyword.ace_operator,
+.ace-chaos .ace_constant,
+.ace-chaos .ace_meta.ace_tag {
 	color: var(--red);
 }
 
-.ace-chaos .ace_keyword.ace_operator {
-	color: var(--red);
-}
-
-.ace-chaos .ace_constant {
-	color: var(--red);
-}
-
-.ace-chaos .ace_constant.ace_language {
-	color: var(--blue);
-}
-
-.ace-chaos .ace_constant.ace_library {
+.ace-chaos .ace_constant.ace_language,
+.ace-chaos .ace_constant.ace_library,
+.ace-chaos .ace_entity.ace_other.ace_attribute-name {
 	color: var(--blue);
 }
 
@@ -141,18 +138,6 @@
 	color: var(--gray);
 	font-style: italic;
 	padding-bottom: 0px;
-}
-
-.ace-chaos .ace_variable {
-	color: var(--text);
-}
-
-.ace-chaos .ace_meta.ace_tag {
-	color: var(--red);
-}
-
-.ace-chaos .ace_entity.ace_other.ace_attribute-name {
-	color: var(--blue);
 }
 
 .ace-chaos .ace_markup.ace_underline {
