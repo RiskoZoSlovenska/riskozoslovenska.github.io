@@ -243,99 +243,107 @@ function newRandomPoint() {
 	]
 }
 
-let mouseX = 0, mouseY = 0
-document.addEventListener("mousemove", event => {
-	mouseX = event.clientX
-	mouseY = event.clientY
-})
+
+function startLoop() {
+	let mouseX = 0, mouseY = 0
+	document.addEventListener("mousemove", event => {
+		mouseX = event.clientX
+		mouseY = event.clientY
+	})
 
 
+	// == Rendering Loop == //
 
-// == Rendering Loop == //
+	let cameraRotZ = deg(Math.atan2(ROT_HEIGHT, ROT_DIST))
+	let lookCamera = invertCFrame(orientationToCFrame(0, 0, -cameraRotZ, [0, 0, 0]))
 
-let cameraRotZ = deg(Math.atan2(ROT_HEIGHT, ROT_DIST))
-let lookCamera = invertCFrame(orientationToCFrame(0, 0, -cameraRotZ, [0, 0, 0]))
+	let curLookY = 0
+	let curLookZ = 0
 
-let curLookY = 0
-let curLookZ = 0
+	setInterval(() => {
+		if (Document.hidden) { return }
 
-setInterval(() => {
-	if (Document.hidden) { return }
+		let angle = (performance.now() / 1000 * ROT_SPEED) % 360
 
-	let angle = (performance.now() / 1000 * ROT_SPEED) % 360
+		let cameraPosX = -Math.cos(rad(angle)) * ROT_DIST
+		let cameraPosY = ROT_HEIGHT
+		let cameraPosZ = -Math.sin(rad(angle)) * ROT_DIST
 
-	let cameraPosX = -Math.cos(rad(angle)) * ROT_DIST
-	let cameraPosY = ROT_HEIGHT
-	let cameraPosZ = -Math.sin(rad(angle)) * ROT_DIST
+		let cameraRotY = angle - 90
+		let camera = invertCFrame(orientationToCFrame(0, cameraRotY, 0, [cameraPosX, cameraPosY, cameraPosZ]))
 
-	let cameraRotY = angle - 90
-	let camera = invertCFrame(orientationToCFrame(0, cameraRotY, 0, [cameraPosX, cameraPosY, cameraPosZ]))
+		let screenWidth = document.documentElement.clientWidth
+		let screenHeight = document.documentElement.clientHeight
 
-	let screenWidth = document.documentElement.clientWidth
-	let screenHeight = document.documentElement.clientHeight
+		let newLookY = (1 - mouseX / screenWidth * 2) * LOOK_Y_RANGE
+		let newLookZ = (1 - mouseY / screenHeight * 2) * LOOK_Z_RANGE
 
-	let newLookY = (1 - mouseX / screenWidth * 2) * LOOK_Y_RANGE
-	let newLookZ = (1 - mouseY / screenHeight * 2) * LOOK_Z_RANGE
+		curLookY = lerp(curLookY, newLookY, LOOK_LERP_ALPHA)
+		curLookZ = lerp(curLookZ, newLookZ, LOOK_LERP_ALPHA)
 
-	curLookY = lerp(curLookY, newLookY, LOOK_LERP_ALPHA)
-	curLookZ = lerp(curLookZ, newLookZ, LOOK_LERP_ALPHA)
+		let lookOffset = invertCFrame(orientationToCFrame(0, curLookY, curLookZ, [0, 0, 0]))
 
-	let lookOffset = invertCFrame(orientationToCFrame(0, curLookY, curLookZ, [0, 0, 0]))
+		cameras = [camera, lookCamera, lookOffset]
 
-	cameras = [camera, lookCamera, lookOffset]
-
-	renderPoints()
-}, 1/FPS * 1000)
+		renderPoints()
+	}, 1/FPS * 1000)
 
 
-// == Point Animation Loop == //
+	// == Point Animation Loop == //
 
-let fadingIn = []
-let fadingOut = []
+	let fadingIn = []
+	let fadingOut = []
 
-if (FADE_TIME >= MIN_LIFE_TIME) {
-	throw "fade time must be smaller than life time"
+	if (FADE_TIME >= MIN_LIFE_TIME) {
+		throw "fade time must be smaller than life time"
+	}
+
+	// Creation loop
+	setInterval(() => {
+		if (points.length >= MAX_POINTS) { return }
+
+		let point = newRandomPoint()
+		points.push(point)
+		fadingIn.push(point)
+
+		setTimeout(() => {
+			fadingOut.push(point)
+		}, randomInRange(MIN_LIFE_TIME, MAX_LIFE_TIME) * 1000);
+
+	}, 1/POINT_RATE * 1000)
+
+	// Fading loop
+	let fadeStep = 1 / FADE_STEPS
+	setInterval(() => {
+		for (let i = fadingIn.length - 1; i >= 0; i--) {
+			let point = fadingIn[i]
+
+			point[3] += fadeStep
+
+			if (point[3] >= 1) { // Point is faded in
+				fadingIn.splice(i, 1)
+			}
+		}
+
+		for (let i = fadingOut.length - 1; i >= 0; i--) {
+			let point = fadingOut[i]
+
+			point[3] -= fadeStep * 1.01 // Fade out slightly faster to avoid getting stuck if fading both in and out (rare)
+
+			if (point[3] <= 0) { // Point has been faded out
+				fadingOut.splice(i, 1)
+				points.splice(points.indexOf(point), 1)
+			}
+		}
+	}, FADE_TIME / FADE_STEPS * 1000)
+
+	console.log("Dots initialized")
 }
 
-// Creation loop
-setInterval(() => {
-	if (points.length >= MAX_POINTS) { return }
+if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+	console.log("Dots skipped")
+} else {
+	startLoop()
+}
 
-	let point = newRandomPoint()
-	points.push(point)
-	fadingIn.push(point)
-
-	setTimeout(() => {
-		fadingOut.push(point)
-	}, randomInRange(MIN_LIFE_TIME, MAX_LIFE_TIME) * 1000);
-
-}, 1/POINT_RATE * 1000)
-
-// Fading loop
-let fadeStep = 1 / FADE_STEPS
-setInterval(() => {
-	for (let i = fadingIn.length - 1; i >= 0; i--) {
-		let point = fadingIn[i]
-
-		point[3] += fadeStep
-
-		if (point[3] >= 1) { // Point is faded in
-			fadingIn.splice(i, 1)
-		}
-	}
-
-	for (let i = fadingOut.length - 1; i >= 0; i--) {
-		let point = fadingOut[i]
-
-		point[3] -= fadeStep * 1.01 // Fade out slightly faster to avoid getting stuck if fading both in and out (rare)
-
-		if (point[3] <= 0) { // Point has been faded out
-			fadingOut.splice(i, 1)
-			points.splice(points.indexOf(point), 1)
-		}
-	}
-}, FADE_TIME / FADE_STEPS * 1000)
-
-
-console.log("Dots initialized")
 }
