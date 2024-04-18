@@ -11,7 +11,7 @@
 		<!-- Specify SVG width attribute so it's not huge when CSS is disabled -->
 		<svg width="18" class="fixed top-2 -right-2 fill-accent-red overflow-visible
 			w-[var(--sidebar-icon-size)] translate-x-[calc(var(--sidebar-icon-size)_+_var(--sidebar-ribbon-size))]
-		" viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
+		" aria-hidden="true" viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
 			<path id="sidebar-grill-main" d="M0,0  h18  v2  h-18  v-2   z" />
 			<use href="#sidebar-grill-main" y="5" />
 			<use href="#sidebar-grill-main" y="10" />
@@ -42,7 +42,7 @@
 	</div>
 </nav>
 
-<div id="sidebar-darkener" class="
+<div id="sidebar-darkener" aria-hidden="true" class="
 	fixed h-full w-full opacity-0 bg-black z-30 pointer-events-none
 	transition-opacity motion-reduce:transition-none ease-[ease] duration-500
 	peer-hofoac/sidebar:opacity-50 peer-hofoac/sidebar:duration-300

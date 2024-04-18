@@ -25,10 +25,10 @@
 			</div>
 
 			<div class="relative grow basis-0">
-				<div>
+				<p>
 					<span id="coords-label" class="font-mono">--.-, --.-</span>
 					<span id="selected-label" class="text-gray-400 ml-4"></span>
-				</div>
+				</p>
 				<div id="svg-canvas" class="
 					w-full md:max-h-[60vh] aspect-square
 					[&>svg]:max-w-full [&>svg]:max-h-full [&>svg]:bg-gray-900
