@@ -19,9 +19,6 @@
 			<li>
 				<a href="https://github.com/RiskoZoSlovenska">Programming</a>
 			</li>
-			<li class="before:block before:content-['―']" >
-				<a href="./stories/">Creative Writing</a>
-			</li>
 		</ul>
 	</main>
 </body>

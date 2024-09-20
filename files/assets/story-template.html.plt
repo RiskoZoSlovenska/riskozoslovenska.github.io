@@ -6,7 +6,7 @@
 	$if(description)$<meta name="description" content="$description$">$endif$
 </head>
 
-<body>
+<body data-unsearchable>
 	$(sidebar{ root = ".." })
 
 	<main class="article-main">

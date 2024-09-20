@@ -32,7 +32,6 @@
 		<ul class="mt-5">
 			<li class="mb-3 text-base"><a class="hofoac:underline" href="$(root)/">Home</a></li>
 			<li class="mb-3 text-base"><a class="hofoac:underline" href="$(root)/about">About</a></li>
-			<li class="mb-3 text-base"><a class="hofoac:underline" href="$(root)/stories/">Stories</a></li>
 			<li class="mb-3 text-base"><a class="hofoac:underline" href="$(root)/fragments">Fragments</a></li>
 			<li class="mb-3 text-base"><a class="hofoac:underline" href="$(root)/how-i-switched-to-linux">Switching to Linux</a></li>
 			<li class="mb-3 text-base"><a class="hofoac:underline" href="$(root)/hangman">Hangman</a></li>

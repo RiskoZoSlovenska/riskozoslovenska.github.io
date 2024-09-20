@@ -18,7 +18,6 @@ local STORIES_DIR = assert(arg[1], "no stories directory provided")
 local OUTPUT_DIR = "build/stories/"
 local WARNINGS_FILE = utils.path.join(STORIES_DIR, "warnings.yaml")
 local STORY_TEMPLATE_FILE = "build/assets/story-template.html"
-local STORY_INDEX_FILE = "build/stories/index.html"
 
 local LCMARK_OPTIONS = {
 	yaml_metadata = true,
@@ -43,9 +42,6 @@ local generatedAt = os.date("Automatically generated on %F %T")
 
 local storyTemplateRaw = assert(utils.readfile(STORY_TEMPLATE_FILE))
 local storyTemplate = assert(lcmark.compile_template(storyTemplateRaw))
-
-local indexTemplateRaw = assert(utils.readfile(STORY_INDEX_FILE))
-local indexTemplate = assert(lcmark.compile_template(indexTemplateRaw))
 
 local warningNamesRaw = assert(utils.readfile(WARNINGS_FILE))
 local warningNames = assert(lyaml.load(warningNamesRaw))
@@ -142,18 +138,6 @@ local function compileSinglePartWork(dirMap, partName)
 	}
 end
 
-local function compileIndex(indexData)
-	table.sort(indexData, function(a, b)
-		return a.name < b.name
-	end)
-
-	local rendered = lcmark.apply_template(indexTemplate, {
-		data = indexData,
-		generatedAt = generatedAt,
-	})
-	assert(utils.writefile(STORY_INDEX_FILE, rendered))
-end
-
 local function processWork(workName)
 	local workDir = utils.path.join(STORIES_DIR, workName)
 
@@ -171,6 +155,9 @@ local indexData = {}
 
 print("Story dir: " .. STORIES_DIR)
 
+-- Create stories directory
+assert(utils.path.mkdir(OUTPUT_DIR))
+
 for workName, fullName, isDir in utils.iterdir(STORIES_DIR) do
 	if isDir and not workName:find("^[%._]") then
 		local data = processWork(workName)
@@ -183,9 +170,6 @@ for workName, fullName, isDir in utils.iterdir(STORIES_DIR) do
 		end
 	end
 end
-
-compileIndex(indexData)
-print("Wrote index")
 
 assert(os.remove(STORY_TEMPLATE_FILE))
 print("Removed story template")
