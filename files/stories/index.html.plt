@@ -20,7 +20,8 @@
 			$for(data)$
 			<li title="Get reading!" class="relative bg-gray-700 p-2.5 hofoac-highlight">
 				<h2 class="text-sm md:text-base mb-1 leading-none">
-					<a class="before:absolute before:w-full before:h-full" href="$data.link$">$data.title$</a>
+					<a class="before:absolute before:w-full before:h-full before:top-0 before:left-0"
+					href="$data.link$">$data.title$</a>
 				</h2>
 				<div class="text-2xs text-gray-300">
 					$if(data.description)$$data.description$$else$<em>No description.</em>$endif$
