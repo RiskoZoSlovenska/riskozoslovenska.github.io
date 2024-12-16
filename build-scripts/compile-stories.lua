@@ -129,6 +129,10 @@ local function compileSinglePartWork(dirMap, partName)
 
 	assert(utils.writefile(storyFileName, rendered))
 
+	if meta.list == false then -- Pretend it wasn't published if it shouldn't be listed
+		return nil
+	end
+
 	return {
 		type = dirMap.type,
 		name = partName,
