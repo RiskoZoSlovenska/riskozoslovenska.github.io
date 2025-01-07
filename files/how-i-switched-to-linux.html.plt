@@ -178,22 +178,6 @@
 # 	Issue(30, "Pressing the power button while the PC is locked doesn’t put it to sleep", false, { FEDORA_KDE }, [[
 # 		This bug has been reported <a href="https://bugs.kde.org/show_bug.cgi?id=392798">here</a>.
 # 	]]),
-# 	Issue(32, "WINE applications have crackle-y audio", false, { FEDORA_KDE }, [[
-# 		This bug has been reported as <a href="https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/3098">
-# 		pipewire/pipewire#3098</a>. I’m currently using the workaround described
-# 		<a href="https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/3098#note_1823699">here</a> and
-# 		<a href="https://discourse.nixos.org/t/pipewire-crackling-in-wine-proton/29131/2">here</a>; that is, creating
-# 		<code>~/.config/pipewire/pipewire-pulse.conf.d/20-pulse-properties.conf</code> with the following content:
-# 	]], [[
-#<pre><code class="no-highlight">pulse.properties = {
-#	pulse.min.req     = 512/48000
-#	pulse.min.frag    = 512/48000
-#	pulse.min.quantum = 512/48000
-#}</code></pre>
-# 	]], [[
-# 		Note that I’m using <code>512</code> instead of <code>256</code> as the latter still caused issues. Also, remember to
-# 		<code>systemctl --user restart pipewire pipewire-pulse</code> to apply changes (or just restart the entire PC).
-# 	]]),
 # 	Issue(34,
 # 		"Launching certain applications (e.g. NVIDIA X Server Settings, certain WINE ones) turns off the blue light filter",
 # 		false, ALL, [[
@@ -382,6 +366,24 @@
 #	nohup spotify > /dev/null 2>&1 &
 #	disown $!
 #}</code></pre>
+# 	]]),
+# 	Issue(32, "WINE applications have crackly audio", true, { FEDORA_KDE }, [[
+# 		This bug has been reported as <a href="https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/3098">
+# 		pipewire/pipewire#3098</a>. I used the workaround described
+# 		<a href="https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/3098#note_1823699">here</a> and
+# 		<a href="https://discourse.nixos.org/t/pipewire-crackling-in-wine-proton/29131/2">here</a>; that is, creating
+# 		<code>~/.config/pipewire/pipewire-pulse.conf.d/20-pulse-properties.conf</code> with the following content:
+# 	]], [[
+#<pre><code class="no-highlight">pulse.properties = {
+#	pulse.min.req     = 512/48000
+#	pulse.min.frag    = 512/48000
+#	pulse.min.quantum = 512/48000
+#}</code></pre>
+# 	]], [[
+# 		Note that I used <code>512</code> instead of <code>256</code> as the latter still caused issues. Also, remember to
+# 		<code>systemctl --user restart pipewire pipewire-pulse</code> to apply changes (or just restart the entire PC).
+# 	]], [[
+# 		This issue is no longer occuring.
 # 	]]),
 # 	Issue(12, "The login screen uses different system settings", true, ALL, [[
 # 		This mostly affects things like mouse speed, cursor icon, background, theme and so on. It happens because the login screen
