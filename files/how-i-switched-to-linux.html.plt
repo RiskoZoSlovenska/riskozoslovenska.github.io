@@ -178,10 +178,6 @@
 # 	Issue(30, "Pressing the power button while the PC is locked doesn’t put it to sleep", false, { FEDORA_KDE }, [[
 # 		This bug has been reported <a href="https://bugs.kde.org/show_bug.cgi?id=392798">here</a>.
 # 	]]),
-# 	Issue(31, "The screen doesn’t turn off after locking", false, { FEDORA_KDE }, [[
-# 		This bug has been reported <a href="https://bugs.kde.org/show_bug.cgi?id=348529">here</a> and appears to be actively being
-# 		worked on as of this writing. There are also workarounds involving scripts but I honestly can’t be bothered.
-# 	]]),
 # 	Issue(32, "WINE applications have crackle-y audio", false, { FEDORA_KDE }, [[
 # 		This bug has been reported as <a href="https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/3098">
 # 		pipewire/pipewire#3098</a>. I’m currently using the workaround described
@@ -227,6 +223,10 @@
 # 		Credit goes to <a href="https://bbs.archlinux.org/viewtopic.php?pid=1805919#p1805919">these</a>
 # 		<a href="https://bbs.archlinux.org/viewtopic.php?pid=2022765#p2022765">two</a> posts. Of course, don’t forget to run
 # 		<code>sudo grub2-mkconfig -o /etc/grub2.cfg</code> to apply changes.
+# 	]]),
+# 	Issue(31, "The screen doesn’t turn off immediately after locking", true, { FEDORA_KDE }, [[
+# 		This bug was reported <a href="https://bugs.kde.org/show_bug.cgi?id=348529">here</a> and has been fixed since I created
+# 		this issue. There is now a dedicated ‘When Locked’ chooser for screen turn-off times.
 # 	]]),
 # 	Issue(39, "The GRUB boot menu is occasionally skipped when restarting", true, { FEDORA_KDE }, [[
 # 		Oftentimes, when rebooting my PC, the GRUB menu doesn’t come up at all despite the fact that I’ve explicitly enabled it
