@@ -153,6 +153,7 @@
 # 	}
 # end
 #
+# -- Current Largest Issue #: 40
 # local issues = {
 # 	Issue(8, "(Some) Flatpaks don’t use the system cursor theme", false, ALL, [[
 # 		This is caused by the Flatpaks not having the permissions to read the cursor files. The fix should be simple: just
@@ -242,6 +243,19 @@
 # 		The solution (i.e. disabling this feature) is given by <a href="https://discussion.fedoraproject.org/t/unset-menu-auto-hide-is-how-to-force-grub2-boot-menu-visibility-on-every-boot-for-kernel-parameters/76631/2">
 # 		this answer</a>: <code>sudo grub2-editenv - unset menu_auto_hide</code>. I just wish it was better documented.
 # 	]]),
+# 	Issue(40, "Can’t limit the max battery charge level", true, { FEDORA_KDE }, [[
+# 		Under Windows, max battery charge levels are often controlled by proprietary apps that aren’t available on Linux.
+# 		With some battery models, KDE allows limiting the charge level in ‘Power Management > Advanced Power Settings’.
+# 		However, for others, you’ll have to resort to less official methods such as a <a href="https://github.com/frederik-h/acer-wmi-battery">custom driver</a>.
+# 	]], [[
+# 		For my Acer Nitro 5, I was able to get the limit working with <a href="https://github.com/Diman119/acer-wmi-battery/tree/dkms">this repo</a>
+# 		(pointed to by <a href="https://www.brenobaptista.com/posts/battery-charging-threshold-acer-linux">this blog</a>). Then,
+# 		to get nicer control and proper persistence across reboots, I:
+# 	]], {
+# 		"Created a file <code>/etc/acer-wmi-battery</code>",
+# 		"Created a simple systemd service start runs on boot that copies the contents of the above file to the device file",
+# 		"Wrote a custom <code>healthmode</code> shell function that writes to the above file and then manually runs the systemd service."
+# 	}),
 # 	Issue(36, "Can’t fine-tune the time and date format in KDE", true, { FEDORA_KDE }, [[
 # 		KDE uses the current locale to determine the date and time format and I wasn’t able to manually set it to ISO 8601.
 # 		Thankfully, this has been asked about and answered <a href="https://superuser.com/questions/1162283/use-iso-time-and-date-format-in-kde-5">
