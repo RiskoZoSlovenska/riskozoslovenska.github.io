@@ -156,29 +156,33 @@
 # -- Current Largest Issue #: 40
 # local issues = {
 # 	Issue(8, "(Some) Flatpaks don’t use the system cursor theme", false, ALL, [[
-# 		This is caused by the Flatpaks not having the permissions to read the cursor files. The fix should be simple: just
-# 		<a href="https://github.com/flatpak/flatpak/issues/709#issuecomment-741883444">grant Flatpaks the permissions to access
-# 		cursors</a>. However, certain Flatpaks, such as Discord or the Minecraft launcher, still fail to work on Fedora/KDE (at
-# 		least). I’m going to guess that it has something to do with these apps mainly being designed for Ubuntu and related
-# 		distros.
+# 		Initially, this was caused by the Flatpaks not having the permissions to read the cursor files. The fix was simple:
+# 		just <a href="https://github.com/flatpak/flatpak/issues/709#issuecomment-741883444">grant them the permissions to access
+# 		cursors</a>. However, that does not fix some Flatpaks, notably the stock Minecraft Launcher. I’m guessing that it has
+# 		something to do with the Launcher being designed primarily for Ubuntu/GNOME.
+# 	]], [[
+# 		Either way, none of the apps I use are affected anymore (I use <a href="https://prismlauncher.org/">Prism Launcher</a>
+# 		for Minecraft).
 # 	]]),
 # 	Issue(20,  "Spotify doesn’t let me specify the offline download location.", false, ALL, [[
 # 		I’m pretty sure the Flatpak version of Spotify has a bit of trouble with this. At some point I got it working, but I don’t
-# 		remember which packaging I was using. Nowadays, I just use the default download location.
+# 		remember which packaging I was using. Nowadays, I just use the default download location (with the Flatpak packaging).
 # 	]]),
 # 	Issue(24, "The ‘Recent’ tab in the file explorer is sub-par", false, ALL, [[
-# 		By sub-par I mean that it <a href="https://askubuntu.com/questions/1240286/how-to-show-folders-on-nautilus-recent-list">1)
-# 		doesn’t show folders and 2) doesn’t show up in the ‘Save File’ dialog</a>.
+# 		My gripes with it on GNOME were that it <a href="https://askubuntu.com/questions/1240286/how-to-show-folders-on-nautilus-recent-list">
+# 		1) doesn’t show folders and 2) doesn’t show up in the ‘Save File’ dialog</a>.
 # 	]], [[
-# 		1) is less of an issue on Fedora as Dolphin has both a ‘Recent Files’ and a ‘Recent Locations’ tabs. However, the
-# 		folders in this tab seem to be sorted solely by when and not by how frequently they were accessed, which limits
-# 		its convenience. 2) remains unresolved. Nevertheless, I have mostly become accustomed to this one particular
-# 		limitation.
+# 		KDE’s Dolphin file manager has neither issue. However, I’ve found that Dolphin is a bit unreliable in how it tracks which
+# 		items were accessed (i.e. the list of folders in <code>recentlyused:/</code> isn’t the same as the list of folders in
+# 		<code>recentlyused:/locations/</code>; the same goes for files) and it does not seem to sort by access frequency at all.
+# 		Furthermore, occasionally, it takes really long to load the list of recently used files/folders.
+# 	]], [[
+# 		I have become used to simply not using the ‘Recent’ tab.
 # 	]]),
 # 	Issue(30, "Pressing the power button while the PC is locked doesn’t put it to sleep", false, { FEDORA_KDE }, [[
 # 		This bug has been reported <a href="https://bugs.kde.org/show_bug.cgi?id=392798">here</a>.
 # 	]]),
-# 	Issue(34,
+# 	Issue(34,  -- TODO: Verify that this no longer occurs
 # 		"Launching certain applications (e.g. NVIDIA X Server Settings, certain WINE ones) turns off the blue light filter",
 # 		false, ALL, [[
 # 		This seems to have been reported <a href="https://bugs.launchpad.net/ubuntu/+source/gnome-shell/+bug/1728342">here</a>.
