@@ -205,98 +205,6 @@
 # 		<a href="https://bbs.archlinux.org/viewtopic.php?pid=2022765#p2022765">two</a> posts. Of course, don’t forget to run
 # 		<code>sudo grub2-mkconfig -o /etc/grub2.cfg</code> to apply changes.
 # 	]]),
-# 	Issue(34, "Launching certain applications (e.g. NVIDIA X Server Settings, some WINE apps) turns off the blue light filter",
-# 		true, ALL, [[
-# 		This seems to have been reported <a href="https://bugs.launchpad.net/ubuntu/+source/gnome-shell/+bug/1728342">here</a>.
-# 		Strangely, that bug report had been filed against GNOME, not KDE. Nevertheless, the symptoms appeared identical to what I
-# 		was experiencing. Either way, I cannot reproduce this any longer.
-# 	]]),
-# 	Issue(31, "The screen doesn’t turn off immediately after locking", true, { FEDORA_KDE }, [[
-# 		This bug was reported <a href="https://bugs.kde.org/show_bug.cgi?id=348529">here</a> and has been fixed since I created
-# 		this issue. There is now a dedicated ‘When Locked’ chooser for screen turn-off times.
-# 	]]),
-# 	Issue(39, "The GRUB boot menu is occasionally skipped when restarting", true, { FEDORA_KDE }, [[
-# 		Oftentimes, when rebooting my PC, the GRUB menu doesn’t come up at all despite the fact that I’ve explicitly enabled it
-# 		and gave it a long timeout in <code>/etc/default/grub</code>. This issue frustrated me quite a lot since I wasn’t able to
-# 		consistently reproduce it; sometimes the menu would be skipped (especially after using the PC for a while) and other times
-# 		it wouldn’t.
-# 	]], [[
-# 		After some digging around in the generated GRUB config file, I found out that this is the result of Fedora making
-# 		<a href="https://fedoraproject.org/wiki/Changes/HiddenGrubMenu">this change</a>; for single-boot systems (GRUB thinks my
-# 		system is single-boot; see <a href="#38">#38</a>), the GRUB menu is automatically skipped after a "successful boot",
-# 		which, according to <a href="https://hansdegoede.livejournal.com/19081.html">this FAQ</a>, is defined as a boot lasting
-# 		more than 2 minutes.
-# 	]], [[
-# 		The solution (i.e. disabling this feature) is given by <a href="https://discussion.fedoraproject.org/t/unset-menu-auto-hide-is-how-to-force-grub2-boot-menu-visibility-on-every-boot-for-kernel-parameters/76631/2">
-# 		this answer</a>: <code>sudo grub2-editenv - unset menu_auto_hide</code>. I just wish it was better documented.
-# 	]]),
-# 	Issue(40, "Can’t limit the max battery charge level", true, { FEDORA_KDE }, [[
-# 		Under Windows, max battery charge levels are often controlled by proprietary apps that aren’t available on Linux.
-# 		With some battery models, KDE allows limiting the charge level in ‘Power Management > Advanced Power Settings’.
-# 		However, for others, you’ll have to resort to less official methods such as a <a href="https://github.com/frederik-h/acer-wmi-battery">custom driver</a>.
-# 	]], [[
-# 		For my Acer Nitro 5, I was able to get the limit working with <a href="https://github.com/Diman119/acer-wmi-battery/tree/dkms">this repo</a>
-# 		(pointed to by <a href="https://www.brenobaptista.com/posts/battery-charging-threshold-acer-linux">this blog</a>). Then,
-# 		to get nicer control and proper persistence across reboots, I:
-# 	]], {
-# 		"Created a file <code>/etc/acer-wmi-battery</code>",
-# 		"Created a simple systemd service start runs on boot that copies the contents of the above file to the device file",
-# 		"Wrote a custom <code>healthmode</code> shell function that writes to the above file and then manually runs the systemd service."
-# 	}),
-# 	Issue(36, "Can’t fine-tune the time and date format in KDE", true, { FEDORA_KDE }, [[
-# 		KDE uses the current locale to determine the date and time format and I wasn’t able to manually set it to ISO 8601.
-# 		Thankfully, this has been asked about and answered <a href="https://superuser.com/questions/1162283/use-iso-time-and-date-format-in-kde-5">
-# 		here</a> — the solution is to set the locale to <code>en_SE</code>.
-# 	]], [[
-# 		This is the only time I’ve seen KDE fail in terms of configurability.
-# 	]], [[
-# 		On a related note, Nextcloud also has this problem. Setting Nextcloud’s locale to <code>en_SE</code> works, but causes
-# 		relative time to be shown in Swedish.
-# 	]]),
-# 	Issue(35, "Dolphin hides <code>.old</code> and <code>.bak</code> files", true, { FEDORA_KDE }, [[
-# 		As pointed out by
-# 		<a href="https://forum.manjaro.org/t/is-it-possible-to-change-the-definition-of-a-hidden-file-in-dolphin/149923">this
-# 		question post</a>, this is a side effect of <a href="https://bugs.kde.org/show_bug.cgi?id=3212">this feature request</a>
-# 		being merged. As mentioned on the feature request page, the behaviour can be reverted by disassociating <code>.old</code>
-# 		and <code>.bak</code> files from the <code>application/x-trash</code> mimetype, creating a new one (e.g.
-# 		<code>application/x-backup</code>) and associating the file extensions with it.
-# 	]], [[
-# 		Also, see <a href="https://discuss.kde.org/t/hidden-and-backup-files-in-dolphin/6129">this discussion post</a>.
-# 	]]),
-# 	Issue(33, "Discord doesn’t stream audio when screen-sharing", true, ALL, [[
-# 		This is a
-# 		<a href="https://www.reddit.com/r/linux_gaming/comments/15i9wka/whats_the_best_solution_to_discord_screenshare/">rather
-# 		well-known limitation</a> of the official Discord client on Linux, and is mostly Discord’s fault. The solution is to use
-# 		one of the many <a href="https://github.com/maltejur/discord-screenaudio">alternate</a>
-# 		<a href="https://github.com/Vencord/Vesktop">clients</a> or to use
-# 		<a href="https://github.com/IceDBorn/pipewire-screenaudio">this Firefox extension</a>, open Discord in the browser and
-# 		stream from there.
-# 	]]),
-# 	Issue(29, "Black screen after logging out", true, { FEDORA_KDE }, [[
-# 		Probably-related reports/posts/questions are
-# 		<a href="https://forum.manjaro.org/t/black-screen-when-using-switch-user-or-logout/85738">this one</a>,
-# 		<a href="https://www.reddit.com/r/kde/comments/zg1qfq/fix_to_black_screen_after_logout_with_sddm_wayland/">this one</a>,
-# 		<a href="https://discussion.fedoraproject.org/t/fedora-36-kde-spin-no-monitor-output-of-sddm-after-logout/76139">this
-# 			one</a>,
-# 		<a href="https://github.com/sddm/sddm/issues/1733">this one</a> and
-# 		<a href="https://www.reddit.com/r/Fedora/comments/zaslud/anyone_else_on_kde_spin_have_sddm_break_on_logout/">this one</a>.
-# 		For me, <a href="https://www.reddit.com/r/Fedora/comments/zaslud/anyone_else_on_kde_spin_have_sddm_break_on_logout/">
-# 		making SDDM use X11 instead of Wayland</a> fixed the issue. However, from the looks of the other reports, other
-# 		workarounds may work as well.
-# 	]]),
-# 	Issue(28, "NVENC breaks on suspend", true, { ZORIN_CORE, ZORIN_LITE }, [[
-# 		If something was using NVENC when the computer went to sleep, NVENC would break until the next reboot. Apparently, this
-# 		was a pretty common issue — see <a href="https://bbs.archlinux.org/viewtopic.php?id=272472">this question</a> and
-# 		<a href="https://www.reddit.com/r/linux_gaming/comments/uul5ns/obs_error_failed_to_open_nvenc_codec_after_pc/">this Reddit
-# 		post</a>. As mentioned in the linked issue, this caused issues with OBS and Sunshine.
-# 	]], [[
-# 		Initially, I
-# 		<a href="https://blog.christophersmart.com/2016/05/11/running-scripts-before-and-after-suspend-with-systemd/">set up a
-# 		script</a> that <code>pkill -x obs</code>’d before every suspend. However, if I recall correctly, I ended up fixing the
-# 		whole problem using <a href="https://askubuntu.com/a/1309807">these steps</a>. Additionally, I don’t recall having this
-# 		issue on Fedora at all. OBS still breaks if it’s recording during a system suspension, but that’s a separate and much more
-# 		minor issue.
-# 	]]),
 # 	Issue(1, "PC wakes up immediately after being suspended", true, ALL, [[
 # 		See <a href="https://www.reddit.com/r/gigabyte/comments/mxqvja/b550i_aorus_pro_ax_f13h_instantly_wakes_from_sleep/">this
 # 		Reddit post</a>. The solution is to
@@ -369,24 +277,6 @@
 #	nohup spotify > /dev/null 2>&1 &
 #	disown $!
 #}</code></pre>
-# 	]]),
-# 	Issue(32, "WINE applications have crackly audio", true, { FEDORA_KDE }, [[
-# 		This bug has been reported as <a href="https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/3098">
-# 		pipewire/pipewire#3098</a>. I used the workaround described
-# 		<a href="https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/3098#note_1823699">here</a> and
-# 		<a href="https://discourse.nixos.org/t/pipewire-crackling-in-wine-proton/29131/2">here</a>; that is, creating
-# 		<code>~/.config/pipewire/pipewire-pulse.conf.d/20-pulse-properties.conf</code> with the following content:
-# 	]], [[
-#<pre><code class="no-highlight">pulse.properties = {
-#	pulse.min.req     = 512/48000
-#	pulse.min.frag    = 512/48000
-#	pulse.min.quantum = 512/48000
-#}</code></pre>
-# 	]], [[
-# 		Note that I used <code>512</code> instead of <code>256</code> as the latter still caused issues. Also, remember to
-# 		<code>systemctl --user restart pipewire pipewire-pulse</code> to apply changes (or just restart the entire PC).
-# 	]], [[
-# 		This issue is no longer occuring.
 # 	]]),
 # 	Issue(12, "The login screen uses different system settings", true, ALL, [[
 # 		This mostly affects things like mouse speed, cursor icon, background, theme and so on. It happens because the login screen
@@ -481,6 +371,116 @@
 # 		<a href="https://askubuntu.com/a/225676">The clipboard is context-sensitive</a>; no fix is required. Additionally, Dolphin
 # 		does have this menu option.
 # 	]]),
+# 	Issue(28, "NVENC breaks on suspend", true, { ZORIN_CORE, ZORIN_LITE }, [[
+# 		If something was using NVENC when the computer went to sleep, NVENC would break until the next reboot. Apparently, this
+# 		was a pretty common issue — see <a href="https://bbs.archlinux.org/viewtopic.php?id=272472">this question</a> and
+# 		<a href="https://www.reddit.com/r/linux_gaming/comments/uul5ns/obs_error_failed_to_open_nvenc_codec_after_pc/">this Reddit
+# 		post</a>. As mentioned in the linked issue, this caused issues with OBS and Sunshine.
+# 	]], [[
+# 		Initially, I
+# 		<a href="https://blog.christophersmart.com/2016/05/11/running-scripts-before-and-after-suspend-with-systemd/">set up a
+# 		script</a> that <code>pkill -x obs</code>’d before every suspend. However, if I recall correctly, I ended up fixing the
+# 		whole problem using <a href="https://askubuntu.com/a/1309807">these steps</a>. Additionally, I don’t recall having this
+# 		issue on Fedora at all. OBS still breaks if it’s recording during a system suspension, but that’s a separate and much more
+# 		minor issue.
+# 	]]),
+# 	Issue(29, "Black screen after logging out", true, { FEDORA_KDE }, [[
+# 		Probably-related reports/posts/questions are
+# 		<a href="https://forum.manjaro.org/t/black-screen-when-using-switch-user-or-logout/85738">this one</a>,
+# 		<a href="https://www.reddit.com/r/kde/comments/zg1qfq/fix_to_black_screen_after_logout_with_sddm_wayland/">this one</a>,
+# 		<a href="https://discussion.fedoraproject.org/t/fedora-36-kde-spin-no-monitor-output-of-sddm-after-logout/76139">this
+# 			one</a>,
+# 		<a href="https://github.com/sddm/sddm/issues/1733">this one</a> and
+# 		<a href="https://www.reddit.com/r/Fedora/comments/zaslud/anyone_else_on_kde_spin_have_sddm_break_on_logout/">this one</a>.
+# 		For me, <a href="https://www.reddit.com/r/Fedora/comments/zaslud/anyone_else_on_kde_spin_have_sddm_break_on_logout/">
+# 		making SDDM use X11 instead of Wayland</a> fixed the issue. However, from the looks of the other reports, other
+# 		workarounds may work as well.
+# 	]]),
+# 	Issue(31, "The screen doesn’t turn off immediately after locking", true, { FEDORA_KDE }, [[
+# 		This bug was reported <a href="https://bugs.kde.org/show_bug.cgi?id=348529">here</a> and has been fixed since I created
+# 		this issue. There is now a dedicated ‘When Locked’ chooser for screen turn-off times.
+# 	]]),
+# 	Issue(32, "WINE applications have crackly audio", true, { FEDORA_KDE }, [[
+# 		This bug has been reported as <a href="https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/3098">
+# 		pipewire/pipewire#3098</a>. I used the workaround described
+# 		<a href="https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/3098#note_1823699">here</a> and
+# 		<a href="https://discourse.nixos.org/t/pipewire-crackling-in-wine-proton/29131/2">here</a>; that is, creating
+# 		<code>~/.config/pipewire/pipewire-pulse.conf.d/20-pulse-properties.conf</code> with the following content:
+# 	]], [[
+#<pre><code class="no-highlight">pulse.properties = {
+#	pulse.min.req     = 512/48000
+#	pulse.min.frag    = 512/48000
+#	pulse.min.quantum = 512/48000
+#}</code></pre>
+# 	]], [[
+# 		Note that I used <code>512</code> instead of <code>256</code> as the latter still caused issues. Also, remember to
+# 		<code>systemctl --user restart pipewire pipewire-pulse</code> to apply changes (or just restart the entire PC).
+# 	]], [[
+# 		This issue is no longer occuring.
+# 	]]),
+# 	Issue(33, "Discord doesn’t stream audio when screen-sharing", true, ALL, [[
+# 		This is a
+# 		<a href="https://www.reddit.com/r/linux_gaming/comments/15i9wka/whats_the_best_solution_to_discord_screenshare/">rather
+# 		well-known limitation</a> of the official Discord client on Linux, and is mostly Discord’s fault. The solution is to use
+# 		one of the many <a href="https://github.com/maltejur/discord-screenaudio">alternate</a>
+# 		<a href="https://github.com/Vencord/Vesktop">clients</a> or to use
+# 		<a href="https://github.com/IceDBorn/pipewire-screenaudio">this Firefox extension</a>, open Discord in the browser and
+# 		stream from there.
+# 	]]),
+# 	Issue(34, "Launching certain applications (e.g. NVIDIA X Server Settings, some WINE apps) turns off the blue light filter",
+# 		true, ALL, [[
+# 		This seems to have been reported <a href="https://bugs.launchpad.net/ubuntu/+source/gnome-shell/+bug/1728342">here</a>.
+# 		Strangely, that bug report had been filed against GNOME, not KDE. Nevertheless, the symptoms appeared identical to what I
+# 		was experiencing. Either way, I cannot reproduce this any longer.
+# 	]]),
+# 	Issue(35, "Dolphin hides <code>.old</code> and <code>.bak</code> files", true, { FEDORA_KDE }, [[
+# 		As pointed out by
+# 		<a href="https://forum.manjaro.org/t/is-it-possible-to-change-the-definition-of-a-hidden-file-in-dolphin/149923">this
+# 		question post</a>, this is a side effect of <a href="https://bugs.kde.org/show_bug.cgi?id=3212">this feature request</a>
+# 		being merged. As mentioned on the feature request page, the behaviour can be reverted by disassociating <code>.old</code>
+# 		and <code>.bak</code> files from the <code>application/x-trash</code> mimetype, creating a new one (e.g.
+# 		<code>application/x-backup</code>) and associating the file extensions with it.
+# 	]], [[
+# 		Also, see <a href="https://discuss.kde.org/t/hidden-and-backup-files-in-dolphin/6129">this discussion post</a>.
+# 	]]),
+# 	Issue(36, "Can’t fine-tune the time and date format in KDE", true, { FEDORA_KDE }, [[
+# 		KDE uses the current locale to determine the date and time format and I wasn’t able to manually set it to ISO 8601.
+# 		Thankfully, this has been asked about and answered <a href="https://superuser.com/questions/1162283/use-iso-time-and-date-format-in-kde-5">
+# 		here</a> — the solution is to set the locale to <code>en_SE</code>.
+# 	]], [[
+# 		This is the only time I’ve seen KDE fail in terms of configurability.
+# 	]], [[
+# 		On a related note, Nextcloud also has this problem. Setting Nextcloud’s locale to <code>en_SE</code> works, but causes
+# 		relative time to be shown in Swedish.
+# 	]]),
+# 	Issue(39, "The GRUB boot menu is occasionally skipped when restarting", true, { FEDORA_KDE }, [[
+# 		Oftentimes, when rebooting my PC, the GRUB menu doesn’t come up at all despite the fact that I’ve explicitly enabled it
+# 		and gave it a long timeout in <code>/etc/default/grub</code>. This issue frustrated me quite a lot since I wasn’t able to
+# 		consistently reproduce it; sometimes the menu would be skipped (especially after using the PC for a while) and other times
+# 		it wouldn’t.
+# 	]], [[
+# 		After some digging around in the generated GRUB config file, I found out that this is the result of Fedora making
+# 		<a href="https://fedoraproject.org/wiki/Changes/HiddenGrubMenu">this change</a>; for single-boot systems (GRUB thinks my
+# 		system is single-boot; see <a href="#38">#38</a>), the GRUB menu is automatically skipped after a "successful boot",
+# 		which, according to <a href="https://hansdegoede.livejournal.com/19081.html">this FAQ</a>, is defined as a boot lasting
+# 		more than 2 minutes.
+# 	]], [[
+# 		The solution (i.e. disabling this feature) is given by <a href="https://discussion.fedoraproject.org/t/unset-menu-auto-hide-is-how-to-force-grub2-boot-menu-visibility-on-every-boot-for-kernel-parameters/76631/2">
+# 		this answer</a>: <code>sudo grub2-editenv - unset menu_auto_hide</code>. I just wish it was better documented.
+# 	]]),
+# 	Issue(40, "Can’t limit the max battery charge level", true, { FEDORA_KDE }, [[
+# 		Under Windows, max battery charge levels are often controlled by proprietary apps that aren’t available on Linux.
+# 		With some battery models, KDE allows limiting the charge level in ‘Power Management > Advanced Power Settings’.
+# 		However, for others, you’ll have to resort to less official methods such as a <a href="https://github.com/frederik-h/acer-wmi-battery">custom driver</a>.
+# 	]], [[
+# 		For my Acer Nitro 5, I was able to get the limit working with <a href="https://github.com/Diman119/acer-wmi-battery/tree/dkms">this repo</a>
+# 		(pointed to by <a href="https://www.brenobaptista.com/posts/battery-charging-threshold-acer-linux">this blog</a>). Then,
+# 		to get nicer control and proper persistence across reboots, I:
+# 	]], {
+# 		"Created a file <code>/etc/acer-wmi-battery</code>",
+# 		"Created a simple systemd service start runs on boot that copies the contents of the above file to the device file",
+# 		"Wrote a custom <code>healthmode</code> shell function that writes to the above file and then manually runs the systemd service."
+# 	}),
 # }
 
 
