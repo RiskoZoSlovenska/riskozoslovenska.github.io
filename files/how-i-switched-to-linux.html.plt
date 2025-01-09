@@ -182,13 +182,6 @@
 # 	Issue(30, "Pressing the power button while the PC is locked doesn’t put it to sleep", false, { FEDORA_KDE }, [[
 # 		This bug has been reported <a href="https://bugs.kde.org/show_bug.cgi?id=392798">here</a>.
 # 	]]),
-# 	Issue(34,  -- TODO: Verify that this no longer occurs
-# 		"Launching certain applications (e.g. NVIDIA X Server Settings, certain WINE ones) turns off the blue light filter",
-# 		false, ALL, [[
-# 		This seems to have been reported <a href="https://bugs.launchpad.net/ubuntu/+source/gnome-shell/+bug/1728342">here</a>.
-# 		Strangely, that bug report was filed against Ubuntu, which uses GNOME, not KDE. Nevertheless, the symptoms appear
-# 		identical to what I’m experiencing and the problem is probably caused by the same underlying issue in both cases.
-# 	]]),
 # 	Issue(37, "The icons of certain apps have black backgrounds/are rendered wrong", false, { FEDORA_KDE }, [[
 # 		This has been reported <a href="https://bugs.kde.org/show_bug.cgi?id=448234">here</a>.
 # 	]]),
@@ -211,6 +204,12 @@
 # 		Credit goes to <a href="https://bbs.archlinux.org/viewtopic.php?pid=1805919#p1805919">these</a>
 # 		<a href="https://bbs.archlinux.org/viewtopic.php?pid=2022765#p2022765">two</a> posts. Of course, don’t forget to run
 # 		<code>sudo grub2-mkconfig -o /etc/grub2.cfg</code> to apply changes.
+# 	]]),
+# 	Issue(34, "Launching certain applications (e.g. NVIDIA X Server Settings, some WINE apps) turns off the blue light filter",
+# 		true, ALL, [[
+# 		This seems to have been reported <a href="https://bugs.launchpad.net/ubuntu/+source/gnome-shell/+bug/1728342">here</a>.
+# 		Strangely, that bug report had been filed against GNOME, not KDE. Nevertheless, the symptoms appeared identical to what I
+# 		was experiencing. Either way, I cannot reproduce this any longer.
 # 	]]),
 # 	Issue(31, "The screen doesn’t turn off immediately after locking", true, { FEDORA_KDE }, [[
 # 		This bug was reported <a href="https://bugs.kde.org/show_bug.cgi?id=348529">here</a> and has been fixed since I created
