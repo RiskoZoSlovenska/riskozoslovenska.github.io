@@ -13,7 +13,7 @@
 		<figure class="mx-auto md:m-0 md:ml-5 md:float-right">
 			<img src="./assets/images/ntfs.png" width="364" height="149" alt="Screenshot of six files with the same name on Windows 7">
 			<figcaption>
-				I stumbled upon this while clearing out my old Win 7 laptop. And yes, those are all unique and in the same folder.
+				I stumbled upon this while clearing out my old Win 7 laptop. All six files are unique and in the same folder.
 			</figcaption>
 		</figure>
 		<p>
@@ -41,26 +41,25 @@
 		</p>
 		<p>
 			A year or so later, I gradually started questioning Zorin. There was nothing noticeably wrong about it at first, but
-			the glacial pace at which it moved became more and more apparent as time moved on. Zorin is built upon Ubuntu LTS,
-			meaning that it only gets a new release when a new LTS comes out: once every two years. That’s an abysmally long time,
-			especially in the world of software. Zorin’s tendency to be constantly behind began to be irritating, and so I started
-			looking for something new.
+			the glacial pace at which it moved became more and more apparent the longer I used it. Zorin is built upon Ubuntu LTS,
+			meaning that it only gets a new release when a new LTS comes out — once every two years. That’s an abysmally long
+			time. Zorin’s consistent tardiness began to be irritating, and slowly I grew bored again.
 		</p>
 		<p>
-			Shortly before I started considering switching distros, a friend of mine took the plunge and swapped out Windows 10
-			for <a href="https://fedoraproject.org/workstation/">Fedora Workstation</a>. Furthermore,
+			Shortly before I started considering switching distros, a (non-tech-savvy) friend of mine took the plunge and hopped
+			from Windows 10 to <a href="https://fedoraproject.org/workstation/">Fedora Workstation</a>. Furthermore,
 			<a href="https://fedoraproject.org/">Fedora</a> cropped up often in online discussions and was ultimately recommended
-			to me by another friend. Needless to say, it caught my attention. After a bit of research, I decided that it was
-			exactly what I was looking for: it was up-to-date, widely-supported and still user-friendly. I also considered
-			<a href="https://archlinux.org/">Arch</a>, <a href="https://endeavouros.com/">EndeavourOS</a> or Solus, but I didn’t
-			want to make anything more difficult than it needed to be nor did I want to risk things with rolling releases. In
-			short, Fedora was a perfect match.
+			to me by another friend. Needless to say, it caught my attention. After a bit of research, I was excited:
+			Fedora was said to be easy, up-to-date, and it enjoyed wide support — a perfect match. I had also given thought to
+			<a href="https://archlinux.org/">Arch</a>, <a href="https://endeavouros.com/">EndeavourOS</a> and Solus, but I didn’t
+			want to make my life any more difficult than it needed to be nor did I want to risk breaking my system with rolling
+			releases. So, Fedora it was.
 		</p>
 		<p>
 			Next, I needed to pick a desktop environment. GNOME was an obvious candidate, but
 			<a href="https://kde.org/plasma-desktop/">KDE</a> caught my eye thanks to its reputation as being heavily
 			configurable, pretty and lightweight. I also wanted to try out <a href="https://fedoraproject.org/spins/cinnamon/">
-			Cinnamon</a>, but the moment I booted up a Fedora KDE LiveCD, I knew that this was the one. KDE greeted me with the
+			Cinnamon</a>, but the moment I booted up a Fedora KDE LiveCD, I knew that it was the one. KDE greeted me with the
 			beloved Windows-like taskbar layout, and the default file manager,
 			<a href="https://apps.kde.org/dolphin/">Dolphin</a>, completely blew <a href="https://apps.gnome.org/Nautilus/">
 			Nautilus</a> and <a href="https://docs.xfce.org/xfce/thunar/start">Thunar</a> (the file managers on Zorin Core and
@@ -79,15 +78,15 @@
 			somewhat confusing (thankfully, as of this writing, there should be a new and improved one coming out soon — if it
 			isn’t out already). I also had to manually add/install Flathub, <a href="https://rpmfusion.org/Howto/NVIDIA">
 			NVIDIA drivers</a> and <a href="https://wiki.winehq.org/Fedora">WINE</a>, which wasn’t hard but was still something
-			Zorin did for me (or let me do with a single click). I also set X11 as the default window system since I didn’t want
-			to deal with yet another thing that could make stuff break. Just like on Zorin, a few residual issues remain, but
-			otherwise, the process went very smoothly.
+			Zorin did for me (or let me do with a single click). I also set X11 as the default window system as I didn’t want
+			to deal with yet another thing that could make stuff break (I've since switched to Wayland and have had no issues).
+			Just like on Zorin, a few residual nitpicks remain, but otherwise, the process went very smoothly.
 		</p>
 		<p>
-			There were some hiccups, but despite that, Linux, Fedora, KDE and the things around them are phenomenal pieces of
+			Overall, there were hiccups. Despite that, Linux, Fedora, KDE and the things around them are phenomenal pieces of
 			software; ditching Windows is probably one of the best decisions I’ve ever made. It’s been and continues to be a wild
-			ride that never fails to teach me something new. If you, dear reader, are on Windows and are getting bored of it, why
-			not try something new? Linux won’t disappoint.
+			ride that never fails to teach me something new. If you, dear reader, are on Windows and are getting bored of — or fed
+			up with — it, why not try something new? Linux won’t disappoint.
 		</p>
 		<hr>
 		<p>
@@ -97,8 +96,9 @@
 		<ul class="list-disc pl-8 mb-5">
 # 		for _, item in ipairs({
 # 			{ "Paint.NET", "https://www.getpaint.net/", [[
-# 				Replaced by GIMP. I only do minor edits/make memes so GIMP is a bit overkill, but it gets the job done if I do a
-# 				bit of Googling.
+# 				Replaced by Pinta, Krita and GIMP. Pinta is an open-source fork of an old version of PDN, so it should be
+# 				more-or-less a direct replacement (as long as you install an up-to-date version). However, I’ve found Krita to be
+# 				more suitable for my occasional needs, and I can always fall back to GIMP for more advanced things.
 # 			]] },
 # 			{ "Logitech G-Hub", "https://www.logitechg.com/en-us/innovation/g-hub.html", [[
 # 				It <a href="https://www.reddit.com/r/LogitechG/comments/gmuogw/logitech_g_hub_for_linux/">doesn’t look to be
@@ -107,8 +107,10 @@
 # 				whenever I need to change anything (which is once in a blue moon anyway).
 # 			]] },
 # 			{ "ScreenToGif", "https://www.screentogif.com/", [[
-# 				No alternative found. As of this writing, <a href="https://github.com/phw/peek">Peek</a> is discontinued and
-# 				<a href="https://github.com/SeaDve/Kooha">Kooha</a> doesn’t work (at least not KDE).
+# 				KDE Plasma’s screenshotting utility, <a href="https://apps.kde.org/spectacle/">Spectacle</a>, provides rectangular
+# 				region screen recording which is sufficient for my needs. <a href="https://github.com/phw/peek">Peek</a> provides
+# 				a more ScreenToGif-like functionality, but as of <time>2025-01-09<time> does not support recording on Plasma. The
+# 				last similar utility I know of is <a href="https://github.com/SeaDve/Kooha">Kooha</a>, but it doesn't work either.
 # 			]] },
 # 			{ "HWiNFO", "https://www.hwinfo.com/", [[
 # 				The functionality I needed — checking temperatures — was filled in by various taskbar-based extensions/widgets.
@@ -133,9 +135,8 @@
 			I’ve tried to detail what I’ve attempted and what worked for each issue.
 		</p>
 		<p>
-			You may notice that this list is fairly long and includes a non-negligible amount of items marked as "ongoing".
-			However, do not take this as an indication that the Linux experience is janky; the positives far outweigh any
-			drawbacks.
+			You may notice that this list is fairly long. However, do not take this as an indication that the Linux experience is
+			janky; the positives far outweigh any negatives.
 		</p>
 
 # local ZORIN_LITE = '<li class="inline-block py-0.5 px-1 rounded text-2xs text-gray-100 bg-[#15a6f0]">Zorin 16 Lite</li>'
@@ -183,7 +184,9 @@
 # 		This bug has been reported <a href="https://bugs.kde.org/show_bug.cgi?id=392798">here</a>.
 # 	]]),
 # 	Issue(37, "The icons of certain apps have black backgrounds/are rendered wrong", false, { FEDORA_KDE }, [[
-# 		This has been reported <a href="https://bugs.kde.org/show_bug.cgi?id=448234">here</a>.
+# 		This has been reported <a href="https://bugs.kde.org/show_bug.cgi?id=448234">here</a>. The bug has been marked as RESOLVED
+# 		UPSTREAM (QtSvg, the renderer to blame, was/is getting improvements), but as of <time>2025-01-08</time>, some icons
+# 		are still mis-rendered.
 # 	]]),
 # 	Issue(38, "<code>os-prober</code> does not detect Windows 10", false, { FEDORA_KDE }, [[
 # 		I have a copy of Windows on a separate 128 GB SSD for when I have no other option but to deal with a Windows-only app.
@@ -451,7 +454,7 @@
 # 		This is the only time I’ve seen KDE fail in terms of configurability.
 # 	]], [[
 # 		On a related note, Nextcloud also has this problem. Setting Nextcloud’s locale to <code>en_SE</code> works, but causes
-# 		relative time to be shown in Swedish.
+# 		relative time (e.g. “a day ago”) to be shown in Swedish.
 # 	]]),
 # 	Issue(39, "The GRUB boot menu is occasionally skipped when restarting", true, { FEDORA_KDE }, [[
 # 		Oftentimes, when rebooting my PC, the GRUB menu doesn’t come up at all despite the fact that I’ve explicitly enabled it
