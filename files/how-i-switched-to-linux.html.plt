@@ -480,8 +480,8 @@
 # 		(pointed to by <a href="https://www.brenobaptista.com/posts/battery-charging-threshold-acer-linux">this blog</a>). Then,
 # 		to get nicer control and proper persistence across reboots, I:
 # 	]], {
-# 		"Created a file <code>/etc/acer-wmi-battery</code>",
-# 		"Created a simple systemd service start runs on boot that copies the contents of the above file to the device file",
+# 		"Created a file named <code>/etc/acer-wmi-battery</code>.",
+# 		"Created a simple oneshot systemd service that runs on boot and copies the contents of the above file to the device file.",
 # 		"Wrote a custom <code>healthmode</code> shell function that writes to the above file and then manually runs the systemd service."
 # 	}),
 # }
