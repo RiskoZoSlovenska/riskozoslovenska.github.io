@@ -21,8 +21,8 @@
 			As you might already know, I’m <b>RiskoZS</b>, but you can call me <b>Risko</b>.
 			I write stuff sometimes. My favourite language is <a href="https://www.lua.org/">Lua</a>, but I also have some
 			moderate experience with a bunch of other languages, including <a href="https://www.python.org/">Python</a>,
-			<a href="https://en.wikipedia.org/wiki/English_language">English</a>, <a href="https://www.java.com/">Java</a> and
-			(unfortunately) <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a>.
+			<a href="https://www.c-language.org/">C</a>, <a href="https://en.wikipedia.org/wiki/English_language">English</a>,
+			<a href="https://www.java.com/">Java</a> and (unfortunately) <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a>.
 			I’m afraid there’s not much else to me than that at the moment, but feel free to check back in a couple of years.
 		</p>
 
