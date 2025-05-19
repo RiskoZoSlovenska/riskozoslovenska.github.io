@@ -165,7 +165,7 @@
 # 		Either way, none of the apps I use are affected anymore (I use <a href="https://prismlauncher.org/">Prism Launcher</a>
 # 		for Minecraft).
 # 	]]),
-# 	Issue(20,  "Spotify doesn’t let me specify the offline download location.", false, ALL, [[
+# 	Issue(20,  "Spotify doesn’t let me specify the offline download location", false, ALL, [[
 # 		I’m pretty sure the Flatpak version of Spotify has a bit of trouble with this. At some point I got it working, but I don’t
 # 		remember which packaging I was using. Nowadays, I just use the default download location (with the Flatpak packaging).
 # 	]]),
