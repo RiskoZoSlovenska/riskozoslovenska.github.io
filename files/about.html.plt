@@ -34,7 +34,6 @@
 # 				{"mailto:riskozoslovenska@gmail.com", "mail.svg", "The Gmail logo", "riskozoslovenska<wbr>@gmail.com"},
 # 				{"https://www.youtube.com/channel/UCWCC6wm037u-lSeF2yfFKbw", "youtube.png", "The YouTube logo", "RiskoZoSlovenska"},
 # 				{"https://steamcommunity.com/profiles/76561199122286912", "steam.svg", "The Steam logo", "RiskoZoSlovenska"},
-# 				{"https://open.spotify.com/user/4u4zs2216n18n40u46mail4cb?si=CitKmACMTwOQKFYN8pFIQg", "spotify.png", "The Spotify logo", "RiskoZoSlovenska"},
 # 				{"https://pcpartpicker.com/b/mGTCmG", "computer.svg", "An image of a computer", "<span class='whitespace-nowrap'>RZS-TANAR</span>"},
 # 			}) do
 			<li class="relative block group">
