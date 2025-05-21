@@ -108,7 +108,7 @@
 	}
 
 	.h1-splash {
-		@apply text-gray-400 text-xs mb-h1;
+		@apply text-gray-400 text-sm mb-h1;
 	}
 
 	.loading {
