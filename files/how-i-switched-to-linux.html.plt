@@ -139,9 +139,9 @@
 			janky; the positives far outweigh any negatives.
 		</p>
 
-# local ZORIN_LITE = '<li class="inline-block py-0.5 px-1 rounded text-2xs text-gray-100 bg-[#15a6f0]">Zorin 16 Lite</li>'
-# local ZORIN_CORE = '<li class="inline-block py-0.5 px-1 rounded text-2xs text-gray-100 bg-[#15a6f0]">Zorin 16 Core</li>'
-# local FEDORA_KDE = '<li class="inline-block py-0.5 px-1 rounded text-2xs text-gray-100 bg-[#3c6eb4]">Fedora/KDE</li>'
+# local ZORIN_LITE = '<li class="inline-block py-0.5 px-1 rounded-sm text-2xs text-gray-100 bg-[#15a6f0]">Zorin 16 Lite</li>'
+# local ZORIN_CORE = '<li class="inline-block py-0.5 px-1 rounded-sm text-2xs text-gray-100 bg-[#15a6f0]">Zorin 16 Core</li>'
+# local FEDORA_KDE = '<li class="inline-block py-0.5 px-1 rounded-sm text-2xs text-gray-100 bg-[#3c6eb4]">Fedora/KDE</li>'
 # local ALL = { ZORIN_CORE, ZORIN_LITE, FEDORA_KDE }
 #
 # local function Issue(number, title, resolved, systems, ...)
@@ -199,7 +199,7 @@
 # 		manually, which is what I ended up doing anyway. I added the following to <code>/etc/grub.d/40_custom</code> (remember to
 # 		replace <code>848F-AF37</code> with your own UUID):
 # 	]], [[
-#<pre class="has-code"><code>menuentry 'Windows Boot Manager' {
+#<pre><code>menuentry 'Windows Boot Manager' {
 #	search.fs_uuid 848F-AF37 root hd0,gpt1
 #	chainloader /EFI/Microsoft/Boot/bootmgfw.efi
 #}</code></pre>
@@ -272,7 +272,7 @@
 # 		PulseAudio fixed it. However, restarting PulseAudio broke Spotify and other apps that depended on it, so I made a
 # 		little script to restart everything:
 # 	]], [[
-#<pre class="has-code"><code class="language-bash"># Audio breaks sometimes and resetting PulseAudio seems to fix it.
+#<pre><code class="language-bash"># Audio breaks sometimes and resetting PulseAudio seems to fix it.
 #&#35; Spotify also needs a restart to work after PulseAudio is restarted.
 #function restartpulse() {
 #	pulseaudio --kill
@@ -304,7 +304,7 @@
 # 		<a href="https://unix.stackexchange.com/a/564888">Register a custom MIME type</a>. My <code>x-code-workspace.xml</code>
 # 		file looked like this:
 # 	]], [[
-#<pre class="has-code"><code class="language-xml">&lt;?xml version=&quot;1.0&quot;?&gt;
+#<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot;?&gt;
 #&lt;mime-info xmlns=&quothttp://www.freedesktop.org/standards/shared-mime-info&quot&gt;
 #	&lt;mime-type type=&quot;application/x-code-workspace&quot;&gt;
 #		&lt;comment&gt;VS Code Workspace&lt;/comment&gt;

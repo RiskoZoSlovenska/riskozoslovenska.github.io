@@ -2,7 +2,7 @@
 #
 <nav id="sidebar" class="
 	peer/sidebar fixed h-full w-min max-w-[85vw] z-40 bg-gray-800 border-r-accent-red
-	border-r-[length:--sidebar-ribbon-size] translate-x-[calc(var(--sidebar-ribbon-size)_-_100%)] hofoac:translate-x-0
+	border-r-(length:--sidebar-ribbon-size) translate-x-[calc(var(--sidebar-ribbon-size)-100%)] hofoac:translate-x-0
 	transition-transform motion-reduce:transition-none ease-[ease] duration-500 hofoac:duration-300
 " onmouseenter="ex_onSidebarMouseEnter(event)" onmouseleave="ex_onSidebarMouseLeave(event)"
 >
@@ -10,7 +10,7 @@
 	<div class="h-full py-4 px-8 overflow-y-auto overscroll-contain">
 		<!-- Specify SVG width attribute so it's not huge when CSS is disabled -->
 		<svg width="18" class="fixed top-2 -right-2 fill-accent-red overflow-visible
-			w-[var(--sidebar-icon-size)] translate-x-[calc(var(--sidebar-icon-size)_+_var(--sidebar-ribbon-size))]
+			w-(--sidebar-icon-size) translate-x-[calc(var(--sidebar-icon-size)+var(--sidebar-ribbon-size))]
 		" aria-hidden="true" viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
 			<path id="sidebar-grill-main" d="M0,0  h18  v2  h-18  v-2   z" />
 			<use href="#sidebar-grill-main" y="5" />

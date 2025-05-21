@@ -24,9 +24,9 @@
 			<div id="fragment" class="
 				absolute select-none
 				opacity-0 transition-opacity duration-500
-				data-[active]:hover:opacity-100 data-[active]:hover:select-auto
+				data-active:hover:opacity-100 data-active:hover:select-auto
 				max-w-[50vw] min-w-[35vw] min-h-[20vh]
-				py-[6rem] px-[6ch] no-has-hover:p-0
+				py-[6rem] px-[6ch] not-has-hover:p-0
 				grid place-content-center
 			"></div>
 		</div>

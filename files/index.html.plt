@@ -12,7 +12,7 @@
 		<canvas id="dots-canvas" class="absolute w-full h-full -z-10" aria-hidden="true"></canvas>
 		<h1 class="text-sm md:text-base mb-[calc(35vh-3rem)]">
 			Hi there. I’m<br>
-			<span class="text-[length:clamp(1rem,_8.5vw,_5rem)] leading-none"><b>RiskoZS</b></span><br>
+			<span class="text-[clamp(1rem,8.5vw,5rem)] leading-none"><b>RiskoZS</b></span><br>
 			and you’ve stumbled into my little corner of the internet.
 		</h1>
 		<ul class="xs:inline-list">

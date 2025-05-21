@@ -10,7 +10,7 @@
 
 	<main class="w-full grid place-content-center text-center">
 		<div>
-			<h1 class="text-accent-red font-bold text-[length:clamp(3.75rem,10vw,5.75rem)]">
+			<h1 class="text-accent-red font-bold text-[clamp(3.75rem,10vw,5.75rem)]">
 				<span class="font-mono">404 </span>;-;
 			</h1>
 			<div class="text-gray-400 text-base md:text-lg mb-3">(a.k.a. Not Found)</div>

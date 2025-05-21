@@ -28,7 +28,7 @@
 				<!-- Gallow --> <path d="M 15 0  H 80  V 17.5  H 70  V 10  H 25  V 100  H 40  V 110  H 0  V 100  H 15  Z" />
 
 				<g id="hangman-svg-parts" class="
-					*:fill-opacity-0 [&>.shown]:fill-opacity-100
+					*:[fill-opacity:0] [&>.shown]:[fill-opacity:1]
 					*:transition-[fill-opacity] *:duration-300 *:ease-linear
 				">
 					<!-- Head      --> <circle cx="75" cy="30" r="12.5" />
@@ -55,7 +55,7 @@
 		<div id="end-overlay" class="
 			fixed left-0 top-0 w-full h-full bg-gray-900 opacity-0 pointer-events-none z-20 overflow-auto
 			transition-opacity duration-700 ease-[ease]
-			data-[is-playing=false]:opacity-[98%] data-[is-playing=false]:pointer-events-auto
+			data-[is-playing=false]:opacity-98 data-[is-playing=false]:pointer-events-auto
 			p-10 pt-7 pb-15 sm:pt-10 sm:pb-20 flex flex-col items-center text-center
 		" data-is-playing="true">
 			<div class="flex-none w-full">

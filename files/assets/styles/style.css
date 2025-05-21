@@ -1,16 +1,118 @@
-@import url("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap') layer(base);
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap') layer(base);
 
-:root {
-	--sidebar-ribbon-size: max(0.5rem, 0.5vw);
-	--sidebar-icon-size: max(18px, 0.75vw);
+@import 'tailwindcss';
+
+@theme {
+	--font-sans: "Lato", "Calibri", "Roboto", sans-serif;
+	--font-mono: "Inconsolata", "Consolas", ui-monospace;
+
+	--breakpoint-xs: 30rem;
+
+	--text-4xs: 0.6rem;
+	--text-3xs: 0.7rem;
+	--text-2xs: 0.8rem;
+	--text-xs: 0.9rem;
+	--text-sm: 1.05rem;
+	--text-base: 1.25rem;
+	--text-lg: 1.5rem;
+	--text-xl: 2rem;
+	--text-2xl: 2.5rem;
+
+	--color-gray-900: #171717;
+	--color-gray-800: #1e1e1e;
+	--color-gray-700: #252525;
+	--color-gray-600: #2d2d2d;
+	--color-gray-500: #3e3e3e;
+	--color-gray-400: #696969;
+	--color-gray-300: #8e8e8e;
+	--color-gray-200: #a5a5a5;
+	--color-gray-100: #d4d4d4;
+	--color-accent-red: #ff3232;
+	--color-accent-blue: #00aaff;
+	--color-correct: #48ca48;
+	--color-incorrect: #ca4848;
 }
 
-@tailwind base;
+/* MARK: Variants */
+@custom-variant hofoac (&:is(:hover, :focus-within, .custom-focus, :active));
+@custom-variant hofonoac (&:is(:hover, :focus-within, .custom-focus):not(:active));
+
+@custom-variant has-hover {
+	@media (hover: hover) {
+		@slot;
+	}
+}
+
+
+/* MARK: Utilities */
+@utility hofoac-highlight {
+	@apply transition-[filter] duration-400 ease-out
+		hofonoac:brightness-125 hofonoac:duration-200
+		active:brightness-150 active:duration-0;
+}
+
+@utility h1-splash {
+	@apply text-gray-400 text-sm mb-h1 leading-tight;
+}
+
+@utility loading {
+	@apply text-gray-300 italic;
+}
+
+@utility padded-main {
+	/* Article pages; I figure these are used often enough */
+	@apply p-7 lg:pt-10 lg:px-16 lg:pb-14;
+}
+
+@utility article-main {
+	@apply padded-main mx-auto max-w-5xl;
+
+	& :where(h1) {
+		@apply mb-h1;
+	}
+
+	& :where(p, h2, h3) {
+		@apply leading-normal mb-6;
+	}
+}
+
+@utility inline-list {
+	/* Inline lists */
+	& > li {
+		@apply inline;
+	}
+
+	& > li:not(:first-child)::before {
+		@apply inline content-["|_"] mx-2;
+	}
+}
+
+@utility container-for-external {
+	/*
+		Container for externally-loaded content (such as stories) which mainly
+		just provides more sensible defaults, such as list markers.
+	*/
+	& ul {
+		@apply list-disc ml-10;
+	}
+}
+
+@utility mb-h1 {
+	@apply mb-5 md:mb-10;
+}
+
+
+/* MARK: Base */
 @layer base {
+	:root {
+		--sidebar-ribbon-size: max(0.5rem, 0.5vw);
+		--sidebar-icon-size: max(18px, 0.75vw);
+	}
+
 	html {
 		@apply scroll-smooth;
-		scrollbar-color: theme(colors.accent-red) theme(colors.gray.800);
+		scrollbar-color: var(--color-accent-red) var(--color-gray-800);
 	}
 
 	body {
@@ -39,7 +141,7 @@
 	}
 
 	b {
-		@apply text-accent-red
+		@apply text-accent-red;
 	}
 
 	a {
@@ -52,19 +154,18 @@
 	}
 
 	input:is([type="text"], [type="search"]) {
-		@apply px-[2px] py-[1px] bg-gray-800 text-gray-100
-			border-2 outline-none border-accent-red focus-visible:border-accent-blue
-			placeholder:italic placeholder:text-gray-300
+		@apply px-[2px] py-px bg-gray-800 text-gray-100
+			border-2 outline-hidden border-accent-red focus-visible:border-accent-blue
+			placeholder:italic placeholder:text-gray-300;
 	}
 
 	img {
-		@apply
-			max-w-full /* Never overflow horizontally */
-			h-auto /* Maintain aspect ratio */
-			object-contain /* Don't stretch */
+		@apply max-w-full; /* Never overflow horizontally */
+		@apply h-auto; /* Maintain aspect ratio */
+		@apply object-contain; /* Don't stretch */
 
-			/* Center any alt text */
-			text-sm text-gray-200 grid place-content-center text-center
+		/* Center any alt text */
+		@apply text-sm text-gray-200 grid place-content-center text-center;
 	}
 
 	/* Figures. https://gist.github.com/MoritzBuetzer/4c89d9da1e15745cf2b0 */
@@ -73,99 +174,28 @@
 	}
 
 	figure figcaption {
-		@apply table-caption caption-bottom mt-2 text-xs text-center text-gray-300 ;
+		@apply table-caption caption-bottom mt-2 text-xs text-center text-gray-300;
 	}
 
 	/* Code */
 	code {
-		@apply font-mono whitespace-pre-wrap py-0.5 px-1 rounded-sm text-gray-200 bg-gray-900;
+		@apply font-mono whitespace-pre-wrap py-0.5 px-1 rounded-xs text-gray-200 bg-gray-900;
 	}
 
 	pre > code {
 		@apply block py-1 px-2 whitespace-pre overflow-x-auto;
 	}
 
-	pre.has-code /* pre:has(> code) */ {
-		@apply my-1 bg-gray-900 rounded overflow-x-auto;
+	pre:has(> code) {
+		@apply my-1 bg-gray-900 rounded-sm overflow-x-auto;
 	}
 
 	/* Button */
 	button {
-		@apply p-1 rounded;
+		@apply p-1 rounded-sm;
 	}
 
 	summary {
-		cursor: pointer;
-	}
-}
-
-@tailwind components;
-@layer components {
-	.hofoac-highlight {
-		@apply transition-[filter] duration-400 ease-out
-			hofonoac:brightness-125 hofonoac:duration-200
-			active:brightness-150 active:duration-0;
-	}
-
-	.h1-splash {
-		@apply text-gray-400 text-sm mb-h1;
-	}
-
-	.loading {
-		@apply text-gray-300 italic;
-	}
-
-	/* Article pages; I figure these are used often enough */
-	.padded-main {
-		@apply p-7 lg:pt-10 lg:px-16 lg:pb-14;
-	}
-
-	.article-main {
-		@apply padded-main mx-auto max-w-5xl;
-	}
-
-	.article-main :where(h1) {
-		@apply mb-h1;
-	}
-
-	.article-main :where(p, h2, h3) {
-		@apply leading-normal mb-6;
-	}
-
-	/* Inline lists */
-	.inline-list > li {
-		@apply inline
-	}
-
-	.inline-list > li:not(:first-child)::before {
-		@apply inline content-["|_"] mx-2
-	}
-
-	/*
-		Container for externally-loaded content (such as stories) which mainly
-		just provides more sensible defaults, such as list markers.
-	*/
-	.container-for-external ul {
-		@apply list-disc ml-10;
-	}
-}
-
-@tailwind utilities;
-@layer utilities {
-	.text-inherit-color {
-		color: inherit;
-	}
-
-	.mb-h1 {
-		@apply mb-5 md:mb-10;
-	}
-
-	/* Needed for SVG transitions; see https://stackoverflow.com/a/68570975 */
-	.fill-opacity-0 {
-		fill-opacity: 0;
-	}
-
-	.fill-opacity-100 {
-		fill-opacity: 1;
+		@apply cursor-pointer;
 	}
 }

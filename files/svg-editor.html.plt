@@ -19,7 +19,7 @@
 			<div class="relative grow-[1.5] basis-0">
 				<div
 					id="ace-editor"
-					class="loading h-full min-h-[12.5rem] rounded [&.loading]:grid [&.loading]:place-content-center"
+					class="loading h-full min-h-[12.5rem] rounded-sm [&.loading]:grid [&.loading]:place-content-center"
 					data-custom-scroll
 				>Waiting for JS...</div>
 			</div>
@@ -32,7 +32,7 @@
 				<div id="svg-canvas" class="
 					w-full md:max-h-[60vh] aspect-square
 					[&>svg]:max-w-full [&>svg]:max-h-full [&>svg]:bg-gray-900
-					[&_.selected]:brightness-150 [&_.selected]:[outline:1px_solid_theme(colors.accent-blue)]
+					[&_.selected]:brightness-150 [&_.selected]:[outline:1px_solid_var(--color-accent-blue)]
 				"></div>
 			</div>
 			<template id="svg-error-template">

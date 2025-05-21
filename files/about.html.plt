@@ -45,11 +45,11 @@
 					absolute left-[50%] -translate-x-[50%] max-w-min pt-2 text-center text-3xs text-gray-300
 					transition-all duration-100 ease-out
 					has-hover:w-max has-hover:text-sm has-hover:p-8 has-hover:pt-1
-					has-hover:group-[&:not(:hover)]:translate-x-[-50%]
-					has-hover:group-[&:not(:hover)]:translate-y-[-25%]
-					has-hover:group-[&:not(:hover)]:text-3xs
-					has-hover:group-[&:not(:hover)]:opacity-0
-					has-hover:group-[&:not(:hover)]:pointer-events-none
+					has-hover:not-group-hover:translate-x-[-50%]
+					has-hover:not-group-hover:translate-y-[-25%]
+					has-hover:not-group-hover:text-3xs
+					has-hover:not-group-hover:opacity-0
+					has-hover:not-group-hover:pointer-events-none
 				">$(contact[4])</div>
 			</li>
 # 			end
