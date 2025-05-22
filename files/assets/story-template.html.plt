@@ -46,11 +46,11 @@
 
 		<div class="container-for-external relative">
 			$if(warnings.hasMajorWarning)$
-			<div class="absolute h-full w-full text-center py-16 px-14 bg-gray-700 transition-opacity duration-300
+			<div class="absolute h-full w-full text-center py-16 px-14 bg-gray-700 rounded transition-opacity duration-300
 			data-accepted:opacity-0 data-accepted:pointer-events-none">
 				<p class="text-gray-300 mb-14">This one may be a bit heavy.</p>
-				<button class="bg-accent-red" onclick="javascript:event.target.parentElement.dataset.accepted = true">
-					I’ve read the warnings. Lemme read!
+				<button class="bg-[#363636] p-1.5 text-accent-red font-bold hofoac-highlight" onclick="javascript:event.target.parentElement.dataset.accepted = true">
+					I’ve seen the warnings. Lemme read!
 				</button>
 			</div>
 			$endif$
