@@ -94,6 +94,7 @@
 			might find it useful.
 		</p>
 		<ul class="list-disc pl-8 mb-5">
+# -- MARK: App List
 # 		for _, item in ipairs({
 # 			{ "Paint.NET", "https://www.getpaint.net/", [[
 # 				Replaced by Pinta, Krita and GIMP. Pinta is an open-source fork of an old version of PDN, so it should be
@@ -154,8 +155,9 @@
 # 	}
 # end
 #
-# -- Current Largest Issue #: 40
+# -- Current Largest Issue #: 41
 # local issues = {
+# -- MARK: Unresolved
 # 	Issue(8, "(Some) Flatpaks don’t use the system cursor theme", false, ALL, [[
 # 		Initially, this was caused by the Flatpaks not having the permissions to read the cursor files. The fix was simple:
 # 		just <a href="https://github.com/flatpak/flatpak/issues/709#issuecomment-741883444">grant them the permissions to access
@@ -208,6 +210,7 @@
 # 		<a href="https://bbs.archlinux.org/viewtopic.php?pid=2022765#p2022765">two</a> posts. Of course, don’t forget to run
 # 		<code>sudo grub2-mkconfig -o /etc/grub2.cfg</code> to apply changes.
 # 	]]),
+# -- MARK: Resolved
 # 	Issue(1, "PC wakes up immediately after being suspended", true, ALL, [[
 # 		See <a href="https://www.reddit.com/r/gigabyte/comments/mxqvja/b550i_aorus_pro_ax_f13h_instantly_wakes_from_sleep/">this
 # 		Reddit post</a>. The solution is to
@@ -484,6 +487,26 @@
 # 		"Created a simple oneshot systemd service that runs on boot and copies the contents of the above file to the device file.",
 # 		"Wrote a custom <code>healthmode</code> shell function that writes to the above file and then manually runs the systemd service."
 # 	}),
+# 	Issue(41, "Disk descryption on boot sometimes fails", true, { FEDORA_KDE }, [[
+# 		On a Fedora install with an encrypted disk, the system asks for the LUKS password on boot. However, occasionally, upon
+# 		entering my password, the boot process would just hang for a while. Pressing the <kbd>Esc</kbd> key would show a message
+# 		saying that the <code>systemd-cryptsetup&lt;some UUID&gt;</code> service failed and that one should check the logs of said
+# 		systemd service (which is non-trivial since the logs don’t appear to be persistently stored anywhere). Worst of all, I
+# 		couldn’t get this to happen consistently; the only thing I observed was that whenever it happened, I had always mispelled
+# 		the password on the first try.
+# 	]], [[
+# 		I eventually figured out that the issue occurs whenever I enter an incorrect password twice, and that allowed me to find a
+# 		<a href="https://discussion.fedoraproject.org/t/encrypted-boot-fails-sometimes-on-fedora-42/152696">discussion thread</a>
+# 		about the issue. It turns out that Fedora only allows three password attempts (i.e. it gives up after two failures)
+# 		and does not handle failures gracefully (it just hangs). The linked thread also provides a fix: add the
+# 		<code>tries=0</code> option to <code>/etc/crypttab</code> (see the man page) and then regenerate the initramfs with
+# 		<code>sudo dracut --force</code>. This gives the user unlimited tries for entering the disk password.
+# 	]], [[
+# 		The linked thread also contains a link to a
+# 		<a href="https://bugzilla.redhat.com/show_bug.cgi?id=2326489">(presently-open) RFE to improve the default behaviour</a>
+# 		by displaying error messages and shutting down gracefully upon failure. Personally, I think giving users unlimited tries
+# 		is a better option, but honestly anything is better than the current behaviour.
+# 	]]),
 # }
 
 
