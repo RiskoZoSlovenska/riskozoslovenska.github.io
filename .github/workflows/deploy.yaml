@@ -38,10 +38,10 @@ jobs:
 
       # Install dependencies
       - name: Install Lua
-        uses: leafo/gh-actions-lua@v10
+        uses: leafo/gh-actions-lua@v11
 
       - name: Install Luarocks
-        uses: leafo/gh-actions-luarocks@v4
+        uses: leafo/gh-actions-luarocks@v5
 
       - name: Install Lua dependencies
         run: |
@@ -54,7 +54,7 @@ jobs:
 
       - name: Install Tailwind CSS CLI # Inspired by https://github.com/ZoeyVid/tailwindcss-update/blob/f929e744f0386697b1a8e06d7e3985732cd9eae5/run.sh
         run: |
-          curl -L https://github.com/tailwindlabs/tailwindcss/releases/download/v4.1.7/tailwindcss-linux-x64 \
+          curl -L https://github.com/tailwindlabs/tailwindcss/releases/download/v4.1.11/tailwindcss-linux-x64 \
             -o /usr/local/bin/tailwindcss
           chmod +x /usr/local/bin/tailwindcss
 
